@@ -5,7 +5,7 @@ public class Tile {
     protected long operationInvertal;
 
 
-    public void Tile(GameSession,x,y,TileType,operationInvertal){
+    public void Tile(GameSession GameSession,int x,int y,TileType TileType,long operationInvertal){
 
     }
 }
