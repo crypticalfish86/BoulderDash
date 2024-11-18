@@ -1,17 +1,23 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class HelloFX extends Application {
 
     @Override
     public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ". (added this to test if it works)    .");
-        Scene scene = new Scene(new StackPane(l), 640, 480);
+        // String javaVersion = System.getProperty("java.version");
+        // String javafxVersion = System.getProperty("javafx.version");
+
+
+        Pane root = new Pane();
+
+        Scene scene = new Scene(root, 640, 480);
+        Game game = new Game(scene, root);
+
+        
+
         stage.setScene(scene);
         stage.show();
     }
