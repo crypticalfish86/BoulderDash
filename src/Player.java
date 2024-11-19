@@ -1,4 +1,3 @@
-public class Player extends Tile{
+public class Player extends Tile {
     String inputPending;
-
 }
