@@ -35,4 +35,17 @@ public class GameSession {
         return;
     }
 
+    //Updates every tile in the game
+    private void updateGame(long currentTimeInMilliseconds){
+        for(Tile[] tileColumn : gridTileMap) {
+            for(Tile tile : tileColumn) {
+                //call updateTile for every tile in here
+            }
+        }
+        return;
+    }
+
+    //TODO determine a method of input before implementing
+    public void onInput(){return;}
+
 }
