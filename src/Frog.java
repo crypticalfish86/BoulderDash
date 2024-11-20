@@ -4,4 +4,11 @@ public class Frog extends Enemy{
     }
 
     private void calculateFastedPath(){};//engage in pathfinding and then call "moveTo" function (in superclass)
+
+    public void interact(Tile Tile){
+        //TODO implement an interact function
+    }
+    public void updateTile(long currentTimeInMilliseconds){
+        //TODO implement an updateTile every certain number of ms
+    }
 }
