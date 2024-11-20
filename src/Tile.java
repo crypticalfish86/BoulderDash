@@ -11,7 +11,7 @@ public abstract class Tile {
     }
     public TileType getTileType() {
         return (TileType);
-        //TODO this really wants an expression. Just going off the convergent UML, this is what i came up with but it needs more refining.
+        //TODO this really wants an expression. Just going off the showcase UML, this is what i came up with but it needs more refining.
     }
     public int getXPosition() {
         return x;
