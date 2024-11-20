@@ -22,6 +22,7 @@ public class GameSession {
         determine the
     */
     private void interpretLevelData(String gameData) {
+        //TODO implement a function  to interpret level data
         return;
     }
 
@@ -32,7 +33,20 @@ public class GameSession {
 
     //updates the incoming tile position with the replacement tile and the outgoing tile with the incoming tile
     public void updateTilePositions(Tile replacementTile, Tile incomingTile, Tile outgoingTile) {
+        //TODO implement a function to update the tile positions
+    }
+
+    //Updates every tile in the game
+    private void updateGame(long currentTimeInMilliseconds){
+        for(Tile[] tileColumn : gridTileMap) {
+            for(Tile tile : tileColumn) {
+                //TODO call updateTile for every tile in here
+            }
+        }
         return;
     }
+
+    //TODO determine a method of input before implementing
+    public void onInput(){return;}
 
 }
