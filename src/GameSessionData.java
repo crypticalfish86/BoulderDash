@@ -6,26 +6,24 @@ public class GameSessionData {
     private int diamondCount;
     private int score;
 
-    
-    private GameSession gameSession;
+    /*public GameSessionData(GameSession GameSession) {
 
-    public GameSessionData(GameSession gameSession) {
-        this.gameSession = gameSession;
+    }*/
+    //TODO fix why this makes GameSession cry
+
+    public GameSessionData() {
+
     }
     public void getInventoryItem(String item) {
 
     }
     public void updateInventory(String item, boolean increment) {
-        
+
     }
     public int getScore() {
         return score;
     }
-
-
     public void updateScore(int scoreToAdd) {
-        //TODO: update the display for the score
-
 
     }
 

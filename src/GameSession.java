@@ -12,7 +12,7 @@ public class GameSession {
     private final Player gamePlayerTile; //Reference to the current single game player (inserted into the level in "interpretLevelData"
     GameSession(Game game, String gameData) {
         this.game = game;
-        this.currentSessionData = new GameSessionData(this);
+        this.currentSessionData = new GameSessionData();
         this.gamePlayerTile = new Player();
         interpretLevelData(gameData);
     }

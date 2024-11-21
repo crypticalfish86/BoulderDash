@@ -64,6 +64,7 @@ public class Game {
      * @return if the file exists, and the game loads
     */
     private boolean loadGame(String filePath) {
+
         //locate the file
         String gameData;
 
