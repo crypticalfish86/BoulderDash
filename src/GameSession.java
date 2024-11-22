@@ -32,8 +32,32 @@ public class GameSession {
     }
 
     //updates the incoming tile position with the replacement tile and the outgoing tile with the incoming tile
+
+    /**
+     * move a tile to another tile in the gridmap and replace where the tile was with another tile.
+     * @param replacementTile
+     * The tile that will replace the current incoming tiles location.
+     * @param incomingTile
+     * The incoming tile that will be moved to the outgoing tiles location.
+     * @param outgoingTile
+     * The outgoing tile that is being deleted.
+     */
     public void updateTilePositions(Tile replacementTile, Tile incomingTile, Tile outgoingTile) {
-        //TODO implement a function to update the tile positions
+        setTile(incomingTile.getYPosition(),incomingTile.getXPosition(), replacementTile);
+        setTile(outgoingTile.getYPosition(),outgoingTile.getXPosition(), incomingTile);
+    }
+
+    /**
+     * Set a new or existing tile at a specific location in the gridmap.
+     * @param yTileLocation
+     * The y location in the gridmap you want to set a new tile for.
+     * @param xTileLocation
+     * The x location in the gridmap you want to set a new tile for.
+     * @param tile
+     * The tile that will be set at this location.
+     */
+    public void setTile(int yTileLocation, int xTileLocation, Tile tile){
+        gridTileMap[yTileLocation][xTileLocation] = tile;
     }
 
     //Updates every tile in the game
