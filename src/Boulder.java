@@ -9,6 +9,16 @@ public class Boulder extends FallingObject{
     }
 
     public void updateTile(long currentTimeInMilliseconds){
-        //TODO implement an updateTile every certain number of ms
+        Tile tileBelow = thisTilesGamesession.getTileFromGrid(getXPosition(), getYPosition() - 1);
+        if(tileBelow instanceof PathWall){
+            this.fall();
+
+        }
+    }
+
+    private void fall(){
+        PathWall pathWall = new PathWall(thisTilesGamesession, getXPosition(), getYPosition(),TileType.STATIC_TILE,getOperationInterval());
+        Tile outgoingTile = thisTilesGamesession.getTileFromGrid(getXPosition(),getYPosition() - 1);
+        thisTilesGamesession.updateTilePositions(pathWall, this,outgoingTile);
     }
 }

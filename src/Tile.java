@@ -27,6 +27,7 @@ public abstract class Tile {
     public int getYPosition() {
         return this.y;
     }
+    public long getOperationInterval(){return this.operationInterval;}
     public void setNewPosition(int x, int y) {
         this.x = x;
         this.y = y;
