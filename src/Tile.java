@@ -1,29 +1,34 @@
 
 public abstract class Tile {
+    protected GameSession thisTilesGamesession;
+
     protected int x;
     protected int y;
+
+    protected TileType tileType;
     protected long lastTimeStamp;
     protected long operationInterval;
 
 
-    public Tile(GameSession GameSession, int x, int y, TileType TileType, long operationInterval) {
-        //TODO decided i would wait and see how the rest went down before expanding on these.
+    public Tile(GameSession gameSession, int x, int y, TileType tileType, long operationInterval) {
+        this.thisTilesGamesession = gameSession;
+        this.x = x;
+        this.y = y;
+        this.tileType = tileType;
     }
     public TileType getTileType() {
-        return (TileType.STATIC_TILE);
-        //TODO this really wants an expression. Just going off the showcase UML, this is what i came up with but it needs more refining.
+        return this.tileType;
     }
     public int getXPosition() {
-        return x;
+        return this.x;
     }
     public int getYPosition() {
-        return y;
+        return this.y;
     }
     public void setNewPosition(int x, int y) {
-        //TODO decided i would wait and see how the rest went down before expanding on these.
+        this.x = x;
+        this.y = y;
     }
     public abstract void interact(Tile Tile);
-        //TODO decided i would wait and see how the rest went down before expanding on these.
     public abstract void updateTile(long currentTimeInMilliseconds);
-        //TODO decided i would wait and see how the rest went down before expanding on these.
 }
