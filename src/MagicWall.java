@@ -1,6 +1,7 @@
 public class MagicWall extends Wall{
     public MagicWall(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);
+        this.amoebaCanSpreadToThisTile = false;
     }
 
     public void interact(Tile Tile){

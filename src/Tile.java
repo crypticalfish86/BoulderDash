@@ -9,6 +9,8 @@ public abstract class Tile {
     protected long lastTimeStamp;
     protected long operationInterval;
 
+    protected boolean amoebaCanSpreadToThisTile;
+
 
     public Tile(GameSession gameSession, int x, int y, TileType tileType, long operationInterval) {
         this.thisTilesGamesession = gameSession;

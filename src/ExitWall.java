@@ -3,6 +3,7 @@ public class ExitWall extends Wall{
     public ExitWall(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);
         this.isActive = false;
+        this.amoebaCanSpreadToThisTile = false;
     }
 
     public void activate(){
