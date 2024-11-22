@@ -28,3 +28,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 .idea/libraries/lib.xml
+.idea/libraries/lib1.xml
+BoulderDash.iml
