@@ -17,8 +17,20 @@ public class Diamond extends FallingObject{
         this.amoebaCanSpreadToThisTile = false;
     }
 
+    /**
+     * Moves player to current tile and deletes diamond if player interacts
+     * with this tile. Also updates the score and diamond count for
+     * the current game session.
+     * @param tile the tile that is interacting with this tile
+     */
     public void interact(Tile tile){
-        //TODO implement interact function
+        if(tile.getTileType() == TileType.PLAYER){
+            PathWall pathWall = new PathWall(gameSession, tile.getXPosition(), tile.getYPosition(),
+                    TileType.STATIC_TILE,getOperationInterval());
+            gameSession.updateTilePositions(pathWall, tile,this); //Move player to this tile and delete diamond
+
+            updateGameSessionData();
+        }
     }
 
     /**
@@ -61,5 +73,12 @@ public class Diamond extends FallingObject{
         }
 
         draw(img, 0, 0);
+    }
+
+
+    private void updateGameSessionData(){
+        GameSessionData currentSessionData = gameSession.getCurrentSessionData();
+        currentSessionData.updateScore(SCORE_VALUE); //Update player's score
+        currentSessionData.incrementDiamondCount(); //update player's diamond count
     }
 }

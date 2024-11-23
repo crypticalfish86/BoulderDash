@@ -24,8 +24,13 @@ public class GameSessionData {
         return score;
     }
     public void updateScore(int scoreToAdd) {
-        
+        score += scoreToAdd;
     }
+    public int getDiamondCount() {return this.diamondCount;}
+    public void incrementDiamondCount() {
+        diamondCount++;
+    }
+
 
     /*
         public static GameSessionData createGameSessionData() {

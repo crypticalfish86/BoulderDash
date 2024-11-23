@@ -141,6 +141,10 @@ public class GameSession {
         return this.gridHeight;
     }
 
+    public GameSessionData getCurrentSessionData(){
+        return this.currentSessionData;
+    }
+
     //TODO determine a method of input before implementing
     public void onInput(){ return; }
 
