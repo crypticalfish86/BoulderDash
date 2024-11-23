@@ -37,15 +37,6 @@ public class AmoebaOrigin extends Tile{
     }
 
     /**
-     * Determines whether this amoeba is the original amoeba of the cluster or a child of that origin
-     * @return
-     * Whether this amoeba is the original amoeba or a child of that original amoeba
-     */
-    public boolean isAmoebaChild(){
-        return false;
-    }
-
-    /**
      * Grow the Amoeba to surrounding tiles and if impossible pass that growth command to a neighbouring amoeba.
      * @param numberOfReturnsToOrigin
      * How many times the amoeba has attempted to grow in within this operation interval, if larger than 100 growth

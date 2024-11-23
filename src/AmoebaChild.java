@@ -10,15 +10,6 @@ public class AmoebaChild extends AmoebaOrigin{
         this.originOfThisChildAmoeba = amoebaOrigin;
     }
 
-    /**
-     * Determines whether this amoeba is the original amoeba of the cluster or a child of that origin
-     * @return
-     * Whether this amoeba is the original amoeba or a child of that original amoeba
-     */
-    @Override
-    public boolean isAmoebaChild(){
-        return true;
-    }
 
     /**
      * Helper function to spread the amoeba to a new tile in the grid, overridden to have a constant AmoebaOrigin.
