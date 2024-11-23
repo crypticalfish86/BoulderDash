@@ -33,12 +33,12 @@ public class AmoebaChild extends AmoebaOrigin{
      */
     @Override
     protected void setNewAmoebaToNeighbouringTile(int x, int y){
-        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(thisTilesGamesession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval, this.originOfThisChildAmoeba);
+        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(this.gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval, this.originOfThisChildAmoeba);
         this.directAmoebaNeighbours.add(newNeighbouringAmoeba);
-        if(this.thisTilesGamesession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
-            this.thisTilesGamesession.callKillPlayer();
+        if(this.gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
+            this.gameSession.callKillPlayer();
         }
-        this.thisTilesGamesession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
+        this.gameSession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
         this.originOfThisChildAmoeba.incrementAmoebaChildCount();
     }
 
