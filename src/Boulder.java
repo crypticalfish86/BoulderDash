@@ -22,6 +22,12 @@ public class Boulder extends FallingObject{
         //TODO implement an interact function for the boulder
     }
 
+    /**
+     * Checks if the boulder should fall or roll based on
+     * the presence of tiles surrounding it
+     * @param currentTimeInMilliseconds
+     * The number of milliseconds since 01/01/1970.
+     */
     public void updateTile(long currentTimeInMilliseconds) {
         int XPosition = getXPosition();
         int YPosition = getYPosition();
