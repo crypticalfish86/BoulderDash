@@ -70,6 +70,14 @@ public class GameSession {
         return;
     }
 
+    public int getGridWidth() {
+        return this.gridWidth;
+    }
+
+    public int getGridHeight() {
+        return this.gridHeight;
+    }
+
     //TODO determine a method of input before implementing
     public void onInput(){return;}
 
