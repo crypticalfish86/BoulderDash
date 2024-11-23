@@ -2,14 +2,26 @@ import java.util.Random;
 
 public class AmoebaChild extends AmoebaOrigin{
 
-    AmoebaOrigin originOfThisChildAmoeba;
-    public AmoebaChild(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, AmoebaOrigin amoebaOrigin) {
-        super(gameSession, x, y, TileType, operationInterval, amoebaGrowthRatePerOperationInterval);
+    private AmoebaOrigin originOfThisChildAmoeba;
+
+    //TODO possibly change the maxAmoebaChildCount from 0 to whatever is specified in the level file format
+    public AmoebaChild(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, AmoebaOrigin originOfThisChildAmoeba) {
+        super(gameSession, x, y, TileType, operationInterval, amoebaGrowthRatePerOperationInterval,0);
+        this.originOfThisChildAmoeba = originOfThisChildAmoeba;
         this.tileType = TileType.AMOEBA;
         this.amoebaCanSpreadToThisTile = false;
-        this.originOfThisChildAmoeba = amoebaOrigin;
+
     }
 
+    /**
+     * Overriden method to prevent the parent method being called which would turn this amoeba into diamonds
+     * @param currentTimeInMilliseconds
+     * The how many milliseconds it's been since 01/01/1970.
+     */
+    @Override
+    public void updateTile(long currentTimeInMilliseconds) {
+
+    }
 
     /**
      * Helper function to spread the amoeba to a new tile in the grid, overridden to have a constant AmoebaOrigin.
@@ -26,6 +38,7 @@ public class AmoebaChild extends AmoebaOrigin{
             this.thisTilesGamesession.callKillPlayer();
         }
         this.thisTilesGamesession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
+        this.originOfThisChildAmoeba.incrementAmoebaChildCount();
     }
 
     /**

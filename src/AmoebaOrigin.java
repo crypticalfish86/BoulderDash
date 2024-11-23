@@ -6,25 +6,41 @@ public class AmoebaOrigin extends Tile{
     protected final long amoebaGrowthRatePerOperationInterval; //how many operation intervals before the amoeba grows by one
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
+    private int maxAmoebaChildCount;
+    private int amoebaChildCount;
+
     protected final ArrayList<AmoebaChild> directAmoebaNeighbours;
-    public AmoebaOrigin(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, long amoebaGrowthRatePerOperationInterval) {
+    public AmoebaOrigin(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount) {
         super(gameSession, x, y, TileType, operationInterval);
         this.tileType = TileType.AMOEBA;
+        this.maxAmoebaChildCount = maxAmoebaChildCount;
         this.directAmoebaNeighbours = new ArrayList<AmoebaChild>();
         this.amoebaGrowthRatePerOperationInterval = amoebaGrowthRatePerOperationInterval;
         this.amoebaCanSpreadToThisTile = false;
     }
 
-    public void interact(Tile Tile){
-        //TODO implement an interact function
+    public int getMaxAmoebaChildCount() {
+        return this.maxAmoebaChildCount;
+    }
+
+    public void interact(Tile tile){
+        if(tile.getTileType() == TileType.EXPLOSION){
+            this.thisTilesGamesession.setTile(this.x,this.y, tile);
+        }
     }
 
     /**
-     * Regulate the growth of the amoeba
+     * Regulate the growth of the amoeba and convert amoebas to diamonds if max count is reached
      * @param currentTimeInMilliseconds
      * The how many milliseconds it's been since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds){
+        if(amoebaChildCount >= maxAmoebaChildCount){
+            for(AmoebaChild amoebaChild : this.directAmoebaNeighbours){
+                amoebaChild.triggerDiamondConversion();
+            }
+            triggerDiamondConversion();
+        }
         if(lastTimeStamp - currentTimeInMilliseconds >= operationInterval){
             this.currentNumberOfIntervals++;
         }
@@ -34,6 +50,10 @@ public class AmoebaOrigin extends Tile{
             growAmoeba(0);
             this.currentNumberOfIntervals = 0;
         }
+    }
+
+    public void triggerDiamondConversion(){
+        this.thisTilesGamesession.setTile(this.x,this.y,new Diamond(this.thisTilesGamesession, this.x,this.y, TileType.FALLING_OBJECT, this.operationInterval));
     }
 
     /**
@@ -82,6 +102,7 @@ public class AmoebaOrigin extends Tile{
             this.thisTilesGamesession.callKillPlayer();
         }
         this.thisTilesGamesession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
+        this.incrementAmoebaChildCount();
     }
 
     /**
@@ -99,5 +120,9 @@ public class AmoebaOrigin extends Tile{
             int randomIndex = random.nextInt(directAmoebaNeighbours.size());
             directAmoebaNeighbours.get(randomIndex).growAmoeba(numberOfReturnsToOrigin);
         }
+    }
+
+    public void incrementAmoebaChildCount(){
+        this.amoebaChildCount++;
     }
 }
