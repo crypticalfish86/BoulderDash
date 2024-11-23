@@ -1,5 +1,6 @@
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 
 public class GameSession {
 
@@ -12,7 +13,7 @@ public class GameSession {
     private Tile[][] gridTileMap; //The full 2D grid instantiated on the interpretation of the level data
     private final Game game; // Reference to the game that the current game session is attached to
     private final GameSessionData currentSessionData; //Reference to this games' game session data
-    private final Player gamePlayerTile; //Reference to the current single game player (inserted into the level in "interpretLevelData"
+    private final Player player; //Reference to the current single game player (inserted into the level in "interpretLevelData"
 
 
 
@@ -22,13 +23,17 @@ public class GameSession {
 
     public static final int GRID_SIZE = 50;
 
+    private boolean isGamePaused = false;
 
 
+
+
+    private static final String ESCAPE_KEYCODE = "Escape";
 
     GameSession(Game game, String gameData, Pane gamePane) {
         this.game = game;
         this.currentSessionData = new GameSessionData(this);
-        this.gamePlayerTile = new Player();
+        this.player = new Player(this, 10, 10, 10); // TODO: change the values
         interpretLevelData(gameData);
 
 
@@ -49,7 +54,7 @@ public class GameSession {
 
 
         this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-
+        this.gc = canvas.getGraphicsContext2D();
     }
 
     /*
@@ -99,19 +104,33 @@ public class GameSession {
      * Calls the kill player method on this game session's player.
      */
     public void callKillPlayer(){
-        gamePlayerTile.killPlayer();
+        player.killPlayer();
     }
 
     //Updates every tile in the game
     private void updateGame(long currentTimeInMilliseconds){
-        for(Tile[] tileColumn : gridTileMap) {
-            for(Tile tile : tileColumn) {
-                //TODO call updateTile for every tile in here
-                
+        //TODO: change it so that draw and update is independent of each other
+        
+        
+        if (isGamePaused) {
+            //TODO: call the tiles to be drawn
+            //TODO: call the menu to be drawn
 
+            
+        } else {
+
+
+
+            for(Tile[] tileColumn : gridTileMap) {
+                for(Tile tile : tileColumn) {
+                    //TODO call updateTile for every tile in here
+                    
+    
+                }
             }
+
+            //TODO: call the tiles to be drawn
         }
-        return;
     }
 
     public int getGridWidth() {
@@ -129,5 +148,45 @@ public class GameSession {
         return this.gc;
     }
 
+    public void onKeyPressed(String key) {
+        if (key == ESCAPE_KEYCODE) { //TODO
 
+            //TODO: open menu
+            isGamePaused = true;
+            return;
+        }
+
+
+        if (isGamePaused) {
+
+            //TODO: direct inputs to the pausing menu
+        } else {
+
+            player.onKeyPressed(key);
+        }
+    }
+
+    public void onKeyReleased(String key) {
+        if (key == ESCAPE_KEYCODE) { //TODO
+
+            //TODO: close menu
+            isGamePaused = false;
+            return;
+        }
+
+
+        if (isGamePaused) {
+            
+            //TODO: direct inputs to the pausing menu
+        } else {
+
+            player.onKeyReleased(key);
+        }
+    }
+
+    // function to be fired when the menu close button is clicked
+    public void onMenuClosed() {
+        this.isGamePaused = false;
+
+    }
 }

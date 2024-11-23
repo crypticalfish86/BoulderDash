@@ -4,10 +4,10 @@ public class PathWall extends Wall {
 
 
 
-    public static final Image img = new Image("");//TODO: add the image here
+    public static final Image img = new Image("./");//TODO: add the image here
 
 
-    
+
     public PathWall(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);
         this.amoebaCanSpreadToThisTile = true;

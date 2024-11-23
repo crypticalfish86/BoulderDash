@@ -14,7 +14,7 @@ public class Game {
     private String loadedPlayerProfileID;
     private GameSession currentGamesession;
 
-
+    
     
     private final Pane gamePane;
 
@@ -51,7 +51,23 @@ public class Game {
         });
 
 
+        scene.setOnKeyPressed(E -> {
+            String key = E.getCharacter();
 
+
+            if (currentGamesession != null) {
+                currentGamesession.onKeyPressed(key);
+            }
+        });
+
+        scene.setOnKeyReleased(E -> {
+            String key = E.getCharacter();
+
+
+            if (currentGamesession != null) {
+                currentGamesession.onKeyReleased(key);
+            }
+        });
 
 
         this.gamePane = pane;

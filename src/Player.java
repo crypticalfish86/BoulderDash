@@ -5,7 +5,7 @@ public class Player extends Tile {
         //TODO possibly should be bool
     String input;
 
-    public static final Image img = new Image("");//TODO: add the image here
+    public static final Image img = new Image("./");//TODO: add the image here
 
     public void queueInput(String input){
         //TODO make the input actually input into this method/function
@@ -27,9 +27,19 @@ public class Player extends Tile {
 
     }
 
-    
+
     public void updateTile(long currentTimeInMilliseconds) {
         draw(img, 0, 0);
     }
 
+
+
+    public void onKeyPressed(String key) {
+        System.out.println("Key " + key + " pressed.");
+    }
+
+    public void onKeyReleased(String key) {
+        
+        System.out.println("Key " + key + " released.");
+    }
 }
