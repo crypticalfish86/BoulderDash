@@ -7,7 +7,8 @@ public abstract class FallingObject extends Tile{
     }
 
     /**
-     * Causes the object to fall downwards
+     * Causes the object to fall downwards and
+     * replaces its currentTile with a {@link PathWall}
      * @param XPosition the current x co-ordinate of the object
      * @param YPosition the current y co-ordinate of the object
      */
@@ -18,20 +19,22 @@ public abstract class FallingObject extends Tile{
     }
 
     /**
-     * Causes the object to roll in a specified direction
+     * Causes the object to roll in a specified direction and
+     * replaces its currentTile with a {@link PathWall}
      * @param XPosition the current x co-ordinate of the object
      * @param YPosition the current y co-ordinate of the object
      * @param direction the direction the object should roll ("right" or "left")
      */
     protected void roll(int XPosition, int YPosition, String direction){
-        int offset;
+        int directionOffset = 0;
         if(direction.equals("Right")){
-            offset = 1;
-        }else{
-            offset = -1;
+            directionOffset = 1;
+        }else if (direction.equals("Left")){
+            directionOffset = -1;
         }
+        
         PathWall pathWall = new PathWall(gameSession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
-        Tile outgoingTile = gameSession.getTileFromGrid(XPosition + offset, YPosition);
+        Tile outgoingTile = gameSession.getTileFromGrid(XPosition + directionOffset, YPosition);
         gameSession.updateTilePositions(pathWall, this,outgoingTile);
     }
 }
