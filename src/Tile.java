@@ -1,6 +1,7 @@
+import javafx.scene.image.Image;
 
 public abstract class Tile {
-    protected GameSession thisTilesGamesession;
+    protected GameSession gameSession;
 
     protected int x;
     protected int y;
@@ -13,7 +14,7 @@ public abstract class Tile {
 
 
     public Tile(GameSession gameSession, int x, int y, TileType tileType, long operationInterval) {
-        this.thisTilesGamesession = gameSession;
+        this.gameSession = gameSession;
         this.x = x;
         this.y = y;
         this.tileType = tileType;
@@ -38,4 +39,12 @@ public abstract class Tile {
     }
     public abstract void interact(Tile Tile);
     public abstract void updateTile(long currentTimeInMilliseconds);
+
+    //method used for drawing the icon
+    protected void draw(Image img, int xOffset, int yOffset) {
+        gameSession.gc().drawImage(img,
+            this.x * GameSession.GRID_SIZE + xOffset,
+            this.y * GameSession.GRID_SIZE + yOffset
+        );
+    }
 }

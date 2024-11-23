@@ -1,6 +1,7 @@
 public class Door extends Wall{
 
     private char doorColour;
+    
 
     public Door(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);

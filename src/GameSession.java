@@ -1,3 +1,6 @@
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+
 public class GameSession {
 
     private int gridHeight; //The height of the grid
@@ -10,11 +13,43 @@ public class GameSession {
     private final Game game; // Reference to the game that the current game session is attached to
     private final GameSessionData currentSessionData; //Reference to this games' game session data
     private final Player gamePlayerTile; //Reference to the current single game player (inserted into the level in "interpretLevelData"
-    GameSession(Game game, String gameData) {
+
+
+
+    private final Canvas canvas;
+    private final GraphicsContext gc;
+
+
+    public static final int GRID_SIZE = 50;
+
+
+
+
+    GameSession(Game game, String gameData, Pane gamePane) {
         this.game = game;
         this.currentSessionData = new GameSessionData(this);
         this.gamePlayerTile = new Player();
         interpretLevelData(gameData);
+
+
+
+
+
+
+
+
+
+
+
+        int mapSizeX = 10;
+        int mapSizeY = 10;// TODO: implement these
+
+        this.gridHeight = mapSizeY;
+        this.gridWidth = mapSizeX;
+
+
+        this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
+
     }
 
     /*
@@ -72,6 +107,8 @@ public class GameSession {
         for(Tile[] tileColumn : gridTileMap) {
             for(Tile tile : tileColumn) {
                 //TODO call updateTile for every tile in here
+                
+
             }
         }
         return;
@@ -86,6 +123,11 @@ public class GameSession {
     }
 
     //TODO determine a method of input before implementing
-    public void onInput(){return;}
+    public void onInput(){ return; }
+
+    public GraphicsContext gc() {
+        return this.gc;
+    }
+
 
 }

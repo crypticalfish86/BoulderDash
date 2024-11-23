@@ -1,13 +1,19 @@
-public class MagicWall extends Wall{
+import javafx.scene.image.Image;
+
+public class MagicWall extends Wall {
+
+
+    public static final Image img = new Image("");//TODO: add the image here
+
     public MagicWall(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);
         this.amoebaCanSpreadToThisTile = false;
     }
 
-    public void interact(Tile Tile){
+    public void interact(Tile Tile) {
         //TODO implement an interact function
     }
-    public void updateTile(long currentTimeInMilliseconds){
-        //TODO implement an updateTile every certain number of ms
+    public void updateTile(long currentTimeInMilliseconds) {
+        draw(img, 0, 0);
     }
 }
