@@ -14,6 +14,7 @@ public class AmoebaOrigin extends Tile{
         super(gameSession, x, y, TileType, operationInterval);
         this.tileType = TileType.AMOEBA;
         this.maxAmoebaChildCount = maxAmoebaChildCount;
+        this.amoebaChildCount = 0;
         this.directAmoebaNeighbours = new ArrayList<AmoebaChild>();
         this.amoebaGrowthRatePerOperationInterval = amoebaGrowthRatePerOperationInterval;
         this.amoebaCanSpreadToThisTile = false;
