@@ -13,6 +13,7 @@ public class AmoebaChild extends AmoebaOrigin{
 
     }
 
+    //TODO possibly remove this once the maxAmoebaChildCount from the level file format is fixed
     /**
      * Overriden method to prevent the parent method being called which would turn this amoeba into diamonds
      * @param currentTimeInMilliseconds

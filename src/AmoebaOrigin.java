@@ -6,7 +6,7 @@ public class AmoebaOrigin extends Tile{
     protected final long amoebaGrowthRatePerOperationInterval; //how many operation intervals before the amoeba grows by one
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
-    private int maxAmoebaChildCount;
+    private final int maxAmoebaChildCount;
     private int amoebaChildCount;
 
     protected final ArrayList<AmoebaChild> directAmoebaNeighbours;
@@ -19,10 +19,11 @@ public class AmoebaOrigin extends Tile{
         this.amoebaCanSpreadToThisTile = false;
     }
 
-    public int getMaxAmoebaChildCount() {
-        return this.maxAmoebaChildCount;
-    }
-
+    /**
+     * This tile is un-interactable unless it's being blown up.
+     * @param tile
+     * The tile that is attempting to interact with this tile.
+     */
     public void interact(Tile tile){
         if(tile.getTileType() == TileType.EXPLOSION){
             this.thisTilesGamesession.setTile(this.x,this.y, tile);
@@ -52,6 +53,9 @@ public class AmoebaOrigin extends Tile{
         }
     }
 
+    /**
+     * Turn this amoeba tile into a diamond.
+     */
     public void triggerDiamondConversion(){
         this.thisTilesGamesession.setTile(this.x,this.y,new Diamond(this.thisTilesGamesession, this.x,this.y, TileType.FALLING_OBJECT, this.operationInterval));
     }
@@ -122,6 +126,9 @@ public class AmoebaOrigin extends Tile{
         }
     }
 
+    /**
+     * Increment the amoeba child count by one.
+     */
     public void incrementAmoebaChildCount(){
         this.amoebaChildCount++;
     }
