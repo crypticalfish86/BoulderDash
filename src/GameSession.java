@@ -60,6 +60,13 @@ public class GameSession {
         gridTileMap[yTileLocation][xTileLocation] = tile;
     }
 
+    /**
+     * Calls the kill player method on this game session's player.
+     */
+    public void callKillPlayer(){
+        gamePlayerTile.killPlayer();
+    }
+
     //Updates every tile in the game
     private void updateGame(long currentTimeInMilliseconds){
         for(Tile[] tileColumn : gridTileMap) {
