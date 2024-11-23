@@ -12,9 +12,9 @@ public abstract class FallingObject extends Tile{
      * @param YPosition the current y co-ordinate of the object
      */
     protected void fall(int XPosition, int YPosition){
-        PathWall pathWall = new PathWall(thisTilesGamesession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
-        Tile outgoingTile = thisTilesGamesession.getTileFromGrid(XPosition,YPosition - 1);
-        thisTilesGamesession.updateTilePositions(pathWall, this,outgoingTile);
+        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
+        Tile outgoingTile = gameSession.getTileFromGrid(XPosition,YPosition - 1);
+        gameSession.updateTilePositions(pathWall, this,outgoingTile);
     }
 
     /**
@@ -30,9 +30,9 @@ public abstract class FallingObject extends Tile{
         }else{
             offset = -1;
         }
-        PathWall pathWall = new PathWall(thisTilesGamesession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
-        Tile outgoingTile = thisTilesGamesession.getTileFromGrid(XPosition + offset, YPosition);
-        thisTilesGamesession.updateTilePositions(pathWall, this,outgoingTile);
+        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
+        Tile outgoingTile = gameSession.getTileFromGrid(XPosition + offset, YPosition);
+        gameSession.updateTilePositions(pathWall, this,outgoingTile);
     }
 }
 
