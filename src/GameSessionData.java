@@ -6,14 +6,14 @@ public class GameSessionData {
     private int diamondCount;
     private int score;
 
-    /*public GameSessionData(GameSession GameSession) {
 
-    }*/
-    //TODO fix why this makes GameSession cry
+    GameSession currentGame;
 
-    public GameSessionData() {
+    public GameSessionData(GameSession GameSession) {
 
     }
+
+    
     public void getInventoryItem(String item) {
 
     }
@@ -42,7 +42,7 @@ public class GameSessionData {
         public void updateScore() {
         }
         //TODO This is Ken's work.
-        */
+    */
 
 
 }
