@@ -2,9 +2,11 @@ import javafx.scene.image.Image;
 
 public class Diamond extends FallingObject{
 
-
-
     private final static int SCORE_VALUE = 50;
+
+    private static final String LEFT_DIRECTION = "Left";
+    private static final String RIGHT_DIRECTION = "Right";
+
     public static final Image img = new Image("./");//TODO: add the image here
 
 
@@ -15,8 +17,8 @@ public class Diamond extends FallingObject{
         this.amoebaCanSpreadToThisTile = false;
     }
 
-    public void interact(Tile Tile){
-        //TODO implement an interact function
+    public void interact(Tile tile){
+        //TODO implement interact function
     }
 
     /**
@@ -26,35 +28,35 @@ public class Diamond extends FallingObject{
      * The number of milliseconds since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds){
-        int XPosition = getXPosition();
-        int YPosition = getYPosition();
+        int xPosition = getXPosition();
+        int yPosition = getYPosition();
 
-        if (YPosition != 0) { //Check boulder is above the bottom layer of the grid
-            Tile tileBelow = gameSession.getTileFromGrid(XPosition,YPosition - 1);
-            if (tileBelow instanceof PathWall) { //Check if diamond should fall
-                this.fall(XPosition, YPosition);
+        if (yPosition != 0) { //Check boulder is above the bottom layer of the grid
+            Tile tileBelow = gameSession.getTileFromGrid(xPosition,yPosition - 1);
+
+            //Check if diamond should fall
+            if (tileBelow instanceof PathWall) {
+                this.fall(xPosition, yPosition);
             }
         }
 
-        if (XPosition != 0 && YPosition != 0) { //Check boulder not on left edge or bottom of grid
-            Tile tileToLeft = gameSession.getTileFromGrid(XPosition - 1, YPosition);
-            Tile tileLeftBelow = gameSession.getTileFromGrid(XPosition - 1, YPosition - 1);
+        if (xPosition != 0 && yPosition != 0) { //Check boulder not on left edge or bottom of grid
+            Tile tileToLeft = gameSession.getTileFromGrid(xPosition - 1, yPosition);
+            Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition - 1);
 
             //Check if diamond should roll left
             if (tileToLeft instanceof PathWall && tileLeftBelow instanceof PathWall) {
-                String direction = "Left";
-                this.roll(XPosition, YPosition, direction);
+                this.roll(xPosition, yPosition, LEFT_DIRECTION);
             }
         }
 
-        if (XPosition < (gameSession.getGridWidth() - 1) && YPosition != 0) {//Check boulder not on left edge or bottom of grid
-            Tile tileToRight = gameSession.getTileFromGrid(XPosition + 1, YPosition);
-            Tile tileRightBelow = gameSession.getTileFromGrid(XPosition + 1, YPosition - 1);
+        if (xPosition < (gameSession.getGridWidth() - 1) && yPosition != 0) {//Check boulder not on left edge or bottom of grid
+            Tile tileToRight = gameSession.getTileFromGrid(xPosition + 1, yPosition);
+            Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition - 1);
 
             //Check if diamond should roll right
             if (tileToRight instanceof PathWall && tileRightBelow instanceof PathWall) {
-                String direction = "Right";
-                this.roll(XPosition, YPosition, direction);
+                this.roll(xPosition, yPosition, RIGHT_DIRECTION);
             }
         }
 
