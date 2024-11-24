@@ -14,6 +14,10 @@ public class Game {
     private String loadedPlayerProfileID;
     private GameSession currentGamesession;
 
+    
+    
+    private final Pane gamePane;
+
 
     //currentGameSession and loadedPlayerProfileID do not get instantiated in the constructor as they are variable (debatable whether anything gets instantiated in the constructor
     Game(Scene scene, Pane pane) {
@@ -47,10 +51,26 @@ public class Game {
         });
 
 
+        scene.setOnKeyPressed(E -> {
+            String key = E.getCharacter();
 
 
+            if (currentGamesession != null) {
+                currentGamesession.onKeyPressed(key);
+            }
+        });
+
+        scene.setOnKeyReleased(E -> {
+            String key = E.getCharacter();
 
 
+            if (currentGamesession != null) {
+                currentGamesession.onKeyReleased(key);
+            }
+        });
+
+
+        this.gamePane = pane;
 
 
 
@@ -92,7 +112,7 @@ public class Game {
 
 
 
-        this.currentGamesession = new GameSession(this, gameData.toString());
+        this.currentGamesession = new GameSession(this, gameData, gamePane);
         return true;
     }
 
@@ -107,10 +127,6 @@ public class Game {
 
     public void setPlayerProfile(String playerProfileID) {
         this.loadedPlayerProfileID = playerProfileID;
-    }
-
-    public void loadGame(File levelFileData) {
-        currentGamesession = new GameSession(this, levelFileData.toString());//This is not how we will pass the level file data, it is just a placeholder for now
     }
 
     
