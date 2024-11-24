@@ -21,7 +21,13 @@ public class GameSessionData {
 
     }
 
-    
+    /**
+     * checks whether the gamesession data has logged that the user has a key in their inventory.
+     * @param item
+     * The string that represents the key colour.
+     * @return
+     * returns true if the user has picked up at least one key of that colour, otherwise returns false.
+     */
     public boolean getInventoryItem(String item) {
         switch (item){
             case "rk":
@@ -48,6 +54,14 @@ public class GameSessionData {
                 return false;
         }
     }
+
+    /**
+     * Changes how many of a particular item the user has in their inventory.
+     * @param item
+     * A string that represents the key colour they are updating.
+     * @param increment
+     * increments if true, otherwise decrements.
+     */
     public void updateInventory(String item, boolean increment) {
         int valueChange = increment ? 1 : 0;
         switch (item){
@@ -67,13 +81,35 @@ public class GameSessionData {
                 return;
         }
     }
+
+    /**
+     * gets the current score of the game.
+     * @return
+     * The current score of the gamesession.
+     */
     public int getScore() {
         return score;
     }
+
+    /**
+     * Updates the current score of the game.
+     * @param scoreToAdd
+     * The amount we are adding to the score.
+     */
     public void updateScore(int scoreToAdd) {
         score += scoreToAdd;
     }
+
+    /**
+     * gets how many diamonds the user has picked up.
+     * @return
+     * how many diamonds the user has picked up.
+     */
     public int getDiamondCount() {return this.diamondCount;}
+
+    /**
+     * Increments the diamond count.
+     */
     public void incrementDiamondCount() {
         diamondCount++;
     }
