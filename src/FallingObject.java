@@ -16,9 +16,6 @@ public abstract class FallingObject extends Tile{
         PathWall pathWall = new PathWall(gameSession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
         Tile outgoingTile = gameSession.getTileFromGrid(XPosition,YPosition - 1);
         gameSession.updateTilePositions(pathWall, this,outgoingTile);
-        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
-        Tile outgoingTile = gameSession.getTileFromGrid(XPosition,YPosition - 1);
-        gameSession.updateTilePositions(pathWall, this,outgoingTile);
     }
 
     /**
