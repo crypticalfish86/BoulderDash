@@ -5,8 +5,8 @@ public class AmoebaChild extends AmoebaOrigin{
     private AmoebaOrigin originOfThisChildAmoeba;
 
     //TODO possibly change the maxAmoebaChildCount from 0 to whatever is specified in the level file format
-    public AmoebaChild(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, AmoebaOrigin originOfThisChildAmoeba) {
-        super(gameSession, x, y, TileType, operationInterval, amoebaGrowthRatePerOperationInterval,0);
+    public AmoebaChild(GameSession gameSession, int x, int y, TileType tileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, AmoebaOrigin originOfThisChildAmoeba) {
+        super(gameSession, x, y, tileType, operationInterval, amoebaGrowthRatePerOperationInterval,0);
         this.originOfThisChildAmoeba = originOfThisChildAmoeba;
         this.tileType = TileType.AMOEBA;
         this.amoebaCanSpreadToThisTile = false;
@@ -33,12 +33,12 @@ public class AmoebaChild extends AmoebaOrigin{
      */
     @Override
     protected void setNewAmoebaToNeighbouringTile(int x, int y){
-        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(thisTilesGamesession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval, this.originOfThisChildAmoeba);
+        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval, this.originOfThisChildAmoeba);
         this.directAmoebaNeighbours.add(newNeighbouringAmoeba);
-        if(this.thisTilesGamesession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
-            this.thisTilesGamesession.callKillPlayer();
+        if(gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
+            gameSession.callKillPlayer();
         }
-        this.thisTilesGamesession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
+        gameSession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
         this.originOfThisChildAmoeba.incrementAmoebaChildCount();
     }
 

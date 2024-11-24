@@ -1,4 +1,4 @@
-public enum TileType{
+public enum TileType {
     PLAYER,
     FALLING_OBJECT,
     EXPLOSION,

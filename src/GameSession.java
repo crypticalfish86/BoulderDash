@@ -42,10 +42,6 @@ public class GameSession {
 
 
 
-
-
-
-
         int mapSizeX = 10;
         int mapSizeY = 10;// TODO: implement these
 
@@ -55,6 +51,8 @@ public class GameSession {
 
         this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
+
+        gamePane.getChildren().addAll(canvas);
     }
 
     /*
@@ -63,6 +61,7 @@ public class GameSession {
     */
     private void interpretLevelData(String gameData) {
         //TODO implement a function  to interpret level data
+
         return;
     }
 

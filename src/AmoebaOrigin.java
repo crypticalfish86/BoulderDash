@@ -27,7 +27,7 @@ public class AmoebaOrigin extends Tile{
      */
     public void interact(Tile tile){
         if(tile.getTileType() == TileType.EXPLOSION){
-            this.thisTilesGamesession.setTile(this.x,this.y, tile);
+            gameSession.setTile(this.x,this.y, tile);
         }
     }
 
@@ -58,7 +58,7 @@ public class AmoebaOrigin extends Tile{
      * Turn this amoeba tile into a diamond.
      */
     public void triggerDiamondConversion(){
-        this.thisTilesGamesession.setTile(this.x,this.y,new Diamond(this.thisTilesGamesession, this.x,this.y, TileType.FALLING_OBJECT, this.operationInterval));
+        gameSession.setTile(this.x,this.y,new Diamond(gameSession, this.x,this.y, TileType.FALLING_OBJECT, this.operationInterval));
     }
 
     /**
@@ -71,10 +71,10 @@ public class AmoebaOrigin extends Tile{
         if(numberOfReturnsToOrigin >= 100){
             return;
         }
-        Tile northTile = thisTilesGamesession.getTileFromGrid(x,y + 1);
-        Tile eastTile = thisTilesGamesession.getTileFromGrid(x + 1, y);
-        Tile southTile = thisTilesGamesession.getTileFromGrid(x, y - 1);
-        Tile westTile = thisTilesGamesession.getTileFromGrid(x - 1, y);
+        Tile northTile = gameSession.getTileFromGrid(x,y + 1);
+        Tile eastTile = gameSession.getTileFromGrid(x + 1, y);
+        Tile southTile = gameSession.getTileFromGrid(x, y - 1);
+        Tile westTile = gameSession.getTileFromGrid(x - 1, y);
 
         if(northTile.amoebaCanSpreadToThisTile()) {
             setNewAmoebaToNeighbouringTile(x, y + 1);
@@ -101,12 +101,12 @@ public class AmoebaOrigin extends Tile{
      * The y position of where in the grid you're spreading the amoeba to.
      */
     protected void setNewAmoebaToNeighbouringTile(int x, int y){
-        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(thisTilesGamesession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval, this);
+        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval, this);
         this.directAmoebaNeighbours.add(newNeighbouringAmoeba);
-        if(this.thisTilesGamesession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
-            this.thisTilesGamesession.callKillPlayer();
+        if(gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
+            gameSession.callKillPlayer();
         }
-        this.thisTilesGamesession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
+        gameSession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
         this.incrementAmoebaChildCount();
     }
 

@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 public class Boulder extends FallingObject{
 
 
-    public static final Image img = new Image("./");//TODO: add the image here
+    public static final Image img = new Image("file:Assets/Images/Boulder.png");//TODO: add the image here
 
 
 
