@@ -10,9 +10,11 @@ public class MagicWall extends Wall {
         this.amoebaCanSpreadToThisTile = false;
     }
 
-    public void interact(Tile Tile) {
-        //TODO implement an interact function
+    public void interact(Tile inputTileObject) {
+        System.out.println("Magic wall activated: Interaction started!");
+        // Add behavior for converting tiles or creating special effects
     }
+
     public void updateTile(long currentTimeInMilliseconds) {
         draw(img, 0, 0);
     }

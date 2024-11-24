@@ -4,24 +4,23 @@ public class AmoebaChild extends AmoebaOrigin{
 
     private AmoebaOrigin originOfThisChildAmoeba;
 
-    //TODO possibly change the maxAmoebaChildCount from 0 to whatever is specified in the level file format
-    public AmoebaChild(GameSession gameSession, int x, int y, TileType tileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, AmoebaOrigin originOfThisChildAmoeba) {
-        super(gameSession, x, y, tileType, operationInterval, amoebaGrowthRatePerOperationInterval,0);
+    public AmoebaChild(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount, AmoebaOrigin originOfThisChildAmoeba) {
+        super(gameSession, x, y, TileType, operationInterval, amoebaGrowthRatePerOperationInterval,maxAmoebaChildCount);
         this.originOfThisChildAmoeba = originOfThisChildAmoeba;
         this.tileType = TileType.AMOEBA;
         this.amoebaCanSpreadToThisTile = false;
 
     }
 
-    //TODO possibly remove this once the maxAmoebaChildCount from the level file format is fixed
+    //TODO, this is kind of ugly to have an overridden empty method, if you have time come back and turn this into something else.
     /**
-     * Overriden method to prevent the parent method being called which would turn this amoeba into diamonds
+     * Overriden method to prevent the parent method being called which would turn this amoeba into diamonds prematurely
      * @param currentTimeInMilliseconds
      * The how many milliseconds it's been since 01/01/1970.
      */
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-
+        return;
     }
 
     /**
@@ -33,12 +32,12 @@ public class AmoebaChild extends AmoebaOrigin{
      */
     @Override
     protected void setNewAmoebaToNeighbouringTile(int x, int y){
-        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval, this.originOfThisChildAmoeba);
+        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(this.gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval,this.maxAmoebaChildCount, this.originOfThisChildAmoeba);
         this.directAmoebaNeighbours.add(newNeighbouringAmoeba);
-        if(gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
-            gameSession.callKillPlayer();
+        if(this.gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
+            this.gameSession.callKillPlayer();
         }
-        gameSession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
+        this.gameSession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
         this.originOfThisChildAmoeba.incrementAmoebaChildCount();
     }
 

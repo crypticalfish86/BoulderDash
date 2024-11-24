@@ -1,3 +1,4 @@
+
 import java.net.URL;
 
 import javafx.scene.image.Image;
@@ -31,19 +32,18 @@ public class Player extends Tile {
 
     }
 
-
+    @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        draw(img, 0, 0);
+        // Update tile's visual and/or game state
+        draw(img, 0, 0); // Draw the player's image at (0,0)
     }
-
-
 
     public void onKeyPressed(String key) {
         System.out.println("Key " + key + " pressed.");
+        queueInput(key); // Queue the key as input
     }
 
     public void onKeyReleased(String key) {
-        
         System.out.println("Key " + key + " released.");
     }
 }

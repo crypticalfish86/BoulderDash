@@ -32,7 +32,7 @@ public class GameSession {
 
     GameSession(Game game, String gameData, Pane gamePane) {
         this.game = game;
-        this.currentSessionData = new GameSessionData(this);
+        this.currentSessionData = new GameSessionData(this, 0, 0, 0, 0, 0, 0);//TODO update this to account for loading games in the middle of play
         this.player = new Player(this, 10, 10, 10); // TODO: change the values
         interpretLevelData(gameData);
 
@@ -138,6 +138,10 @@ public class GameSession {
 
     public int getGridHeight() {
         return this.gridHeight;
+    }
+
+    public GameSessionData getCurrentSessionData(){
+        return this.currentSessionData;
     }
 
     //TODO determine a method of input before implementing

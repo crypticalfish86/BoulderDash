@@ -1,3 +1,5 @@
+//TODO fix the edge case where the amoeba origin gets blown up and a new amoeba origin has to be chosen
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -6,7 +8,7 @@ public class AmoebaOrigin extends Tile{
     protected final long amoebaGrowthRatePerOperationInterval; //how many operation intervals before the amoeba grows by one
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
-    private final int maxAmoebaChildCount;
+    protected final int maxAmoebaChildCount;
     private int amoebaChildCount;
 
     protected final ArrayList<AmoebaChild> directAmoebaNeighbours;
@@ -27,7 +29,7 @@ public class AmoebaOrigin extends Tile{
      */
     public void interact(Tile tile){
         if(tile.getTileType() == TileType.EXPLOSION){
-            gameSession.setTile(this.x,this.y, tile);
+            this.gameSession.setTile(this.x,this.y, tile);
         }
     }
 
@@ -58,7 +60,7 @@ public class AmoebaOrigin extends Tile{
      * Turn this amoeba tile into a diamond.
      */
     public void triggerDiamondConversion(){
-        gameSession.setTile(this.x,this.y,new Diamond(gameSession, this.x,this.y, TileType.FALLING_OBJECT, this.operationInterval));
+        this.gameSession.setTile(this.x,this.y,new Diamond(this.gameSession, this.x,this.y, TileType.FALLING_OBJECT, this.operationInterval));
     }
 
     /**
@@ -101,12 +103,12 @@ public class AmoebaOrigin extends Tile{
      * The y position of where in the grid you're spreading the amoeba to.
      */
     protected void setNewAmoebaToNeighbouringTile(int x, int y){
-        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval, this);
+        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(this.gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval,this.maxAmoebaChildCount, this);
         this.directAmoebaNeighbours.add(newNeighbouringAmoeba);
-        if(gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
-            gameSession.callKillPlayer();
+        if(this.gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
+            this.gameSession.callKillPlayer();
         }
-        gameSession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
+        this.gameSession.setTile(newNeighbouringAmoeba.getYPosition(), newNeighbouringAmoeba.getXPosition(), newNeighbouringAmoeba);
         this.incrementAmoebaChildCount();
     }
 
