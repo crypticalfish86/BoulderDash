@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -59,6 +60,18 @@ public class CanvasTest extends Application {
             public boolean onMouseMove(double x, double y, boolean hasConsumed) {
                 // TODO Auto-generated method stub
                 return false;
+            }
+
+            @Override
+            public void onKeyDown(KeyCode key) {
+                // TODO Auto-generated method stub
+                
+            }
+
+            @Override
+            public void onKeyUp(KeyCode key) {
+                // TODO Auto-generated method stub
+                
             }
 
             @Override

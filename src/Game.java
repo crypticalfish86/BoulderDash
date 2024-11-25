@@ -16,66 +16,85 @@ public class Game {
 
     
     
-    private final Pane gamePane;
 
+
+    private CanvasCompositor cc;
+    private MainMenu mainMenu;
 
     //currentGameSession and loadedPlayerProfileID do not get instantiated in the constructor as they are variable (debatable whether anything gets instantiated in the constructor
-    Game(Scene scene, Pane pane) {
-
-        //TODO: add menu buttons here
-
-
-        //TODO: implement profile loading
-
-
-        //TODO: Shows the profiles that this player has
-
-
-        //TODO: remove this part that loads the game
-        FlowPane formatterPane = new FlowPane();
-
-        TextField gameDirectoryInputField = new TextField();
-        Button startGameButton = new Button("Load Game");
-
-        formatterPane.getChildren().addAll(gameDirectoryInputField, startGameButton);
-
-
-        startGameButton.setOnAction(E -> {
-
-
-            boolean success = loadGame(gameDirectoryInputField.getText());
-
-            if (success) {
-                formatterPane.setVisible(false);
-            };
-        });
-
-
-        scene.setOnKeyPressed(E -> {
-            String key = E.getCharacter();
-
-
-            if (currentGamesession != null) {
-                currentGamesession.onKeyPressed(key);
-            }
-        });
-
-        scene.setOnKeyReleased(E -> {
-            String key = E.getCharacter();
-
-
-            if (currentGamesession != null) {
-                currentGamesession.onKeyReleased(key);
-            }
-        });
-
-
-        this.gamePane = pane;
+    public Game(CanvasCompositor cc) {
 
 
 
 
-        pane.getChildren().add(formatterPane);
+
+        this.mainMenu = new MainMenu(this, cc);
+
+
+
+        this.cc = cc;
+
+
+
+
+
+
+
+
+        // //TODO: add menu buttons here
+
+
+        // //TODO: implement profile loading
+
+
+        // //TODO: Shows the profiles that this player has
+
+
+        // //TODO: remove this part that loads the game
+        // FlowPane formatterPane = new FlowPane();
+
+        // TextField gameDirectoryInputField = new TextField();
+        // Button startGameButton = new Button("Load Game");
+
+        // formatterPane.getChildren().addAll(gameDirectoryInputField, startGameButton);
+
+
+        // startGameButton.setOnAction(E -> {
+
+
+        //     boolean success = loadGame(gameDirectoryInputField.getText());
+
+        //     if (success) {
+        //         formatterPane.setVisible(false);
+        //     };
+        // });
+
+
+        // scene.setOnKeyPressed(E -> {
+        //     String key = E.getCharacter();
+
+
+        //     if (currentGamesession != null) {
+        //         currentGamesession.onKeyPressed(key);
+        //     }
+        // });
+
+        // scene.setOnKeyReleased(E -> {
+        //     String key = E.getCharacter();
+
+
+        //     if (currentGamesession != null) {
+        //         currentGamesession.onKeyReleased(key);
+        //     }
+        // });
+
+
+        // this.gamePane = pane;
+
+
+
+
+        // pane.getChildren().add(formatterPane);
     }
 
 

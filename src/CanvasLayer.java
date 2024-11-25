@@ -1,4 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 
 public class CanvasLayer {
 
@@ -57,6 +58,24 @@ public class CanvasLayer {
          * @param elapsed time in milliseconds passed
          */
         public void draw(GraphicsContext gc, long elapsed);
+
+
+        
+        /**
+         * fires when a key is down
+         * redirected from scene inputs to simplify
+         * @param key input key
+         */
+        public void onKeyDown(KeyCode key);
+
+
+
+        /**
+         * fires when a key is up
+         * redirected from scene inputs to simplify
+         * @param key input key
+         */
+        public void onKeyUp(KeyCode key);
     }
 }
 

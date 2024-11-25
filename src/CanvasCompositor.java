@@ -45,6 +45,23 @@ public class CanvasCompositor {
                 hasConsumed &= cl.cI.onMouseUp(E.getSceneX(), E.getSceneY(), hasConsumed);
             }
         });
+
+
+        scene.setOnKeyPressed(E -> {
+            for (CanvasLayer cl : canvasLayerArray) {
+                cl.cI.onKeyDown(E.getCode());
+            }
+        });
+
+        scene.setOnKeyReleased(E -> {
+            for (CanvasLayer cl : canvasLayerArray) {
+                cl.cI.onKeyUp(E.getCode());
+            }
+        });
+
+
+
+        pane.getChildren().addAll(canvas);
     }
 
 

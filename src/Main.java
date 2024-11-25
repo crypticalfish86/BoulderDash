@@ -1,7 +1,10 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application {
 
@@ -15,14 +18,36 @@ public class Main extends Application {
 
 
         Pane root = new Pane();
-
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-        Game game = new Game(scene, root);
+
+
+        CanvasCompositor cc = new CanvasCompositor(root, scene);
+
+
+
+        Game game = new Game(cc);
 
         
 
-        stage.setScene(scene);
+
+        //I'm sorry java does not have pointers, so I have to do this
+        long[] lastUpdated = {System.currentTimeMillis()};
+
+        
+        Timeline updateLoop = new Timeline(new KeyFrame(Duration.seconds((double) 1 /60), E -> {
+            long now = System.currentTimeMillis();
+            long timeDiff = now - lastUpdated[0];
+            lastUpdated[0] = now;
+            cc.draw(timeDiff);
+        }));
+        
+        updateLoop.play();
+
+
+
         stage.show();
+
+
     }
     
 
