@@ -49,7 +49,7 @@ public class GameSession {
         this.gridWidth = mapSizeX;
 
 
-        this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
+        this.canvas = new Canvas(Main.GRID_WIDTH, Main.GRID_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
 
         gamePane.getChildren().addAll(canvas);

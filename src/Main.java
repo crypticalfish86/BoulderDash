@@ -5,9 +5,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static final int WINDOW_WIDTH = 640;
-    public static final int WINDOW_HEIGHT = 480;
-
+    public static final int GRID_HEIGHT = 1280;
+    public static final int GRID_WIDTH = 960;
 
     @Override
     public void start(Stage stage) {
@@ -17,7 +16,7 @@ public class Main extends Application {
 
         Pane root = new Pane();
 
-        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        Scene scene = new Scene(root, GRID_HEIGHT, GRID_WIDTH);
         Game game = new Game(scene, root);
 
         

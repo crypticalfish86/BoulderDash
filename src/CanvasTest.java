@@ -27,11 +27,11 @@ public class CanvasTest extends Application {
 
 
 
-        //i'm sorry java does not have pointers so i have to do this
-        long lastUpdated[] = {System.currentTimeMillis()};
+        //I'm sorry java does not have pointers, so I have to do this
+        long[] lastUpdated = {System.currentTimeMillis()};
 
         
-        Timeline updateLoop = new Timeline(new KeyFrame(Duration.seconds(1/60), E -> {
+        Timeline updateLoop = new Timeline(new KeyFrame(Duration.seconds((double) 1 /60), E -> {
             long now = System.currentTimeMillis();
             long timeDiff = now - lastUpdated[0];
             lastUpdated[0] = now;
