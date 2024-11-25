@@ -1,11 +1,23 @@
 
+import java.net.URL;
+
 import javafx.scene.image.Image;
 
 public class Player extends Tile {
-    private String inputPending; // Holds the queued input
+    
+    String inputPending; // Holds the queued input
+    String input;
 
+
+    
     // Image representing the player
-    public static final Image img = new Image("./player.png"); // Replace with actual path
+    public static final Image img = new Image("file:Assets/Images/Ameoba.png");//TODO: add the image here
+
+    
+    
+
+    
+
 
     // Constructor for Player
     public Player(GameSession gameSession, int x, int y, long operationInterval) {
@@ -33,7 +45,7 @@ public class Player extends Tile {
     @Override
     public void interact(Tile tile) {
         // Logic for player interaction with another tile
-        System.out.println("Interacting with tile: " + tile.getType());
+        System.out.println("Interacting with tile: " + tile.getTileType());
     }
 
     @Override

@@ -27,22 +27,20 @@ public abstract class FallingObject extends Tile{
      * @throws IllegalArgumentException if the provided direction is invalid
      */
     protected void roll(int XPosition, int YPosition, String direction){
-        int directionOffset;
-
-        switch (direction){
-            case "Right" :
-                directionOffset = 1;
+        int offset;
+        switch(direction){
+            case "Right":
+                offset = 1;
                 break;
-            case "Left:" :
-                directionOffset = -1;
+            case "Left":
+                offset = -1;
                 break;
             default:
-                throw new IllegalArgumentException("Invalid direction " + direction +
-                        " Allowed values are 'Left or 'Right'");
+                throw new IllegalArgumentException("Invalid direction: " + direction + "Allowed values are 'Left' or 'Right ");
         }
 
         PathWall pathWall = new PathWall(gameSession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
-        Tile outgoingTile = gameSession.getTileFromGrid(XPosition + directionOffset, YPosition);
+        Tile outgoingTile = gameSession.getTileFromGrid(XPosition + offset, YPosition);
         gameSession.updateTilePositions(pathWall, this,outgoingTile);
     }
 }
