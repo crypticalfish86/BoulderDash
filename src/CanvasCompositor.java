@@ -32,7 +32,7 @@ public class CanvasCompositor {
             for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
                 CanvasLayer cl = canvasLayerArray.get(i);
 
-                hasConsumed &= cl.cI.onMouseDown(E.getSceneX(), E.getSceneY(), hasConsumed);
+                hasConsumed |= cl.cI.onMouseDown(E.getSceneX(), E.getSceneY(), hasConsumed);
             }
         });
 
@@ -42,7 +42,7 @@ public class CanvasCompositor {
             for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
                 CanvasLayer cl = canvasLayerArray.get(i);
 
-                hasConsumed &= cl.cI.onMouseUp(E.getSceneX(), E.getSceneY(), hasConsumed);
+                hasConsumed |= cl.cI.onMouseUp(E.getSceneX(), E.getSceneY(), hasConsumed);
             }
         });
 
@@ -116,7 +116,7 @@ public class CanvasCompositor {
             for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
                 CanvasLayer cl = canvasLayerArray.get(i);
 
-                hasConsumed &= cl.cI.onMouseMove(E.getSceneX(), E.getSceneY(), hasConsumed);
+                hasConsumed |= cl.cI.onMouseMove(E.getSceneX(), E.getSceneY(), hasConsumed);
             }
         });
 
