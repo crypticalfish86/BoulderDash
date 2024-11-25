@@ -1,15 +1,17 @@
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application {
 
-    public static final int WINDOW_HEIGHT = 1280;
-    public static final int WINDOW_WIDTH = 960;
+    public static final int WINDOW_HEIGHT = 960;
+    public static final int WINDOW_WIDTH = 1280;
 
     @Override
     public void start(Stage stage) {
@@ -17,7 +19,7 @@ public class Main extends Application {
         // String javafxVersion = System.getProperty("javafx.version");
 
 
-        Pane root = new Pane();
+        BorderPane root = new BorderPane();
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 
@@ -40,11 +42,11 @@ public class Main extends Application {
             lastUpdated[0] = now;
             cc.draw(timeDiff);
         }));
-        
+        updateLoop.setCycleCount(Animation.INDEFINITE);
         updateLoop.play();
 
 
-
+        stage.setScene(scene);
         stage.show();
 
 

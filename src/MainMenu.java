@@ -59,8 +59,9 @@ public class MainMenu {
 
             @Override
             public void draw(GraphicsContext gc, long elapsed) {
-                gc.setFill(new Color(0, 0,0, 0));
+                gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
+
             }
         }, 1);
 
