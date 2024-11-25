@@ -46,13 +46,19 @@ public class CanvasTest extends Application {
         //creates a test layer
         CanvasLayer cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
-            public boolean onMouseDown(double x, double y) {
+            public boolean onMouseDown(double x, double y, boolean hasConsumed) {
                 return false;
             }
 
             @Override
-            public void onMouseUp(double x, double y) {
-                
+            public boolean onMouseUp(double x, double y, boolean hasConsumed) {
+                return false;
+            }
+
+            @Override
+            public boolean onMouseMove(double x, double y, boolean hasConsumed) {
+                // TODO Auto-generated method stub
+                return false;
             }
 
             @Override

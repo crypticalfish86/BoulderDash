@@ -7,15 +7,17 @@ import javafx.scene.layout.Pane;
 
 public class CanvasCompositor {
     
-
+    private Scene scene;
 
     private Canvas canvas;
     private GraphicsContext gc;
     private ArrayList<CanvasLayer> canvasLayerArray = new ArrayList<>();
 
-    private CanvasLayer lastClickOn;
+
 
     public CanvasCompositor(Pane pane, Scene scene) {
+
+        this.scene = scene;
         this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
 
@@ -26,23 +28,21 @@ public class CanvasCompositor {
 
         scene.setOnMousePressed(E -> {
             //checks from the top to the bottom to see which layer it interacts with
+            boolean hasConsumed = false;
             for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
                 CanvasLayer cl = canvasLayerArray.get(i);
 
-                boolean isConsumed = cl.cI.onMouseDown(E.getSceneX(), E.getSceneY());
-
-                if (isConsumed) {
-                    lastClickOn = cl;
-                    break;
-                }
+                hasConsumed &= cl.cI.onMouseDown(E.getSceneX(), E.getSceneY(), hasConsumed);
             }
-
         });
 
         scene.setOnMouseReleased(E -> {
-            if (lastClickOn != null) {
-                lastClickOn.cI.onMouseUp(E.getSceneX(), E.getSceneY());
-                lastClickOn = null;
+            //checks from the top to the bottom to see which layer it interacts with
+            boolean hasConsumed = false;
+            for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
+                CanvasLayer cl = canvasLayerArray.get(i);
+
+                hasConsumed &= cl.cI.onMouseUp(E.getSceneX(), E.getSceneY(), hasConsumed);
             }
         });
     }
@@ -90,5 +90,18 @@ public class CanvasCompositor {
         for (CanvasLayer cl : canvasLayerArray) {
             cl.cI.draw(gc, elapsed);
         }
+
+
+
+        scene.setOnMouseReleased(E -> {
+            //checks from the top to the bottom to see which layer it interacts with
+            boolean hasConsumed = false;
+            for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
+                CanvasLayer cl = canvasLayerArray.get(i);
+
+                hasConsumed &= cl.cI.onMouseMove(E.getSceneX(), E.getSceneY(), hasConsumed);
+            }
+        });
+
     }
 }
