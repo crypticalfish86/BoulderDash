@@ -14,7 +14,20 @@ public class Boulder extends FallingObject{
     }
 
     public void interact(Tile tile){
-        //TODO implement interact function
+        if(tile.getTileType() == TileType.PLAYER){
+
+            //Check if player to left of boulder and a path to right of boulder
+            if(tile.getXPosition() == this.x - 1 &&
+                    gameSession.getTileFromGrid(this.x + 1,this.y) instanceof PathWall){
+                pushBoulder(tile, RIGHT_DIRECTION);
+            }
+
+            //Check if player to right of boulder and a path to left of boulder
+            if(tile.getXPosition() == this.x + 1 &&
+                    gameSession.getTileFromGrid(this.x - 1,this.y) instanceof PathWall){
+                pushBoulder(tile, LEFT_DIRECTION);
+            }
+        }
     }
 
     /**
@@ -56,6 +69,24 @@ public class Boulder extends FallingObject{
                 this.roll(xPosition, yPosition, RIGHT_DIRECTION);
             }
         }
+    }
+
+    private void pushBoulder(Tile player, String direction){
+        int offset;
+        switch (direction){
+            case "Right":
+                offset = 1;
+                break;
+            case "Left":
+                offset = -1;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid direction " + direction + " Allowed values are 'Left' or 'Right");
+        }
+
+        PathWall pathWall = new PathWall(gameSession, this.x + (-offset), this.y,TileType.STATIC_TILE,getOperationInterval());
+        gameSession.updateTilePositions(pathWall, player,this);
+        gameSession.setTile(this.x + offset,this.y, this);
     }
 }
 
