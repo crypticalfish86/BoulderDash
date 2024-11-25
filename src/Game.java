@@ -131,7 +131,7 @@ public class Game {
 
 
 
-        this.currentGamesession = new GameSession(this, gameData, gamePane);
+        // this.currentGamesession = new GameSession(this, gameData, gamePane);
         return true;
     }
 

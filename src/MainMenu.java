@@ -1,5 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class MainMenu {
     
@@ -58,7 +59,8 @@ public class MainMenu {
 
             @Override
             public void draw(GraphicsContext gc, long elapsed) {
-
+                gc.setFill(new Color(0, 0,0, 0));
+                gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
             }
         }, 1);
 
