@@ -1,5 +1,3 @@
-//TODO fix the edge case where the amoeba origin gets blown up and a new amoeba origin has to be chosen
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -61,6 +59,16 @@ public class AmoebaOrigin extends Tile{
      */
     public void triggerDiamondConversion(){
         this.gameSession.setTile(this.x,this.y,new Diamond(this.gameSession, this.x,this.y, TileType.FALLING_OBJECT, this.operationInterval));
+    }
+
+    /**
+     * when a part of the amoeba gets blown up, destroy the whole amoeba
+     */
+    public void blowUpWholeAmoeba(){
+        for(AmoebaChild amoebaChild : this.directAmoebaNeighbours){
+            blowUpWholeAmoeba();
+        }
+        this.gameSession.setTile(this.x,this.y, new PathWall(this.gameSession, this.x,this.y, TileType.STATIC_TILE, this.operationInterval));
     }
 
     /**
