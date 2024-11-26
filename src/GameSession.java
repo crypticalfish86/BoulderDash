@@ -30,7 +30,7 @@ public class GameSession {
 
     private static final String ESCAPE_KEYCODE = "Escape";
 
-    GameSession(Game game, String gameData, Pane gamePane) {
+    GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
         this.currentSessionData = new GameSessionData(this, 0, 0, 0, 0, 0, 0);//TODO update this to account for loading games in the middle of play
         this.player = new Player(this, 10, 10, 10); // TODO: change the values
@@ -51,8 +51,6 @@ public class GameSession {
 
         this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
-
-        gamePane.getChildren().addAll(canvas);
     }
 
     /*

@@ -1,3 +1,4 @@
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Tile {
@@ -41,8 +42,8 @@ public abstract class Tile {
     public abstract void updateTile(long currentTimeInMilliseconds);
 
     //method used for drawing the icon
-    protected void draw(Image img, int xOffset, int yOffset) {
-        gameSession.gc().drawImage(img,
+    protected void draw(GraphicsContext gc, Image img, int xOffset, int yOffset) {
+        gc.drawImage(img,
             this.x * GameSession.GRID_SIZE + xOffset,
             this.y * GameSession.GRID_SIZE + yOffset
         );
