@@ -47,6 +47,18 @@ public class CanvasCompositor {
         });
 
 
+        scene.setOnMouseMoved(E -> {
+            //checks from the top to the bottom to see which layer it interacts with
+            boolean hasConsumed = false;
+            for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
+                CanvasLayer cl = canvasLayerArray.get(i);
+
+                hasConsumed |= cl.cI.onMouseMove(E.getSceneX(), E.getSceneY(), hasConsumed);
+            }
+        });
+
+
+
         scene.setOnKeyPressed(E -> {
             for (CanvasLayer cl : canvasLayerArray) {
                 cl.cI.onKeyDown(E.getCode());
@@ -102,23 +114,15 @@ public class CanvasCompositor {
      * 
     */
     public void draw(long elapsed) {
+        
+
+
+
+
         gc.clearRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
         for (CanvasLayer cl : canvasLayerArray) {
             cl.cI.draw(gc, elapsed);
         }
-
-
-
-        scene.setOnMouseReleased(E -> {
-            //checks from the top to the bottom to see which layer it interacts with
-            boolean hasConsumed = false;
-            for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
-                CanvasLayer cl = canvasLayerArray.get(i);
-
-                hasConsumed |= cl.cI.onMouseMove(E.getSceneX(), E.getSceneY(), hasConsumed);
-            }
-        });
-
     }
 }
