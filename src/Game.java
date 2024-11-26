@@ -36,8 +36,8 @@ public class Game {
 
 
 
-
-
+        // Hides the menu
+        // mainMenu.hide();
 
 
 

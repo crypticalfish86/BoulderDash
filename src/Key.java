@@ -24,6 +24,14 @@ public class Key extends Wall{
     public void onUpdate(long timePassedInMilliseconds) {
         draw(img, 0, 0); // Draw the key image at the specified location
     }
+
+    public void draw(Image img, int x, int y) {
+    }
+
+    @Override
+    public void updateTile(long currentTimeInMilliseconds) {
+
+    }
 }
 
 

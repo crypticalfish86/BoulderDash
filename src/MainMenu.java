@@ -70,6 +70,8 @@ public class MainMenu {
 
         cc.addLayer(cl);
 
+        // Create function to check what button you are on
+        // This will use the three functions above (mouseUp, mouseDown, mouseMove)
 
     }
 
