@@ -3,12 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 
 
 public class Game {
@@ -37,23 +31,9 @@ public class Game {
 
 
 
-        // Hides the menu
-        // mainMenu.hide();
 
 
-
-        // //TODO: add menu buttons here
-        Image playImg = new Image ("file:Assets/Buttons/PlayButton.png");
-        Button playButton = new Button("Play");
-        playButton.setMaxWidth(Double.MAX_VALUE);
-
-        // //TODO: implement profile loading
-
-
-        // //TODO: Shows the profiles that this player has
-
-
-        // //TODO: remove this part that loads the game
+        
         // FlowPane formatterPane = new FlowPane();
 
         // TextField gameDirectoryInputField = new TextField();
@@ -144,7 +124,10 @@ public class Game {
 
 
 
-
+    public void onPlayButtonClicked() {
+        System.out.println("play is clicked");
+        mainMenu.hide();
+    }
 
 
     public void setPlayerProfile(String playerProfileID) {

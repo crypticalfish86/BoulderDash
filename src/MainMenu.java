@@ -1,13 +1,9 @@
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 
 public class MainMenu {
     
@@ -19,6 +15,11 @@ public class MainMenu {
 
 
     Game game;
+
+
+    public static final Image IMAGE_TITLE = new Image("file:Assets/Buttons/MenuTitle.png");
+    public static final Image IMAGE_PLAY = new Image("file:Assets/Buttons/PlayButton.png");
+    
 
 
     public MainMenu(Game game, CanvasCompositor cc) {
@@ -33,23 +34,29 @@ public class MainMenu {
 
 
 
-
+        boolean[] mouseDownOnPlay = {false};
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
             public boolean onMouseDown(double x, double y, boolean hasConsumed) {
-                return false;
+                mouseDownOnPlay[0] = isMouseOnPlay(x, y);
+                return true;
             }
 
             @Override
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
-                return false;
+                if (mouseDownOnPlay[0] && isMouseOnPlay(x, y)) {
+                    game.onPlayButtonClicked();
+                }
+                return true;
             }
 
             @Override
             public boolean onMouseMove(double x, double y, boolean hasConsumed) {
                 // TODO Auto-generated method stub
-                return false;
+                // getMouseOnButton(x, y);
+
+                return true;
             }
 
             @Override
@@ -66,8 +73,21 @@ public class MainMenu {
 
             @Override
             public void draw(GraphicsContext gc, long elapsed) {
+                // gc.setFill(new Color(.15, .1, .05, 1));
                 gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
+
+
+                //draw the title
+                UIHelper.drawImageRelativeXX(gc, IMAGE_TITLE, .5, .2, .25);
+
+                
+                //
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .8, .1);
+
+                
+
+
             }
         }, 1);
 
@@ -80,6 +100,19 @@ public class MainMenu {
         // This will use the three functions above (mouseUp, mouseDown, mouseMove)
 
     }
+
+
+
+
+
+
+
+    private boolean isMouseOnPlay(double mouseX, double mouseY) {
+
+        //check for play button
+        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PLAY, .5, .8, .1);
+    }
+
 
 
     public void hide() {
