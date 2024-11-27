@@ -48,4 +48,7 @@ public abstract class Tile {
             this.y * GameSession.GRID_SIZE + yOffset
         );
     }
+    public GameSession getGameSession() {
+        return this.gameSession;
+    }
 }

@@ -1,65 +1,44 @@
-
-import java.net.URL;
-
 import javafx.scene.image.Image;
 
 public class Player extends Tile {
-    
-    String inputPending; // Holds the queued input
-    String input;
 
-
-    
-    // Image representing the player
-    public static final Image img = new Image("file:Assets/Images/Ameoba.png");//TODO: add the image here
-
-    
-    
-
-    
-
+    // Image representing the player (replace with actual image path)
+    public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
 
     // Constructor for Player
     public Player(GameSession gameSession, int x, int y, long operationInterval) {
+        // Call the parent class (Tile) constructor with the gameSession and other parameters
         super(gameSession, x, y, TileType.PLAYER, operationInterval);
     }
 
-    // Method to queue input
-    public void queueInput(String input) {
-        this.inputPending = input; // Save the input into inputPending
-        System.out.println("Input queued: " + input);
+    // Example method to access GameSession
+    public void somePlayerLogic() {
+        GameSession session = getGameSession(); // This should work now, as Player inherits from Tile
+        if (session != null) {
+            System.out.println("Game Session is available.");
+        }
     }
 
-    // Method to handle player initialization logic (constructor-like behavior)
-    public void Player() {
-        inputPending = ""; // Initialize inputPending as an empty string
-        System.out.println("Player initialized.");
-    }
-
-    // Method to handle player death logic
-    public void killPlayer() {
-        System.out.println("Player killed."); // Simulating player death
-        // Add logic to remove the player from the game session
-    }
-
-    @Override
-    public void interact(Tile tile) {
-        // Logic for player interaction with another tile
-        System.out.println("Interacting with tile: " + tile.getTileType());
-    }
-
-    @Override
-    public void updateTile(long currentTimeInMilliseconds) {
-        // Update tile's visual and/or game state
-        draw(img, 0, 0); // Draw the player's image at (0,0)
-    }
-
+    // Handle player input (example)
     public void onKeyPressed(String key) {
         System.out.println("Key " + key + " pressed.");
-        queueInput(key); // Queue the key as input
+        // You can queue input or implement additional logic for key press here
     }
 
     public void onKeyReleased(String key) {
         System.out.println("Key " + key + " released.");
+        // Handle key release logic here
+    }
+
+    @Override
+    public void interact(Tile other) {
+        // Implement interaction logic with other tiles
+        System.out.println("Player interacting with tile: " + other.getTileType());
+    }
+
+    @Override
+    public void updateTile(long currentTimeInMilliseconds) {
+        // Update the player's tile, for example, drawing the image
+        draw(img, 0, 0); // Update player's image at the specified location (customize as needed)
     }
 }
