@@ -73,6 +73,8 @@ public class ProfileSelector {
 
                 //draw the title
                 UIHelper.drawImageRelativeXX(gc, IMAGE_BACK, .5, .2, .1);
+
+
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE_BOX, .5, .8, .1);
 
 
