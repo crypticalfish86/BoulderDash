@@ -15,6 +15,7 @@ public class Game {
 
     private CanvasCompositor cc;
     private MainMenu mainMenu;
+    private ProfileSelector profileSelector;
 
     //currentGameSession and loadedPlayerProfileID do not get instantiated in the constructor as they are variable (debatable whether anything gets instantiated in the constructor
     public Game(CanvasCompositor cc) {
@@ -24,6 +25,7 @@ public class Game {
 
 
         this.mainMenu = new MainMenu(this, cc);
+
 
 
 
@@ -127,6 +129,7 @@ public class Game {
     public void onPlayButtonClicked() {
         System.out.println("play is clicked");
         mainMenu.hide();
+        this.profileSelector = new ProfileSelector(this, cc);
     }
 
 
