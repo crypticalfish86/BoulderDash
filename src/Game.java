@@ -130,6 +130,30 @@ public class Game {
         System.out.println("play is clicked");
         mainMenu.hide();
         this.profileSelector = new ProfileSelector(this, cc);
+
+        // TODO Auto-generated method stub
+        // Run load game function here or move to profileselector to manage save screen
+    }
+
+    public void onBackButtonClicked() {
+        System.out.println("back button has been clicked");
+        profileSelector.hide();
+        mainMenu.show();
+    }
+
+    public void onProfileBoxClicked1() {
+        System.out.println("Profile box 1 has been clicked");
+        profileSelector.hide();
+    }
+
+    public void onProfileBoxClicked2() {
+        System.out.println("Profile box 2 has been clicked");
+        profileSelector.hide();
+    }
+
+    public void onProfileBoxClicked3() {
+        System.out.println("Profile box 3 has been clicked");
+        profileSelector.hide();
     }
 
 

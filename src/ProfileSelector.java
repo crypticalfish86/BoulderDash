@@ -26,22 +26,34 @@ public class ProfileSelector {
         this.cc = cc;
 
         boolean[] mouseDownOnBackButton = {false};
-        boolean[] mouseDownOnProfileSelector1 = {false};
-        boolean[] mouseDownOnProfileSelector2 = {false};
-        boolean[] mouseDownOnProfileSelector3 = {false};
+        boolean[] mouseDownOnProfileBox1 = {false};
+        boolean[] mouseDownOnProfileBox2 = {false};
+        boolean[] mouseDownOnProfileBox3 = {false};
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
             public boolean onMouseDown(double x, double y, boolean hasConsumed) {
-                // mouseDownOnPlay[0] = isMouseOnPlay(x, y);
+                mouseDownOnBackButton[0] = isMouseOnBackButton(x, y);
+                mouseDownOnProfileBox1[0] = isMouseOnProfileBox1(x, y);
+                mouseDownOnProfileBox2[0] = isMouseOnProfileBox2(x, y);
+                mouseDownOnProfileBox3[0] = isMouseOnProfileBox3(x, y);
                 return true;
             }
 
             @Override
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
-                // if (mouseDownOnPlay[0] && isMouseOnPlay(x, y)) {
-                //     game.onPlayButtonClicked();
-                // }
+                if (mouseDownOnBackButton[0] && isMouseOnBackButton(x, y)) {
+                    game.onBackButtonClicked();
+                }
+                if (mouseDownOnProfileBox1[0] && isMouseOnProfileBox1(x, y)) {
+                    game.onProfileBoxClicked1();
+                }
+                if (mouseDownOnProfileBox2[0] && isMouseOnProfileBox2(x, y)) {
+                    game.onProfileBoxClicked2();
+                }
+                if (mouseDownOnProfileBox3[0] && isMouseOnProfileBox3(x, y)) {
+                    game.onProfileBoxClicked3();
+                }
                 return true;
             }
 
@@ -72,11 +84,26 @@ public class ProfileSelector {
 
 
                 //draw the title
-                UIHelper.drawImageRelativeXX(gc, IMAGE_BACK, .5, .2, .1);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_BACK, .15, .1, .15);
 
 
-                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE_BOX, .5, .8, .1);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE_BOX, .5, .2, .4);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE_BOX, .5, .5, .4);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE_BOX, .5, .8, .4);
 
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE1, .4, .15, .17);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE2, .4, .45, .17);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE3, .4, .75, .17);
+
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE1, .4, .15, .17);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE2, .4, .45, .17);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE3, .4, .75, .17);
+
+                // TODO Auto-generated method stub
+                /*
+                If statement for determining what is outputted onto the screen (level or new save image)
+                if ()
+                 */
 
             }
         }, 1);
@@ -85,10 +112,24 @@ public class ProfileSelector {
     }
 
 
-    private boolean isMouseOnBack(double mouseX, double mouseY) {
+    private boolean isMouseOnBackButton(double mouseX, double mouseY) {
+        //check for back button
+        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_BACK, .15, .1, .15);
+    }
 
-        //check for play button
-        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_BACK, .5, .8, .1);
+    private boolean isMouseOnProfileBox1(double mouseX, double mouseY) {
+        //check for profile button
+        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .2, .4);
+    }
+
+    private boolean isMouseOnProfileBox2(double mouseX, double mouseY) {
+        //check for profile button
+        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .5, .4);
+    }
+
+    private boolean isMouseOnProfileBox3(double mouseX, double mouseY) {
+        //check for profile button
+        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .8, .4);
     }
 
 
