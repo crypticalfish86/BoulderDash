@@ -74,7 +74,7 @@ public class Diamond extends FallingObject{
             }
         }
 
-        draw(img, 0, 0);
+        // draw(img, 0, 0);
     }
 
 

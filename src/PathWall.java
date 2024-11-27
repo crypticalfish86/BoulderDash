@@ -1,4 +1,7 @@
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+
+import java.awt.*;
 
 public class PathWall extends Wall {
 
@@ -22,6 +25,13 @@ public class PathWall extends Wall {
 
 
     public void updateTile(long currentTimeInMilliseconds) {
-        draw(img, 0, 0);
+        // draw(img, 0, 0);
+    }
+
+    protected void draw(GraphicsContext gc, Image img, int xOffset, int yOffset) {
+        gc.drawImage(img,
+                this.x * GameSession.GRID_SIZE + xOffset,
+                this.y * GameSession.GRID_SIZE + yOffset
+        );
     }
 }

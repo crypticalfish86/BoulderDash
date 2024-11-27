@@ -38,7 +38,9 @@ public class Player extends Tile {
 
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        // Update the player's tile, for example, drawing the image
-        draw(img, 0, 0); // Update player's image at the specified location (customize as needed)
+
+    }
+
+    public void killPlayer() {
     }
 }

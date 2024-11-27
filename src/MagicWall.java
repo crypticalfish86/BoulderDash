@@ -1,3 +1,4 @@
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class MagicWall extends Wall {
@@ -16,6 +17,6 @@ public class MagicWall extends Wall {
     }
 
     public void updateTile(long currentTimeInMilliseconds) {
-        draw(img, 0, 0);
+        // draw(img, 0, 0);
     }
 }

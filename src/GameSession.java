@@ -104,6 +104,7 @@ public class GameSession {
         player.killPlayer();
     }
 
+
     //Updates every tile in the game
     private void updateGame(long currentTimeInMilliseconds){
         //TODO: change it so that draw and update is independent of each other
