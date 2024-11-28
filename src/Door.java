@@ -1,9 +1,14 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 public class Door extends Wall {
 
+    
+    public static final Image img = new Image("file:Assets/Images/Door.png"); // Placeholder for the image
     private char doorColour;
 
-    public Door(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, char doorColour) {
-        super(gameSession, x, y, TileType, operationInterval);
+    public Door(GameSession gameSession, int x, int y, long operationInterval, char doorColour) {
+        super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
         this.doorColour = doorColour;
         this.amoebaCanSpreadToThisTile = false;
     }
@@ -23,5 +28,11 @@ public class Door extends Wall {
 
     public void updateTile(long currentTimeInMilliseconds) {
         System.out.println("Door update logic here."); // Optional update behavior
+    }
+
+
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
     }
 }

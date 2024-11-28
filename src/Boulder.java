@@ -1,3 +1,4 @@
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Boulder extends FallingObject{
@@ -5,11 +6,11 @@ public class Boulder extends FallingObject{
     private static final String LEFT_DIRECTION = "Left";
     private static final String RIGHT_DIRECTION = "Right";
 
-    public static final Image img = new Image("file:Assets/Images/Boulder.png");//TODO: add the image here
+    public static final Image img = new Image("file:Assets/Images/BoulderSymmetrical.png");//TODO: add the image here
 
 
-    public Boulder(GameSession gameSession, int x, int y, TileType TileType, long operationInterval){
-        super(gameSession, x, y, TileType, operationInterval);
+    public Boulder(GameSession gameSession, int x, int y, long operationInterval){
+        super(gameSession, x, y, TileType.FALLING_OBJECT, operationInterval);
         this.amoebaCanSpreadToThisTile = false;
     }
 
@@ -101,6 +102,13 @@ public class Boulder extends FallingObject{
         PathWall pathWall = new PathWall(gameSession, this.x + (-offset), this.y,TileType.STATIC_TILE,getOperationInterval());
         gameSession.updateTilePositions(pathWall, player,this);
         gameSession.setTile(this.x + offset,this.y, this);
+    }
+
+
+
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
     }
 }
 

@@ -28,10 +28,8 @@ public class PathWall extends Wall {
         // draw(img, 0, 0);
     }
 
-    protected void draw(GraphicsContext gc, Image img, int xOffset, int yOffset) {
-        gc.drawImage(img,
-                this.x * GameSession.GRID_SIZE + xOffset,
-                this.y * GameSession.GRID_SIZE + yOffset
-        );
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
     }
 }

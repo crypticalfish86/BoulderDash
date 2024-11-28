@@ -137,5 +137,15 @@ public class Game {
         this.loadedPlayerProfileID = playerProfileID;
     }
 
+
+    public void startSampleGame() {
+        
+        System.out.println("starting a game");
+        mainMenu.hide();
+
+        if (this.currentGamesession != null) { return; }
+        this.currentGamesession = new GameSession(this, loadedPlayerProfileID, cc);
+        
+    }
     
 }

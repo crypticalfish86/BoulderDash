@@ -1,6 +1,9 @@
-import javafx.scene.canvas.Canvas;
+import java.util.Random;
+
+
+
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.KeyCode;
 
 public class GameSession {
 
@@ -15,10 +18,8 @@ public class GameSession {
     private final GameSessionData currentSessionData; //Reference to this games' game session data
     private final Player player; //Reference to the current single game player (inserted into the level in "interpretLevelData"
 
-
-
-    private final Canvas canvas;
-    private final GraphicsContext gc;
+    private final CanvasLayer cl;
+    private final CanvasCompositor cc;
 
 
     public static final int GRID_SIZE = 50;
@@ -27,30 +28,130 @@ public class GameSession {
 
 
 
-
+    public static final long OPERATION_INTERVAL = 100;
     private static final String ESCAPE_KEYCODE = "Escape";
+
+    
+
+    public double gridScale;
+    public double cameraX;
+    public double cameraY;
 
     GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
-        this.currentSessionData = new GameSessionData(this, 0, 0, 0, 0, 0, 0);//TODO update this to account for loading games in the middle of play
+        this.currentSessionData = new GameSessionData(this,
+            0, 0, 0, 0,
+            0, 0
+        );
+        //TODO update this to account for loading games in the middle of play
+
+
+
+
         this.player = new Player(this, 10, 10, 10); // TODO: change the values
         interpretLevelData(gameData);
 
 
 
-
-
-
-
         int mapSizeX = 10;
-        int mapSizeY = 10;// TODO: implement these
+        int mapSizeY = 10;
 
         this.gridHeight = mapSizeY;
         this.gridWidth = mapSizeX;
 
 
-        this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-        this.gc = canvas.getGraphicsContext2D();
+
+
+
+
+
+
+
+
+
+        generateSampleGame();
+
+
+        this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
+
+            @Override
+            public boolean onMouseDown(double x, double y, boolean hasConsumed) {
+                return true;
+            }
+
+            @Override
+            public boolean onMouseUp(double x, double y, boolean hasConsumed) {
+                return true;
+            }
+
+            @Override
+            public boolean onMouseMove(double x, double y, boolean hasConsumed) {
+                return true;
+            }
+
+            @Override
+            public void draw(GraphicsContext gc, long elapsed) {
+
+
+                
+
+                    for (int y = 0; y < gridHeight; ++y) {
+                        for (int x = 0; x < gridWidth; ++x) {
+    
+                            gridTileMap[y][x].drawTile(gc);
+    
+                        }
+                    }
+
+
+                if (!isGamePaused) {
+
+                    for (int y = 0; y < gridHeight; ++y) {
+                        for (int x = 0; x < gridWidth; ++x) {
+                            if (gridTileMap[y] == null || gridTileMap[y][x] == null) { System.out.printf("%d, %d\n", x, y);}
+                            gridTileMap[y][x].updateTile(elapsed);
+    
+                        }
+                    }
+                    
+                    double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
+                    
+                    gridScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
+
+                    cameraX = (double) player.x * epsilon + cameraX * (1 - epsilon);
+                    cameraY = (double) player.y * epsilon + cameraY * (1 - epsilon);
+                }
+                
+            }
+
+            @Override
+            public void onKeyDown(KeyCode key) {
+                switch (key) {
+                    case ESCAPE:
+                        isGamePaused = !isGamePaused;
+                        break;
+
+                    case W:
+                        //input up
+
+                
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onKeyUp(KeyCode key) {
+                if (key == KeyCode.ESCAPE) {
+                    
+                }
+            }
+
+        }, 1);
+
+
+        cc.addLayer(this.cl);
+        this.cc = cc;
     }
 
     /*
@@ -146,9 +247,6 @@ public class GameSession {
     //TODO determine a method of input before implementing
     public void onInput(){ return; }
 
-    public GraphicsContext gc() {
-        return this.gc;
-    }
 
     public void onKeyPressed(String key) {
         if (key == ESCAPE_KEYCODE) { //TODO
@@ -189,6 +287,68 @@ public class GameSession {
     // function to be fired when the menu close button is clicked
     public void onMenuClosed() {
         this.isGamePaused = false;
+    }
+
+
+    public void endGame() {
+        this.cc.removeLayer(this.cl);
+    }
+
+
+
+
+
+
+
+    private void generateSampleGame() {
+        Random rand = new Random();
+        int sizeX = rand.nextInt(40) + 10;
+        int sizeY = rand.nextInt(40) + 10;
+
+
+
+
+        //fills the game with dirt
+        //fills the border with wall
+        gridHeight = sizeY;
+        gridWidth = sizeX;
+
+        this.gridTileMap = new Tile[sizeY][sizeX];
+
+        for (int y = 0; y < sizeY; ++y) {
+            this.gridTileMap[y][0] = new TitaniumWall(this, 0, y, OPERATION_INTERVAL);
+            this.gridTileMap[y][sizeX - 1] = new TitaniumWall(this, sizeX - 1, y, OPERATION_INTERVAL);
+        }
+
+        for (int x = 1; x < sizeX - 1; ++x) {
+            this.gridTileMap[0][x] = new TitaniumWall(this, x, 0, OPERATION_INTERVAL);
+            this.gridTileMap[sizeY - 1][x] = new TitaniumWall(this, x, sizeY - 1, OPERATION_INTERVAL);
+        }
+
+
+
+        for (int y = 1; y < sizeY - 1; ++y) {
+            for (int x = 1; x < sizeX - 1; ++x) {
+                
+                int random = rand.nextInt(100);
+
+                if (random < 4) {
+                    this.gridTileMap[y][x] = new TitaniumWall(this, x, y, OPERATION_INTERVAL);
+                } else if (random < 10) {
+                    this.gridTileMap[y][x] = new Boulder(this, x, y, OPERATION_INTERVAL);
+                } else if (random < 15) {
+                    this.gridTileMap[y][x] = new Diamond(this, x, y, OPERATION_INTERVAL);
+                } else {
+                    this.gridTileMap[y][x] = new DirtWall(this, x, y, OPERATION_INTERVAL);
+                }
+            } 
+        }
+
+        //set the player
+        int playerX = rand.nextInt(sizeX - 5) + 2;
+        int playerY = rand.nextInt(sizeY - 5) + 2;
+
+        this.gridTileMap[playerY][playerX] = new Player(this, playerX, playerY, OPERATION_INTERVAL);
 
     }
 }

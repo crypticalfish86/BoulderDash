@@ -1,3 +1,4 @@
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Diamond extends FallingObject{
@@ -14,8 +15,8 @@ public class Diamond extends FallingObject{
 
 
 
-    public Diamond(GameSession gameSession, int x, int y, TileType TileType, long operationInterval){
-        super(gameSession, x, y, TileType, operationInterval);
+    public Diamond(GameSession gameSession, int x, int y, long operationInterval){
+        super(gameSession, x, y, TileType.FALLING_OBJECT, operationInterval);
         this.amoebaCanSpreadToThisTile = false;
     }
 
@@ -82,5 +83,10 @@ public class Diamond extends FallingObject{
         GameSessionData currentSessionData = gameSession.getCurrentSessionData();
         currentSessionData.updateScore(SCORE_VALUE); //Update player's score
         currentSessionData.incrementDiamondCount(); //update player's diamond count
+    }
+
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
     }
 }

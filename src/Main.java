@@ -38,6 +38,7 @@ public class Main extends Application {
         Timeline updateLoop = new Timeline(new KeyFrame(Duration.seconds((double) 1 /60), E -> {
             long now = System.currentTimeMillis();
             long timeDiff = now - lastUpdated[0];
+            if (timeDiff < 1000 / 75) { return; }
             lastUpdated[0] = now;
             cc.draw(timeDiff);
         }));

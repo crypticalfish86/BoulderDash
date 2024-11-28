@@ -35,11 +35,13 @@ public class MainMenu {
 
 
         boolean[] mouseDownOnPlay = {false};
+        boolean[] mouseDownOnPlay2 = {false};
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
             public boolean onMouseDown(double x, double y, boolean hasConsumed) {
                 mouseDownOnPlay[0] = isMouseOnPlay(x, y);
+                mouseDownOnPlay2[0] = isMouseOnPlay2(x, y);
                 return true;
             }
 
@@ -47,6 +49,10 @@ public class MainMenu {
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
                 if (mouseDownOnPlay[0] && isMouseOnPlay(x, y)) {
                     game.onPlayButtonClicked();
+                }
+
+                if (mouseDownOnPlay2[0] && isMouseOnPlay2(x, y)) {
+                    game.startSampleGame();
                 }
                 return true;
             }
@@ -86,6 +92,10 @@ public class MainMenu {
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .8, .1);
 
                 
+                //
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .5, .1);
+
+                gc.fillText(null, elapsed, elapsed);
 
 
             }
@@ -108,12 +118,14 @@ public class MainMenu {
 
 
     private boolean isMouseOnPlay(double mouseX, double mouseY) {
-
         //check for play button
         return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PLAY, .5, .8, .1);
     }
 
-
+    private boolean isMouseOnPlay2(double mouseX, double mouseY) {
+        //check for play button
+        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PLAY, .5, .5, .1);
+    }
 
     public void hide() {
         cc.removeLayer(cl);

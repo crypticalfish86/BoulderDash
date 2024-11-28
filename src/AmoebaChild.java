@@ -4,10 +4,9 @@ public class AmoebaChild extends AmoebaOrigin{
 
     private AmoebaOrigin originOfThisChildAmoeba;
 
-    public AmoebaChild(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount, AmoebaOrigin originOfThisChildAmoeba) {
-        super(gameSession, x, y, TileType, operationInterval, amoebaGrowthRatePerOperationInterval,maxAmoebaChildCount);
+    public AmoebaChild(GameSession gameSession, int x, int y, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount, AmoebaOrigin originOfThisChildAmoeba) {
+        super(gameSession, x, y, operationInterval, amoebaGrowthRatePerOperationInterval,maxAmoebaChildCount);
         this.originOfThisChildAmoeba = originOfThisChildAmoeba;
-        this.tileType = TileType.AMOEBA;
         this.amoebaCanSpreadToThisTile = false;
 
     }
@@ -32,7 +31,7 @@ public class AmoebaChild extends AmoebaOrigin{
      */
     @Override
     protected void setNewAmoebaToNeighbouringTile(int x, int y){
-        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(this.gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval,this.maxAmoebaChildCount, this.originOfThisChildAmoeba);
+        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(this.gameSession, x, y, this.operationInterval, this.amoebaGrowthRatePerOperationInterval,this.maxAmoebaChildCount, this.originOfThisChildAmoeba);
         this.directAmoebaNeighbours.add(newNeighbouringAmoeba);
         if(this.gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
             this.gameSession.callKillPlayer();

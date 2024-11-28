@@ -19,4 +19,9 @@ public class MagicWall extends Wall {
     public void updateTile(long currentTimeInMilliseconds) {
         // draw(img, 0, 0);
     }
+
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
+    }
 }

@@ -1,8 +1,15 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 //class Author: Jace
 public class AmoebaOrigin extends Tile{
+    
+    public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
+
+
     protected final long amoebaGrowthRatePerOperationInterval; //how many operation intervals before the amoeba grows by one
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
@@ -10,9 +17,10 @@ public class AmoebaOrigin extends Tile{
     private int amoebaChildCount;
 
     protected final ArrayList<AmoebaChild> directAmoebaNeighbours;
-    public AmoebaOrigin(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount) {
-        super(gameSession, x, y, TileType, operationInterval);
-        this.tileType = TileType.AMOEBA;
+    public AmoebaOrigin(GameSession gameSession, int x, int y, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount) {
+        super(gameSession, x, y, TileType.AMOEBA, operationInterval);
+
+        
         this.maxAmoebaChildCount = maxAmoebaChildCount;
         this.amoebaChildCount = 0;
         this.directAmoebaNeighbours = new ArrayList<AmoebaChild>();
@@ -58,7 +66,7 @@ public class AmoebaOrigin extends Tile{
      * Turn this amoeba tile into a diamond.
      */
     public void triggerDiamondConversion(){
-        this.gameSession.setTile(this.x,this.y,new Diamond(this.gameSession, this.x,this.y, TileType.FALLING_OBJECT, this.operationInterval));
+        this.gameSession.setTile(this.x,this.y,new Diamond(this.gameSession, this.x,this.y, this.operationInterval));
     }
 
     /**
@@ -111,7 +119,7 @@ public class AmoebaOrigin extends Tile{
      * The y position of where in the grid you're spreading the amoeba to.
      */
     protected void setNewAmoebaToNeighbouringTile(int x, int y){
-        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(this.gameSession, x, y, TileType.AMOEBA, this.operationInterval, this.amoebaGrowthRatePerOperationInterval,this.maxAmoebaChildCount, this);
+        AmoebaChild newNeighbouringAmoeba = new AmoebaChild(this.gameSession, x, y, this.operationInterval, this.amoebaGrowthRatePerOperationInterval,this.maxAmoebaChildCount, this);
         this.directAmoebaNeighbours.add(newNeighbouringAmoeba);
         if(this.gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
             this.gameSession.callKillPlayer();
@@ -142,5 +150,14 @@ public class AmoebaOrigin extends Tile{
      */
     public void incrementAmoebaChildCount(){
         this.amoebaChildCount++;
+    }
+
+
+
+
+
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
     }
 }
