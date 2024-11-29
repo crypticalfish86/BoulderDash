@@ -4,8 +4,21 @@ import javafx.scene.image.Image;
 public class AmoebaTile extends Tile{
 
     public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
-    private AmoebaController thisAmoebaTilesController;
+    private final AmoebaController thisAmoebaTilesController;
 
+    /**
+     * Construct a single amoeba tile that is part of a greater amoeba cluster.
+     * @param gameSession
+     * The game session the amoeba tile is a part of.
+     * @param x
+     * The x position of the amoeba tile.
+     * @param y
+     * The y position of the amoeba tile.
+     * @param operationInterval
+     * The time in ms between operations.
+     * @param thisAmoebaTilesController
+     * Obj reference to the amoeba cluster controller that this amoeba tile is a part of.
+     */
     public AmoebaTile(GameSession gameSession, int x, int y, long operationInterval, AmoebaController thisAmoebaTilesController){
         super(gameSession, x, y,TileType.AMOEBA, operationInterval);
         this.thisAmoebaTilesController = thisAmoebaTilesController;
@@ -24,6 +37,11 @@ public class AmoebaTile extends Tile{
     }
 
 
+    /**
+     * Perform any time based updates to the tile.
+     * @param currentTimeInMilliseconds
+     * The current time in ms since 01/01/1970.
+     */
     public void updateTile(long currentTimeInMilliseconds) {
         return;
     }
@@ -52,6 +70,7 @@ public class AmoebaTile extends Tile{
         }
     }
 
+    //TODO ask what this does so you can write javadoc
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
