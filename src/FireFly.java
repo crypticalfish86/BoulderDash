@@ -12,8 +12,10 @@ public class FireFly extends FlyingEnemy{
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseRight);
         this.amoebaCanSpreadToThisTile = true;
     }
-    public void interact(Tile Tile){
-        //TODO implement an interact function
+    public void interact(Tile tile){
+        if (tile.getTileType() == TileType.FALLING_OBJECT) {
+            this.triggerExplosion(this.x, this.y, false);
+        }
     }
     public void updateTile(long currentTimeInMilliseconds){
         //TODO implement an updateTile every certain number of ms

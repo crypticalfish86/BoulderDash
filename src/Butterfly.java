@@ -15,8 +15,10 @@ public class Butterfly extends FlyingEnemy{
         this.amoebaCanSpreadToThisTile = true;
     }
 
-    public void interact(Tile Tile){
-        //TODO implement an interact function
+    public void interact(Tile tile){
+        if (tile.getTileType() == TileType.FALLING_OBJECT) {
+            this.triggerExplosion(this.x, this.y, true);
+        }
     }
     public void updateTile(long currentTimeInMilliseconds){
         //TODO implement an updateTile every certain number of ms
