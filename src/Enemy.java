@@ -6,7 +6,14 @@ public abstract class Enemy extends Tile{
     protected void moveTo(){};
 
 
-
+    /**
+     * Converts all explodable tiles in a certain radius to an explosion,
+     * centered around the enemy that is exploding
+     * @param xPosition the x position of the enemy
+     * @param yPosition the y position of the enemy
+     * @param replaceWithDiamond represents whether the explosion should leave behind
+     *                           a diamond once it disappears
+     */
     protected void triggerExplosion(int xPosition, int yPosition, Boolean replaceWithDiamond){
         int startX;
         int endX;
@@ -53,6 +60,11 @@ public abstract class Enemy extends Tile{
         }
     }
 
+    /**
+     * Checks whether a tile can explode based on its type
+     * @param tile the tile to check
+     * @return true if the tile can explode, false otherwise
+     */
     private boolean isExplodable(Tile tile){
         if (tile.getTileType() == TileType.FALLING_OBJECT){
             return true;
