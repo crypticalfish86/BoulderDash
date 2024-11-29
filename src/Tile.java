@@ -19,6 +19,7 @@ public abstract class Tile {
         this.x = x;
         this.y = y;
         this.tileType = tileType;
+        //TODO add a starting timestamp here
     }
     public TileType getTileType() {
         return this.tileType;
