@@ -1,5 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Random;
-
+import java.util.Scanner;
 
 
 import javafx.scene.canvas.GraphicsContext;
@@ -36,6 +38,9 @@ public class GameSession {
     public double gridScale;
     public double cameraX;
     public double cameraY;
+
+    private int timeLeft;
+
 
     GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
@@ -160,8 +165,16 @@ public class GameSession {
     */
     private void interpretLevelData(String gameData) {
         //TODO implement a function  to interpret level data
+        // String[] gameDataArr = gameData.split(" ");
 
-        return;
+        // line 1: Height, Width
+        // Line 2: TimeAllowed, DiamondsRequired, AmeobaSpreadRate, AmeobaSizeLimit
+        // Line 3: TimeLeft, Score, DiamondCount
+        // Line 4: RedKey, BlueKey, YellowKey, GreenKey
+        // Line 5+: Actual level
+
+
+
     }
 
     //returns a specific tile from the gridTileMap

@@ -1,0 +1,34 @@
+40 30; 
+180 11 2 7;
+180 0 0;
+0 0 0 0;
+T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T
+T P - - - - W D D D - - - D D D D D D D D D D @ D D - - - D D D D D D D D T A T
+T - - - D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D D D D D D D D D D D D D D D M D D D D * D D D D D D D D D D T
+T @ @ @ @ D D D D - - - - - - - D GD D D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D - W W W W W - D D D D D D D D D @ @ D D D D D D D D D D D D T
+T D D D D D D D D - W D D D W - D D D D @ D D D D * D D D D D D D * D D D D D T
+T D D D @ D D D @ - W D GK D W - D D D D @ @ D D D D D D D D D D D D D D D D D T
+T D @ D D D D @ D - W D D D W - D D D @ D D D D D D * D D D D D D M D D D D D T
+T D D D D D D D D - W W D W W - D D D * D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D - - - - - FW - D D D D D D D D D @ @ @ D D D * - - - - - - D T
+T D D D D D D D D D D D D D D D D D D D D D D D D D * D D D D D D D D D D D D T
+T D D D D D D D D D * - - @ @ - - D D D D D D @ D @ D D D D D D D D D D D D D T
+T D D A D D D D D D D D D RK D D D - - - - - D D D D D D D D D - - - - - BN - D T
+T D D D D D D D D D D D D - - D D D - - - - D D D D D D D D D - D D D D D D D T
+T D D D D D D - - D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D D @ D D D @ D D D @ D D D @ @ @ D D D D D D D D D D D D D D T
+T D D D D D D D D D D D D D D D D D D D D D M D D D D D D D D D D D D D D D D T
+T @ @ @ D D D D D D - - - - - - - RD D D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D T
+T D * D D D D D D D - - D D D W W W W W W W W W W W W W W W W W W W W W W W W T
+T D D D D D D D D D D D D D D D @ @ @ @ @ @ @ @ D D D D D D W W D D D D D D D T
+T D M D D D D D D D D D D D D D * D D D D D D D D D - - - - - - D D D D D D D T
+T D D D D D D @ @ D D D D D D D D D @ D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D D D D D W W W W W W D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D D D D D W * D D * W D D D D D D D D D D @ @ @ D D D D D D D T
+T D D D D D D D D D D D D W D D D D W D D D D D D D D D D D D D D D D D D D D T
+T @ @ D @ D @ D D D D D D D D D D E W D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D D D D D W W W W W W D D D D D D D D D * D D D D D D D D D D T
+T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T

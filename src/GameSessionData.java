@@ -1,11 +1,19 @@
 public class GameSessionData {
     private GameSession gameSession;
+    private int levelHeight;
+    private int levelWidth;
+    private int timeAllowed;
     private int redKeys;
     private int blueKeys;
     private int yellowKeys;
     private int greenKeys;
     private int diamondCount;
     private int score;
+
+    // TimeAllowed, DiamondsRequired, AmeobaSpreadRate, AmeobaSizeLimit
+    // Line 3: TimeLeft, Score, DiamondCount
+    // Line 4: RedKey, BlueKey, YellowKey, GreenKey
+    // Line 5+: Actual level
 
 
     GameSession currentGame;

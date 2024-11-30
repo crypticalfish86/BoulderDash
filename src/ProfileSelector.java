@@ -83,7 +83,7 @@ public class ProfileSelector {
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
 
-                //draw the title
+                // draws the back button
                 UIHelper.drawImageRelativeXX(gc, IMAGE_BACK, .15, .1, .15);
 
 

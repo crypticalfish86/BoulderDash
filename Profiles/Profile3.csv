@@ -1,1 +1,2 @@
-ProfileID,Number Of Diamonds,Current Score,Level FIle Format (place holder = ?),
+ProfileID,Number Of Diamonds,Current Score,
+$new
