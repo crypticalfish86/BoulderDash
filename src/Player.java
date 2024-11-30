@@ -1,3 +1,4 @@
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Player extends Tile {
@@ -42,5 +43,11 @@ public class Player extends Tile {
     }
 
     public void killPlayer() {
+    }
+
+
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
     }
 }

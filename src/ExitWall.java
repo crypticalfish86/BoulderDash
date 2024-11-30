@@ -1,9 +1,17 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 public class ExitWall extends Wall {
+
+    
+    
+    public static final Image img = new Image("file:Assets/Images/ExitWall.png"); // Placeholder for the image
+
 
     private boolean isActive;
 
-    public ExitWall(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
-        super(gameSession, x, y, TileType, operationInterval);
+    public ExitWall(GameSession gameSession, int x, int y, long operationInterval) {
+        super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
         this.isActive = false;
         this.amoebaCanSpreadToThisTile = false;
     }
@@ -33,5 +41,11 @@ public class ExitWall extends Wall {
     public void changeLevel() {
         System.out.println("Level changed!");
         // Add logic to load the next level
+    }
+
+
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
     }
 }

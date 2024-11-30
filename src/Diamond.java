@@ -1,3 +1,4 @@
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Diamond extends FallingObject{
@@ -14,8 +15,8 @@ public class Diamond extends FallingObject{
 
 
 
-    public Diamond(GameSession gameSession, int x, int y, TileType TileType, long operationInterval){
-        super(gameSession, x, y, TileType, operationInterval);
+    public Diamond(GameSession gameSession, int x, int y, long operationInterval){
+        super(gameSession, x, y, TileType.FALLING_OBJECT, operationInterval);
         this.amoebaCanSpreadToThisTile = false;
     }
 
@@ -45,7 +46,7 @@ public class Diamond extends FallingObject{
         int xPosition = getXPosition();
         int yPosition = getYPosition();
 
-        if (yPosition != 0) { //Check boulder is above the bottom layer of the grid
+        if (yPosition != 0) { //Check diamond is above the bottom layer of the grid
             Tile tileBelow = gameSession.getTileFromGrid(xPosition,yPosition - 1);
 
             //Check if diamond should fall
@@ -54,7 +55,7 @@ public class Diamond extends FallingObject{
             }
         }
 
-        if (xPosition != 0 && yPosition != 0) { //Check boulder not on left edge or bottom of grid
+        if (xPosition != 0 && yPosition != 0) { //Check diamond not on left edge or bottom of grid
             Tile tileToLeft = gameSession.getTileFromGrid(xPosition - 1, yPosition);
             Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition - 1);
 
@@ -64,7 +65,7 @@ public class Diamond extends FallingObject{
             }
         }
 
-        if (xPosition < (gameSession.getGridWidth() - 1) && yPosition != 0) {//Check boulder not on left edge or bottom of grid
+        if (xPosition < (gameSession.getGridWidth() - 1) && yPosition != 0) {//Check diamond not on left edge or bottom of grid
             Tile tileToRight = gameSession.getTileFromGrid(xPosition + 1, yPosition);
             Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition - 1);
 
@@ -82,5 +83,10 @@ public class Diamond extends FallingObject{
         GameSessionData currentSessionData = gameSession.getCurrentSessionData();
         currentSessionData.updateScore(SCORE_VALUE); //Update player's score
         currentSessionData.incrementDiamondCount(); //update player's diamond count
+    }
+
+    @Override
+    public void drawTile(GraphicsContext gc) {
+        draw(gc, img, 0, 0);
     }
 }
