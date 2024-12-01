@@ -35,9 +35,9 @@ public class GameSession {
 
     
 
-    public double gridScale;
-    public double cameraX;
-    public double cameraY;
+    private double cameraScale;
+    private double cameraX;
+    private double cameraY;
 
     private int timeLeft;
 
@@ -121,7 +121,7 @@ public class GameSession {
                     
                     double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
                     
-                    gridScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
+                    cameraScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
 
                     cameraX = (double) player.x * epsilon + cameraX * (1 - epsilon);
                     cameraY = (double) player.y * epsilon + cameraY * (1 - epsilon);
@@ -363,5 +363,20 @@ public class GameSession {
 
         this.gridTileMap[playerY][playerX] = new Player(this, playerX, playerY, OPERATION_INTERVAL);
 
+    }
+
+
+    public double getCameraX() {
+        return this.cameraX;
+    }
+
+    
+    public double getCameraY() {
+        return this.cameraX;
+    }
+
+    
+    public double getCameraScale() {
+        return this.cameraScale;
     }
 }

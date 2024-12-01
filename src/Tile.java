@@ -45,10 +45,10 @@ public abstract class Tile {
     //method used for drawing the icon
     protected void draw(GraphicsContext gc, Image img, int xOffset, int yOffset) {
         gc.drawImage(img,
-            (this.x + xOffset - this.gameSession.cameraX) * this.gameSession.gridScale + Main.WINDOW_WIDTH / 2,
-            (this.y + yOffset - this.gameSession.cameraY) * this.gameSession.gridScale + Main.WINDOW_HEIGHT / 2,
-            this.gameSession.gridScale,
-            this.gameSession.gridScale
+            (this.x + xOffset - this.gameSession.getCameraX()) * this.gameSession.getCameraScale() + Main.WINDOW_WIDTH / 2,
+            (this.y + yOffset - this.gameSession.getCameraY()) * this.gameSession.getCameraScale() + Main.WINDOW_HEIGHT / 2,
+            this.gameSession.getCameraScale(),
+            this.gameSession.getCameraScale()
         );
     }
 
