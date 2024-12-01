@@ -3,12 +3,11 @@ import java.util.ArrayList;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 
 public class CanvasCompositor {
     
-    private Scene scene;
-
     private Canvas canvas;
     private GraphicsContext gc;
     private ArrayList<CanvasLayer> canvasLayerArray = new ArrayList<>();
@@ -17,7 +16,7 @@ public class CanvasCompositor {
 
     public CanvasCompositor(Pane pane, Scene scene) {
 
-        this.scene = scene;
+        
         this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
 
@@ -27,6 +26,7 @@ public class CanvasCompositor {
 
 
         scene.setOnMousePressed(E -> {
+            if (E.getButton() != MouseButton.PRIMARY) { return; }
             //checks from the top to the bottom to see which layer it interacts with
             boolean hasConsumed = false;
             for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
@@ -37,6 +37,7 @@ public class CanvasCompositor {
         });
 
         scene.setOnMouseReleased(E -> {
+            if (E.getButton() != MouseButton.PRIMARY) { return; }
             //checks from the top to the bottom to see which layer it interacts with
             boolean hasConsumed = false;
             for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
@@ -77,9 +78,11 @@ public class CanvasCompositor {
     }
 
 
+
     /**
      * Adds the specified render layer for the canvas.
      * This layer can be removed by calling the remove function
+     * @param canvasLayer the layer to be added
     */
     public void addLayer(CanvasLayer canvasLayer) {
         for (int i = 0; i < canvasLayerArray.size(); ++i) {
@@ -94,6 +97,8 @@ public class CanvasCompositor {
         canvasLayerArray.add(canvasLayer);
     }
 
+
+
     /**
      * Removes a specified layer from the compositor
      * @param canvasLayer layer to be removed
@@ -103,6 +108,8 @@ public class CanvasCompositor {
         return canvasLayerArray.remove(canvasLayer);
     }
 
+
+
     /**
      * Removes all context layers from this canvas
     */
@@ -110,8 +117,11 @@ public class CanvasCompositor {
         canvasLayerArray.clear();
     }
 
+
+
     /**
-     * 
+     * signals all layer to draw
+     * @param elapsed time elapsed between last draw
     */
     public void draw(long elapsed) {
         
