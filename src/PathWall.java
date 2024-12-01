@@ -15,6 +15,12 @@ public class PathWall extends Wall {
     // Handle interactions with other tiles
     @Override
     public void interact(Tile tile) {
+        if (tile.getTileType() == TileType.MOVING_ENEMY) {
+            PathWall pathWall = new PathWall(gameSession, tile.getXPosition(), getYPosition(),
+                    operationInterval);
+            gameSession.updateTilePositions(pathWall, tile, this);
+        }
+
         // Example interaction logic
         if (tile instanceof Player) {
             System.out.println("Player stepped on a PathWall.");
