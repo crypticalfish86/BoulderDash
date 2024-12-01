@@ -103,7 +103,9 @@ public class Player extends Tile {
 
     @Override
     public void interact(Tile tile) {
-        if(tile.getTileType() == TileType.PLAYER) {
+        if(tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y + 1) {
+            PathWall pathWall = new PathWall(gameSession, this.x, this.y + 1, operationInterval );
+            gameSession.updateTilePositions(pathWall, tile, this);
             gameSession.callKillPlayer();
         }
 
