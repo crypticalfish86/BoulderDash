@@ -224,6 +224,11 @@ public class GameSession {
         return this.gridHeight;
     }
 
+    public Tile[][] getGridTileMap(){return this.gridTileMap;}
+
+    public int getPlayerX(){return this.player.getXPosition();}
+    public int getPlayerY(){return this.player.getYPosition();}
+
     public GameSessionData getCurrentSessionData(){
         return this.currentSessionData;
     }
