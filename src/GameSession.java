@@ -126,10 +126,11 @@ public class GameSession {
                     
                     double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
                     
-                    cameraScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
+                    // cameraScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
+                    cameraScale = 30;
 
-                    cameraX = (double) player.x * epsilon + cameraX * (1 - epsilon);
-                    cameraY = (double) player.y * epsilon + cameraY * (1 - epsilon);
+                    cameraX = (double) player.getXPosition() * epsilon + cameraX * (1 - epsilon);
+                    cameraY = (double) player.getYPosition() * epsilon + cameraY * (1 - epsilon);
                 }
                 
             }
@@ -189,8 +190,8 @@ public class GameSession {
      * The outgoing tile that is being deleted.
      */
     public void updateTilePositions(Tile replacementTile, Tile incomingTile, Tile outgoingTile) {
-        setTile(incomingTile.getYPosition(),incomingTile.getXPosition(), replacementTile);
-        setTile(outgoingTile.getYPosition(),outgoingTile.getXPosition(), incomingTile);
+        setTile(incomingTile.getYPosition(), incomingTile.getXPosition(), replacementTile);
+        setTile(outgoingTile.getYPosition(), outgoingTile.getXPosition(), incomingTile);
     }
 
     /**
@@ -202,16 +203,17 @@ public class GameSession {
      * @param tile
      * The tile that will be set at this location.
      */
-    public void setTile(int yTileLocation, int xTileLocation, Tile tile){
+    public void setTile(int yTileLocation, int xTileLocation, Tile tile) {
         gridTileMap[yTileLocation][xTileLocation] = tile;
+        tile.setNewPosition(xTileLocation, yTileLocation);
     }
 
-    /**
-     * Calls the kill player method on this game session's player.
-     */
-    public void callKillPlayer(){
-        player.killPlayer();
-    }
+    // /**
+    //  * Calls the kill player method on this game session's player.
+    //  */
+    // public void callKillPlayer() {
+    //     player.killPlayer();
+    // }
 
 
     
@@ -311,7 +313,7 @@ public class GameSession {
 
     
     public double getCameraY() {
-        return this.cameraX;
+        return this.cameraY;
     }
 
     

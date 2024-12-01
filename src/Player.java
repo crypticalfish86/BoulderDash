@@ -138,26 +138,22 @@ public class Player extends Tile {
         switch (currentDirection) {
             case 'W':
                 //interact with the tile on the right
-                interact(gameSession.getTileFromGrid(this.getXPosition(), this.getYPosition() + 1));
-                System.out.println("moving");
+                gameSession.getTileFromGrid(this.getXPosition(), this.getYPosition() - 1).interact(this);
                 break;
                 
             case 'S':
                 //interact with the tile on the right
-                interact(gameSession.getTileFromGrid(this.getXPosition(), this.getYPosition() - 1));
-                System.out.println("moving");
+                gameSession.getTileFromGrid(this.getXPosition(), this.getYPosition() + 1).interact(this);
                 break;
             
             case 'A':
                 //interact with the tile on the right
-                interact(gameSession.getTileFromGrid(this.getXPosition() - 1, this.getYPosition()));
-                System.out.println("moving");
+                gameSession.getTileFromGrid(this.getXPosition() - 1, this.getYPosition()).interact(this);
                 break;
                 
             case 'D':
                 //interact with the tile on the right
-                interact(gameSession.getTileFromGrid(this.getXPosition() + 1, this.getYPosition()));
-                System.out.println("moving");
+                gameSession.getTileFromGrid(this.getXPosition() + 1, this.getYPosition()).interact(this);
                 break;
         }
 

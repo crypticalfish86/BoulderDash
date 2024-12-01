@@ -85,6 +85,7 @@ public abstract class Enemy extends Tile{
         // }else{
         //     return false;
         // }
+        return true;
 
     }
 }

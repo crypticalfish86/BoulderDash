@@ -11,8 +11,9 @@ public class NormalWall extends Wall {
         this.amoebaCanSpreadToThisTile = false;
     }
 
-    public void interact(Tile inputTileObject) {
-
+    @Override
+    public void interact(Tile tile) {
+        
     }
 
     public void updateTile(long currentTimeInMilliseconds) {

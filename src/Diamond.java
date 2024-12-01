@@ -8,8 +8,6 @@ public class Diamond extends FallingObject{
     public static final Image img = new Image("file:Assets/Images/Diamond.png");//TODO: add the image here
 
 
-    private static final String LEFT_DIRECTION = "Left";
-    private static final String RIGHT_DIRECTION = "Right";
 
 
 
@@ -42,39 +40,7 @@ public class Diamond extends FallingObject{
      * The number of milliseconds since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds){
-        int xPosition = getXPosition();
-        int yPosition = getYPosition();
-
-        if (yPosition != 0) { //Check diamond is above the bottom layer of the grid
-            Tile tileBelow = gameSession.getTileFromGrid(xPosition,yPosition - 1);
-
-            //Check if diamond should fall
-            // if (tileBelow instanceof PathWall) {
-            //     this.fall(xPosition, yPosition);
-            // }
-        }
-
-        if (xPosition != 0 && yPosition != 0) { //Check diamond not on left edge or bottom of grid
-            Tile tileToLeft = gameSession.getTileFromGrid(xPosition - 1, yPosition);
-            Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition - 1);
-
-            //Check if diamond should roll left
-            // if (tileToLeft instanceof PathWall && tileLeftBelow instanceof PathWall) {
-            //     this.roll(xPosition, yPosition, LEFT_DIRECTION);
-            // }
-        }
-
-        if (xPosition < (gameSession.getGridWidth() - 1) && yPosition != 0) {//Check diamond not on left edge or bottom of grid
-            Tile tileToRight = gameSession.getTileFromGrid(xPosition + 1, yPosition);
-            Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition - 1);
-
-            //Check if diamond should roll right
-            // if (tileToRight instanceof PathWall && tileRightBelow instanceof PathWall) {
-            //     this.roll(xPosition, yPosition, RIGHT_DIRECTION);
-            // }
-        }
-
-        // draw(img, 0, 0);
+        updatePhysics();
     }
 
 
