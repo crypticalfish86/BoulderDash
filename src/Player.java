@@ -54,12 +54,21 @@ public class Player extends Tile {
     @Override
     public void interact(Tile other) {
         System.out.println("Player interacting with tile: " + other.getTileType());
+
         if (other instanceof Key) {
+            // Handle interaction with a Key
             Key key = (Key) other;
             addKeyToInventory(key);
 
             // Remove the key from the grid by setting the tile to null
             gameSession.setTile(other.getYPosition(), other.getXPosition(), null);
+            System.out.println("Player picked up a key of color: " + key.getKeyColour());
+        } else if (other instanceof Door) {
+            // Handle interaction with a Door
+            Door door = (Door) other;
+            door.interact(this); // Pass the player object to the door's interact method
+        } else {
+            System.out.println("Player cannot interact with this tile.");
         }
     }
 
@@ -72,6 +81,8 @@ public class Player extends Tile {
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
+
+
 
     // Add the killPlayer method
     public void killPlayer() {
