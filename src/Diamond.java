@@ -49,9 +49,9 @@ public class Diamond extends FallingObject{
             Tile tileBelow = gameSession.getTileFromGrid(xPosition,yPosition - 1);
 
             //Check if diamond should fall
-            // if (tileBelow instanceof PathWall) {
-            //     this.fall(xPosition, yPosition);
-            // }
+             if (tileBelow.getTileType() == TileType.PATH) {
+                 this.fall(xPosition, yPosition);
+             }
         }
 
         if (xPosition != 0 && yPosition != 0) { //Check diamond not on left edge or bottom of grid
@@ -59,9 +59,9 @@ public class Diamond extends FallingObject{
             Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition - 1);
 
             //Check if diamond should roll left
-            // if (tileToLeft instanceof PathWall && tileLeftBelow instanceof PathWall) {
-            //     this.roll(xPosition, yPosition, LEFT_DIRECTION);
-            // }
+             if (tileToLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
+                 this.roll(xPosition, yPosition, LEFT_DIRECTION);
+             }
         }
 
         if (xPosition < (gameSession.getGridWidth() - 1) && yPosition != 0) {//Check diamond not on left edge or bottom of grid
@@ -69,9 +69,9 @@ public class Diamond extends FallingObject{
             Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition - 1);
 
             //Check if diamond should roll right
-            // if (tileToRight instanceof PathWall && tileRightBelow instanceof PathWall) {
-            //     this.roll(xPosition, yPosition, RIGHT_DIRECTION);
-            // }
+             if (tileToRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH) {
+                 this.roll(xPosition, yPosition, RIGHT_DIRECTION);
+             }
         }
 
         // draw(img, 0, 0);

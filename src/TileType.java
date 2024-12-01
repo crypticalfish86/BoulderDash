@@ -6,5 +6,6 @@ public enum TileType {
     AMOEBA,
     DOOR,
     KEY,
-    STATIC_TILE
+    STATIC_TILE,
+    PATH
 }
