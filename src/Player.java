@@ -1,13 +1,13 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Tile {
 
-    // Image representing the player (replace with actual image path)
     public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
     
     //added because NOBODY DECIDED TO CODE THE PLAYER
-    //WTF
     private boolean keyUp = false;
     private boolean keyDown = false;
     private boolean keyLeft = false;
@@ -24,15 +24,13 @@ public class Player extends Tile {
 
     
 
-    // Constructor for Player
     public Player(GameSession gameSession, int x, int y, long operationInterval) {
-        // Call the parent class (Tile) constructor with the gameSession and other parameters
         super(gameSession, x, y, TileType.PLAYER, operationInterval);
+        // Initialize the inventory, not needed because you should call the game session data, and key should decide the logic instead of the player
     }
 
-    // Example method to access GameSession
     public void somePlayerLogic() {
-        GameSession session = getGameSession(); // This should work now, as Player inherits from Tile
+        GameSession session = getGameSession();
         if (session != null) {
             System.out.println("Game Session is available.");
         }
@@ -167,12 +165,27 @@ public class Player extends Tile {
         
     }
 
-    public void killPlayer() {
-    }
-
-
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
+    }
+
+
+
+    // Add the killPlayer method
+    public void killPlayer() {
+        System.out.println("Player has been killed.");
+        gameSession.endGame(); // Assuming endGame is implemented in GameSession
+    }
+
+    // Add key to the player's inventory
+    public void addKeyToInventory(Key key) {
+        inventory.add(key);
+        System.out.println("Key of color " + key.getKeyColour() + " added to inventory.");
+    }
+
+    // Get the player's inventory
+    public List<Key> getInventory() {
+        return inventory;
     }
 }

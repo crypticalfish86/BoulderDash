@@ -1,35 +1,40 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import java.awt.*;
-
 public class PathWall extends Wall {
 
+    // Image representing the PathWall (replace with the actual image path)
+    public static final Image img = new Image("file:Assets/Images/PathWall.png"); // Path to the PathWall image
 
-
-    public static final Image img = new Image("file:Assets/Images/PathWall.png");//TODO: add the image here
-
-
-
+    // Constructor
     public PathWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
-        this.amoebaCanSpreadToThisTile = true;
+        this.amoebaCanSpreadToThisTile = true; // Amoeba can spread to this tile
     }
 
-    public void interact(Tile Tile){
-        //TODO implement an interact function
+    // Handle interactions with other tiles
+    @Override
+    public void interact(Tile tile) {
+        // Example interaction logic
+        if (tile instanceof Player) {
+            System.out.println("Player stepped on a PathWall.");
+            // You can add more specific behaviors here, such as triggering effects
+        } else {
+            System.out.println("Another tile interacted with the PathWall.");
+        }
     }
-    
 
-
-
-
+    // Update the tile (called periodically)
+    @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        // draw(img, 0, 0);
+        // Optionally handle updates here if PathWall has time-dependent behavior
+        // Example: Draw the tile to the canvas
+        draw(this.gameSession.getGraphicsContext(), img, 0, 0);
     }
 
+    // Draw the PathWall tile
     @Override
     public void drawTile(GraphicsContext gc) {
-        draw(gc, img, 0, 0);
+        draw(gc, img, 0, 0); // Draw the PathWall image at its current position
     }
 }

@@ -12,6 +12,9 @@ public class GameSession {
     private int gridHeight; //The height of the grid
     private int gridWidth; //The width of the grid
 
+    private GraphicsContext graphicsContext; // Store the GraphicsContext
+
+
     private long startTimeStamp; //The starting time stamp (ms since 1970)
     private long maxTimeToCompleteLevel; //The time given to complete level (in ms)
 
@@ -44,6 +47,8 @@ public class GameSession {
 
     GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
+        this.graphicsContext = graphicsContext; // Initialize the GraphicsContext
+
         this.currentSessionData = new GameSessionData(this,
             0, 0, 0, 0,
             0, 0
@@ -162,6 +167,9 @@ public class GameSession {
 
 
 
+    }
+    public GraphicsContext getGraphicsContext() {
+        return this.graphicsContext; // Return the stored GraphicsContext
     }
 
     //returns a specific tile from the gridTileMap

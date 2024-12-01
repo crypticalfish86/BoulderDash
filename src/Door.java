@@ -3,7 +3,6 @@ import javafx.scene.image.Image;
 
 public class Door extends Wall {
 
-    
     public static final Image img = new Image("file:Assets/Images/Door.png"); // Placeholder for the image
     private char doorColour;
 
@@ -13,26 +12,45 @@ public class Door extends Wall {
         this.amoebaCanSpreadToThisTile = false;
     }
 
+    // Getter for door color
     public char getDoorColour() {
         return this.doorColour;
     }
 
+    // Interact method for the door
+    @Override
     public void interact(Tile inputTileObject) {
-        if (inputTileObject instanceof Key && ((Key) inputTileObject).getKeyColour() == this.doorColour) {
-            System.out.println("Door unlocked with the correct key!");
-            // Logic to open the door or remove it
-        } else {
-            System.out.println("Door cannot be opened without the correct key.");
+        if (inputTileObject instanceof Player) {
+            Player player = (Player) inputTileObject;
+
+            // Check if the player has the correct key
+            if (playerHasCorrectKey(player)) {
+                System.out.println("Door unlocked with the correct key!");
+                unlockDoor();
+            } else {
+                System.out.println("Door cannot be opened without the correct key.");
+            }
         }
     }
 
-    public void updateTile(long currentTimeInMilliseconds) {
-        System.out.println("Door update logic here."); // Optional update behavior
+    // Check if the player has the correct key
+    private boolean playerHasCorrectKey(Player player) {
+        return player.getInventory().stream().anyMatch(key -> key.getKeyColour() == this.doorColour);
     }
 
+    // Logic to unlock or remove the door
+    private void unlockDoor() {
+        // Remove the door from the game grid
+        gameSession.setTile(getYPosition(), getXPosition(), null); // Set tile to null or replace with a passable tile
+    }
+
+    @Override
+    public void updateTile(long currentTimeInMilliseconds) {
+        // Optional: Implement time-based behavior if needed
+    }
 
     @Override
     public void drawTile(GraphicsContext gc) {
-        draw(gc, img, 0, 0);
+        draw(gc, img, 0, 0); // Draw the door image
     }
 }
