@@ -27,14 +27,14 @@ public class ExitWall extends Wall {
     // Handle interaction with the exit wall
     @Override
     public void interact(Tile inputTileObject) {
-        if (this.isActive && inputTileObject instanceof Player) {
-            System.out.println("Player exits through the exit wall!");
-            changeLevel(); // Trigger level change
-        } else if (!this.isActive) {
-            System.out.println("Exit wall is not active.");
-        } else {
-            System.out.println("Only the player can interact with the exit wall.");
-        }
+        // if (this.isActive && inputTileObject instanceof Player) {
+        //     System.out.println("Player exits through the exit wall!");
+        //     changeLevel(); // Trigger level change
+        // } else if (!this.isActive) {
+        //     System.out.println("Exit wall is not active.");
+        // } else {
+        //     System.out.println("Only the player can interact with the exit wall.");
+        // }
     }
 
     // Update tile (optional, for animations or effects)

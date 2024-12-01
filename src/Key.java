@@ -18,15 +18,15 @@ public class Key extends Wall {
 
     @Override
     public void interact(Tile inputTileObject) {
-        if (inputTileObject instanceof Player) {
-            Player player = (Player) inputTileObject;
-            System.out.println("Player picked up the key of color: " + keyColour);
-            // player.addKeyToInventory(this);
-            gameSession.getCurrentSessionData().getInventoryItem(String.format("%c%c", keyColour, + 'k'));
+        // if (inputTileObject instanceof Player) {
+        //     Player player = (Player) inputTileObject;
+        //     System.out.println("Player picked up the key of color: " + keyColour);
+        //     // player.addKeyToInventory(this);
+        //     gameSession.getCurrentSessionData().getInventoryItem(String.format("%c%c", keyColour, + 'k'));
 
-            // Remove the key from the game grid by setting it to null
-            gameSession.setTile(getYPosition(), getXPosition(), null);
-        }
+        //     // Remove the key from the game grid by setting it to null
+        //     gameSession.setTile(getYPosition(), getXPosition(), null);
+        // }
     }
 
     @Override

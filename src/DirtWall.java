@@ -13,14 +13,14 @@ public class DirtWall extends Wall {
     // Interaction logic for the dirt wall
     @Override
     public void interact(Tile inputTileObject) {
-        if (inputTileObject instanceof Player) {
-            System.out.println("Dirt wall dug out by the player.");
+        // if (inputTileObject instanceof Player) {
+        //     System.out.println("Dirt wall dug out by the player.");
 
-            // Remove the dirt wall from the game grid by setting the tile to null
-            gameSession.setTile(getYPosition(), getXPosition(), null);
+        //     // Remove the dirt wall from the game grid by setting the tile to null
+        //     gameSession.setTile(getYPosition(), getXPosition(), null);
 
-            // Optionally, you can trigger a visual or audio effect here to represent the wall being dug out
-        }
+        //     // Optionally, you can trigger a visual or audio effect here to represent the wall being dug out
+        // }
     }
 
     // Update logic for dirt walls

@@ -16,12 +16,12 @@ public class PathWall extends Wall {
     @Override
     public void interact(Tile tile) {
         // Example interaction logic
-        if (tile instanceof Player) {
-            System.out.println("Player stepped on a PathWall.");
-            // You can add more specific behaviors here, such as triggering effects
-        } else {
-            System.out.println("Another tile interacted with the PathWall.");
-        }
+        // if (tile instanceof Player) {
+        //     System.out.println("Player stepped on a PathWall.");
+        //     // You can add more specific behaviors here, such as triggering effects
+        // } else {
+        //     System.out.println("Another tile interacted with the PathWall.");
+        // }
     }
 
     // Update the tile (called periodically)

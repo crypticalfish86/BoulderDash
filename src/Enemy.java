@@ -66,25 +66,25 @@ public abstract class Enemy extends Tile{
      * @return true if the tile can explode, false otherwise
      */
     private boolean isExplodable(Tile tile){
-        if (tile.getTileType() == TileType.FALLING_OBJECT){
-            return true;
-        }else if (tile.getTileType() == TileType.DOOR){
-            return true;
-        }else if (tile.getTileType() == TileType.KEY){
-            return true;
-        }else if (tile.getTileType() == TileType.MOVING_ENEMY){
-            return true;
-        }if (tile.getTileType() == TileType.AMOEBA){
-            return true;
-        }else if (tile instanceof DirtWall){
-            return true;
-        }else if (tile instanceof MagicWall) {
-            return true;
-        }else if (tile instanceof NormalWall) {
-            return true;
-        }else{
-            return false;
-        }
+        // if (tile.getTileType() == TileType.FALLING_OBJECT){
+        //     return true;
+        // }else if (tile.getTileType() == TileType.DOOR){
+        //     return true;
+        // }else if (tile.getTileType() == TileType.KEY){
+        //     return true;
+        // }else if (tile.getTileType() == TileType.MOVING_ENEMY){
+        //     return true;
+        // }if (tile.getTileType() == TileType.AMOEBA){
+        //     return true;
+        // }else if (tile instanceof DirtWall){
+        //     return true;
+        // }else if (tile instanceof MagicWall) {
+        //     return true;
+        // }else if (tile instanceof NormalWall) {
+        //     return true;
+        // }else{
+        //     return false;
+        // }
 
     }
 }

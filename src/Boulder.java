@@ -23,20 +23,20 @@ public class Boulder extends FallingObject{
      * @param tile the tile that is interacting with this tile
      */
     public void interact(Tile tile){
-        if(tile.getTileType() == TileType.PLAYER){
+        // if(tile.getTileType() == TileType.PLAYER){
 
-            //Check if player to left of boulder and a path to right of boulder
-            if(tile.getXPosition() == this.x - 1 &&
-                    gameSession.getTileFromGrid(this.x + 1,this.y) instanceof PathWall){
-                pushBoulder(tile, RIGHT_DIRECTION);
-            }
+        //     //Check if player to left of boulder and a path to right of boulder
+        //     if(tile.getXPosition() == this.x - 1 &&
+        //             gameSession.getTileFromGrid(this.x + 1,this.y) instanceof PathWall){
+        //         pushBoulder(tile, RIGHT_DIRECTION);
+        //     }
 
-            //Check if player to right of boulder and a path to left of boulder
-            if(tile.getXPosition() == this.x + 1 &&
-                    gameSession.getTileFromGrid(this.x - 1,this.y) instanceof PathWall){
-                pushBoulder(tile, LEFT_DIRECTION);
-            }
-        }
+        //     //Check if player to right of boulder and a path to left of boulder
+        //     if(tile.getXPosition() == this.x + 1 &&
+        //             gameSession.getTileFromGrid(this.x - 1,this.y) instanceof PathWall){
+        //         pushBoulder(tile, LEFT_DIRECTION);
+        //     }
+        // }
     }
 
     /**

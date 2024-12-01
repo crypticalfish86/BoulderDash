@@ -20,17 +20,17 @@ public class Door extends Wall {
     // Interact method for the door
     @Override
     public void interact(Tile inputTileObject) {
-        if (inputTileObject instanceof Player) {
-            Player player = (Player) inputTileObject;
+        // if (inputTileObject instanceof Player) {
+        //     Player player = (Player) inputTileObject;
 
-            // Check if the player has the correct key
-            if (playerHasCorrectKey(player)) {
-                System.out.println("Door unlocked with the correct key!");
-                unlockDoor();
-            } else {
-                System.out.println("Door cannot be opened without the correct key.");
-            }
-        }
+        //     // Check if the player has the correct key
+        //     if (playerHasCorrectKey(player)) {
+        //         System.out.println("Door unlocked with the correct key!");
+        //         unlockDoor();
+        //     } else {
+        //         System.out.println("Door cannot be opened without the correct key.");
+        //     }
+        // }
     }
 
     // Check if the player has the correct key
