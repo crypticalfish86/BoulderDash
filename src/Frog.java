@@ -73,7 +73,7 @@ public class Frog extends Enemy {
         // can move to that tile and 1 means it can't
         for(int i = 0; i < gridWidth; i++){
             for(int j = 0; j < gridHeight; j++){
-                if(grid[i][j] instanceof PathWall){
+                if(grid[i][j].getTileType() == TileType.PATH){
                     navigableGrid[i][j] = 0;
                 }else{
                     navigableGrid[i][j] = 1;
@@ -96,13 +96,13 @@ public class Frog extends Enemy {
         ArrayList<String> validMoves = new ArrayList<>();
 
         //Find valid moves frog can make
-        if (isInBounds(this.x - 1, this.y) && grid[this.x - 1][this.y] instanceof PathWall) {
+        if (isInBounds(this.x - 1, this.y) && grid[this.x - 1][this.y].getTileType() == TileType.PATH) {
             validMoves.add(LEFT_MOVE);
-        }else if (isInBounds(this.x + 1, this.y) && grid[this.x + 1][this.y] instanceof PathWall) {
+        }else if (isInBounds(this.x + 1, this.y) && grid[this.x + 1][this.y].getTileType() == TileType.PATH) {
             validMoves.add(RIGHT_MOVE);
-        }else if (isInBounds(this.x, this.y + 1) && grid[this.x][this.y + 1] instanceof PathWall) {
+        }else if (isInBounds(this.x, this.y + 1) && grid[this.x][this.y + 1].getTileType() == TileType.PATH) {
             validMoves.add(UP_MOVE);
-        }if (isInBounds(this.x, this.y - 1) && grid[this.x][this.y - 1] instanceof PathWall) {
+        }if (isInBounds(this.x, this.y - 1) && grid[this.x][this.y - 1].getTileType() == TileType.PATH) {
             validMoves.add(DOWN_MOVE);
         }
 
