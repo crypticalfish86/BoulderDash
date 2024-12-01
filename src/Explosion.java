@@ -3,6 +3,9 @@ import javafx.scene.image.Image;
 
 public class Explosion extends Tile {
 
+    private int ticksAlive;
+    private final int ticksToConvert = 10;
+
     private Boolean replaceWithDiamond;
     
     public static final Image img = new Image("file:Assets/Images/Explosion.png"); // Placeholder for the image
@@ -13,13 +16,18 @@ public class Explosion extends Tile {
     public Explosion(GameSession gameSession, int x, int y, long operationInterval, Boolean replaceWithDiamond) {
         super(gameSession, x, y, TileType.EXPLOSION, operationInterval);
         this.replaceWithDiamond = replaceWithDiamond;
+        ticksAlive = 1;
 
     }
     public void interact(Tile Tile) {
 
     }
     public void updateTile(long currentTimeInMilliseconds) {
-        //TODO convert explosion to path/diamond after certain length of time
+        ticksAlive++;
+
+        if(ticksAlive == ticksToConvert){
+            convertExplosion();
+        }
     }
 
 
@@ -27,5 +35,15 @@ public class Explosion extends Tile {
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
+    }
+
+    private void convertExplosion(){
+        if(replaceWithDiamond){
+            Diamond diamond = new Diamond(gameSession, this.x, this.y, operationInterval);
+            gameSession.setTile(this.y,this.x, diamond);
+        }else{
+            PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
+            gameSession.setTile(this.y,this.x, pathWall);
+        }
     }
 }

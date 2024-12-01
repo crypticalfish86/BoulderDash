@@ -64,7 +64,7 @@ public abstract class FallingObject extends Tile{
             Tile tileBelow = gameSession.getTileFromGrid(xPosition,yPosition + 1);
 
             //Check if boulder should fall
-            if (tileBelow instanceof PathWall) {
+            if (tileBelow.getTileType() == TileType.PATH) {
                 this.fall(xPosition, yPosition);
             }
         }
@@ -74,7 +74,7 @@ public abstract class FallingObject extends Tile{
             Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition + 1);
 
             //Check if boulder should roll left
-            if (tileToLeft instanceof PathWall && tileLeftBelow instanceof PathWall) {
+            if (tileToLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
                 this.roll(xPosition, yPosition, LEFT_DIRECTION);
             }
         }
@@ -85,7 +85,7 @@ public abstract class FallingObject extends Tile{
             Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition + 1);
 
             //Check if boulder should roll right
-            if (tileToRight instanceof PathWall && tileRightBelow instanceof PathWall){
+            if (tileToRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
                 this.roll(xPosition, yPosition, RIGHT_DIRECTION);
             }
         }
