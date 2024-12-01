@@ -7,5 +7,8 @@ public enum TileType {
     DOOR,
     KEY,
     STATIC_TILE,
-    PATH
+    PATH,
+    DIRT_WALL,
+    MAGIC_WALL,
+    NORMAL_WALL
 }
