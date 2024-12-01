@@ -36,6 +36,8 @@ public abstract class Tile {
         this.y = y;
     }
 
+
+
     public boolean amoebaCanSpreadToThisTile() {
         return this.amoebaCanSpreadToThisTile;
     }
@@ -58,3 +60,4 @@ public abstract class Tile {
         return this.gameSession;
     }
 }
+
