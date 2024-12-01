@@ -35,7 +35,7 @@ public class Door extends Wall {
 
     // Check if the player has the correct key
     private boolean playerHasCorrectKey(Player player) {
-        return player.getInventory().stream().anyMatch(key -> key.getKeyColour() == this.doorColour);
+        return gameSession.getCurrentSessionData().getInventoryItem(String.format("%c%c", doorColour, 'k'));
     }
 
     // Logic to unlock or remove the door
