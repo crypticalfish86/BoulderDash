@@ -51,7 +51,14 @@ public class Diamond extends FallingObject{
             //Check if diamond should fall
              if (tileBelow.getTileType() == TileType.PATH) {
                  this.fall(xPosition, yPosition);
+                 this.isFalling = true;
+             }else{
+                 this.isFalling = false;
              }
+
+            if(tileBelow.getTileType() == TileType.PATH && isFalling){
+                tileBelow.interact(this); //Call interact on player
+            }
         }
 
         if (xPosition != 0 && yPosition != 0) { //Check diamond not on left edge or bottom of grid

@@ -55,6 +55,13 @@ public class Boulder extends FallingObject{
             //Check if boulder should fall
             if (tileBelow.getTileType() == TileType.PATH) {
                 this.fall(xPosition, yPosition);
+                this.isFalling = true;
+            }else{
+                this.isFalling = false;
+            }
+
+            if(tileBelow.getTileType() == TileType.PATH && isFalling){
+                tileBelow.interact(this); //Call interact on player
             }
         }
 

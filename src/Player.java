@@ -102,10 +102,11 @@ public class Player extends Tile {
     }
 
     @Override
-    public void interact(Tile other) {
-        // Implement interaction logic with other tiles
+    public void interact(Tile tile) {
+        if(tile.getTileType() == TileType.PLAYER) {
+            gameSession.callKillPlayer();
+        }
 
-        //check for tile kills
 
     }
 
