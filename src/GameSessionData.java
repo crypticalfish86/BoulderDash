@@ -36,31 +36,33 @@ public class GameSessionData {
      * @return
      * returns true if the user has picked up at least one key of that colour, otherwise returns false.
      */
-    public boolean getInventoryItem(String item) {
-        switch (item){
-            case "rk":
-                if(this.redKeys > 0){
-                    return true;
-                }
-                return false;
-            case "bk":
-                if(this.blueKeys > 0){
-                    return true;
-                }
-                return false;
-            case "yk":
-                if(this.yellowKeys > 0){
-                    return true;
-                }
-                return false;
-            case "gk":
-                if(this.greenKeys > 0){
-                    return true;
-                }
-                return false;
+    public boolean tryConsumeKey(char key) {
+        switch (key){
+            case 'r':
+                if (this.redKeys <= 0) { return false; }
+                this.redKeys--;
+                return true;
+                
+            case 'b':
+                if (this.blueKeys <= 0) { return false; }
+                this.blueKeys--;
+                return true;
+
+            case 'y':
+                if (this.yellowKeys <= 0) { return false; }
+                this.yellowKeys--;
+                return true;
+
+            case 'g':
+                if (this.greenKeys <= 0) { return false; }
+                this.greenKeys--;
+                return true;
+
             default:
+                System.out.printf("Error: unknown key type: %c\n", key);
                 return false;
         }
+
     }
 
     /**
@@ -70,23 +72,26 @@ public class GameSessionData {
      * @param increment
      * increments if true, otherwise decrements.
      */
-    public void updateInventory(String item, boolean increment) {
-        int valueChange = increment ? 1 : 0;
-        switch (item){
-            case "rk":
-                this.redKeys += valueChange;
-                return;
-            case "bk":
-                this.blueKeys += valueChange;
-                return;
-            case "yk":
-                this.yellowKeys += valueChange;
-                return;
-            case "gk":
-                this.greenKeys += valueChange;
-                return;
+    public void giveKey(char key) {
+        switch (key){
+            case 'r':
+                this.redKeys++;
+                break;
+
+            case 'b':
+                this.blueKeys++;
+                break;
+
+            case 'y':
+                this.yellowKeys++;
+                break;
+
+            case 'g':
+                this.greenKeys++;
+                break;
+
             default:
-                return;
+                System.out.printf("Error: unknown key type: %c\n", key);
         }
     }
 

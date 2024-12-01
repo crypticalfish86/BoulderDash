@@ -27,6 +27,8 @@ public class Key extends Wall {
         //     // Remove the key from the game grid by setting it to null
         //     gameSession.setTile(getYPosition(), getXPosition(), null);
         // }
+
+        //TODO: call the game session data's giveKey(char keyColour)
     }
 
     @Override

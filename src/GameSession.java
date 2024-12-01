@@ -451,9 +451,6 @@ public class GameSession {
 
         String scoreString = String.format("%04d", currentSessionData.getDiamondCount());
         gc.fillText(scoreString, Main.WINDOW_WIDTH * .95, Main.WINDOW_HEIGHT * .07);
-        
-
-
 
 
 
