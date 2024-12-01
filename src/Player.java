@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Player extends Tile {
 
-    public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
+    public static final Image img = new Image("file:Assets/Images/Player.png"); // Placeholder for the image
     private List<Key> inventory; // List to store collected keys
 
     public Player(GameSession gameSession, int x, int y, long operationInterval) {
