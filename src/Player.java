@@ -1,12 +1,16 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Tile {
 
     public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
+    private List<Key> inventory; // List to store collected keys
 
     public Player(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.PLAYER, operationInterval);
+        this.inventory = new ArrayList<>(); // Initialize the inventory
     }
 
     public void somePlayerLogic() {
@@ -36,6 +40,7 @@ public class Player extends Tile {
         int newY = getYPosition() + deltaY;
         if (canMoveTo(newX, newY)) {
             setNewPosition(newX, newY);
+            interact(gameSession.getTileFromGrid(newX, newY)); // Interact with the tile at the new position
             System.out.println("Player moved to position: (" + newX + ", " + newY + ")");
         } else {
             System.out.println("Cannot move to position: (" + newX + ", " + newY + ")");
@@ -49,6 +54,13 @@ public class Player extends Tile {
     @Override
     public void interact(Tile other) {
         System.out.println("Player interacting with tile: " + other.getTileType());
+        if (other instanceof Key) {
+            Key key = (Key) other;
+            addKeyToInventory(key);
+
+            // Remove the key from the grid by setting the tile to null
+            gameSession.setTile(other.getYPosition(), other.getXPosition(), null);
+        }
     }
 
     @Override
@@ -64,7 +76,17 @@ public class Player extends Tile {
     // Add the killPlayer method
     public void killPlayer() {
         System.out.println("Player has been killed.");
-        // Example: Trigger game-over logic
         gameSession.endGame(); // Assuming endGame is implemented in GameSession
+    }
+
+    // Add key to the player's inventory
+    public void addKeyToInventory(Key key) {
+        inventory.add(key);
+        System.out.println("Key of color " + key.getKeyColour() + " added to inventory.");
+    }
+
+    // Get the player's inventory
+    public List<Key> getInventory() {
+        return inventory;
     }
 }

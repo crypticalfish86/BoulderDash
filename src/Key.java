@@ -1,45 +1,40 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Key extends Wall{
-    private char keyColour;
+public class Key extends Wall {
+    private char keyColour; // Key's color or unique identifier
 
-    public static final Image img = new Image("./"); // TODO: add the image path here
+    public static final Image img = new Image("file:Assets/Images/Key.png"); // Replace with the actual image path
 
-    public Key(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
-        super(gameSession, x, y, TileType, operationInterval);
-        this.amoebaCanSpreadToThisTile = false;
+    public Key(GameSession gameSession, int x, int y, TileType tileType, long operationInterval, char keyColour) {
+        super(gameSession, x, y, tileType, operationInterval);
+        this.keyColour = keyColour;
+        this.amoebaCanSpreadToThisTile = false; // Keys cannot spread amoebas
     }
 
     public char getKeyColour() {
         return this.keyColour;
     }
 
+    @Override
     public void interact(Tile inputTileObject) {
-        // Example interaction logic
         if (inputTileObject instanceof Player) {
-            System.out.println("Player picked up the key!");
-            // Remove the key from the map or add it to the player's inventory
+            Player player = (Player) inputTileObject;
+            System.out.println("Player picked up the key of color: " + keyColour);
+            player.addKeyToInventory(this);
+
+            // Remove the key from the game grid by setting it to null
+            gameSession.setTile(getYPosition(), getXPosition(), null);
         }
-    }
-    public void onUpdate(long timePassedInMilliseconds) {
-        
     }
 
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-
+        // No specific update logic for keys
     }
-
 
     @Override
     public void drawTile(GraphicsContext gc) {
-        draw(gc, img, 0, 0);
+        draw(gc, img, 0, 0); // Draw the key image
     }
 }
-
-
-
-
-
-
