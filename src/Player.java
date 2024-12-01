@@ -126,7 +126,7 @@ public class Player extends Tile {
 
         int framesRequiredToSpeedUp = RECURRING_DIRECTION_INITIAL_SPEED * RECURRING_DIRECTION_SPEED_UP;
         boolean shouldMove;
-        if (recurringFrameCount > framesRequiredToSpeedUp) {
+        if (recurringFrameCount < framesRequiredToSpeedUp) {
             shouldMove = recurringFrameCount % RECURRING_DIRECTION_INITIAL_SPEED == 0;
         } else {
             shouldMove = (recurringFrameCount - framesRequiredToSpeedUp) % RECURRING_DIRECTION_FAST_SPEED == 0;

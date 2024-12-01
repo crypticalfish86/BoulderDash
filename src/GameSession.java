@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class GameSession {
 
@@ -104,14 +105,16 @@ public class GameSession {
 
 
                 
+                gc.setFill(new Color(.05, .05, .05, 1));
+                gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
-                    for (int y = 0; y < gridHeight; ++y) {
-                        for (int x = 0; x < gridWidth; ++x) {
-    
-                            gridTileMap[y][x].drawTile(gc);
-    
-                        }
+                for (int y = 0; y < gridHeight; ++y) {
+                    for (int x = 0; x < gridWidth; ++x) {
+
+                        gridTileMap[y][x].drawTile(gc);
+
                     }
+                }
 
 
                 if (!isGamePaused) {
