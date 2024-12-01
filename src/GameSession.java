@@ -18,7 +18,7 @@ public class GameSession {
     private Tile[][] gridTileMap; //The full 2D grid instantiated on the interpretation of the level data
     private final Game game; // Reference to the game that the current game session is attached to
     private final GameSessionData currentSessionData; //Reference to this games' game session data
-    private final Player player; //Reference to the current single game player (inserted into the level in "interpretLevelData"
+    private Player player; //Reference to the current single game player (inserted into the level in "interpretLevelData"
 
     private final CanvasLayer cl;
     private final CanvasCompositor cc;
@@ -31,7 +31,7 @@ public class GameSession {
 
 
     public static final long OPERATION_INTERVAL = 100;
-    private static final String ESCAPE_KEYCODE = "Escape";
+    
 
     
 
@@ -53,7 +53,7 @@ public class GameSession {
 
 
 
-        this.player = new Player(this, 10, 10, 10); // TODO: change the values
+        // this.player = new Player(this, 10, 10, 10); // TODO: change the values
         interpretLevelData(gameData);
 
 
@@ -131,25 +131,12 @@ public class GameSession {
 
             @Override
             public void onKeyDown(KeyCode key) {
-                switch (key) {
-                    case ESCAPE:
-                        isGamePaused = !isGamePaused;
-                        break;
-
-                    case W:
-                        //input up
-
-                
-                    default:
-                        break;
-                }
+                keyDown(key);
             }
 
             @Override
             public void onKeyUp(KeyCode key) {
-                if (key == KeyCode.ESCAPE) {
-                    
-                }
+                keyUp(key);
             }
 
         }, 1);
@@ -219,31 +206,7 @@ public class GameSession {
     }
 
 
-    //Updates every tile in the game
-    private void updateGame(long currentTimeInMilliseconds){
-        //TODO: change it so that draw and update is independent of each other
-        
-        
-        if (isGamePaused) {
-            //TODO: call the tiles to be drawn
-            //TODO: call the menu to be drawn
-
-            
-        } else {
-
-
-
-            for(Tile[] tileColumn : gridTileMap) {
-                for(Tile tile : tileColumn) {
-                    //TODO call updateTile for every tile in here
-                    
     
-                }
-            }
-
-            //TODO: call the tiles to be drawn
-        }
-    }
 
     public int getGridWidth() {
         return this.gridWidth;
@@ -257,45 +220,7 @@ public class GameSession {
         return this.currentSessionData;
     }
 
-    //TODO determine a method of input before implementing
-    public void onInput(){ return; }
-
-
-    public void onKeyPressed(String key) {
-        if (key == ESCAPE_KEYCODE) { //TODO
-
-            //TODO: open menu
-            isGamePaused = true;
-            return;
-        }
-
-
-        if (isGamePaused) {
-
-            //TODO: direct inputs to the pausing menu
-        } else {
-
-            player.onKeyPressed(key);
-        }
-    }
-
-    public void onKeyReleased(String key) {
-        if (key == ESCAPE_KEYCODE) { //TODO
-
-            //TODO: close menu
-            isGamePaused = false;
-            return;
-        }
-
-
-        if (isGamePaused) {
-            
-            //TODO: direct inputs to the pausing menu
-        } else {
-
-            player.onKeyReleased(key);
-        }
-    }
+   
 
     // function to be fired when the menu close button is clicked
     public void onMenuClosed() {
@@ -361,7 +286,8 @@ public class GameSession {
         int playerX = rand.nextInt(sizeX - 5) + 2;
         int playerY = rand.nextInt(sizeY - 5) + 2;
 
-        this.gridTileMap[playerY][playerX] = new Player(this, playerX, playerY, OPERATION_INTERVAL);
+        this.player = new Player(this, playerX, playerY, OPERATION_INTERVAL);
+        this.gridTileMap[playerY][playerX] = this.player;
 
     }
 
@@ -378,5 +304,87 @@ public class GameSession {
     
     public double getCameraScale() {
         return this.cameraScale;
+    }
+
+
+
+
+
+    private void keyDown(KeyCode key) {
+        switch (key) {
+            case ESCAPE:
+                isGamePaused = !isGamePaused;
+                break;
+
+            case UP:
+            case W:
+                if (isGamePaused) { break; }
+                //input up
+                player.onKeyPressed('W');
+                break;
+
+
+            case DOWN:
+            case S:
+                if (isGamePaused) { break; }
+                //input down
+                player.onKeyPressed('S');
+                break;
+
+
+            case LEFT:
+            case A:
+                if (isGamePaused) { break; }
+                //input left
+                player.onKeyPressed('A');
+                break;
+
+
+            case RIGHT:
+            case D:
+                if (isGamePaused) { break; }
+                //input right
+                player.onKeyPressed('D');
+                break;
+                
+
+            default:
+                break;
+        }
+    }
+
+    private void keyUp(KeyCode key) {
+        switch (key) {
+            case UP:
+            case W:
+                //input up
+                player.onKeyReleased('W');
+                break;
+
+
+            case DOWN:
+            case S:
+                //input down
+                player.onKeyReleased('S');
+                break;
+
+
+            case LEFT:
+            case A:
+                //input left
+                player.onKeyReleased('A');
+                break;
+
+
+            case RIGHT:
+            case D:
+                //input right
+                player.onKeyReleased('D');
+                break;
+                
+
+            default:
+                break;
+        }
     }
 }

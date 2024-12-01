@@ -13,7 +13,7 @@ public abstract class FallingObject extends Tile{
      * @param YPosition the current y co-ordinate of the object
      */
     protected void fall(int XPosition, int YPosition){
-        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
+        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition, getOperationInterval());
         Tile outgoingTile = gameSession.getTileFromGrid(XPosition,YPosition - 1);
         gameSession.updateTilePositions(pathWall, this,outgoingTile);
     }
@@ -39,7 +39,7 @@ public abstract class FallingObject extends Tile{
                 throw new IllegalArgumentException("Invalid direction: " + direction + "Allowed values are 'Left' or 'Right ");
         }
 
-        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition,TileType.STATIC_TILE,getOperationInterval());
+        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition, getOperationInterval());
         Tile outgoingTile = gameSession.getTileFromGrid(XPosition + offset, YPosition);
         gameSession.updateTilePositions(pathWall, this,outgoingTile);
     }

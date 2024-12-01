@@ -28,8 +28,7 @@ public class Diamond extends FallingObject{
      */
     public void interact(Tile tile){
         if(tile.getTileType() == TileType.PLAYER){
-            PathWall pathWall = new PathWall(gameSession, tile.getXPosition(), tile.getYPosition(),
-                    TileType.STATIC_TILE,getOperationInterval());
+            PathWall pathWall = new PathWall(gameSession, tile.getXPosition(), tile.getYPosition(), getOperationInterval());
             gameSession.updateTilePositions(pathWall, tile,this); //Move player to this tile and delete diamond
 
             updateGameSessionData();

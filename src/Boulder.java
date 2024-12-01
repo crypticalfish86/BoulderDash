@@ -99,7 +99,7 @@ public class Boulder extends FallingObject{
                 throw new IllegalArgumentException("Invalid direction " + direction + " Allowed values are 'Left' or 'Right");
         }
 
-        PathWall pathWall = new PathWall(gameSession, this.x + (-offset), this.y,TileType.STATIC_TILE,getOperationInterval());
+        PathWall pathWall = new PathWall(gameSession, this.x + (-offset), this.y, getOperationInterval());
         gameSession.updateTilePositions(pathWall, player,this);
         gameSession.setTile(this.x + offset,this.y, this);
     }
