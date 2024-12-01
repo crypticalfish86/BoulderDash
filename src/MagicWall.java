@@ -6,8 +6,8 @@ public class MagicWall extends Wall {
 
     public static final Image img = new Image("file:Assets/Images/MagicWall.png");//TODO: add the image here
 
-    public MagicWall(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
-        super(gameSession, x, y, TileType, operationInterval);
+    public MagicWall(GameSession gameSession, int x, int y, long operationInterval) {
+        super(gameSession, x, y, TileType.MAGIC_WALL, operationInterval);
         this.amoebaCanSpreadToThisTile = false;
     }
 

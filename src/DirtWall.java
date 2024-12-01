@@ -6,7 +6,7 @@ public class DirtWall extends Wall {
     public static final Image img = new Image("file:Assets/Images/Dirt.png"); // Placeholder for the dirt wall image
 
     public DirtWall(GameSession gameSession, int x, int y, long operationInterval) {
-        super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
+        super(gameSession, x, y, TileType.DIRT_WALL, operationInterval);
         this.amoebaCanSpreadToThisTile = true; // Amoebas can spread to dirt walls
     }
 

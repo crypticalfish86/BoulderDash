@@ -7,7 +7,7 @@ public class NormalWall extends Wall {
     public static final Image img = new Image("file:Assets/Images/NormalWallVers3.png");
 
     public NormalWall(GameSession gameSession, int x, int y, long operationInterval) {
-        super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
+        super(gameSession, x, y, TileType.NORMAL_WALL, operationInterval);
         this.amoebaCanSpreadToThisTile = false;
     }
 

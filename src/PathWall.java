@@ -8,7 +8,7 @@ public class PathWall extends Wall {
 
     // Constructor
     public PathWall(GameSession gameSession, int x, int y, long operationInterval) {
-        super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
+        super(gameSession, x, y, TileType.PATH, operationInterval);
         this.amoebaCanSpreadToThisTile = true; // Amoeba can spread to this tile
     }
 
