@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Player extends Tile {
 
-    public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
+    public static final Image img = new Image("file:Assets/Images/PlayerForward.png"); // Placeholder for the image
     
     //added because NOBODY DECIDED TO CODE THE PLAYER
     private boolean keyUp = false;
