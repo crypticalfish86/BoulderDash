@@ -70,7 +70,7 @@ public class Boulder extends FallingObject{
 
         PathWall pathWall = new PathWall(gameSession, this.x + (-offset), this.y, getOperationInterval());
         gameSession.updateTilePositions(pathWall, player,this);
-        gameSession.setTile(this.x + offset,this.y, this);
+        gameSession.setTile(this.y, this.x + offset, this);
     }
 
 

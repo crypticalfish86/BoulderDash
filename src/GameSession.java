@@ -7,6 +7,9 @@ import java.util.Scanner;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class GameSession {
 
@@ -43,7 +46,6 @@ public class GameSession {
     private double cameraX;
     private double cameraY;
 
-    private int timeLeft;
 
 
     GameSession(Game game, String gameData, CanvasCompositor cc) {
@@ -116,6 +118,13 @@ public class GameSession {
                     }
                 }
 
+                // draw the top bar :)
+
+                drawTopBar(gc);
+
+
+
+
 
                 if (!isGamePaused) {
 
@@ -130,11 +139,15 @@ public class GameSession {
                     double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
                     
                     // cameraScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
-                    cameraScale = 30;
+                    cameraScale = 60;
 
                     cameraX = (double) player.getXPosition() * epsilon + cameraX * (1 - epsilon);
                     cameraY = (double) player.getYPosition() * epsilon + cameraY * (1 - epsilon);
                 }
+
+
+
+                
                 
             }
 
@@ -231,8 +244,8 @@ public class GameSession {
 
     public Tile[][] getGridTileMap(){return this.gridTileMap;}
 
-    public int getPlayerX(){return this.player.getXPosition();}
-    public int getPlayerY(){return this.player.getYPosition();}
+    public int getPlayerX() { return this.player.getXPosition(); }
+    public int getPlayerY() { return this.player.getYPosition(); }
 
     public GameSessionData getCurrentSessionData(){
         return this.currentSessionData;
@@ -248,12 +261,9 @@ public class GameSession {
 
     public void endGame() {
         this.cc.removeLayer(this.cl);
+
+        
     }
-
-
-
-
-
 
 
     private void generateSampleGame() {
@@ -306,6 +316,10 @@ public class GameSession {
 
         this.player = new Player(this, playerX, playerY, OPERATION_INTERVAL);
         this.gridTileMap[playerY][playerX] = this.player;
+
+
+        this.startTimeStamp = System.currentTimeMillis();
+        this.maxTimeToCompleteLevel = 60*60*1000;
 
     }
 
@@ -405,4 +419,48 @@ public class GameSession {
                 break;
         }
     }
+
+
+
+
+
+    private void drawTopBar(GraphicsContext gc) {
+        gc.setFill(new Color(.5, .5, .5, .7));
+        gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT * .1);
+
+
+        
+
+        
+        gc.setFill(Color.WHITE);
+        gc.setFont(new Font("Arial", Main.WINDOW_HEIGHT * .05));
+
+        
+        long timeDiff = startTimeStamp + maxTimeToCompleteLevel - System.currentTimeMillis();
+        int secondsLeft = (int) (timeDiff / 1000);
+
+        //draw the timer
+        gc.setTextAlign(TextAlignment.LEFT);
+        String timeString = String.format("%02d:%02d", secondsLeft / 60, secondsLeft % 60);
+        gc.fillText(timeString, Main.WINDOW_WIDTH * .05, Main.WINDOW_HEIGHT * .07);
+
+
+
+        gc.setTextAlign(TextAlignment.RIGHT);
+        //draw the score
+
+        String scoreString = String.format("%04d", currentSessionData.getDiamondCount());
+        gc.fillText(scoreString, Main.WINDOW_WIDTH * .95, Main.WINDOW_HEIGHT * .07);
+        
+
+
+
+
+
+    }
+
+
+
+
+
 }

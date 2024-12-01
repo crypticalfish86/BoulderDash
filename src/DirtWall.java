@@ -20,9 +20,6 @@ public class DirtWall extends Wall {
             tile.getYPosition(),
             operationInterval
         );
-
-
-        System.out.println("a wall has been interacted");
         
         gameSession.updateTilePositions(pathWall, tile, this);
     }

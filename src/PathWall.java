@@ -23,8 +23,6 @@ public class PathWall extends Wall {
             operationInterval
         );
 
-        System.out.println("a path has been interacted");
-
         gameSession.updateTilePositions(pathWall, tile, this);
         // }
 
