@@ -14,7 +14,7 @@ public class Player extends Tile {
 
     // Example method to access GameSession
     public void somePlayerLogic() {
-        GameSession session = getGameSession(); // This should work now, as Player inherits from Tile
+        GameSession session = getGameSession();
         if (session != null) {
             System.out.println("Game Session is available.");
         }
@@ -63,7 +63,6 @@ public class Player extends Tile {
         }
     }
 
-
     // Example method to check if the player can move to a specific tile
     private boolean canMoveTo(int x, int y) {
         // Add collision logic or bounds checking here
@@ -79,12 +78,14 @@ public class Player extends Tile {
 
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        // Update the player's tile, for example, drawing the image
-        draw(img, getX(), getY()); // Update player's image at the specified location (customize as needed)
+        GraphicsContext gc = this.gameSession.getGraphicsContext(); // Access GraphicsContext
+        draw(gc, img, getXPosition(), getYPosition());
     }
+
 
     @Override
     public void drawTile(GraphicsContext gc) {
-
+        // Draw the player image on the graphics context
+        draw(gc, img, 0, 0);
     }
 }
