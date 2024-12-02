@@ -88,10 +88,9 @@ public class Frog extends Enemy {
 
 
 
-    public String returnStringTileRepresentation(){
+    public String returnStringTileRepresentation() {
         return "F";
     }
->>>>>>> c4586193427f1233401d7211f6194de20b4b532a
 }
 
 
