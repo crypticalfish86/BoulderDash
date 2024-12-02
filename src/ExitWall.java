@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 
 public class ExitWall extends Wall {
 
-    public static final Image img = new Image("file:Assets/Images/ExitWall.png"); // Placeholder for the image
+    public static final Image img = new Image("file:Assets/Images/NetherPortal.png"); // Placeholder for the image
 
     private boolean isActive; // Indicates whether the exit is active
 
