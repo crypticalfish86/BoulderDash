@@ -1,8 +1,8 @@
 public class GameSessionData {
     private GameSession gameSession;
-    private int levelHeight;
-    private int levelWidth;
     private int timeAllowed;
+    private int startingTime;
+    private int diamondsRequired;
     private int redKeys;
     private int blueKeys;
     private int yellowKeys;
@@ -18,8 +18,10 @@ public class GameSessionData {
 
     GameSession currentGame;
 
-    public GameSessionData(GameSession gameSession, int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score) {
+    public GameSessionData(GameSession gameSession, int timeAllowed, int diamondsRequired,int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score) {
         this.gameSession = gameSession;
+        this.timeAllowed = timeAllowed;
+        this.diamondsRequired = diamondsRequired;
         this.redKeys = redKeys;
         this.blueKeys = blueKeys;
         this.yellowKeys = yellowKeys;
@@ -27,6 +29,19 @@ public class GameSessionData {
         this.diamondCount = diamondCount;
         this.score = score;
 
+    }
+
+    /**
+     * Return all game session data of the current session.
+     * @return
+     * All the data of the current session.
+     */
+    public int[] returnAllGameSessionData(){
+        return new int[]{
+                this.score, this.timeAllowed - this.startingTime, this.timeAllowed,
+                this.diamondCount, this.diamondsRequired,
+                this.redKeys, this.blueKeys, this.yellowKeys, this.greenKeys
+        };
     }
 
     /**
