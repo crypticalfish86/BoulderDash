@@ -1,11 +1,12 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import java.util.ArrayList;
-import java.util.List;
+
+
+
 
 public class Player extends Tile {
 
-    public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
+    public static final Image img = new Image("file:Assets/Images/PlayerForward.png"); // Placeholder for the image
     
     //added because NOBODY DECIDED TO CODE THE PLAYER
     private boolean keyUp = false;
@@ -106,7 +107,7 @@ public class Player extends Tile {
         if(tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y + 1) {
             PathWall pathWall = new PathWall(gameSession, this.x, this.y + 1, operationInterval );
             gameSession.updateTilePositions(pathWall, tile, this);
-            gameSession.callKillPlayer();
+            this.killPlayer();
         }
 
 
@@ -126,7 +127,7 @@ public class Player extends Tile {
 
         int framesRequiredToSpeedUp = RECURRING_DIRECTION_INITIAL_SPEED * RECURRING_DIRECTION_SPEED_UP;
         boolean shouldMove;
-        if (recurringFrameCount > framesRequiredToSpeedUp) {
+        if (recurringFrameCount < framesRequiredToSpeedUp) {
             shouldMove = recurringFrameCount % RECURRING_DIRECTION_INITIAL_SPEED == 0;
         } else {
             shouldMove = (recurringFrameCount - framesRequiredToSpeedUp) % RECURRING_DIRECTION_FAST_SPEED == 0;
@@ -141,26 +142,22 @@ public class Player extends Tile {
         switch (currentDirection) {
             case 'W':
                 //interact with the tile on the right
-                interact(gameSession.getTileFromGrid(this.getXPosition(), this.getYPosition() + 1));
-                System.out.println("moving");
+                gameSession.getTileFromGrid(this.getXPosition(), this.getYPosition() - 1).interact(this);
                 break;
                 
             case 'S':
                 //interact with the tile on the right
-                interact(gameSession.getTileFromGrid(this.getXPosition(), this.getYPosition() - 1));
-                System.out.println("moving");
+                gameSession.getTileFromGrid(this.getXPosition(), this.getYPosition() + 1).interact(this);
                 break;
             
             case 'A':
                 //interact with the tile on the right
-                interact(gameSession.getTileFromGrid(this.getXPosition() - 1, this.getYPosition()));
-                System.out.println("moving");
+                gameSession.getTileFromGrid(this.getXPosition() - 1, this.getYPosition()).interact(this);
                 break;
                 
             case 'D':
                 //interact with the tile on the right
-                interact(gameSession.getTileFromGrid(this.getXPosition() + 1, this.getYPosition()));
-                System.out.println("moving");
+                gameSession.getTileFromGrid(this.getXPosition() + 1, this.getYPosition()).interact(this);
                 break;
         }
 

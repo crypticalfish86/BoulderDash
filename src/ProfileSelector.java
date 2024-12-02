@@ -114,22 +114,22 @@ public class ProfileSelector {
 
     private boolean isMouseOnBackButton(double mouseX, double mouseY) {
         //check for back button
-        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_BACK, .15, .1, .15);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_BACK, .15, .1, .15);
     }
 
     private boolean isMouseOnProfileBox1(double mouseX, double mouseY) {
         //check for profile button
-        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .2, .4);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .2, .4);
     }
 
     private boolean isMouseOnProfileBox2(double mouseX, double mouseY) {
         //check for profile button
-        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .5, .4);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .5, .4);
     }
 
     private boolean isMouseOnProfileBox3(double mouseX, double mouseY) {
         //check for profile button
-        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .8, .4);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .8, .4);
     }
 
 

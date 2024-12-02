@@ -69,7 +69,7 @@ public class Frog extends Enemy {
 
         int[][] navigableGrid = new int[gridWidth][gridHeight];
 
-        //initialise a grid for pathdinding where 0 means the frog
+        //initialise a grid for pathfinding where 0 means the frog
         // can move to that tile and 1 means it can't
         for(int i = 0; i < gridWidth; i++){
             for(int j = 0; j < gridHeight; j++){

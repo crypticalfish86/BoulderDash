@@ -24,18 +24,25 @@ public class Door extends Wall {
         //     Player player = (Player) inputTileObject;
 
         //     // Check if the player has the correct key
-        //     if (playerHasCorrectKey(player)) {
+        //     if (playerHasCorrectKey(player)) { 
         //         System.out.println("Door unlocked with the correct key!");
         //         unlockDoor();
         //     } else {
         //         System.out.println("Door cannot be opened without the correct key.");
         //     }
         // }
+
+
+        //TODO:
+        // use if (gsd.tryConsumeKey(char doorColour)) {
+        //
+        //}
     }
 
     // Check if the player has the correct key
     private boolean playerHasCorrectKey(Player player) {
-        return gameSession.getCurrentSessionData().getInventoryItem(String.format("%c%c", doorColour, 'k'));
+        // return gameSession.getCurrentSessionData().getInventoryItem(String.format("%c%c", doorColour, 'k'));
+        return false;
     }
 
     // Logic to unlock or remove the door

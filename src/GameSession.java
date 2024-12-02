@@ -1,22 +1,21 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Random;
-import java.util.Scanner;
 
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 public class GameSession {
 
     private int gridHeight; //The height of the grid
     private int gridWidth; //The width of the grid
 
-    private GraphicsContext graphicsContext; // Store the GraphicsContext
 
 
-    private long startTimeStamp; //The starting time stamp (ms since 1970)
-    private long maxTimeToCompleteLevel; //The time given to complete level (in ms)
+    private long timeLeft; //The starting time stamp (ms since 1970)
+    // private long maxTimeToCompleteLevel; //The time given to complete level (in ms)
 
     private Tile[][] gridTileMap; //The full 2D grid instantiated on the interpretation of the level data
     private final Game game; // Reference to the game that the current game session is attached to
@@ -25,6 +24,8 @@ public class GameSession {
 
     private final CanvasLayer cl;
     private final CanvasCompositor cc;
+
+    private final GamePauseMenu gamePauseMenu;
 
 
     public static final int GRID_SIZE = 50;
@@ -42,17 +43,16 @@ public class GameSession {
     private double cameraX;
     private double cameraY;
 
-    private int timeLeft;
 
 
     GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
-        this.graphicsContext = graphicsContext; // Initialize the GraphicsContext
 
         this.currentSessionData = new GameSessionData(this,
             0, 0, 0, 0,
             0, 0
         );
+        this.gamePauseMenu = new GamePauseMenu(this, cc);
         //TODO update this to account for loading games in the middle of play
 
 
@@ -104,17 +104,35 @@ public class GameSession {
 
 
                 
+                gc.setFill(new Color(.05, .05, .05, 1));
+                gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
-                    for (int y = 0; y < gridHeight; ++y) {
-                        for (int x = 0; x < gridWidth; ++x) {
-    
-                            gridTileMap[y][x].drawTile(gc);
-    
-                        }
+                for (int y = 0; y < gridHeight; ++y) {
+                    for (int x = 0; x < gridWidth; ++x) {
+
+                        gridTileMap[y][x].drawTile(gc);
+
                     }
+                }
+
+                // draw the top bar :)
+
+                drawTopBar(gc);
 
 
-                if (!isGamePaused) {
+
+                
+
+                if (isGamePaused) {
+
+
+
+
+                } else {
+                    timeLeft -= 1000 / 60;
+                    if (timeLeft <= 0) {
+                        player.killPlayer();//LOL
+                    }
 
                     for (int y = 0; y < gridHeight; ++y) {
                         for (int x = 0; x < gridWidth; ++x) {
@@ -126,11 +144,16 @@ public class GameSession {
                     
                     double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
                     
-                    cameraScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
+                    // cameraScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
+                    cameraScale = 60;
 
-                    cameraX = (double) player.x * epsilon + cameraX * (1 - epsilon);
-                    cameraY = (double) player.y * epsilon + cameraY * (1 - epsilon);
+                    cameraX = (double) player.getXPosition() * epsilon + cameraX * (1 - epsilon);
+                    cameraY = (double) player.getYPosition() * epsilon + cameraY * (1 - epsilon);
                 }
+
+
+
+                
                 
             }
 
@@ -173,9 +196,6 @@ public class GameSession {
         // Line 5: RedKey, BlueKey, YellowKey, GreenKey
         // Line 6+: Actual level
     }
-    public GraphicsContext getGraphicsContext() {
-        return this.graphicsContext; // Return the stored GraphicsContext
-    }
 
     //returns a specific tile from the gridTileMap
     public Tile getTileFromGrid(int x, int y) {
@@ -194,8 +214,8 @@ public class GameSession {
      * The outgoing tile that is being deleted.
      */
     public void updateTilePositions(Tile replacementTile, Tile incomingTile, Tile outgoingTile) {
-        setTile(incomingTile.getYPosition(),incomingTile.getXPosition(), replacementTile);
-        setTile(outgoingTile.getYPosition(),outgoingTile.getXPosition(), incomingTile);
+        setTile(incomingTile.getYPosition(), incomingTile.getXPosition(), replacementTile);
+        setTile(outgoingTile.getYPosition(), outgoingTile.getXPosition(), incomingTile);
     }
 
     /**
@@ -207,16 +227,17 @@ public class GameSession {
      * @param tile
      * The tile that will be set at this location.
      */
-    public void setTile(int yTileLocation, int xTileLocation, Tile tile){
+    public void setTile(int yTileLocation, int xTileLocation, Tile tile) {
         gridTileMap[yTileLocation][xTileLocation] = tile;
+        tile.setNewPosition(xTileLocation, yTileLocation);
     }
 
-    /**
-     * Calls the kill player method on this game session's player.
-     */
-    public void callKillPlayer(){
-        player.killPlayer();
-    }
+    // /**
+    //  * Calls the kill player method on this game session's player.
+    //  */
+    // public void callKillPlayer() {
+    //     player.killPlayer();
+    // }
 
 
     
@@ -231,8 +252,8 @@ public class GameSession {
 
     public Tile[][] getGridTileMap(){return this.gridTileMap;}
 
-    public int getPlayerX(){return this.player.getXPosition();}
-    public int getPlayerY(){return this.player.getYPosition();}
+    public int getPlayerX() { return this.player.getXPosition(); }
+    public int getPlayerY() { return this.player.getYPosition(); }
 
     public GameSessionData getCurrentSessionData(){
         return this.currentSessionData;
@@ -241,8 +262,8 @@ public class GameSession {
    
 
     // function to be fired when the menu close button is clicked
-    public void onMenuClosed() {
-        this.isGamePaused = false;
+    public void resume() {
+        setIsPaused(false);
     }
 
 
@@ -250,10 +271,10 @@ public class GameSession {
         this.cc.removeLayer(this.cl);
     }
 
-
-
-
-
+    public void exitGame() {
+        endGame();
+        game.endGame();
+    }
 
 
     private void generateSampleGame() {
@@ -307,6 +328,9 @@ public class GameSession {
         this.player = new Player(this, playerX, playerY, OPERATION_INTERVAL);
         this.gridTileMap[playerY][playerX] = this.player;
 
+
+        this.timeLeft = 60*60*1000;
+
     }
 
 
@@ -316,7 +340,7 @@ public class GameSession {
 
     
     public double getCameraY() {
-        return this.cameraX;
+        return this.cameraY;
     }
 
     
@@ -331,7 +355,7 @@ public class GameSession {
     private void keyDown(KeyCode key) {
         switch (key) {
             case ESCAPE:
-                isGamePaused = !isGamePaused;
+                setIsPaused(!isGamePaused);
                 break;
 
             case UP:
@@ -405,4 +429,55 @@ public class GameSession {
                 break;
         }
     }
+
+
+
+
+
+    private void drawTopBar(GraphicsContext gc) {
+        gc.setFill(new Color(.5, .5, .5, .7));
+        gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT * .1);
+
+
+        
+
+        
+        gc.setFill(Color.WHITE);
+        gc.setFont(new Font("Arial", Main.WINDOW_HEIGHT * .05));
+
+        
+        // long timeDiff = startTimeStamp + maxTimeToCompleteLevel - System.currentTimeMillis();
+        int secondsLeft = (int) (timeLeft / 1000);
+
+        //draw the timer
+        gc.setTextAlign(TextAlignment.LEFT);
+        String timeString = String.format("%02d:%02d", secondsLeft / 60, secondsLeft % 60);
+        gc.fillText(timeString, Main.WINDOW_WIDTH * .05, Main.WINDOW_HEIGHT * .07);
+
+
+
+        gc.setTextAlign(TextAlignment.RIGHT);
+        //draw the score
+
+        String scoreString = String.format("%04d", currentSessionData.getDiamondCount());
+        gc.fillText(scoreString, Main.WINDOW_WIDTH * .95, Main.WINDOW_HEIGHT * .07);
+
+
+
+    }
+
+
+
+    private void setIsPaused(boolean isPaused) {
+        if (isPaused ^ isGamePaused) {
+            isGamePaused = isPaused;
+
+            if (isGamePaused) {
+                gamePauseMenu.show();
+            } else {
+                gamePauseMenu.hide();
+            }
+        }
+    }
+
 }

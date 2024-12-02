@@ -104,10 +104,15 @@ public class AmoebaController {
         //Add a new amoeba to the array list
         AmoebaTile newAmoeba = new AmoebaTile(this.gameSession, x, y, this.operationInterval, this);//instantiate new amoeba
         this.amoebaChildren.add(newAmoeba);//add new amoeba to cluster
-        if(this.gameSession.getTileFromGrid(x,y).tileType == TileType.PLAYER){
-            this.gameSession.callKillPlayer();
+
+        //TODO: Verify this code
+        //change it so it only spreads on a path, potentially making a new tiletype for paths
+
+        if(this.gameSession.getTileFromGrid(x,y).tileType == TileType.PATH){
+            // this.gameSession.callKillPlayer();
+            // TODO: i don't think amoeba kills players?
+            this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
         }
-        this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
 
         this.currentAmoebaChildCount++;
     }

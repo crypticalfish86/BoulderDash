@@ -33,54 +33,7 @@ public class Game {
         this.cc = cc;
 
 
-
-
-
         
-        // FlowPane formatterPane = new FlowPane();
-
-        // TextField gameDirectoryInputField = new TextField();
-        // Button startGameButton = new Button("Load Game");
-
-        // formatterPane.getChildren().addAll(gameDirectoryInputField, startGameButton);
-
-
-        // startGameButton.setOnAction(E -> {
-
-
-        //     boolean success = loadGame(gameDirectoryInputField.getText());
-
-        //     if (success) {
-        //         formatterPane.setVisible(false);
-        //     };
-        // });
-
-
-        // scene.setOnKeyPressed(E -> {
-        //     String key = E.getCharacter();
-
-
-        //     if (currentGamesession != null) {
-        //         currentGamesession.onKeyPressed(key);
-        //     }
-        // });
-
-        // scene.setOnKeyReleased(E -> {
-        //     String key = E.getCharacter();
-
-
-        //     if (currentGamesession != null) {
-        //         currentGamesession.onKeyReleased(key);
-        //     }
-        // });
-
-
-        // this.gamePane = pane;
-
-
-
-
-        // pane.getChildren().add(formatterPane);
     }
 
 
@@ -174,4 +127,9 @@ public class Game {
         
     }
     
+
+    public void endGame() {
+        //TODO: implement returning to main menu
+        mainMenu.show();
+    }
 }

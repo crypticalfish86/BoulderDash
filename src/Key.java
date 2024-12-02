@@ -6,8 +6,8 @@ public class Key extends Wall {
 
     public static final Image img = new Image("file:Assets/Images/Key.png"); // Replace with the actual image path
 
-    public Key(GameSession gameSession, int x, int y, TileType tileType, long operationInterval, char keyColour) {
-        super(gameSession, x, y, tileType, operationInterval);
+    public Key(GameSession gameSession, int x, int y, long operationInterval, char keyColour) {
+        super(gameSession, x, y, TileType.KEY, operationInterval);
         this.keyColour = keyColour;
         this.amoebaCanSpreadToThisTile = false; // Keys cannot spread amoebas
     }
@@ -27,6 +27,8 @@ public class Key extends Wall {
         //     // Remove the key from the game grid by setting it to null
         //     gameSession.setTile(getYPosition(), getXPosition(), null);
         // }
+
+        //TODO: call the game session data's giveKey(char keyColour)
     }
 
     @Override

@@ -15,11 +15,16 @@ public class PathWall extends Wall {
     // Handle interactions with other tiles
     @Override
     public void interact(Tile tile) {
-        if (tile.getTileType() == TileType.MOVING_ENEMY) {
-            PathWall pathWall = new PathWall(gameSession, tile.getXPosition(), getYPosition(),
-                    operationInterval);
-            gameSession.updateTilePositions(pathWall, tile, this);
-        }
+        // if (tile.getTileType() == TileType.MOVING_ENEMY) {
+        PathWall pathWall = new PathWall(
+            gameSession,
+            tile.getXPosition(),
+            tile.getYPosition(),
+            operationInterval
+        );
+
+        gameSession.updateTilePositions(pathWall, tile, this);
+        // }
 
         // Example interaction logic
         // if (tile instanceof Player) {
@@ -28,14 +33,14 @@ public class PathWall extends Wall {
         // } else {
         //     System.out.println("Another tile interacted with the PathWall.");
         // }
+        
+
     }
 
     // Update the tile (called periodically)
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        // Optionally handle updates here if PathWall has time-dependent behavior
-        // Example: Draw the tile to the canvas
-        draw(this.gameSession.getGraphicsContext(), img, 0, 0);
+        
     }
 
     // Draw the PathWall tile
