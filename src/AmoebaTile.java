@@ -76,4 +76,8 @@ public class AmoebaTile extends Tile{
         draw(gc, img, 0, 0);
     }
 
+    public String returnStringTileRepresentation(){
+        return "A";
+    }
+
 }

@@ -212,81 +212,13 @@ public class GameSession {
 
         for (int i = 0; i < gridTileMap.length; i++){
             for (int ii = 0; i < gridTileMap[i].length; ii++){
-                saveString += convertTileToSaveString(gridTileMap[i][ii]) + " ";
+                saveString += gridTileMap[i][ii].returnStringTileRepresentation() + " ";
             }
             saveString += "\n";
         }
         return saveString;
     }
 
-    private String convertTileToSaveString(Tile tile){
-        if (tile instanceof PathWall){
-            return "-";
-        }
-        else if (tile instanceof ExitWall){
-            return "E";
-        }
-        else if (tile instanceof NormalWall){
-            return "W";
-        }
-        else if (tile instanceof TitaniumWall){
-            return "T";
-        }
-        else if (tile instanceof MagicWall) {
-            return "M";
-        }
-        else if (tile instanceof DirtWall){
-            return "D";
-        }
-        else if (tile instanceof Diamond){
-            return "*";
-        }
-        else if (tile instanceof Boulder){
-            return "@";
-        }
-        else if (tile instanceof Key && ((Key) tile).getKeyColour() == 'R'){//TODO ensure these key colours are correct
-            return "RK";
-        }
-        else if (tile instanceof Key && ((Key) tile).getKeyColour() == 'B'){//TODO ensure these key colours are correct
-            return "BK";
-        }
-        else if (tile instanceof Key && ((Key) tile).getKeyColour() == 'G'){//TODO ensure these key colours are correct
-            return "GK";
-        }
-        else if (tile instanceof Key && ((Key) tile).getKeyColour() == 'Y'){//TODO ensure these key colours are correct
-            return "YK";
-        }
-        else if (tile instanceof Door && ((Door) tile).getDoorColour() == 'R'){
-            return "RD";
-        }
-        else if (tile instanceof Door && ((Door) tile).getDoorColour() == 'B'){
-            return "BD";
-        }
-        else if (tile instanceof Door && ((Door) tile).getDoorColour() == 'G'){
-            return "GD";
-        }
-        else if (tile instanceof Door && ((Door) tile).getDoorColour() == 'Y'){
-            return "YD";
-        }
-        else if (tile instanceof Player){
-            return "P";
-        }
-        else if (tile instanceof Butterfly){ //TODO determine how we're doing butterfly with omar
-            return "BF";
-        }
-        else if (tile instanceof FireFly){ //TODO determine how we're doing firefly with omar
-            return "FF";
-        }
-        else if (tile instanceof Frog){
-            return "F";
-        }
-        else if (tile instanceof AmoebaTile){
-            return "A";
-        }
-        else {
-            return "ERROR";
-        }
-    }
 
     //returns a specific tile from the gridTileMap
     public Tile getTileFromGrid(int x, int y) {

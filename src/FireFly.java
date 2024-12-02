@@ -26,4 +26,8 @@ public class FireFly extends FlyingEnemy{
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
+
+    public String returnStringTileRepresentation(){
+        return "FF";//TODO ask omar how we're doing this (firefly directions)
+    }
 }

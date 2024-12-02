@@ -23,4 +23,8 @@ public class TitaniumWall extends Wall {
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
+
+    public String returnStringTileRepresentation(){
+        return "T";
+    }
 }

@@ -46,4 +46,8 @@ public class Explosion extends Tile {
             gameSession.setTile(this.y,this.x, pathWall);
         }
     }
+
+    public String returnStringTileRepresentation(){
+        return "EX"; //TODO make sure we code for this in loading, inform armaan
+    }
 }

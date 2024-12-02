@@ -125,6 +125,10 @@ public class Frog extends Enemy {
             return false;
         }
     }
+
+    public String returnStringTileRepresentation(){
+        return "F";
+    }
 }
 
 

@@ -29,4 +29,8 @@ public class Butterfly extends FlyingEnemy{
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
+
+    public String returnStringTileRepresentation(){
+        return "BF";//TODO discuss how we're doing this with omar (the butterfly direction)
+    }
 }
