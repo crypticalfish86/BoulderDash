@@ -61,12 +61,14 @@ public class CanvasCompositor {
 
 
         scene.setOnKeyPressed(E -> {
+            if (canvasLayerArray.size() == 0) { return; }
             for (CanvasLayer cl : canvasLayerArray) {
                 cl.cI.onKeyDown(E.getCode());
             }
         });
 
         scene.setOnKeyReleased(E -> {
+            if (canvasLayerArray.size() == 0) { return; }
             for (CanvasLayer cl : canvasLayerArray) {
                 cl.cI.onKeyUp(E.getCode());
             }

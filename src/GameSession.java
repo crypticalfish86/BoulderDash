@@ -1,14 +1,10 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Random;
-import java.util.Scanner;
 
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class GameSession {
@@ -16,11 +12,10 @@ public class GameSession {
     private int gridHeight; //The height of the grid
     private int gridWidth; //The width of the grid
 
-    private GraphicsContext graphicsContext; // Store the GraphicsContext
 
 
-    private long startTimeStamp; //The starting time stamp (ms since 1970)
-    private long maxTimeToCompleteLevel; //The time given to complete level (in ms)
+    private long timeLeft; //The starting time stamp (ms since 1970)
+    // private long maxTimeToCompleteLevel; //The time given to complete level (in ms)
 
     private Tile[][] gridTileMap; //The full 2D grid instantiated on the interpretation of the level data
     private final Game game; // Reference to the game that the current game session is attached to
@@ -29,6 +24,8 @@ public class GameSession {
 
     private final CanvasLayer cl;
     private final CanvasCompositor cc;
+
+    private final GamePauseMenu gamePauseMenu;
 
 
     public static final int GRID_SIZE = 50;
@@ -50,12 +47,12 @@ public class GameSession {
 
     GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
-        this.graphicsContext = graphicsContext; // Initialize the GraphicsContext
 
         this.currentSessionData = new GameSessionData(this,
             0, 0, 0, 0,
             0, 0
         );
+        this.gamePauseMenu = new GamePauseMenu(this, cc);
         //TODO update this to account for loading games in the middle of play
 
 
@@ -124,9 +121,18 @@ public class GameSession {
 
 
 
+                
+
+                if (isGamePaused) {
 
 
-                if (!isGamePaused) {
+
+
+                } else {
+                    timeLeft -= 1000 / 60;
+                    if (timeLeft <= 0) {
+                        player.killPlayer();//LOL
+                    }
 
                     for (int y = 0; y < gridHeight; ++y) {
                         for (int x = 0; x < gridWidth; ++x) {
@@ -184,9 +190,6 @@ public class GameSession {
 
 
 
-    }
-    public GraphicsContext getGraphicsContext() {
-        return this.graphicsContext; // Return the stored GraphicsContext
     }
 
     //returns a specific tile from the gridTileMap
@@ -254,15 +257,18 @@ public class GameSession {
    
 
     // function to be fired when the menu close button is clicked
-    public void onMenuClosed() {
-        this.isGamePaused = false;
+    public void resume() {
+        setIsPaused(false);
     }
 
 
     public void endGame() {
         this.cc.removeLayer(this.cl);
+    }
 
-        
+    public void exitGame() {
+        endGame();
+        game.endGame();
     }
 
 
@@ -318,8 +324,7 @@ public class GameSession {
         this.gridTileMap[playerY][playerX] = this.player;
 
 
-        this.startTimeStamp = System.currentTimeMillis();
-        this.maxTimeToCompleteLevel = 60*60*1000;
+        this.timeLeft = 60*60*1000;
 
     }
 
@@ -345,7 +350,7 @@ public class GameSession {
     private void keyDown(KeyCode key) {
         switch (key) {
             case ESCAPE:
-                isGamePaused = !isGamePaused;
+                setIsPaused(!isGamePaused);
                 break;
 
             case UP:
@@ -436,8 +441,8 @@ public class GameSession {
         gc.setFont(new Font("Arial", Main.WINDOW_HEIGHT * .05));
 
         
-        long timeDiff = startTimeStamp + maxTimeToCompleteLevel - System.currentTimeMillis();
-        int secondsLeft = (int) (timeDiff / 1000);
+        // long timeDiff = startTimeStamp + maxTimeToCompleteLevel - System.currentTimeMillis();
+        int secondsLeft = (int) (timeLeft / 1000);
 
         //draw the timer
         gc.setTextAlign(TextAlignment.LEFT);
@@ -458,6 +463,16 @@ public class GameSession {
 
 
 
+    private void setIsPaused(boolean isPaused) {
+        if (isPaused ^ isGamePaused) {
+            isGamePaused = isPaused;
 
+            if (isGamePaused) {
+                gamePauseMenu.show();
+            } else {
+                gamePauseMenu.hide();
+            }
+        }
+    }
 
 }

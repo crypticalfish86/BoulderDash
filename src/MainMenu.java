@@ -119,12 +119,12 @@ public class MainMenu {
 
     private boolean isMouseOnPlay(double mouseX, double mouseY) {
         //check for play button
-        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PLAY, .5, .8, .1);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .8, .1);
     }
 
     private boolean isMouseOnPlay2(double mouseX, double mouseY) {
         //check for play button
-        return UIHelper.checkIsXYInBox(mouseX, mouseY, IMAGE_PLAY, .5, .5, .1);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .5, .1);
     }
 
     public void hide() {
