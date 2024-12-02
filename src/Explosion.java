@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 public class Explosion extends Tile {
 
     private int ticksAlive;
-    private final int ticksToConvert = 10;
+    private final int ticksToConvert = 20;
 
     private Boolean replaceWithDiamond;
     

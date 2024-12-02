@@ -13,7 +13,7 @@ public class FireFly extends FlyingEnemy{
         this.amoebaCanSpreadToThisTile = true;
     }
     public void interact(Tile tile){
-        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y + 1) {
+        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, false);
         }
     }
