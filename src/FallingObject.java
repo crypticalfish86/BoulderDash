@@ -1,53 +1,55 @@
-public abstract class FallingObject extends Tile{
-    protected boolean isFalling;
-    
-    private static final String LEFT_DIRECTION = "Left";
-    private static final String RIGHT_DIRECTION = "Right";
-
-
+public abstract class FallingObject extends Tile {
     
 
-    public FallingObject(GameSession gameSession, int x, int y, TileType TileType, long operationInterval){
+
+    private static final int DELAY_FALL = 8;
+    private static final int DELAY_ROLL = 13;
+
+    protected int fallReload = 0;
+    private boolean isFalling = false;
+
+
+
+
+
+    public FallingObject(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);
-        isFalling = false;
     }
 
     /**
      * Causes the object to fall downwards and
      * replaces its currentTile with a {@link PathWall}
-     * @param XPosition the current x co-ordinate of the object
-     * @param YPosition the current y co-ordinate of the object
+     * @param lowerTile the tile below the boulder
      */
-    protected void fall(int XPosition, int YPosition){
-        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition, getOperationInterval());
-        Tile outgoingTile = gameSession.getTileFromGrid(XPosition,YPosition + 1);
-        gameSession.updateTilePositions(pathWall, this, outgoingTile);
+    private boolean fall(Tile lowerTile) {
+        
+        int thisY = this.getYPosition();
+        lowerTile.interact(this); //somebody decided to not make interact to return a boolean so i have to check :(
+        
+        if (thisY != getYPosition()) {
+            fallReload = DELAY_FALL;
+            isFalling = true;
+            return true;
+        } else {
+            isFalling = false;
+            return false;
+        }
     }
 
     /**
      * Causes the object to roll in a specified direction and
      * replaces its currentTile with a {@link PathWall}
-     * @param XPosition the current x co-ordinate of the object
-     * @param YPosition the current y co-ordinate of the object
-     * @param direction the direction the object should roll ("right" or "left")
-     * @throws IllegalArgumentException if the provided direction is invalid
+     * @param nextTile the adjacent tile
+     * @param nextTileBelow the adjacent tile's lower tile
      */
-    protected void roll(int XPosition, int YPosition, String direction){
-        int offset;
-        switch(direction){
-            case "Right":
-                offset = 1;
-                break;
-            case "Left":
-                offset = -1;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid direction: " + direction + "Allowed values are 'Left' or 'Right ");
-        }
+    protected void roll(Tile nextTile, Tile nextTileBelow){
 
-        PathWall pathWall = new PathWall(gameSession, XPosition, YPosition, getOperationInterval());
-        Tile outgoingTile = gameSession.getTileFromGrid(XPosition + offset, YPosition);
-        gameSession.updateTilePositions(pathWall, this,outgoingTile);
+        
+        nextTile.interact(this);
+        nextTileBelow.interact(this);
+        isFalling = true;
+
+        fallReload = DELAY_ROLL;
     }
 
 
@@ -57,36 +59,51 @@ public abstract class FallingObject extends Tile{
      * 
      */
     protected void updatePhysics() {
+
+        if (fallReload > 0) { fallReload--; return; }
+
+        
         int xPosition = getXPosition();
         int yPosition = getYPosition();
 
-        if (yPosition != 0) { //Check boulder is above the bottom layer of the grid
-            Tile tileBelow = gameSession.getTileFromGrid(xPosition,yPosition + 1);
+        //no operations, if the boulder is on the bottom of the grid
+        if (yPosition >= gameSession.getGridHeight() - 1) { return; }
 
-            //Check if boulder should fall
-            if (tileBelow.getTileType() == TileType.PATH) {
-                this.fall(xPosition, yPosition);
-            }
+
+
+
+        Tile tileBelow = gameSession.getTileFromGrid(xPosition, yPosition + 1);
+        //boulder will try to interact with tiles below if it has momentum, or if it has 
+        if (tileBelow.tileType == TileType.PATH || isFalling) {
+            
+
+            if (fall(tileBelow)) { return; }
         }
 
-        if (xPosition != 0 && yPosition != 0) { //Check boulder not on left edge or bottom of grid
-            Tile tileToLeft = gameSession.getTileFromGrid(xPosition - 1, yPosition);
+
+
+
+        //roll left
+        if (xPosition > 0) {
+            Tile tileLeft = gameSession.getTileFromGrid(xPosition - 1, yPosition);
             Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition + 1);
 
             //Check if boulder should roll left
-            if (tileToLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
-                this.roll(xPosition, yPosition, LEFT_DIRECTION);
+            if (tileLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
+                this.roll(tileLeft, tileLeftBelow);
             }
         }
 
 
-        if (xPosition < (gameSession.getGridWidth() - 1) && yPosition != 0) {//Check boulder not on left edge or bottom of grid
-            Tile tileToRight = gameSession.getTileFromGrid(xPosition + 1, yPosition);
+
+        //roll right
+        if (xPosition < gameSession.getGridWidth() - 1) {
+            Tile tileRight = gameSession.getTileFromGrid(xPosition + 1, yPosition);
             Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition + 1);
 
             //Check if boulder should roll right
-            if (tileToRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
-                this.roll(xPosition, yPosition, RIGHT_DIRECTION);
+            if (tileRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
+                this.roll(tileRight, tileRightBelow);
             }
         }
     }

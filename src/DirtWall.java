@@ -14,14 +14,17 @@ public class DirtWall extends Wall {
     @Override
     public void interact(Tile tile) {
         
-        PathWall pathWall = new PathWall(
-            gameSession,
-            tile.getXPosition(),
-            tile.getYPosition(),
-            operationInterval
-        );
         
-        gameSession.updateTilePositions(pathWall, tile, this);
+        if (tile.tileType == TileType.PLAYER) {
+            PathWall pathWall = new PathWall(
+                gameSession,
+                tile.getXPosition(),
+                tile.getYPosition(),
+                operationInterval
+            );
+            
+            gameSession.updateTilePositions(pathWall, tile, this);
+        }
     }
 
     // Update logic for dirt walls
