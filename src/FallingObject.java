@@ -1,10 +1,12 @@
 public abstract class FallingObject extends Tile{
     protected boolean isFalling;
+    protected boolean isRolling;
     
     private static final String LEFT_DIRECTION = "Left";
     private static final String RIGHT_DIRECTION = "Right";
 
     protected int ticksAlive;
+
 
 
     
@@ -51,6 +53,7 @@ public abstract class FallingObject extends Tile{
         PathWall pathWall = new PathWall(gameSession, XPosition, YPosition, getOperationInterval());
         Tile outgoingTile = gameSession.getTileFromGrid(XPosition + offset, YPosition);
         gameSession.updateTilePositions(pathWall, this,outgoingTile);
+        isRolling = false;
     }
 
 
@@ -91,9 +94,13 @@ public abstract class FallingObject extends Tile{
             Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition + 1);
 
             //Check if object should roll left
-            if (tileToLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
-                this.roll(xPosition, yPosition, LEFT_DIRECTION);
+            if(!isRolling){
+                if (tileToLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
+                    this.roll(xPosition, yPosition, LEFT_DIRECTION);
+                    isRolling = true;
+                }
             }
+
         }
 
 
@@ -102,9 +109,12 @@ public abstract class FallingObject extends Tile{
             Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition + 1);
 
             //Check if object should roll right
-            if (tileToRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
-                this.roll(xPosition, yPosition, RIGHT_DIRECTION);
+            if(!isRolling){
+                if (tileToRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
+                    this.roll(xPosition, yPosition, RIGHT_DIRECTION);
+                }
             }
+
         }
     }
 }
