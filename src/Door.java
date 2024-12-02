@@ -20,29 +20,17 @@ public class Door extends Wall {
     // Interact method for the door
     @Override
     public void interact(Tile inputTileObject) {
-        // if (inputTileObject instanceof Player) {
-        //     Player player = (Player) inputTileObject;
-
-        //     // Check if the player has the correct key
-        //     if (playerHasCorrectKey(player)) { 
-        //         System.out.println("Door unlocked with the correct key!");
-        //         unlockDoor();
-        //     } else {
-        //         System.out.println("Door cannot be opened without the correct key.");
-        //     }
-        // }
-
-
-        //TODO:
-        // use if (gsd.tryConsumeKey(char doorColour)) {
-        //
-        //}
-    }
-
-    // Check if the player has the correct key
-    private boolean playerHasCorrectKey(Player player) {
-        // return gameSession.getCurrentSessionData().getInventoryItem(String.format("%c%c", doorColour, 'k'));
-        return false;
+        if (inputTileObject.getTileType() == TileType.PLAYER) {
+            // Use GameSessionData to check if the player has the correct key
+            if (gameSession.getCurrentSessionData().tryConsumeKey(doorColour)) {
+                System.out.println("Door unlocked with the correct key: " + doorColour);
+                unlockDoor(); // Unlock the door
+            } else {
+                System.out.println("Door cannot be opened without the correct key: " + doorColour);
+            }
+        } else {
+            System.out.println("Only the player can interact with the door.");
+        }
     }
 
     // Logic to unlock or remove the door
@@ -61,7 +49,7 @@ public class Door extends Wall {
         draw(gc, img, 0, 0); // Draw the door image
     }
 
-    public String returnStringTileRepresentation(){
+    public String returnStringTileRepresentation() {
         return Character.toString(this.doorColour);
     }
 }
