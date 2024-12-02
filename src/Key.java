@@ -45,4 +45,3 @@ public class Key extends Wall {
         return Character.toString(this.keyColour);
     }
 }
-
