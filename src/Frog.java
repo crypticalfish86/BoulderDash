@@ -1,24 +1,26 @@
+import java.lang.annotation.ElementType;
+import java.util.ArrayList;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import java.util.ArrayList;
-import java.util.Random;
-
 
 public class Frog extends Enemy {
 
-    private static final String RIGHT_MOVE = "Right";
-    private static final String LEFT_MOVE = "Left";
-    private static final String UP_MOVE = "Up";
-    private static final String DOWN_MOVE = "Down";
-    private static final String NO_MOVE = "NoMove";
 
 
 
     public static final Image img = new Image("file:Assets/Images/Frog.png"); // Placeholder for the image
 
+    private ArrayList<int[]> path = new ArrayList<>();
+    private int cooldown = 0;
+    private int pathRefresh = 0;
+    
 
-    public Frog(GameSession gameSession, int x, int y, long operationInterval){
-        super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval);
+    private static final int COOLDOWN_MOVE = 15;
+    private static final int PATH_REFRESH_RATE = 120;
+
+    public Frog(GameSession gameSession, int x, int y){
+        super(gameSession, x, y, TileType.MOVING_ENEMY, 0);
         this.amoebaCanSpreadToThisTile = true;
     }
 
@@ -31,28 +33,50 @@ public class Frog extends Enemy {
     }
 
     public void updateTile(long currentTimeInMilliseconds) {
-        String nextMove = this.calculateNextMove();
-
-        if (nextMove.equals(RIGHT_MOVE)){
-            Tile tileToInteractWith = gameSession.getTileFromGrid(this.x + 1, this.y);
-            tileToInteractWith.interact(this);
-        }else if (nextMove.equals(LEFT_MOVE)){
-            Tile tileToInteractWith = gameSession.getTileFromGrid(this.x - 1, this.y);
-            tileToInteractWith.interact(this);
-        }else if (nextMove.equals(UP_MOVE)){
-            Tile tileToInteractWith = gameSession.getTileFromGrid(this.x, this.y + 1);
-            tileToInteractWith.interact(this);
-        }else if (nextMove.equals(DOWN_MOVE)){
-            Tile tileToInteractWith = gameSession.getTileFromGrid(this.x, this.y - 1);
-            tileToInteractWith.interact(this);
-        }else if (nextMove.equals(NO_MOVE)){
-            //Frog will not move
-        }else{
-            throw new IllegalArgumentException("Invalid move" + nextMove);
+        
+        //checks if the frog should move
+        if (pathRefresh > 0) {
+            pathRefresh--;
         }
 
+        if (cooldown > 0) { cooldown--; return; }
+        cooldown = COOLDOWN_MOVE;
 
+
+
+        //moves the frog if there is a path, if not, generate one
+        if (pathRefresh == 0 || path.size() == 0) { refreshPath(); }
+
+        if (path.size() == 0) { return; }
+
+
+        int[] pathTarget = path.remove(0);
+
+        if (!moveTo(pathTarget[0], pathTarget[1])) {
+            refreshPath();
+        }
     }
+
+
+
+
+
+    /**
+     * Refreshes the path of the frog
+     */
+    private void refreshPath() {
+        pathRefresh = PATH_REFRESH_RATE;
+        
+        PathFinder<Tile> pf = new PathFinder<>(gameSession.getGridTileMap(), gameSession.getGridWidth(), gameSession.getGridHeight());
+        System.out.println("recalculating path");
+        this.path = pf.computeGridFill(new int[] {this.x, this.y}, new int[] {gameSession.getPlayerX(), gameSession.getPlayerY()}, Tile -> {
+            return Tile.tileType == TileType.PATH || Tile.tileType == TileType.PLAYER;
+        });
+    }
+
+
+
+
 
 
     @Override
@@ -60,71 +84,13 @@ public class Frog extends Enemy {
         draw(gc, img, 0, 0);
     }
 
-    private String calculateNextMove() {
-        Tile[][] grid = gameSession.getGridTileMap();
-        int gridHeight = gameSession.getGridHeight();
-        int gridWidth = gameSession.getGridWidth();
-        int playerX = gameSession.getPlayerX();
-        int playerY = gameSession.getPlayerY();
-
-        int[][] navigableGrid = new int[gridWidth][gridHeight];
-
-        //initialise a grid for pathfinding where 0 means the frog
-        // can move to that tile and 1 means it can't
-        for(int i = 0; i < gridWidth; i++){
-            for(int j = 0; j < gridHeight; j++){
-                if(grid[i][j].getTileType() == TileType.PATH){
-                    navigableGrid[i][j] = 0;
-                }else{
-                    navigableGrid[i][j] = 1;
-                }
-            }
-        }
-
-        //TODO Pathfinding on navigable grid to find next move
-
-        return generateRandomMove(); //Generate a random move if no path to player
-    }
+    
 
 
 
-    private String generateRandomMove() {
-        int gridHeight = gameSession.getGridHeight();
-        int gridWidth = gameSession.getGridWidth();
-        Tile[][] grid = gameSession.getGridTileMap();
+    
 
-        ArrayList<String> validMoves = new ArrayList<>();
-
-        //Find valid moves frog can make
-        if (isInBounds(this.x - 1, this.y) && grid[this.x - 1][this.y].getTileType() == TileType.PATH) {
-            validMoves.add(LEFT_MOVE);
-        }else if (isInBounds(this.x + 1, this.y) && grid[this.x + 1][this.y].getTileType() == TileType.PATH) {
-            validMoves.add(RIGHT_MOVE);
-        }else if (isInBounds(this.x, this.y + 1) && grid[this.x][this.y + 1].getTileType() == TileType.PATH) {
-            validMoves.add(UP_MOVE);
-        }if (isInBounds(this.x, this.y - 1) && grid[this.x][this.y - 1].getTileType() == TileType.PATH) {
-            validMoves.add(DOWN_MOVE);
-        }
-
-        //Randomly pick a move from the list of valid moves or return 'No_Move' if the frog can't move
-        int randomDirection = new Random().nextInt(validMoves.size() - 1);
-        if(validMoves.size() == 0) {
-            return NO_MOVE;
-        }else{
-            return validMoves.get(randomDirection);
-        }
-    }
-
-    private Boolean isInBounds(int x, int y) {
-        int gridHeight = gameSession.getGridHeight();
-        int gridWidth = gameSession.getGridWidth();
-
-        if (x >= 0 && x < gridWidth - 1 && y >= 0 && y < gridHeight - 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    
 }
 
 

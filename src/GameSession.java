@@ -250,7 +250,7 @@ public class GameSession {
         return this.gridHeight;
     }
 
-    public Tile[][] getGridTileMap(){return this.gridTileMap;}
+    public Tile[][] getGridTileMap(){ return this.gridTileMap; }
 
     public int getPlayerX() { return this.player.getXPosition(); }
     public int getPlayerY() { return this.player.getYPosition(); }
@@ -330,6 +330,12 @@ public class GameSession {
 
 
         this.timeLeft = 60*60*1000;
+
+
+        
+        int frogX = rand.nextInt(sizeX - 2) + 1;
+        int frogY = rand.nextInt(sizeY - 2) + 1;
+        this.gridTileMap[frogY][frogX] = new Frog(this, frogX, frogY);
 
     }
 
