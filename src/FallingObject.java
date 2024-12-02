@@ -4,12 +4,15 @@ public abstract class FallingObject extends Tile{
     private static final String LEFT_DIRECTION = "Left";
     private static final String RIGHT_DIRECTION = "Right";
 
+    protected int ticksAlive;
+
 
     
 
     public FallingObject(GameSession gameSession, int x, int y, TileType TileType, long operationInterval){
         super(gameSession, x, y, TileType, operationInterval);
         isFalling = false;
+        ticksAlive = 0;
     }
 
     /**
