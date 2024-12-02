@@ -49,7 +49,12 @@ public class Boulder extends FallingObject{
      * The number of milliseconds since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds) {
-        updatePhysics();
+        ticksAlive++;
+
+        if(ticksAlive % 20 == 0){
+            updatePhysics();
+        }
+
     }
 
 

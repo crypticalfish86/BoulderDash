@@ -1,14 +1,15 @@
-40 30; 
-180 11 2 7;
-180 0 0;
-0 0 0 0;
+2;40;30;
+0;180;180;
+0;11;
+2;7;
+0;0;0;0;
 T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T
 T P - - - - W D D D - - - D D D D D D D D D D @ D D - - - D D D D D D D D T A T
 T - - - D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D T
 T D D D D D D D D D D D D D D D D D D D D D D M D D D D * D D D D D D D D D D T
 T @ @ @ @ D D D D - - - - - - - D GD D D D D D D D D D D D D D D D D D D D D D T
 T D D D D D D D D - W W W W W - D D D D D D D D D @ @ D D D D D D D D D D D D T
-T D D D D D D D D - W D D D W - D D D D @ D D D D * D D D D D D D * D D D D D T
+T D YD D D D D D D - W D D D W - D D D D @ D D D D * D D D D D D D * D D D D D T
 T D D D @ D D D @ - W D GK D W - D D D D @ @ D D D D D D D D D D D D D D D D D T
 T D @ D D D D @ D - W D D D W - D D D @ D D D D D D * D D D D D D M D D D D D T
 T D D D D D D D D - W W D W W - D D D * D D D D D D D D D D D D D D D D D D D T
@@ -25,10 +26,10 @@ T D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D T
 T D * D D D D D D D - - D D D W W W W W W W W W W W W W W W W W W W W W W W W T
 T D D D D D D D D D D D D D D D @ @ @ @ @ @ @ @ D D D D D D W W D D D D D D D T
 T D M D D D D D D D D D D D D D * D D D D D D D D D - - - - - - D D D D D D D T
-T D D D D D D @ @ D D D D D D D D D @ D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D @ @ D D D D D D D D D @ D D D D D D D D D D D D D D YK D D D D D T
 T D D D D D D D D D D D D W W W W W W D D D D D D D D D D D D D D D D D D D D T
 T D D D D D D D D D D D D W * D D * W D D D D D D D D D D @ @ @ D D D D D D D T
-T D D D D D D D D D D D D W D D D D W D D D D D D D D D D D D D D D D D D D D T
+T D D D D D D D D D D D D W D D BD D W D D BK D D D D D D D D D D D D D D D D D T
 T @ @ D @ D @ D D D D D D D D D D E W D D D D D D D D D D D D D D D D D D D D T
 T D D D D D D D D D D D D W W W W W W D D D D D D D D D * D D D D D D D D D D T
 T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T

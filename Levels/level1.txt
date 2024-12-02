@@ -1,0 +1,37 @@
+1;40;30;
+0;180;180;
+0;11;
+0;0;
+0;0;0;0;
+T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T
+T P - - - RK - - - - - - - - - - - - - * - - - - - - - - - - - - - - - - - - RD T
+T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T - T T T T T T
+T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T * - T T T T T T
+T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T - T T T T T T
+T T - - - - - * - - - - - - - - - - - - - - - - - - - - - - - - - - T T T T T T
+T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T T T - T T T T T T T
+T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T T T - T T T T T T T
+T T T T T T - - - - - - - - - - - - - - - - - - - - - - T T T T - T T * T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T T T T - T T T T - T T - T T T T
+T T T T T T - T - - - - - - - - - - T - T T T T T T T - - YK - - - T T - - GD T T
+T T T T T T - T - T T T T T T T T - T - T T T T * T T T T T T T - T T - T T T T
+T T T T T T - T - T * T T T T T T - T - T T T T - T T T T T T T - T T - T T T T
+T T T T T T - T - T - - - - - - - - T - T T T T - T T T T T T T - T T - T T T T
+T T T T T T - T - T T T T T T T T T T - T T T T - T T T T T T T - T T - T T T T
+T T T T T T * T - - - - - - - - - - - - - - - - - T T T T T T T - T T - T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - - - - - * - - - T T T T
+T T T T T T GK T T T T T T T T T T T T - T T T T - T T - T T T T T - T T T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T - T T T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T - T T T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T - T T T T T T
+T T T T T T - - - - - - - - - - - T T - T T T T - T T - T T T T T - T T T T T T
+T T T T T T - T T T - T T T T T - T T - T T T T - T T - T T T T T - T T T T T T
+T T T T T T - T T T - T T T T T * T T - - BK - - - T T - - - - - - - T T T T T T
+T T T T T T - T T T - T T T T T - T T T T T - T T T T - T T T T T - T T T T T T
+T T - - - - * T T T - T T T T T - - - - - - - - - - - - T T T T T - T T T T T T
+T T - T T T T T T T - T T T T T T T T T T T - T T T T T T T T T T - YD T T T T T
+T T - - - - - - - - - - - - - - - - - - - - - T T T T T T T T T T - T T T T T T
+T T - T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T - T T T T T T
+T T BD T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T - T T T T T T
+T T T T T T T T T T T T T T T T T T T T T T - - - - - * - - - - - F - - - - E T
+T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T

@@ -1,16 +1,17 @@
-40;30;
-180;11;0;0;
-180;0;0;
+1;40;30;
+300;150;180;
+3;11;
+0;0;
 0;0;0;0;
 T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T
-T P - - - - - - - - - - - - - - - - - * - - - - - - - - - - - - - - - - - - - T
+T - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - T
 T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T T T T T T T T
-T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T * - T T T T T T
+T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T - - T T T T T T
 T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T - T T T T T T
-T T - - - - - * - - - - - - - - - - - - - - - - - - - - - - - - - - T T T T T T
+T T - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - T T T T T T
 T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T T T T T T T T
 T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T T T T T T T T
-T T T T T T - - - - - - - - - - - - - - - - - - - - - - T T T T T T T * T T T T
+T T T T T T - - - - - - - - - - - - - P - - - - - - - - T T T T T T T * T T T T
 T T T T T T - T T T T T T T T T T T T - T T T T T T T - T T T T T T T - T T T T
 T T T T T T - T - - - - - - - - - - T - T T T T T T T - - - - - - T T - T T T T
 T T T T T T - T - T T T T T T T T - T - T T T T * T T T T T T T - T T - T T T T

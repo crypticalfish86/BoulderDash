@@ -94,6 +94,7 @@ public abstract class FallingObject extends Tile {
                 this.roll(tileLeft, tileLeftBelow);
                 return;
             }
+
         }
 
 
