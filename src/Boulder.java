@@ -49,19 +49,14 @@ public class Boulder extends FallingObject{
      * The number of milliseconds since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds) {
-        ticksAlive++;
-
-        if(ticksAlive % 20 == 0){
-            updatePhysics();
-        }
-
+        updatePhysics();
     }
 
 
     /**
      * Pushes the boulder in a specified direction
      * @param player the player that is pushing the boulder
-     * @param direction the direction the boulder is being pushed
+     * @param isRight the direction the boulder is being pushed
      */
     private void pushBoulder(Tile player, boolean isRight) {
         System.out.println(isRight);

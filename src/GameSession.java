@@ -50,7 +50,7 @@ public class GameSession {
 
         this.currentSessionData = new GameSessionData(this,
             0, 0, 0, 0,
-            0, 0
+            0, 0, 0, 0
         );
         this.gamePauseMenu = new GamePauseMenu(this, cc);
         //TODO update this to account for loading games in the middle of play

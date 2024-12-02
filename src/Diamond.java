@@ -39,12 +39,8 @@ public class Diamond extends FallingObject{
      * @param currentTimeInMilliseconds
      * The number of milliseconds since 01/01/1970.
      */
-    public void updateTile(long currentTimeInMilliseconds){
-        ticksAlive++;
-        if(ticksAlive % 20 == 0){
-            updatePhysics();
-        }
-
+    public void updateTile(long currentTimeInMilliseconds) {
+        updatePhysics();
     }
 
 

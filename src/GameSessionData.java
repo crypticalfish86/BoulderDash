@@ -18,7 +18,7 @@ public class GameSessionData {
 
     GameSession currentGame;
 
-    public GameSessionData(GameSession gameSession, int timeAllowed, int diamondsRequired,int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score) {
+    public GameSessionData(GameSession gameSession, int timeAllowed, int diamondsRequired ,int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score) {
         this.gameSession = gameSession;
         this.timeAllowed = timeAllowed;
         this.diamondsRequired = diamondsRequired;
