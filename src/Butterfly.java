@@ -16,7 +16,7 @@ public class Butterfly extends FlyingEnemy{
     }
 
     public void interact(Tile tile){
-        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y + 1) {
+        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, true);
         }
     }
