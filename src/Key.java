@@ -18,17 +18,17 @@ public class Key extends Wall {
 
     @Override
     public void interact(Tile inputTileObject) {
-        // if (inputTileObject instanceof Player) {
-        //     Player player = (Player) inputTileObject;
-        //     System.out.println("Player picked up the key of color: " + keyColour);
-        //     // player.addKeyToInventory(this);
-        //     gameSession.getCurrentSessionData().getInventoryItem(String.format("%c%c", keyColour, + 'k'));
+        if (inputTileObject.getTileType() == TileType.PLAYER) {
+            System.out.println("Player picked up the key of color: " + keyColour);
 
-        //     // Remove the key from the game grid by setting it to null
-        //     gameSession.setTile(getYPosition(), getXPosition(), null);
-        // }
+            // Add the key to GameSessionData
+            gameSession.getCurrentSessionData().giveKey(keyColour);
 
-        //TODO: call the game session data's giveKey(char keyColour)
+            // Remove the key from the game grid by setting it to null
+            gameSession.setTile(getYPosition(), getXPosition(), null);
+        } else {
+            System.out.println("Only the player can pick up keys.");
+        }
     }
 
     @Override
@@ -41,7 +41,8 @@ public class Key extends Wall {
         draw(gc, img, 0, 0); // Draw the key image
     }
 
-    public String returnStringTileRepresentation(){
+    public String returnStringTileRepresentation() {
         return Character.toString(this.keyColour);
     }
 }
+
