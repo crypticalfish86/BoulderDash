@@ -93,6 +93,7 @@ public abstract class Enemy extends Tile {
      * @param tile the tile to check
      * @return true if the tile can be affected by explosion, false otherwise
      */
+
     private boolean isExplodable(Tile tile) {
         switch (tile.getTileType()) {
             case FALLING_OBJECT:
@@ -103,6 +104,7 @@ public abstract class Enemy extends Tile {
             case DIRT_WALL:
             case MAGIC_WALL:
             case NORMAL_WALL:
+            case PATH:
                 return true;
                 
             default:
