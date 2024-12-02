@@ -43,38 +43,40 @@ public class Game {
      * @param filePath file
      * @return if the file exists, and the game loads
     */
-    private boolean loadGame(String filePath) {
-
-        //locate the file
-        String gameData;
-
+    private boolean loadGame(CanvasCompositor cc, String filePath) {
         try {
+            // locate the file and load file content into the gamedata string
+            Scanner input = new Scanner(profileDeterminer(filePath));
+            while (input.hasNextLine()) {
 
-            //load file content into the gamedata string
-            Scanner s = new Scanner(new File(filePath)).useDelimiter("\\Z");
-            gameData = s.next();
-            s.close();
-
+            }
+            input.close();
         } catch (FileNotFoundException e) {
-
             System.err.println("File " + filePath + " not found.");
             return false;
         } catch (Exception e) {
-            
             System.err.println("Unknown Error.");
             return false;
         }
 
 
-
-
-
-
-
-
-
         // this.currentGamesession = new GameSession(this, gameData, gamePane);
         return true;
+    }
+
+    /**
+     * @param filePath file
+     * @return assigns the profileID and returns the appropiate profile file to read
+     */
+    private File profileDeterminer(String filePath) {
+        loadedPlayerProfileID = String.valueOf(filePath.charAt(filePath.length() - 1));
+        if (loadedPlayerProfileID.equals("1")) {
+            return profileSelector.getProfile1();
+        } else if (loadedPlayerProfileID.equals("2")) {
+            return profileSelector.getProfile2();
+        } else {
+            return profileSelector.getProfile3();
+        }
     }
 
     //TODO Add proper exceptions and errors like in loadgame
