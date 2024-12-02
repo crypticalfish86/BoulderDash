@@ -174,6 +174,7 @@ public class GameSession {
         this.cc = cc;
     }
 
+
     /*
         method used to interpret the gameData (from a levelFileFormat file) fills the gridTileMap, initiates timer,
         determine the
@@ -195,6 +196,96 @@ public class GameSession {
         // Line 4: AmeobaSpreadRate, AmeobaSizeLimit
         // Line 5: RedKey, BlueKey, YellowKey, GreenKey
         // Line 6+: Actual level
+    }
+
+    public String buildSaveString(){
+        String saveString = "";
+
+        int[] data = this.currentSessionData.returnAllGameSessionData();
+        //TODO figure out where "current level" is stored, also clean up inline comments
+        saveString += "1;"; //change this when you figure it out
+        saveString += Integer.toString(this.gridHeight) + ";" + Integer.toString(this.gridWidth) + ";"; //height and width
+        saveString += Integer.toString(data[0]) + ";" + Integer.toString(data[1]) + ";" + Integer.toString(data[2]); //Score, timeleft, time allowed
+        saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4]) + ";";//diamondCount and diamondsRequired
+        saveString += "4;4;"; //TODO add amoebaspreadrate and ameoba max size somewhere in gamesession
+        saveString += Integer.toString(data[5]) + ";" + Integer.toString(data[6]) + ";" + Integer.toString(data[7]) + ";" + Integer.toString(data[8]);//keys
+
+        for (int i = 0; i < gridTileMap.length; i++){
+            for (int ii = 0; i < gridTileMap[i].length; ii++){
+                saveString += convertTileToSaveString(gridTileMap[i][ii]) + " ";
+            }
+            saveString += "\n";
+        }
+        return saveString;
+    }
+
+    private String convertTileToSaveString(Tile tile){
+        if (tile instanceof PathWall){
+            return "-";
+        }
+        else if (tile instanceof ExitWall){
+            return "E";
+        }
+        else if (tile instanceof NormalWall){
+            return "W";
+        }
+        else if (tile instanceof TitaniumWall){
+            return "T";
+        }
+        else if (tile instanceof MagicWall) {
+            return "M";
+        }
+        else if (tile instanceof DirtWall){
+            return "D";
+        }
+        else if (tile instanceof Diamond){
+            return "*";
+        }
+        else if (tile instanceof Boulder){
+            return "@";
+        }
+        else if (tile instanceof Key && ((Key) tile).getKeyColour() == 'R'){//TODO ensure these key colours are correct
+            return "RK";
+        }
+        else if (tile instanceof Key && ((Key) tile).getKeyColour() == 'B'){//TODO ensure these key colours are correct
+            return "BK";
+        }
+        else if (tile instanceof Key && ((Key) tile).getKeyColour() == 'G'){//TODO ensure these key colours are correct
+            return "GK";
+        }
+        else if (tile instanceof Key && ((Key) tile).getKeyColour() == 'Y'){//TODO ensure these key colours are correct
+            return "YK";
+        }
+        else if (tile instanceof Door && ((Door) tile).getDoorColour() == 'R'){
+            return "RD";
+        }
+        else if (tile instanceof Door && ((Door) tile).getDoorColour() == 'B'){
+            return "BD";
+        }
+        else if (tile instanceof Door && ((Door) tile).getDoorColour() == 'G'){
+            return "GD";
+        }
+        else if (tile instanceof Door && ((Door) tile).getDoorColour() == 'Y'){
+            return "YD";
+        }
+        else if (tile instanceof Player){
+            return "P";
+        }
+        else if (tile instanceof Butterfly){ //TODO determine how we're doing butterfly with omar
+            return "BF";
+        }
+        else if (tile instanceof FireFly){ //TODO determine how we're doing firefly with omar
+            return "FF";
+        }
+        else if (tile instanceof Frog){
+            return "F";
+        }
+        else if (tile instanceof AmoebaTile){
+            return "A";
+        }
+        else {
+            return "ERROR";
+        }
     }
 
     //returns a specific tile from the gridTileMap

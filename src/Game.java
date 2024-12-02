@@ -1,5 +1,7 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -75,7 +77,21 @@ public class Game {
         return true;
     }
 
+    //TODO Add proper exceptions and errors like in loadgame
+    private boolean saveGame() throws IOException { //TODO add proper exception throwing
+        if(this.currentGamesession == null){
+            return false;
+        }
+        //Call "buildSaveString in GameSession and then write the file to the correct profile
+        String saveString = this.currentGamesession.buildSaveString();
 
+        String filepath = "..\\Levels" + this.loadedPlayerProfileID;
+
+
+        FileWriter fileToSaveTo = new FileWriter(filepath);
+        fileToSaveTo.write(saveString);
+        return true;
+    }
 
 
 
