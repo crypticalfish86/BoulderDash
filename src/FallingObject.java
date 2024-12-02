@@ -90,7 +90,8 @@ public abstract class FallingObject extends Tile {
             Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition + 1);
 
             //Check if boulder should roll left
-            if (tileLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
+            if (tileLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH
+            && onCurvedTile(this.x,this.y)) {
                 this.roll(tileLeft, tileLeftBelow);
                 return;
             }
@@ -105,10 +106,26 @@ public abstract class FallingObject extends Tile {
             Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition + 1);
 
             //Check if boulder should roll right
-            if (tileRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
+            if (tileRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH
+                    && onCurvedTile(this.x,this.y)){
                 this.roll(tileRight, tileRightBelow);
                 return;
             }
+        }
+    }
+
+    private boolean onCurvedTile(int x, int y) {
+        Tile tileBelow = gameSession.getTileFromGrid(x,y + 1);
+        if(tileBelow.getTileType() == TileType.FALLING_OBJECT){
+            return true;
+        }else if(tileBelow.getTileType() == TileType.STATIC_TILE){
+            return true;
+        }else if(tileBelow.getTileType() == TileType.DIRT_WALL) {
+            return true;
+        }else if(tileBelow.getTileType() == TileType.NORMAL_WALL) {
+            return true;
+        }else{
+            return false;
         }
     }
 }

@@ -174,6 +174,7 @@ public class GameSession {
         this.cc = cc;
     }
 
+
     /*
         method used to interpret the gameData (from a levelFileFormat file) fills the gridTileMap, initiates timer,
         determine the
@@ -196,6 +197,28 @@ public class GameSession {
         // Line 5: RedKey, BlueKey, YellowKey, GreenKey
         // Line 6+: Actual level
     }
+
+    public String buildSaveString(){
+        String saveString = "";
+
+        int[] data = this.currentSessionData.returnAllGameSessionData();
+        //TODO figure out where "current level" is stored, also clean up inline comments
+        saveString += "1;"; //change this when you figure it out
+        saveString += Integer.toString(this.gridHeight) + ";" + Integer.toString(this.gridWidth) + ";"; //height and width
+        saveString += Integer.toString(data[0]) + ";" + Integer.toString(data[1]) + ";" + Integer.toString(data[2]); //Score, timeleft, time allowed
+        saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4]) + ";";//diamondCount and diamondsRequired
+        saveString += "4;4;"; //TODO add amoebaspreadrate and ameoba max size somewhere in gamesession
+        saveString += Integer.toString(data[5]) + ";" + Integer.toString(data[6]) + ";" + Integer.toString(data[7]) + ";" + Integer.toString(data[8]);//keys
+
+        for (int i = 0; i < gridTileMap.length; i++){
+            for (int ii = 0; i < gridTileMap[i].length; ii++){
+                saveString += gridTileMap[i][ii].returnStringTileRepresentation() + " ";
+            }
+            saveString += "\n";
+        }
+        return saveString;
+    }
+
 
     //returns a specific tile from the gridTileMap
     public Tile getTileFromGrid(int x, int y) {

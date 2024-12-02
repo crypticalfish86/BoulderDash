@@ -27,7 +27,7 @@ public class Frog extends Enemy {
 
     public void interact(Tile tile) {
 
-        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y + 1) {
+        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, false);
         }
     }
@@ -88,9 +88,10 @@ public class Frog extends Enemy {
 
 
 
-    
-
-    
+    public String returnStringTileRepresentation(){
+        return "F";
+    }
+>>>>>>> c4586193427f1233401d7211f6194de20b4b532a
 }
 
 

@@ -60,4 +60,8 @@ public class Door extends Wall {
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Draw the door image
     }
+
+    public String returnStringTileRepresentation(){
+        return Character.toString(this.doorColour);
+    }
 }

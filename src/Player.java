@@ -188,4 +188,8 @@ public class Player extends Tile {
     // public List<Key> getInventory() {
     //     return inventory;
     // }
+
+    public String returnStringTileRepresentation(){
+        return "P";
+    }
 }

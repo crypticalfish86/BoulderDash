@@ -59,4 +59,8 @@ public class ExitWall extends Wall {
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Draw the exit wall image
     }
+
+    public String returnStringTileRepresentation(){
+        return "E";
+    }
 }

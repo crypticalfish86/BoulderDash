@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 public class Explosion extends Tile {
 
     private int ticksAlive;
-    private final int ticksToConvert = 10;
+    private final int ticksToConvert = 20;
 
     private Boolean replaceWithDiamond;
     
@@ -45,5 +45,9 @@ public class Explosion extends Tile {
             PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
             gameSession.setTile(this.y,this.x, pathWall);
         }
+    }
+
+    public String returnStringTileRepresentation(){
+        return "EX"; //TODO make sure we code for this in loading, inform armaan
     }
 }

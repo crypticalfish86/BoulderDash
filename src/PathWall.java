@@ -37,4 +37,8 @@ public class PathWall extends Wall {
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Draw the PathWall image at its current position
     }
+
+    public String returnStringTileRepresentation(){
+        return "-";
+    }
 }

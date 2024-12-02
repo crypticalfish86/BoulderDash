@@ -25,4 +25,7 @@ public class NormalWall extends Wall {
         draw(gc, img, 0, 0);
     }
 
+    public String returnStringTileRepresentation(){
+        return "W";
+    }
 }

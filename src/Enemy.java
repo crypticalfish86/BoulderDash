@@ -21,14 +21,14 @@ public abstract class Enemy extends Tile {
         int endY;
 
         //Check if enemy at bottom layer of grid
-        if(yPosition == 0) {
+        if(yPosition == gameSession.getGridHeight() - 1) {
             startY = yPosition;
         }else{
             startY = yPosition - 1;
         }
 
         //Check if enemy at top layer of grid
-        if(yPosition == gameSession.getGridHeight() - 1) {
+        if(yPosition == 0) {
             endY = yPosition;
         }else{
             endY = yPosition + 1;
@@ -49,16 +49,16 @@ public abstract class Enemy extends Tile {
         }
 
         //Convert each tile in explosion radius to an explosion if it can be exploded
-        for(int i = startX; i <= endX; i++){
-            for(int j = startY; j <= endY; j++){
+        for(int i = startX; i < endX + 1; i++){
+            for(int j = startY; j < endY + 1; j++){
                 if ((isExplodable(gameSession.getTileFromGrid(i,j)))){ //Check if tile can explode
                     Explosion explosion = new Explosion(gameSession, i, j, operationInterval, replaceWithDiamond);
-                    gameSession.setTile(i, j, explosion);
+                    gameSession.setTile(j, i, explosion);
                 }
 
                 if((gameSession.getTileFromGrid(i,j).getTileType() == TileType.PLAYER)){
                     Explosion explosion = new Explosion(gameSession, i, j, operationInterval, replaceWithDiamond);
-                    gameSession.setTile(i, j, explosion);
+                    gameSession.setTile(j, i, explosion);
                     //gameSession.callKillPlayer();
                 }
             }

@@ -16,7 +16,7 @@ public class Butterfly extends FlyingEnemy{
     }
 
     public void interact(Tile tile){
-        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y + 1) {
+        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, true);
         }
     }
@@ -28,5 +28,9 @@ public class Butterfly extends FlyingEnemy{
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
+    }
+
+    public String returnStringTileRepresentation(){
+        return "BF";//TODO discuss how we're doing this with omar (the butterfly direction)
     }
 }

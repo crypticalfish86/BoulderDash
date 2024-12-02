@@ -54,4 +54,8 @@ public class Diamond extends FallingObject{
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
+
+    public String returnStringTileRepresentation(){
+        return "*";
+    }
 }

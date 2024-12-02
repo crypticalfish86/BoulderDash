@@ -43,6 +43,7 @@ public abstract class Tile {
     }
     public abstract void interact(Tile Tile);
     public abstract void updateTile(long currentTimeInMilliseconds);
+    public abstract String returnStringTileRepresentation();
 
     //method used for drawing the icon
     protected void draw(GraphicsContext gc, Image img, int xOffset, int yOffset) {

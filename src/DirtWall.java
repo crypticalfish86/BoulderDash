@@ -38,4 +38,8 @@ public class DirtWall extends Wall {
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Render the dirt wall
     }
+
+    public String returnStringTileRepresentation(){
+        return "D";
+    }
 }
