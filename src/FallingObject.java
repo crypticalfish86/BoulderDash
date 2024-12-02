@@ -94,7 +94,7 @@ public abstract class FallingObject extends Tile{
             Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition + 1);
 
             //Check if object should roll left
-            if(!isRolling){
+            if(!isRolling && !isFalling){
                 if (tileToLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
                     this.roll(xPosition, yPosition, LEFT_DIRECTION);
                     isRolling = true;
@@ -109,7 +109,7 @@ public abstract class FallingObject extends Tile{
             Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition + 1);
 
             //Check if object should roll right
-            if(!isRolling){
+            if(!isRolling && !isFalling){
                 if (tileToRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
                     this.roll(xPosition, yPosition, RIGHT_DIRECTION);
                 }
