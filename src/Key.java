@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 public class Key extends Wall {
     private char keyColour; // Key's color or unique identifier
 
-    public static final Image img = new Image("file:Assets/Images/Key.png"); // Replace with the actual image path
+    public static final Image img = new Image("file:Assets/Images/RedKey.png"); // Replace with the actual image path
 
     public Key(GameSession gameSession, int x, int y, long operationInterval, char keyColour) {
         super(gameSession, x, y, TileType.KEY, operationInterval);

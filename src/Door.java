@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 
 public class Door extends Wall {
 
-    public static final Image img = new Image("file:Assets/Images/Door.png"); // Placeholder for the image
+    public static final Image img = new Image("file:Assets/Images/RedDoor.png"); // Placeholder for the image
     private char doorColour;
 
     public Door(GameSession gameSession, int x, int y, long operationInterval, char doorColour) {

@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 public class PathWall extends Wall {
 
     // Image representing the PathWall (replace with the actual image path)
-    public static final Image img = new Image("file:Assets/Images/PathWall.png"); // Path to the PathWall image
+    public static final Image img = new Image("file:Assets/Images/PathVers2.png"); // Path to the PathWall image
 
     // Constructor
     public PathWall(GameSession gameSession, int x, int y, long operationInterval) {
