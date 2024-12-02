@@ -95,7 +95,8 @@ public abstract class FallingObject extends Tile{
 
             //Check if object should roll left
             if(!isRolling && !isFalling){
-                if (tileToLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
+                if (tileToLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH
+                && onCurvedTile(xPosition, yPosition)) {
                     this.roll(xPosition, yPosition, LEFT_DIRECTION);
                     isRolling = true;
                 }
@@ -110,11 +111,28 @@ public abstract class FallingObject extends Tile{
 
             //Check if object should roll right
             if(!isRolling && !isFalling){
-                if (tileToRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
+                if (tileToRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH
+                && onCurvedTile(xPosition, yPosition)) {
                     this.roll(xPosition, yPosition, RIGHT_DIRECTION);
                 }
             }
 
+        }
+    }
+
+    private boolean onCurvedTile(int x, int y) {
+        Tile tileBelow = gameSession.getTileFromGrid(x,y + 1);
+
+        if(tileBelow.getTileType() == TileType.FALLING_OBJECT){
+            return true;
+        }else if(tileBelow.getTileType() == TileType.STATIC_TILE){
+            return true;
+        }else if(tileBelow.getTileType() == TileType.DIRT_WALL) {
+            return true;
+        }else if(tileBelow.getTileType() == TileType.NORMAL_WALL) {
+            return true;
+        }else{
+            return false;
         }
     }
 }
