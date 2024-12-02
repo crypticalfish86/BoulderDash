@@ -37,6 +37,9 @@ public class GamePauseMenu {
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
 
+
+
+
             @Override
             public boolean onMouseDown(double x, double y, boolean hasConsumed) {
                 
@@ -50,6 +53,10 @@ public class GamePauseMenu {
 
                 return isMouseAtBackground(x, y);
             }
+
+
+
+
 
             @Override
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
@@ -71,14 +78,15 @@ public class GamePauseMenu {
                 return isMouseAtBackground(x, y);
             }
 
+
+
+
             @Override
             public boolean onMouseMove(double x, double y, boolean hasConsumed) {
-                
-
-
-
                 return isMouseAtBackground(x, y);
             }
+
+
 
 
 
@@ -104,27 +112,33 @@ public class GamePauseMenu {
                 UIHelper.drawImageRelativeYY(gc, IMAGE_SAVE, .5, .44, .05);
                 UIHelper.drawImageRelativeYY(gc, IMAGE_LOAD, .5, .56, .05);
                 UIHelper.drawImageRelativeYY(gc, IMAGE_EXIT, .5, .68, .05);
-
-
-
             }
+
+
 
             @Override
             public void onKeyDown(KeyCode key) {
                 
             }
 
+
+
             @Override
             public void onKeyUp(KeyCode key) {
                 
             }
-            
         }, 2);
+
         this.cc = cc;
-
-
     }
 
+
+    /**
+     * Checks if the mouse at x and y is on this window tray
+     * @param x x-position of the mouse
+     * @param y y-position of the mouse
+     * @return if the mouse is in the window tray
+     */
     public boolean isMouseAtBackground(double x, double y) {
         return (
             x > (.5 - WINDOW_SIZE_X / 2) * Main.WINDOW_WIDTH &&
@@ -134,9 +148,12 @@ public class GamePauseMenu {
         );
     }
 
+
+
     public void show() {
         cc.addLayer(cl);
     }
+
 
 
     public void hide() {
@@ -144,18 +161,25 @@ public class GamePauseMenu {
     }
 
 
+    /** fired when the resume button is clicked */
     private void resume() {
         gameSession.resume();
     }
 
+
+    /** fired when the save button is clicked */
     private void save() {
         //TODO: link saving
     }
 
+
+    /** fired when the load button is clicked */
     private void load() {
         //TODO: link loading
     }
     
+
+    /** fired when the exit button is clicked */
     private void exit() {
         hide();
         gameSession.endGame();

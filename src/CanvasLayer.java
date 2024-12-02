@@ -8,6 +8,11 @@ public class CanvasLayer {
     public int ZIndex;
 
 
+    /**
+     * Creates a Canvas Layer, which is used for rendering and receiving inputs for a ui layer
+     * @param cI the interface, containing the essential events to be called. Use this to customise this layer's behaviour
+     * @param ZIndex used for layering. higher z-index appears on top, and also receives inputs on higher priority
+     */
     public CanvasLayer(CanvasLayerI cI, int ZIndex) {
         this.cI = cI;
         this.ZIndex = ZIndex;
@@ -15,11 +20,10 @@ public class CanvasLayer {
 
 
 
-    
+    /**
+     * Interface used for determining the behaviour of a graphics layer.
+     */
     public interface CanvasLayerI {
-
-
-
         /**
          * function being called when the mouse is down on this specific layer. mouseUp is promised to be fired
          * @param x x-position of the mouseDown

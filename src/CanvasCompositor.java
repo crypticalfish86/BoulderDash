@@ -18,13 +18,10 @@ public class CanvasCompositor {
 
         
         this.canvas = new Canvas(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-
-
-
         this.gc = canvas.getGraphicsContext2D();
 
 
-
+        //redirects the mouse press event. only process primary mouse clicks due to backwards compability
         scene.setOnMousePressed(E -> {
             if (E.getButton() != MouseButton.PRIMARY) { return; }
             //checks from the top to the bottom to see which layer it interacts with
@@ -36,6 +33,9 @@ public class CanvasCompositor {
             }
         });
 
+
+        
+        //redirects the mouse release event. only process primary mouse clicks due to backwards compability
         scene.setOnMouseReleased(E -> {
             if (E.getButton() != MouseButton.PRIMARY) { return; }
             //checks from the top to the bottom to see which layer it interacts with
@@ -47,7 +47,8 @@ public class CanvasCompositor {
             }
         });
 
-
+        
+        //redirects the mouse move event. only process primary mouse clicks due to backwards compability
         scene.setOnMouseMoved(E -> {
             //checks from the top to the bottom to see which layer it interacts with
             boolean hasConsumed = false;
@@ -59,7 +60,7 @@ public class CanvasCompositor {
         });
 
 
-
+        //redirects key inputs
         scene.setOnKeyPressed(E -> {
             if (canvasLayerArray.size() == 0) { return; }
             for (CanvasLayer cl : canvasLayerArray) {
@@ -67,6 +68,7 @@ public class CanvasCompositor {
             }
         });
 
+        //redirects key inputs
         scene.setOnKeyReleased(E -> {
             if (canvasLayerArray.size() == 0) { return; }
             for (CanvasLayer cl : canvasLayerArray) {
@@ -75,7 +77,7 @@ public class CanvasCompositor {
         });
 
 
-
+        //adds the current drawing layer to the scene's pane
         pane.getChildren().addAll(canvas);
     }
 
@@ -122,15 +124,10 @@ public class CanvasCompositor {
 
 
     /**
-     * signals all layer to draw
+     * signals the drawing of this canvas
      * @param elapsed time elapsed between last draw
     */
     public void draw(long elapsed) {
-        
-
-
-
-
         gc.clearRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
         for (CanvasLayer cl : canvasLayerArray) {
