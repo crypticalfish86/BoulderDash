@@ -56,7 +56,8 @@ public abstract class FallingObject extends Tile {
 
 
     /**
-     * 
+     * Signals the falling object to try falling or rolling.
+     * Should be called during update when other calcualtiosn are done.
      */
     protected void updatePhysics() {
 
@@ -71,19 +72,19 @@ public abstract class FallingObject extends Tile {
 
 
 
-
+        
         Tile tileBelow = gameSession.getTileFromGrid(xPosition, yPosition + 1);
-        //boulder will try to interact with tiles below if it has momentum, or if it has 
-        if (tileBelow.tileType == TileType.PATH || isFalling) {
-            
 
+
+        //boulder will try to interact with tiles below if it has momentum, or if the lower tile os a path
+        if (tileBelow.tileType == TileType.PATH || isFalling) {
             if (fall(tileBelow)) { return; }
         }
 
 
 
 
-        //roll left
+        //try to roll left
         if (xPosition > 0) {
             Tile tileLeft = gameSession.getTileFromGrid(xPosition - 1, yPosition);
             Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition + 1);
@@ -91,12 +92,13 @@ public abstract class FallingObject extends Tile {
             //Check if boulder should roll left
             if (tileLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH) {
                 this.roll(tileLeft, tileLeftBelow);
+                return;
             }
         }
 
 
 
-        //roll right
+        //try to roll right
         if (xPosition < gameSession.getGridWidth() - 1) {
             Tile tileRight = gameSession.getTileFromGrid(xPosition + 1, yPosition);
             Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition + 1);
@@ -104,6 +106,7 @@ public abstract class FallingObject extends Tile {
             //Check if boulder should roll right
             if (tileRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH){
                 this.roll(tileRight, tileRightBelow);
+                return;
             }
         }
     }
