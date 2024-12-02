@@ -2,8 +2,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class UIHelper {
-    
-
     public static void drawImageRelativeXX(GraphicsContext gc, Image img, double xPos, double yPos, double width) {
         double xyScale = img.getHeight() / img.getWidth();
         gc.drawImage(img,
@@ -13,9 +11,6 @@ public class UIHelper {
             Main.WINDOW_WIDTH * width * xyScale
         );
     }
-
-
-
 
     public static boolean checkIsXYInBox(double mouseX, double mouseY, Image img, double xPos, double yPos, double width) {
         double xyScale = img.getHeight() / img.getWidth();
@@ -28,4 +23,6 @@ public class UIHelper {
 
         );
     }
+
+
 }

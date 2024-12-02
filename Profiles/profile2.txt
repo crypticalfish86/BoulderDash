@@ -1,1 +1,36 @@
-2
+1;40;30;
+300;150;180;
+3;11;
+0;0;
+0;0;0;0;
+T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T
+T - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - T
+T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T T T T T T T T
+T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T - - T T T T T T
+T T - T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T - T T T T T T
+T T - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - T T T T T T
+T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T T T T T T T T
+T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T T T T T T T T T T T
+T T T T T T - - - - - - - - - - - - - P - - - - - - - - T T T T T T T * T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T T T T - T T T T T T T - T T T T
+T T T T T T - T - - - - - - - - - - T - T T T T T T T - - - - - - T T - T T T T
+T T T T T T - T - T T T T T T T T - T - T T T T * T T T T T T T - T T - T T T T
+T T T T T T - T - T * T T T T T T - T - T T T T - T T T T T T T - T T - T T T T
+T T T T T T - T - T - - - - - - - - T - T T T T - T T T T T T T - T T - T T T T
+T T T T T T - T - T T T T T T T T T T - T T T T - T T T T T T T - T T - T T T T
+T T T T T T * T - - - - - - - - - - - - T T T T - T T T T T T T - T T - T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - - - - - * - - - T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T T T T T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T T T T T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T T T T T T T T
+T T T T T T - - - - - - - - - - - T T - T T T T - T T - T T T T T T T T T T T T
+T T T T T T - T T T - T T T T T - T T - T T T T - T T - T T T T T T T T T T T T
+T T T T T T - T T T - T T T T T * T T - - - - - - T T - - - - - - - T T T T T T
+T T T T T T - T T T - T T T T T - T T T T T - T T T T - T T T T T - T T T T T T
+T T - - - - * T T T - T T T T T - - - - - - - - - - - - T T T T T - T T T T T T
+T T - T T T T T T T - T T T T T T T T T T T - T T T T T T T T T T - T T T T T T
+T T - - - - - - - - - T T T T T T T T T T T - T T T T T T T T T T - T T T T T T
+T T T T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T - T T T T T T
+T T T T T T T T T T T T T T T T T T T T T T - T T T T T T T T T T - T T T T T T
+T T T T T T T T T T T T T T T T T T T T T T - - - - - * - - - - - - - - - - E T
+T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T

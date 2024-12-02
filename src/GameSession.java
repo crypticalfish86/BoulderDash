@@ -165,8 +165,13 @@ public class GameSession {
         // Line 4: RedKey, BlueKey, YellowKey, GreenKey
         // Line 5+: Actual level
 
-
-
+        // Vers2
+        // line 1: Current Level, Height, Width
+        // Line 2: Score, TimeLeft, TimeAllowed
+        // Line 3: DiamondCount, DiamondsRequired
+        // Line 4: AmeobaSpreadRate, AmeobaSizeLimit
+        // Line 5: RedKey, BlueKey, YellowKey, GreenKey
+        // Line 6+: Actual level
     }
     public GraphicsContext getGraphicsContext() {
         return this.graphicsContext; // Return the stored GraphicsContext
