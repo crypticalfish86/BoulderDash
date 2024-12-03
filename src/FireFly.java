@@ -18,8 +18,11 @@ public class FireFly extends FlyingEnemy{
         }
     }
     public void updateTile(long currentTimeInMilliseconds){
-        move(this, this.x, this.y);
-        //TODO implement an updateTile every certain number of ms
+        ticksAlive++;
+
+        if(ticksAlive % 20 == 0){
+            this.newMove(this, this.x, this.y);
+        }
     }
 
 

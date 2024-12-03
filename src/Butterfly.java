@@ -3,7 +3,6 @@ import javafx.scene.image.Image;
 
 public class Butterfly extends FlyingEnemy{
 
-
     
     public static final Image img = new Image("file:Assets/Images/Butterfly.png"); // Placeholder for the image
 
@@ -21,8 +20,13 @@ public class Butterfly extends FlyingEnemy{
         }
     }
     public void updateTile(long currentTimeInMilliseconds){
-        move(this, this.x, this.y);
-        //TODO implement an updateTile every certain number of ms
+        ticksAlive++;
+
+        if(ticksAlive % 20 == 0){
+            this.newMove(this, this.x, this.y);
+        }
+
+        
     }
 
 

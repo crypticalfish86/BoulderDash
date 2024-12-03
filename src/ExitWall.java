@@ -9,7 +9,7 @@ public class ExitWall extends Wall {
     private boolean isActive; // Indicates whether the exit is active
 
     public ExitWall(GameSession gameSession, int x, int y, long operationInterval) {
-        super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
+        super(gameSession, x, y, TileType.EXIT_WALL, operationInterval);
         this.isActive = false; // Exit is initially inactive
         this.amoebaCanSpreadToThisTile = false;
     }
