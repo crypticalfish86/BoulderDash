@@ -3,6 +3,11 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class ProfileSelector {
     CanvasCompositor cc;
     CanvasLayer cl;
@@ -20,6 +25,13 @@ public class ProfileSelector {
     public static final Image IMAGE_PROFILE1 = new Image("file:Assets/Buttons/ProfileOne.png");
     public static final Image IMAGE_PROFILE2 = new Image("file:Assets/Buttons/ProfileTwo.png");
     public static final Image IMAGE_PROFILE3 = new Image("file:Assets/Buttons/ProfileThree.png");
+
+    public File profile1 = new File("Profiles/profile1.txt");
+    public File profile2 = new File("Profiles/profile2.txt");
+    public File profile3 = new File("Profiles/profile3.txt");
+    public boolean profileOneSelected = false;
+    public boolean profileTwoSelected = false;
+    public boolean profileThreeSelected = false;
 
     public ProfileSelector(Game game, CanvasCompositor cc) {
         this.game = game;
@@ -47,12 +59,15 @@ public class ProfileSelector {
                 }
                 if (mouseDownOnProfileBox1[0] && isMouseOnProfileBox1(x, y)) {
                     game.onProfileBoxClicked1();
+                    profileOneSelected = true;
                 }
                 if (mouseDownOnProfileBox2[0] && isMouseOnProfileBox2(x, y)) {
                     game.onProfileBoxClicked2();
+                    profileTwoSelected = true;
                 }
                 if (mouseDownOnProfileBox3[0] && isMouseOnProfileBox3(x, y)) {
                     game.onProfileBoxClicked3();
+                    profileThreeSelected = true;
                 }
                 return true;
             }
@@ -86,7 +101,6 @@ public class ProfileSelector {
                 // draws the back button
                 UIHelper.drawImageRelativeXX(gc, IMAGE_BACK, .15, .1, .15);
 
-
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE_BOX, .5, .2, .4);
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE_BOX, .5, .5, .4);
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE_BOX, .5, .8, .4);
@@ -100,15 +114,47 @@ public class ProfileSelector {
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PROFILE3, .4, .75, .17);
 
                 // TODO Auto-generated method stub
-                /*
-                If statement for determining what is outputted onto the screen (level or new save image)
-                if ()
-                 */
+                // If statement for determining what is outputted onto the screen (level or new save image)
 
+                // Level format for profiles/levels
+                // line 1: Current Level, Height, Width
+                // Line 2: Score, TimeLeft, TimeAllowed
+                // Line 3: DiamondCount, DiamondsRequired
+                // Line 4: AmeobaSpreadRate, AmeobaSizeLimit
+                // Line 5: RedKey, BlueKey, YellowKey, GreenKey
+                // Line 6+: Actual level
+                displaySaveStatus(gc, profile1, .6, .29, .17);
+                displaySaveStatus(gc, profile2, .6, .59, .17);
+                displaySaveStatus(gc, profile3, .6, .89, .17);
             }
         }, 1);
 
         cc.addLayer(cl);
+    }
+
+    private void displaySaveStatus(GraphicsContext gc, File profile, double xPos, double yPos, double width) {
+        int currentLine = 0;
+        try {
+            Scanner input = new Scanner(profile);
+            while (input.hasNextLine() && currentLine < 1) {
+                String[] saveCheck = input.nextLine().split(";");
+                if (saveCheck[0].equals("new")) {
+                    UIHelper.drawImageRelativeXX(gc, IMAGE_NEW_SAVE, xPos, yPos, width);
+                } else {
+                    if (saveCheck[0].equals("1")) {
+                        UIHelper.drawImageRelativeXX(gc, IMAGE_LEVEL1, xPos, yPos, width);
+                    } else if (saveCheck[0].equals("2")) {
+                        UIHelper.drawImageRelativeXX(gc, IMAGE_LEVEL2, xPos, yPos, width);
+                    } else if (saveCheck[0].equals("3")) {
+                        UIHelper.drawImageRelativeXX(gc, IMAGE_LEVEL3, xPos, yPos, width);
+                    }
+                }
+                currentLine++;
+            }
+            input.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
 
@@ -132,8 +178,41 @@ public class ProfileSelector {
         return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .8, .4);
     }
 
+    public boolean isProfileOneSelected() {
+        return profileOneSelected;
+    }
 
+    public void setProfileOneSelected(boolean profileOneSelected) {
+        this.profileOneSelected = profileOneSelected;
+    }
 
+    public boolean isProfileTwoSelected() {
+        return profileTwoSelected;
+    }
+
+    public void setProfileTwoSelected(boolean profileTwoSelected) {
+        this.profileTwoSelected = profileTwoSelected;
+    }
+
+    public boolean isProfileThreeSelected() {
+        return profileThreeSelected;
+    }
+
+    public void setProfileThreeSelected(boolean profileThreeSelected) {
+        this.profileThreeSelected = profileThreeSelected;
+    }
+
+    public File getProfile1() {
+        return profile1;
+    }
+
+    public File getProfile2() {
+        return profile2;
+    }
+
+    public File getProfile3() {
+        return profile3;
+    }
 
     public void hide() {
         cc.removeLayer(cl);

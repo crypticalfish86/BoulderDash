@@ -219,6 +219,18 @@ public class GameSession {
         return saveString;
     }
 
+    public void setAllGameSession(int currentLevel, int height, int width,
+                                   int score, int timeLeft, int timeAllowed, int startingTime,
+                                   int diamondCount, int diamondsRequired,
+                                   int redKeys, int blueKeys, int yellowKeys, int greenKeys) {
+        currentSessionData.setAllGameSessionData(score, timeAllowed, startingTime,
+                diamondCount, diamondsRequired,
+                redKeys, blueKeys, yellowKeys, greenKeys);
+        this.gridHeight = height;
+        this.gridWidth = width;
+        this.timeLeft = timeLeft;
+    }
+
 
     //returns a specific tile from the gridTileMap
     public Tile getTileFromGrid(int x, int y) {
@@ -503,4 +515,7 @@ public class GameSession {
         }
     }
 
+    public long getTimeLeft() {
+        return timeLeft;
+    }
 }
