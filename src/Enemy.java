@@ -120,7 +120,7 @@ public abstract class Enemy extends Tile {
      * @param y
      * @return
      */
-    private boolean isXYInBounds(int x, int y) {
+    protected boolean isXYInBounds(int x, int y) {
         int gridHeight = gameSession.getGridHeight();
         int gridWidth = gameSession.getGridWidth();
 
