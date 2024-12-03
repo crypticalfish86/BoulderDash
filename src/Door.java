@@ -3,12 +3,13 @@ import javafx.scene.image.Image;
 
 public class Door extends Wall {
 
-    public static final Image img = new Image("file:Assets/Images/RedDoor.png"); // Placeholder for the image
+    private Image img; // The image representing the door
     private char doorColour; // The color of the door
 
     public Door(GameSession gameSession, int x, int y, long operationInterval, char doorColour) {
         super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
         this.doorColour = doorColour;
+        this.img = selectImageBasedOnColor(doorColour); // Set the image based on the door color
         this.amoebaCanSpreadToThisTile = false;
     }
 
@@ -46,7 +47,6 @@ public class Door extends Wall {
 
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        // Optional: Implement time-based behavior if needed
     }
 
     @Override
@@ -56,5 +56,22 @@ public class Door extends Wall {
 
     public String returnStringTileRepresentation() {
         return Character.toString(this.doorColour);
+    }
+
+    // Select the image based on the door color
+    private Image selectImageBasedOnColor(char color) {
+        switch (color) {
+            case 'r': // Red door
+                return new Image("file:Assets/Images/RedDoor.png");
+            case 'b': // Blue door
+                return new Image("file:Assets/Images/BlueDoor.png");
+            case 'y': // Yellow door
+                return new Image("file:Assets/Images/YellowDoor.png");
+            case 'g': // Green door
+                return new Image("file:Assets/Images/GreenDoor.png");
+        }
+
+        // If no case matches, throw an exception
+        throw new IllegalArgumentException("Unsupported door color: " + color);
     }
 }
