@@ -86,9 +86,9 @@ public class Game {
             }
             input.close();
 
-            currentGamesession.setAllGameSession(totalArrOfGameData[0], totalArrOfGameData[1],
-                    totalArrOfGameData[2], totalArrOfGameData[3], totalArrOfGameData[4], 180,
-                    totalArrOfGameData[5], totalArrOfGameData[6],
+            currentGamesession.setAllGameSession(totalArrOfGameData[0], totalArrOfGameData[1], totalArrOfGameData[2],
+                    totalArrOfGameData[3], totalArrOfGameData[4], totalArrOfGameData[5],
+                    totalArrOfGameData[7], totalArrOfGameData[8],
                     totalArrOfGameData[9], totalArrOfGameData[10], totalArrOfGameData[11],
                     totalArrOfGameData[12], totalArrOfGameData[13]);
         } catch (FileNotFoundException e) {
