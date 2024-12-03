@@ -10,7 +10,7 @@ public abstract class FlyingEnemy extends Enemy{
         this.y = y;
     }
 
-    public void move(Tile.getXPosition, Tile.getYPosition) {
+    public void move(Tile FlyingEnemy, int x, int y) {
         int[][] directions; // Define direction changes for 'left' and 'right' wall-following
         if (prioritiseDirection) {
             directions = new int[][]{{0, -1}, {-1, 0}, {0, 1}, {1, 0}}; // left, up, right, down
@@ -19,7 +19,7 @@ public abstract class FlyingEnemy extends Enemy{
             for (int[] dir : directions) {
                 int newX = x + dir[0];
                 int newY = y + dir[1];
-                if (isXYInBounds(newX, newY) && (Tile.getTileType(newX, newY) == (TileType.PATH))) {
+                if (isXYInBounds(newX, newY) && ((gameSession.getTileFromGrid(newX, newY).getTileType()) == (TileType.PATH))) {
                     x = newX;
                     y = newY;
                     break;

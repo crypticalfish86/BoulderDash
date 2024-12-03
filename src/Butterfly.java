@@ -21,6 +21,7 @@ public class Butterfly extends FlyingEnemy{
         }
     }
     public void updateTile(long currentTimeInMilliseconds){
+        move(this, this.x, this.y);
         //TODO implement an updateTile every certain number of ms
     }
 
