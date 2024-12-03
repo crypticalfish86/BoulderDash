@@ -10,5 +10,6 @@ public enum TileType {
     PATH,
     DIRT_WALL,
     MAGIC_WALL,
+    DIAMOND,
     NORMAL_WALL
 }

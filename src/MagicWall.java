@@ -17,25 +17,56 @@ public class MagicWall extends Wall {
     // Interaction logic for the Magic Wall
     @Override
     public void interact(Tile inputTileObject) {
-        System.out.println("Magic wall activated: Interaction started!");
-        if (!isActive) {
-            activateWall(); // Activate the wall
-        } else {
-            System.out.println("Magic wall is already active.");
+        System.out.println("MagicWall interacted with tile: " + inputTileObject.getTileType());
+
+        // Check the type of the interacting tile
+        switch (inputTileObject.getTileType()) {
+            case FALLING_OBJECT:
+                if (inputTileObject instanceof Boulder) {
+                    transformTile(inputTileObject, TileType.DIAMOND); // Transform Boulder into Diamond
+                }
+                break;
+            case DIAMOND:
+                transformTile(inputTileObject, TileType.FALLING_OBJECT); // Transform Diamond into Boulder
+                break;
+            default:
+                System.out.println("No transformation applied by MagicWall.");
         }
+    }
+
+    // Transform the tile to the new type
+    private void transformTile(Tile inputTileObject, TileType newTileType) {
+        int x = inputTileObject.getXPosition();
+        int y = inputTileObject.getYPosition();
+        Tile newTile;
+
+        // Create the new tile based on the new tile type
+        if (newTileType == TileType.FALLING_OBJECT) {
+            newTile = new Boulder(gameSession, x, y, inputTileObject.getOperationInterval());
+            System.out.println("Transformed Diamond into Boulder at (" + x + ", " + y + ").");
+        } else if (newTileType == TileType.DIAMOND) {
+            newTile = new Diamond(gameSession, x, y, inputTileObject.getOperationInterval());
+            System.out.println("Transformed Boulder into Diamond at (" + x + ", " + y + ").");
+        } else {
+            System.out.println("Unknown transformation type.");
+            return;
+        }
+
+        // Replace the old tile with the new tile
+        gameSession.setTile(y, x, newTile);
     }
 
     // Activate the magic wall
     private void activateWall() {
         this.isActive = true;
         this.activationStartTime = System.currentTimeMillis();
-        System.out.println("Magic wall is now active!");
+        System.out.println("MagicWall activated!");
     }
 
     // Deactivate the magic wall
     private void deactivateWall() {
         this.isActive = false;
-        System.out.println("Magic wall has been deactivated.");
+        System.out.println("MagicWall deactivated.");
     }
 
     // Update logic for the magic wall
@@ -48,8 +79,6 @@ public class MagicWall extends Wall {
             if (elapsedTime > 10_000) {
                 deactivateWall();
             }
-
-            // Add additional magic wall effects here, such as transforming surrounding tiles
         }
     }
 
