@@ -10,6 +10,11 @@ public class GameSessionData {
     private int diamondCount;
     private int score;
 
+    // TimeAllowed, DiamondsRequired, AmeobaSpreadRate, AmeobaSizeLimit
+    // Line 3: TimeLeft, Score, DiamondCount
+    // Line 4: RedKey, BlueKey, YellowKey, GreenKey
+    // Line 5+: Actual level
+
 
     GameSession currentGame;
 
@@ -38,34 +43,6 @@ public class GameSessionData {
                 this.redKeys, this.blueKeys, this.yellowKeys, this.greenKeys
         };
     }
-
-    /**
-     * Set the values of game session data when loading in a save
-     * @param score
-     * @param timeAllowed
-     * @param startingTime
-     * @param diamondCount
-     * @param diamondsRequired
-     * @param redKeys
-     * @param blueKeys
-     * @param yellowKeys
-     * @param greenKeys
-     */
-    public void setAllGameSessionData(int score, int timeAllowed, int startingTime,
-                                       int diamondCount, int diamondsRequired,
-                                       int redKeys, int blueKeys, int yellowKeys, int greenKeys) {
-        this.score = score;
-        this.timeAllowed = timeAllowed;
-        this.startingTime = startingTime;
-        this.diamondCount = diamondCount;
-        this.diamondsRequired = diamondsRequired;
-        this.redKeys = redKeys;
-        this.blueKeys = blueKeys;
-        this.yellowKeys = yellowKeys;
-        this.greenKeys = greenKeys;
-    }
-
-
 
     /**
      * checks whether the gamesession data has logged that the user has a key in their inventory.
@@ -164,6 +141,7 @@ public class GameSessionData {
     public void incrementDiamondCount() {
         diamondCount++;
     }
+
 
 
 }

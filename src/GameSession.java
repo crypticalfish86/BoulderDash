@@ -289,7 +289,7 @@ public class GameSession {
         return this.gridHeight;
     }
 
-    public Tile[][] getGridTileMap(){return this.gridTileMap;}
+    public Tile[][] getGridTileMap(){ return this.gridTileMap; }
 
     public int getPlayerX() { return this.player.getXPosition(); }
     public int getPlayerY() { return this.player.getYPosition(); }
@@ -350,11 +350,9 @@ public class GameSession {
 
                 if (random < 4) {
                     this.gridTileMap[y][x] = new TitaniumWall(this, x, y, OPERATION_INTERVAL);
-                } else if (random < 10) {
-                    this.gridTileMap[y][x] = new Boulder(this, x, y, OPERATION_INTERVAL);
-                } else if (random < 15) {
-                    this.gridTileMap[y][x] = new Diamond(this, x, y, OPERATION_INTERVAL);
-                } else {
+                } else if (random < 7) {
+                    this.gridTileMap[y][x] = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
+                }  else {
                     this.gridTileMap[y][x] = new DirtWall(this, x, y, OPERATION_INTERVAL);
                 }
             } 
@@ -369,6 +367,12 @@ public class GameSession {
 
 
         this.timeLeft = 60*60*1000;
+
+
+        
+        int frogX = rand.nextInt(sizeX - 2) + 1;
+        int frogY = rand.nextInt(sizeY - 2) + 1;
+        this.gridTileMap[frogY][frogX] = new Frog(this, frogX, frogY);
 
     }
 

@@ -178,16 +178,6 @@ public class Player extends Tile {
         gameSession.endGame(); // Assuming endGame is implemented in GameSession
     }
 
-    // // Add key to the player's inventory
-    // public void addKeyToInventory(Key key) {
-    //     inventory.add(key);
-    //     System.out.println("Key of color " + key.getKeyColour() + " added to inventory.");
-    // }
-
-    // // Get the player's inventory
-    // public List<Key> getInventory() {
-    //     return inventory;
-    // }
 
     public String returnStringTileRepresentation(){
         return "P";

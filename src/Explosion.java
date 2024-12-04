@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 public class Explosion extends Tile {
 
     private int ticksAlive;
-    private final int ticksToConvert = 20;
+    private final int ticksToConvert = 35;
 
     private Boolean replaceWithDiamond;
     
@@ -22,6 +22,11 @@ public class Explosion extends Tile {
     public void interact(Tile Tile) {
 
     }
+
+    /**
+     * Converts the explosion to another tile after a certain number of ticks
+     * @param currentTimeInMilliseconds The number of milliseconds since 01/01/1970.
+     */
     public void updateTile(long currentTimeInMilliseconds) {
         ticksAlive++;
 
@@ -37,6 +42,10 @@ public class Explosion extends Tile {
         draw(gc, img, 0, 0);
     }
 
+
+    /**
+     * Converts the explosion to a path or a diamond based on what enemy exploded
+     */
     private void convertExplosion(){
         if(replaceWithDiamond){
             Diamond diamond = new Diamond(gameSession, this.x, this.y, operationInterval);

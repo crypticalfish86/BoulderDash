@@ -1,9 +1,9 @@
-public abstract class Enemy extends Tile{
-    public Enemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval){
+public abstract class Enemy extends Tile {
+    public Enemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);
     }
 
-    protected void moveTo(){};
+
 
 
     /**
@@ -65,32 +65,70 @@ public abstract class Enemy extends Tile{
         }
     }
 
+
+
+    /**
+     * moves this item to a target x and y
+     * @param x
+     * @param y
+     * @return
+     */
+    protected boolean moveTo(int x, int y) {
+        if (!isXYInBounds(x, y)) { return false; }
+        Tile targetTile = gameSession.getTileFromGrid(x, y);
+
+
+        if (targetTile.tileType == TileType.PATH) {
+            targetTile.interact(this);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     /**
      * Checks whether a tile can explode based on its type
      * @param tile the tile to check
-     * @return true if the tile can explode, false otherwise
+     * @return true if the tile can be affected by explosion, false otherwise
      */
-    private boolean isExplodable(Tile tile){
-         if (tile.getTileType() == TileType.FALLING_OBJECT){
-             return true;
-         }else if (tile.getTileType() == TileType.DOOR){
-             return true;
-         }else if (tile.getTileType() == TileType.KEY){
-             return true;
-         }else if (tile.getTileType() == TileType.MOVING_ENEMY){
-             return true;
-         }if (tile.getTileType() == TileType.AMOEBA){
-             return true;
-         }else if (tile.getTileType() == TileType.DIRT_WALL){
-             return true;
-         }else if (tile.getTileType() == TileType.MAGIC_WALL) {
-             return true;
-         }else if (tile.getTileType() == TileType.NORMAL_WALL) {
-             return true;
-         }else{
-             return false;
-         }
 
+    private boolean isExplodable(Tile tile) {
+        switch (tile.getTileType()) {
+            case FALLING_OBJECT:
+            case DOOR:
+            case KEY:
+            case MOVING_ENEMY:
+            case AMOEBA:
+            case DIRT_WALL:
+            case MAGIC_WALL:
+            case NORMAL_WALL:
+            case PATH:
+                return true;
+                
+            default:
+                return false;
+        }
+    }
+
+
+
+    /**
+     * checks if a given x and y is in bounds
+     * @param x
+     * @param y
+     * @return
+     */
+    protected boolean isXYInBounds(int x, int y) {
+        int gridHeight = gameSession.getGridHeight();
+        int gridWidth = gameSession.getGridWidth();
+
+        if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
