@@ -41,19 +41,23 @@ public class Game {
 
     /**
      * @param filePath file
-     * @return if the file exists, and the game loads
-    */
-    private boolean loadGame(String filePath) {
-        // Initialise GameSession
-        this.currentGamesession = null;
+     */
+    private void loadGame(String filePath) {
+        loadedPlayerProfileID = String.valueOf(filePath.charAt(filePath.length() - 5));
+        System.out.println(loadedPlayerProfileID);
 
+        if (this.currentGamesession != null) {
+            return;
+        }
+
+        this.currentGamesession = new GameSession(this, loadedPlayerProfileID, cc);
 
         try {
             int[] totalArrOfGameData = new int[15]; // stores all game data values from file
             
             int currentLine = 1;
             // locate the file and load file content into the gamedata string
-            Scanner input = new Scanner(profileDeterminer(filePath));
+            Scanner input = new Scanner(profileDeterminer());
             while (input.hasNextLine()) {
                 String[] profileCheck = input.nextLine().split(";");
                 if (profileCheck[0].equals("new") && currentLine == 1) {
@@ -91,7 +95,7 @@ public class Game {
             input.close();
 
             int count = 1;
-            Scanner arrInput = new Scanner(profileDeterminer(filePath));
+            Scanner arrInput = new Scanner(profileDeterminer());
 
             while (arrInput.hasNextLine()) {
                 if (count >= 6) {
@@ -245,23 +249,15 @@ public class Game {
             // setOperationIntervalsPerAmoebaGrowthRate(totalArrOfGameData[10]);
         } catch (FileNotFoundException e) {
             System.err.println("File " + filePath + " not found.");
-            return false;
         } catch (Exception e) {
             System.err.println("Unknown Error.");
-            return false;
         }
-
-
-        // this.currentGamesession = new GameSession(this, gameData, gamePane);
-        return true;
     }
 
     /**
-     * @param filePath file
      * @return assigns the profileID and returns the appropiate profile file to read
      */
-    private File profileDeterminer(String filePath) {
-        loadedPlayerProfileID = String.valueOf(filePath.charAt(filePath.length() - 5));
+    private File profileDeterminer() {
         if (loadedPlayerProfileID.equals("1")) {
             return profileSelector.getProfile1();
         } else if (loadedPlayerProfileID.equals("2")) {
