@@ -215,8 +215,7 @@ public class Game {
                                 currentGamesession.setTile(yValue, xValue, firefly);
                                 break;
                             case "F":
-                                Frog frog = new Frog(currentGamesession, xValue, yValue,
-                                        GameSession.OPERATION_INTERVAL);
+                                Frog frog = new Frog(currentGamesession, xValue, yValue);
                                 currentGamesession.setTile(yValue, xValue, frog);
                                 break;
                             case "A":
