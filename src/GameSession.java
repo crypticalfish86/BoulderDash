@@ -61,7 +61,6 @@ public class GameSession {
 
 
 
-        // this.player = new Player(this, 10, 10, 10); // TODO: change the values
         interpretLevelData(gameData);
 
 
@@ -102,7 +101,7 @@ public class GameSession {
             public void draw(GraphicsContext gc, long elapsed) {
 
 
-                
+                //draw the tiles
                 gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
@@ -115,19 +114,13 @@ public class GameSession {
                 }
 
                 // draw the top bar :)
-
                 drawTopBar(gc);
 
 
 
                 
-
-                if (isGamePaused) {
-
-
-
-
-                } else {
+                //simulate game if the game is not paused
+                if (!isGamePaused) {
                     timeLeft -= 1000 / 60;
                     if (timeLeft <= 0) {
                         player.killPlayer();//LOL
@@ -143,7 +136,6 @@ public class GameSession {
                     
                     double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
                     
-                    // cameraScale = 15 / Math.exp(Math.abs(cameraX - player.x) + Math.abs(cameraY - player.y)) + 10;
                     cameraScale = 60;
 
                     cameraX = (double) player.getXPosition() * epsilon + cameraX * (1 - epsilon);
