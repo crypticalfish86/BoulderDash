@@ -66,11 +66,6 @@ public class GameSession {
 
 
 
-        int mapSizeX = 10;
-        int mapSizeY = 10;
-
-        this.gridHeight = mapSizeY;
-        this.gridWidth = mapSizeX;
 
 
 
@@ -82,9 +77,10 @@ public class GameSession {
 
 
 
-        generateSampleGame();
+        // generateSampleGame();
 
-
+        //the draw method is under the draw of this interface
+        //the main class controlls it to draw
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
 
             @Override
