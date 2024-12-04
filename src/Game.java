@@ -14,7 +14,7 @@ public class Game {
     
 
 
-    private CanvasCompositor cc;
+    private final CanvasCompositor cc;
 
     private MainMenu mainMenu;
     private ProfileSelector profileSelector;
@@ -44,14 +44,19 @@ public class Game {
      * @return if the file exists, and the game loads
     */
     private boolean loadGame(String filePath) {
+        // Initialise GameSession
+        this.currentGamesession = null;
+
+
         try {
-            int[] totalArrOfGameData = new int[14]; // stores all game data values from file
+            int[] totalArrOfGameData = new int[15]; // stores all game data values from file
+            
             int currentLine = 1;
             // locate the file and load file content into the gamedata string
             Scanner input = new Scanner(profileDeterminer(filePath));
             while (input.hasNextLine()) {
                 String[] profileCheck = input.nextLine().split(";");
-                if (profileCheck[0].equals("new")) {
+                if (profileCheck[0].equals("new") && currentLine == 1) {
                     currentGamesession.setAllGameSession(1, 40, 30,
                             0, 180, 180, 180,
                             0, 11,
@@ -67,30 +72,178 @@ public class Game {
                             totalArrOfGameData[3] = Integer.parseInt(profileCheck[0]); // score
                             totalArrOfGameData[4] = Integer.parseInt(profileCheck[1]); // timeleft
                             totalArrOfGameData[5] = Integer.parseInt(profileCheck[2]); // timeallowed
+                            totalArrOfGameData[6] = totalArrOfGameData[5]; // startingTime
                         case 3:
-                            totalArrOfGameData[6] = Integer.parseInt(profileCheck[0]); // diamondcount
-                            totalArrOfGameData[7] = Integer.parseInt(profileCheck[1]); // diamondsrequired
+                            totalArrOfGameData[7] = Integer.parseInt(profileCheck[0]); // diamondcount
+                            totalArrOfGameData[8] = Integer.parseInt(profileCheck[1]); // diamondsrequired
                         case 4:
-                            totalArrOfGameData[8] = Integer.parseInt(profileCheck[0]); // ameobaspreadrate
-                            totalArrOfGameData[9] = Integer.parseInt(profileCheck[1]); // ameobasizelimit
+                            totalArrOfGameData[9] = Integer.parseInt(profileCheck[0]); // ameobaspreadrate
+                            totalArrOfGameData[10] = Integer.parseInt(profileCheck[1]); // ameobasizelimit
                         case 5:
-                            totalArrOfGameData[10] = Integer.parseInt(profileCheck[0]); // redkey
-                            totalArrOfGameData[11] = Integer.parseInt(profileCheck[1]); // bluekey
-                            totalArrOfGameData[12] = Integer.parseInt(profileCheck[2]); // yellowkey
-                            totalArrOfGameData[13] = Integer.parseInt(profileCheck[3]); // greenkey
+                            totalArrOfGameData[11] = Integer.parseInt(profileCheck[0]); // redkey
+                            totalArrOfGameData[12] = Integer.parseInt(profileCheck[1]); // bluekey
+                            totalArrOfGameData[13] = Integer.parseInt(profileCheck[2]); // yellowkey
+                            totalArrOfGameData[14] = Integer.parseInt(profileCheck[3]); // greenkey
                     }
-                } else {
-
                 }
                 currentLine++;
             }
             input.close();
 
+            int count = 1;
+            Scanner arrInput = new Scanner(profileDeterminer(filePath));
+
+            while (arrInput.hasNextLine()) {
+                if (count >= 6) {
+                    int yValue = count - 6; // Since we start reading from profile file line 6
+                    String[] arrCheck = arrInput.nextLine().split(" ");
+                    for (int xValue = 0; xValue < totalArrOfGameData[2]; xValue++) {
+                        switch (arrCheck[xValue]) {
+                            case "-":
+                                // Instantiate object and set tile to its location
+                                PathWall pathWall = new PathWall(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, pathWall);
+                                break;
+                            case "E":
+                                ExitWall exitWall = new ExitWall(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, exitWall);
+                                break;
+                            case "W":
+                                // Talk about this with Jace (can't be instantiated but still in file format)
+                            case "T":
+                                TitaniumWall titaniumWall = new TitaniumWall(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, titaniumWall);
+                                break;
+                            case "M":
+                                MagicWall magicWall = new MagicWall(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, magicWall);
+                                break;
+                            case "D":
+                                DirtWall dirtWall = new DirtWall(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, dirtWall);
+                                break;
+                            case "*":
+                                Diamond diamond = new Diamond(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, diamond);
+                                break;
+                            case "@":
+                                Boulder boulder = new Boulder(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, boulder);
+                                break;
+                            case "RK":
+                                char redKeyColour = 'r';
+                                Key redKey = new Key(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, redKeyColour);
+                                currentGamesession.setTile(yValue, xValue, redKey);
+                                break;
+                            case "GK":
+                                char greenKeyColour = 'g';
+                                Key greenKey = new Key(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, greenKeyColour);
+                                currentGamesession.setTile(yValue, xValue, greenKey);
+                                break;
+                            case "BK":
+                                char blueKeyColour = 'b';
+                                Key blueKey = new Key(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, blueKeyColour);
+                                currentGamesession.setTile(yValue, xValue, blueKey);
+                                break;
+                            case "YK":
+                                char yellowKeyColour = 'y';
+                                Key yellowKey = new Key(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, yellowKeyColour);
+                                currentGamesession.setTile(yValue, xValue, yellowKey);
+                                break;
+                            case "RD":
+                                char redDoorColour = 'r';
+                                Door redDoor = new Door(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, redDoorColour);
+                                currentGamesession.setTile(yValue, xValue, redDoor);
+                                break;
+                            case "GD":
+                                char greenDoorColour = 'g';
+                                Door greenDoor = new Door(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, greenDoorColour);
+                                currentGamesession.setTile(yValue, xValue, greenDoor);
+                                break;
+                            case "BD":
+                                char blueDoorColour = 'b';
+                                Door blueDoor = new Door(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, blueDoorColour);
+                                currentGamesession.setTile(yValue, xValue, blueDoor);
+                                break;
+                            case "YD":
+                                char yellowDoorColour = 'y';
+                                Door yellowDoor = new Door(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, yellowDoorColour);
+                                currentGamesession.setTile(yValue, xValue, yellowDoor);
+                                break;
+                            case "P":
+                                Player player = new Player(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, player);
+                                break;
+                            case "BN":
+
+                            case "BE":
+
+                            case "BS":
+
+                            case "BW":
+                                // Assumed true but need to check
+                                Butterfly butterfly = new Butterfly(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, true);
+                                currentGamesession.setTile(yValue, xValue, butterfly);
+                                break;
+                            case "FN":
+
+                            case "FE":
+
+                            case "FS":
+
+                            case "FW":
+                                // Assumed true but need to check
+                                FireFly firefly = new FireFly(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, true);
+                                currentGamesession.setTile(yValue, xValue, firefly);
+                                break;
+                            case "F":
+                                Frog frog = new Frog(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL);
+                                currentGamesession.setTile(yValue, xValue, frog);
+                                break;
+                            case "A":
+                                AmoebaController amoebaController = new AmoebaController(currentGamesession,
+                                        xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, totalArrOfGameData[9], totalArrOfGameData[10]);
+                                currentGamesession.getAmeobaControllerList().add(amoebaController);
+
+                                AmoebaTile amoebaTile = new AmoebaTile(currentGamesession, xValue, yValue,
+                                        GameSession.OPERATION_INTERVAL, amoebaController);
+                                currentGamesession.setTile(yValue, xValue, amoebaTile);
+                                break;
+                        }
+                    }
+                }
+                count++;
+            }
+            arrInput.close();
+
             currentGamesession.setAllGameSession(totalArrOfGameData[0], totalArrOfGameData[1], totalArrOfGameData[2],
-                    totalArrOfGameData[3], totalArrOfGameData[4], totalArrOfGameData[5],
+                    totalArrOfGameData[3], totalArrOfGameData[4], totalArrOfGameData[5], totalArrOfGameData[6],
                     totalArrOfGameData[7], totalArrOfGameData[8],
-                    totalArrOfGameData[9], totalArrOfGameData[10], totalArrOfGameData[11],
-                    totalArrOfGameData[12], totalArrOfGameData[13]);
+                    totalArrOfGameData[11], totalArrOfGameData[12], totalArrOfGameData[13],
+                    totalArrOfGameData[14]);
+
+            // amoebaController.setMaxAmeobaChildCount(totalArrOfGameData[9]);
+            // setOperationIntervalsPerAmoebaGrowthRate(totalArrOfGameData[10]);
         } catch (FileNotFoundException e) {
             System.err.println("File " + filePath + " not found.");
             return false;

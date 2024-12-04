@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -21,6 +22,8 @@ public class GameSession {
     private final Game game; // Reference to the game that the current game session is attached to
     private final GameSessionData currentSessionData; //Reference to this games' game session data
     private Player player; //Reference to the current single game player (inserted into the level in "interpretLevelData"
+
+    private ArrayList<AmoebaController> ameobaControllerList;
 
     private final CanvasLayer cl;
     private final CanvasCompositor cc;
@@ -172,6 +175,7 @@ public class GameSession {
 
         cc.addLayer(this.cl);
         this.cc = cc;
+        ameobaControllerList = new ArrayList<>();
     }
 
 
@@ -517,5 +521,9 @@ public class GameSession {
 
     public long getTimeLeft() {
         return timeLeft;
+    }
+
+    public ArrayList<AmoebaController> getAmeobaControllerList() {
+        return ameobaControllerList;
     }
 }

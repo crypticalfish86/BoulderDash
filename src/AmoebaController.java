@@ -3,11 +3,11 @@ import java.util.Random;
 public class AmoebaController {
     private final GameSession gameSession;
     private final ArrayList<AmoebaTile> amoebaChildren; //The list of children to this amoeba controller
-    private final int maxAmoebaChildCount; //The maximum amount of allowed children to this amoeba
+    private int maxAmoebaChildCount; //The maximum amount of allowed children to this amoeba
     private int currentAmoebaChildCount; //The current number of children
     protected long lastTimeStamp;
     private final long operationInterval;
-    private final long operationIntervalsPerAmoebaGrowthRate; //how many operation intervals before the amoeba grows by one
+    private long operationIntervalsPerAmoebaGrowthRate; //how many operation intervals before the amoeba grows by one
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
 
@@ -136,4 +136,11 @@ public class AmoebaController {
         }
     }
 
+    public void setMaxAmoebaChildCount(int maxAmoebaChildCount) {
+        this.maxAmoebaChildCount = maxAmoebaChildCount;
+    }
+
+    public void setOperationIntervalsPerAmoebaGrowthRate(long operationIntervalsPerAmoebaGrowthRate) {
+        this.operationIntervalsPerAmoebaGrowthRate = operationIntervalsPerAmoebaGrowthRate;
+    }
 }
