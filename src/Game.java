@@ -42,12 +42,12 @@ public class Game {
     /**
      * @param filePath file
      */
-    private void loadGame(String filePath) {
+    public boolean loadGame(String filePath) {
         loadedPlayerProfileID = String.valueOf(filePath.charAt(filePath.length() - 5));
         System.out.println(loadedPlayerProfileID);
 
         if (this.currentGamesession != null) {
-            return;
+            return true;
         }
 
         this.currentGamesession = new GameSession(this, loadedPlayerProfileID, cc);
@@ -249,9 +249,12 @@ public class Game {
             // setOperationIntervalsPerAmoebaGrowthRate(totalArrOfGameData[10]);
         } catch (FileNotFoundException e) {
             System.err.println("File " + filePath + " not found.");
+            return false;
         } catch (Exception e) {
             System.err.println("Unknown Error.");
+            return false;
         }
+        return true;
     }
 
     /**

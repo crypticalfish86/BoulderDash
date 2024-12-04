@@ -379,6 +379,18 @@ public class GameSession {
 
     }
 
+    private void startProfile1() {
+        game.loadGame("Profiles/profile1.txt");
+    }
+
+    private void startProfile2() {
+        game.loadGame("Profiles/profile2.txt");
+    }
+
+    private void startProfile3(){
+        game.loadGame("Profiles/profile3.txt");
+    }
+
 
     public double getCameraX() {
         return this.cameraX;
