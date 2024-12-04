@@ -1,8 +1,8 @@
 import javafx.scene.shape.MoveTo;
-
+//TODO resolve any commented out code lines
 public abstract class FlyingEnemy extends Enemy {
     protected boolean prioritiseLeft;
-    protected int ticksAlive;
+    //protected int ticksAlive;
     protected String direction;
 
     public FlyingEnemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, boolean prioritiseDirection) {
@@ -10,7 +10,7 @@ public abstract class FlyingEnemy extends Enemy {
         this.prioritiseLeft = prioritiseLeft; //either true meaning left or false meaning right
         this.x = x;
         this.y = y;
-        ticksAlive = 0;
+        //ticksAlive = 0;
         direction = "Up";
     }
 

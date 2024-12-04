@@ -12,6 +12,7 @@ public class Butterfly extends FlyingEnemy{
     public Butterfly(GameSession gameSession, int x, int y, long operationInterval, boolean prioritiseDirection){
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseDirection);
         this.amoebaCanSpreadToThisTile = true;
+        this.lastTimeStamp = System.currentTimeMillis();
     }
 
     public void interact(Tile tile){
@@ -19,14 +20,18 @@ public class Butterfly extends FlyingEnemy{
             this.triggerExplosion(this.x, this.y, true);
         }
     }
+
+
+    /**
+     * Moves one tile every operation interval.
+     * @param currentTimeInMilliseconds
+     * The number of milliseconds since the unix epoch (01/01/1970).
+     */
     public void updateTile(long currentTimeInMilliseconds){
-        ticksAlive++;
-
-        if(ticksAlive % 20 == 0){
-            this.move(this.x, this.y);
+        if(currentTimeInMilliseconds - this.lastTimeStamp >= this.operationInterval){
+            move(this.x, this.y);
+            this.lastTimeStamp = System.currentTimeMillis();
         }
-
-
     }
 
 
