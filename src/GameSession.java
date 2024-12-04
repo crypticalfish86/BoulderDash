@@ -23,7 +23,7 @@ public class GameSession {
     private final GameSessionData currentSessionData; //Reference to this games' game session data
     private Player player; //Reference to the current single game player (inserted into the level in "interpretLevelData"
 
-    private ArrayList<AmoebaController> ameobaControllerList;
+    private final ArrayList<AmoebaController> ameobaControllerList;
 
     private final CanvasLayer cl;
     private final CanvasCompositor cc;

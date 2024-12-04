@@ -168,6 +168,8 @@ public class GameSessionData {
         diamondCount++;
     }
 
-
+    public int getDiamondsRequired() {
+        return this.diamondsRequired;
+    }
 
 }

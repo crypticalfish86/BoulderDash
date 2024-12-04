@@ -135,12 +135,4 @@ public class AmoebaController {
             }
         }
     }
-
-    public void setMaxAmoebaChildCount(int maxAmoebaChildCount) {
-        this.maxAmoebaChildCount = maxAmoebaChildCount;
-    }
-
-    public void setOperationIntervalsPerAmoebaGrowthRate(long operationIntervalsPerAmoebaGrowthRate) {
-        this.operationIntervalsPerAmoebaGrowthRate = operationIntervalsPerAmoebaGrowthRate;
-    }
 }
