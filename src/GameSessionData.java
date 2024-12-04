@@ -45,6 +45,32 @@ public class GameSessionData {
     }
 
     /**
+     * Set the values of game session data when loading in a save
+     * @param score
+     * @param timeAllowed
+     * @param startingTime
+     * @param diamondCount
+     * @param diamondsRequired
+     * @param redKeys
+     * @param blueKeys
+     * @param yellowKeys
+     * @param greenKeys
+     */
+    public void setAllGameSessionData(int score, int timeAllowed, int startingTime,
+                                      int diamondCount, int diamondsRequired,
+                                      int redKeys, int blueKeys, int yellowKeys, int greenKeys) {
+        this.score = score;
+        this.timeAllowed = timeAllowed;
+        this.startingTime = startingTime;
+        this.diamondCount = diamondCount;
+        this.diamondsRequired = diamondsRequired;
+        this.redKeys = redKeys;
+        this.blueKeys = blueKeys;
+        this.yellowKeys = yellowKeys;
+        this.greenKeys = greenKeys;
+    }
+
+    /**
      * checks whether the gamesession data has logged that the user has a key in their inventory.
      * @param item
      * The string that represents the key colour.
