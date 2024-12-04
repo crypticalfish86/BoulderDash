@@ -21,7 +21,7 @@ public class FireFly extends FlyingEnemy{
         ticksAlive++;
 
         if(ticksAlive % 20 == 0){
-            this.newMove(this, this.x, this.y);
+            this.move(this, this.x, this.y);
         }
     }
 
