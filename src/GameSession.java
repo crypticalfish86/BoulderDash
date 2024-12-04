@@ -318,8 +318,8 @@ public class GameSession {
 
     private void generateSampleGame() {
         Random rand = new Random();
-        int sizeX = rand.nextInt(40) + 10;
-        int sizeY = rand.nextInt(40) + 10;
+        int sizeX = rand.nextInt(10) + 10;
+        int sizeY = rand.nextInt(10) + 10;
 
 
 
@@ -350,11 +350,14 @@ public class GameSession {
 
                 if (random < 4) {
                     this.gridTileMap[y][x] = new TitaniumWall(this, x, y, OPERATION_INTERVAL);
-                } else if (random < 7) {
+                } else if (random < 4) {
                     this.gridTileMap[y][x] = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
                 }  else {
                     this.gridTileMap[y][x] = new DirtWall(this, x, y, OPERATION_INTERVAL);
                 }
+
+                Tile butterfly = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
+                this.setTile(3,3, butterfly);
             } 
         }
 
