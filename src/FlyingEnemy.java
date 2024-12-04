@@ -3,7 +3,7 @@ import javafx.scene.shape.MoveTo;
 public abstract class FlyingEnemy extends Enemy {
     protected boolean prioritiseLeft;
     protected int ticksAlive;
-    private String direction;
+    protected String direction;
 
     public FlyingEnemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, boolean prioritiseDirection) {
         super(gameSession, x, y, TileType, operationInterval);
@@ -17,13 +17,13 @@ public abstract class FlyingEnemy extends Enemy {
 
 
 
-    protected void move(Tile FlyingEnemy, int x, int y){
+    protected void move(int x, int y){
         int[] xDir = new int[4];
         int[] yDir = new int[4];
 
-        System.out.println(x + "" + y + "" + direction);
+        System.out.println(x + "" + y + "" + this.direction);
 
-        switch (direction) {
+        switch (this.direction) {
             case "Up":
                 xDir = new int[]{-1, +1, 0, 0};
                 yDir = new int[]{0, 0, +1, -1};
@@ -43,7 +43,7 @@ public abstract class FlyingEnemy extends Enemy {
             default:
                 throw new IllegalArgumentException("Invalid direction: " + direction);
         }
-        
+
 
         Tile tileToLeft = gameSession.getTileFromGrid(x + xDir[0], y + yDir[0]);
         Tile tileToRight = gameSession.getTileFromGrid(x + xDir[1], y + yDir[1]);
@@ -80,13 +80,13 @@ public abstract class FlyingEnemy extends Enemy {
         }
 
         if(newX < x){
-            direction = "Left";
+            this.direction = "Left";
         }else if(newX > x){
-            direction = "Right";
+            this.direction = "Right";
         }else if(newY < y){
-            direction = "Up";
+            this.direction = "Up";
         }else if(newY > y){
-            direction = "Down";
+            this.direction = "Down";
         }
 
 

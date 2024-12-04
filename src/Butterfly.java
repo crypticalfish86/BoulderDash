@@ -23,7 +23,7 @@ public class Butterfly extends FlyingEnemy{
         ticksAlive++;
 
         if(ticksAlive % 20 == 0){
-            this.move(this, this.x, this.y);
+            this.move(this.x, this.y);
         }
 
 
