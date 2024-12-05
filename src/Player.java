@@ -109,6 +109,11 @@ public class Player extends Tile {
             gameSession.updateTilePositions(pathWall, tile, this);
             this.killPlayer();
         }
+        else if(tile.getTileType() == TileType.MOVING_ENEMY){
+            PathWall pathWall = new PathWall(gameSession, this.x, this.y + 1, operationInterval );
+            gameSession.updateTilePositions(pathWall, tile, this);
+            this.killPlayer();
+        }
 
 
     }

@@ -65,25 +65,25 @@ public abstract class FlyingEnemy extends Enemy {
 
         int newX = x;
         int newY = y;
-        if(tileToLeft.getTileType() == TileType.PATH){
+        if(tileToLeft.getTileType() == TileType.PATH || tileToLeft.getTileType() == TileType.PLAYER){
             tileToLeft.interact(this);
 
             newX = x + xDir[0];
             newY = y + yDir[0];
 
-        }else if(tileInFront.getTileType() == TileType.PATH){
+        }else if(tileInFront.getTileType() == TileType.PATH || tileInFront.getTileType() == TileType.PLAYER){
             tileInFront.interact(this);
 
             newX = x + xDir[3];
             newY = y + yDir[3];
 
-        }else if(tileToRight.getTileType() == TileType.PATH){
+        }else if(tileToRight.getTileType() == TileType.PATH || tileToRight.getTileType() == TileType.PLAYER){
             tileToRight.interact(this);
 
             newX = x + xDir[1];
             newY = y + yDir[1];
 
-        }else if(tileBehind.getTileType() == TileType.PATH){
+        }else if(tileBehind.getTileType() == TileType.PATH || tileBehind.getTileType() == TileType.PLAYER){
             tileBehind.interact(this);
 
             newX = x + xDir[2];
