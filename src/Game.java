@@ -75,27 +75,29 @@ public class Game {
             return false;
         }
 
-        String filepath = "..\\Profiles\\profile" + profileID + ".txt";
+        String filepath = "./Profiles/profile" + profileID + ".txt";
 
         try {
             File file = new File(filepath);
             Scanner scanner = new Scanner(file);
-            scanner.useDelimiter("\\Z"); // Read entire file as one string
+            scanner.useDelimiter("\\A"); // Read entire file as one string
 
             String fileContent;
             if(scanner.hasNext()){
+                System.out.println("file read");
                 fileContent = scanner.next();
             }
             else{
                 return false;
             }
-
+            System.out.println(fileContent);
             //If the content of the file is new then load in the default file
-            if(fileContent.equals("NEW;")){
+            if(fileContent.equals("new;")){
                 //TODO read default level package
-                File levelOneFile = new File("..\\Levels\\level1.txt");
+                System.out.println("reading level file");
+                File levelOneFile = new File("./Levels/level1.txt");
                 Scanner levelOneFileScanner = new Scanner(levelOneFile);
-                levelOneFileScanner.useDelimiter("\\Z");
+                levelOneFileScanner.useDelimiter("\\A");
                 fileContent = levelOneFileScanner.next();
                 this.currentGamesession = new GameSession(this, fileContent, cc);
             }
@@ -104,7 +106,7 @@ public class Game {
                 scanner.close();
             }
             return true;
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

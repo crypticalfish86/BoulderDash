@@ -53,13 +53,13 @@ public class Key extends Wall {
     // Select the image based on the key color
     private Image selectImageBasedOnColor(char color) {
         switch (color) {
-            case 'r': // Red key
+            case 'R': // Red key
                 return new Image("file:Assets/Images/RedKey.png");
-            case 'b': // Blue key
+            case 'B': // Blue key
                 return new Image("file:Assets/Images/BlueKey.png");
-            case 'y': // Yellow key
+            case 'Y': // Yellow key
                 return new Image("file:Assets/Images/YellowKey.png");
-            case 'g': // Green key
+            case 'G': // Green key
                 return new Image("file:Assets/Images/GreenKey.png");
         }
 

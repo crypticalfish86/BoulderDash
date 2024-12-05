@@ -59,7 +59,7 @@ public class GameSession {
 
 
 
-        // generateSampleGame();
+         //generateSampleGame();
 
         //the draw method is under the draw of this interface
         //the main class controlls it to draw
@@ -165,14 +165,15 @@ public class GameSession {
         // Line 5: RedKey, BlueKey, YellowKey, GreenKey
         // Line 6+: Actual level
 
-        String[] gameDataArr = gameData.split(";");
-        this.gridHeight = Integer.parseInt(gameDataArr[1]);
-        this.gridWidth = Integer.parseInt(gameDataArr[2]);
+        String[] gameDataArr = gameData.split(";\\s*");
+        this.gridHeight = Integer.parseInt(gameDataArr[2]);
+        this.gridWidth = Integer.parseInt(gameDataArr[1]);
+        System.out.printf("Map size: (%d, %d)\n", this.gridWidth, this.gridHeight);
 
         this.gridTileMap = new Tile[this.gridHeight][this.gridWidth];
 
         int score = Integer.parseInt(gameDataArr[3]);
-        int timeLeft = Integer.parseInt(gameDataArr[4]);
+        int timeLeft = Integer.parseInt(gameDataArr[4]) * 1000;
         int diamondCount = Integer.parseInt(gameDataArr[6]);
         int diamondsRequired = Integer.parseInt(gameDataArr[7]);
         this.amoebaGrowthRate = Integer.parseInt(gameDataArr[8]);
@@ -182,6 +183,7 @@ public class GameSession {
         int yellowKeys = Integer.parseInt(gameDataArr[12]);
         int greenKeys = Integer.parseInt(gameDataArr[13]);
 
+        this.timeLeft = timeLeft;
         this.currentSessionData = new GameSessionData(this, timeLeft, diamondsRequired, redKeys, blueKeys, yellowKeys, greenKeys, diamondCount, score);
 
 
@@ -193,88 +195,92 @@ public class GameSession {
     }
         private void fill2DGrid(String stringGridMap){
             String[] gridMapLinesArray = stringGridMap.split("\n");//split file by new line
+            System.out.println(gridMapLinesArray.length);
+            for (int y = 0; y < gridMapLinesArray.length; y++){
 
-            for (int i = 0; i < gridMapLinesArray.length; i++){
+                String[] gridLineTileArray = gridMapLinesArray[y].split(" ");//then split each element of that array by
 
-                String[] gridLineTileArray = gridMapLinesArray[i].split(" ");//then split each element of that array by
+                for(int x = 0; x < gridLineTileArray.length; x++){
 
-                for(int ii = 0; ii < gridLineTileArray.length; ii++){
-
-                    Tile newTile = new PathWall(this, ii, i, OPERATION_INTERVAL);//this should never finish itialised as this, it should go through the switch statement
-                    switch (gridLineTileArray[ii]){
+                    Tile newTile = new PathWall(this, x, y, OPERATION_INTERVAL);//this should never finish itialised as this, it should go through the switch statement
+                    switch (gridLineTileArray[x]){
                         case "-":
-                            newTile = new PathWall(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
                             break;
                         case "E":
-                            newTile = new ExitWall(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new ExitWall(this, x, y, OPERATION_INTERVAL);
                             break;
                         case "W":
-                            newTile = new NormalWall(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new NormalWall(this, x, y, OPERATION_INTERVAL);
                             break;
                         case "T":
-                            newTile = new TitaniumWall(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new TitaniumWall(this, x, y, OPERATION_INTERVAL);
                             break;
                         case "M":
-                            newTile = new MagicWall(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new MagicWall(this, x, y, OPERATION_INTERVAL);
                             break;
                         case "D":
-                            newTile = new DirtWall(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new DirtWall(this, x, y, OPERATION_INTERVAL);
                             break;
                         case "*":
-                            newTile = new Diamond(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new Diamond(this, x, y, OPERATION_INTERVAL);
                             break;
                         case "@":
-                            newTile = new Boulder(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new Boulder(this, x, y, OPERATION_INTERVAL);
                             break;
                         case "RK":
-                            newTile = new Key(this, ii, i, OPERATION_INTERVAL, 'R');//TODO this may break the game when saving, come back to this
+                            newTile = new Key(this, x, y, OPERATION_INTERVAL, 'R');//TODO this may break the game when saving, come back to this
                             break;
                         case "BK":
-                            newTile = new Key(this, ii, i, OPERATION_INTERVAL, 'B');//TODO this may break the game when saving, come back to this
+                            newTile = new Key(this, x, y, OPERATION_INTERVAL, 'B');//TODO this may break the game when saving, come back to this
                             break;
                         case "YK":
-                            newTile = new Key(this, ii, i, OPERATION_INTERVAL, 'Y');//TODO this may break the game when saving, come back to this
+                            newTile = new Key(this, x, y, OPERATION_INTERVAL, 'Y');//TODO this may break the game when saving, come back to this
                             break;
                         case "GK":
-                            newTile = new Key(this, ii, i, OPERATION_INTERVAL, 'G');//TODO this may break the game when saving, come back to this
+                            newTile = new Key(this, x, y, OPERATION_INTERVAL, 'G');//TODO this may break the game when saving, come back to this
                             break;
                         case "RD":
-                            newTile = new Door(this, ii, i, OPERATION_INTERVAL, 'R');//TODO this may break the game when saving, come back to this
+                            newTile = new Door(this, x, y, OPERATION_INTERVAL, 'R');//TODO this may break the game when saving, come back to this
                             break;
                         case "BD":
-                            newTile = new Door(this, ii, i, OPERATION_INTERVAL, 'B');//TODO this may break the game when saving, come back to this
+                            newTile = new Door(this, x, y, OPERATION_INTERVAL, 'B');//TODO this may break the game when saving, come back to this
                             break;
                         case "YD":
-                            newTile = new Door(this, ii, i, OPERATION_INTERVAL, 'Y');//TODO this may break the game when saving, come back to this
+                            newTile = new Door(this, x, y, OPERATION_INTERVAL, 'Y');//TODO this may break the game when saving, come back to this
                             break;
                         case "GD":
-                            newTile = new Door(this, ii, i, OPERATION_INTERVAL, 'G');//TODO this may break the game when saving, come back to this
+                            newTile = new Door(this, x, y, OPERATION_INTERVAL, 'G');//TODO this may break the game when saving, come back to this
                             break;
                         case "P":
-                            player = new Player(this, ii, i, OPERATION_INTERVAL);
+                            Player player = new Player(this, x, y, OPERATION_INTERVAL);
                             this.player = player;
                             newTile = player;
                             break;
                         case "BF"://TODO ask omar or isaac the proper way to do this
-                            newTile = new Butterfly(this, ii, i, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
+                            newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
                             break;
                         case "FF"://TODO ask omar or isaac the proper way to do this
-                            newTile = new FireFly(this, ii, i, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
+                            newTile = new FireFly(this, x, y, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
                             break;
                         case "F":
-                            newTile = new Frog(this, ii, i);//TODO ask alex why there is no operation interval for frog
+                            newTile = new Frog(this, x, y);//TODO ask alex why there is no operation interval for frog
                             break;
                         case "A":
-                            AmoebaController newAmoebaController = new AmoebaController(this, ii, i, OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize);
+                            AmoebaController newAmoebaController = new AmoebaController(this, x, y, OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize);
                             this.amoebaControllerList.add(newAmoebaController);
                             break;
                         default:
                             System.out.println("ERROR TILE NOT RECOGNISED, PRINTING PATHWALL BY DEFAULT");
-                            newTile = new PathWall(this, ii, i, OPERATION_INTERVAL);
+                            newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
                             break;
                     }
+//                    System.out.printf("filling (%d, %d)\n", x, y);
 
-                    this.gridTileMap[i][ii] = newTile;
+
+
+
+                    this.gridTileMap[y][x] = newTile;
                 }
             }
         }
@@ -620,6 +626,6 @@ public class GameSession {
     }
 
     public ArrayList<AmoebaController> getAmeobaControllerList() {
-        return ameobaControllerList;
+        return amoebaControllerList;
     }
 }

@@ -61,13 +61,13 @@ public class Door extends Wall {
     // Select the image based on the door color
     private Image selectImageBasedOnColor(char color) {
         switch (color) {
-            case 'r': // Red door
+            case 'R': // Red door
                 return new Image("file:Assets/Images/RedDoor.png");
-            case 'b': // Blue door
+            case 'B': // Blue door
                 return new Image("file:Assets/Images/BlueDoor.png");
-            case 'y': // Yellow door
+            case 'Y': // Yellow door
                 return new Image("file:Assets/Images/YellowDoor.png");
-            case 'g': // Green door
+            case 'G': // Green door
                 return new Image("file:Assets/Images/GreenDoor.png");
         }
 

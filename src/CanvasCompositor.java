@@ -1,17 +1,21 @@
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import com.sun.javafx.font.directwrite.RECT;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 
+
 public class CanvasCompositor {
     
     private Canvas canvas;
     private GraphicsContext gc;
     private ArrayList<CanvasLayer> canvasLayerArray = new ArrayList<>();
-
+    private final ReentrantReadWriteLock modifyLock = new ReentrantReadWriteLock();
 
 
     public CanvasCompositor(Pane pane, Scene scene) {
@@ -62,7 +66,7 @@ public class CanvasCompositor {
 
         //redirects key inputs
         scene.setOnKeyPressed(E -> {
-            if (canvasLayerArray.size() == 0) { return; }
+            if (canvasLayerArray.isEmpty()) { return; }
             for (CanvasLayer cl : canvasLayerArray) {
                 cl.cI.onKeyDown(E.getCode());
             }
@@ -70,7 +74,7 @@ public class CanvasCompositor {
 
         //redirects key inputs
         scene.setOnKeyReleased(E -> {
-            if (canvasLayerArray.size() == 0) { return; }
+            if (canvasLayerArray.isEmpty()) { return; }
             for (CanvasLayer cl : canvasLayerArray) {
                 cl.cI.onKeyUp(E.getCode());
             }
@@ -88,17 +92,29 @@ public class CanvasCompositor {
      * This layer can be removed by calling the remove function
      * @param canvasLayer the layer to be added
     */
-    public void addLayer(CanvasLayer canvasLayer) {
-        for (int i = 0; i < canvasLayerArray.size(); ++i) {
-            if (canvasLayer.ZIndex < canvasLayerArray.get(i).ZIndex) {
-                
-                canvasLayerArray.add(i, canvasLayer);
+    public boolean addLayer(CanvasLayer canvasLayer) {
 
-                return;
+        boolean hasAdded;
+        //tries to acquire the read lock to modify the layer array
+        try {
+            modifyLock.writeLock().lock();
+
+            //inserts the layer into the descending sorted array
+            for (int i = 0; i < canvasLayerArray.size(); ++i) {
+                if (canvasLayer.ZIndex < canvasLayerArray.get(i).ZIndex) {
+
+                    canvasLayerArray.add(i, canvasLayer);
+
+                    break;
+                }
             }
-        }
+            canvasLayerArray.add(canvasLayer);
+            hasAdded = true;
 
-        canvasLayerArray.add(canvasLayer);
+        } finally {
+            modifyLock.writeLock().unlock();
+        }
+        return hasAdded;
     }
 
 
@@ -109,7 +125,19 @@ public class CanvasCompositor {
      * @return if the remove action was successful (if this item was previously existing)
      */
     public boolean removeLayer(CanvasLayer canvasLayer) {
-        return canvasLayerArray.remove(canvasLayer);
+
+
+        boolean hasRemoved; // indicates if this process has been successful
+
+        //tries to acquire write lock to modify the layer array
+        try {
+            modifyLock.writeLock().lock();
+
+            hasRemoved = canvasLayerArray.remove(canvasLayer);
+        } finally {
+            modifyLock.writeLock().unlock();
+        }
+        return hasRemoved;
     }
 
 
@@ -128,10 +156,25 @@ public class CanvasCompositor {
      * @param elapsed time elapsed between last draw
     */
     public void draw(long elapsed) {
-        gc.clearRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
-        for (CanvasLayer cl : canvasLayerArray) {
-            cl.cI.draw(gc, elapsed);
+        //tries to acquire read lock for rendering
+        try {
+            modifyLock.readLock().lock();
+
+            //clears the window
+            gc.clearRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
+
+
+            //attempts to draw all the layers
+            if (!canvasLayerArray.isEmpty()) {
+                for (CanvasLayer cl : canvasLayerArray) {
+                    cl.cI.draw(gc, elapsed);
+                }
+            }
+
+
+        } finally {
+            modifyLock.readLock().unlock();
         }
     }
 }
