@@ -1,8 +1,17 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
+
+/**
+ * This Class is used to create a layer to be used with {@link CanvasCompositor}, to allow any layers
+ * have the same previlege of rendering and listening inputs
+ * 
+ * The interface {@link CanvasCompositor.CanvasLayerI} is required to define the custom behaviour of this layer
+ * so that this layer can respond to drawing and key inputs, as well as mouse inputs
+ */
 public class CanvasLayer {
 
+    
     
     public CanvasLayerI cI;
     public int ZIndex;
@@ -26,10 +35,10 @@ public class CanvasLayer {
     public interface CanvasLayerI {
         /**
          * function being called when the mouse is down on this specific layer. mouseUp is promised to be fired
-         * @param x x-position of the mouseDown
-         * @param y y-position of the mouseDown
+         * @param x x-position of the mouse
+         * @param y y-position of the mouse
          * @param hasConsumed if this mouseDown is obstructed
-         * @return has the click been consumed
+         * @return has the click been consumed on this layer, or if the input has been blocked
          */
         public boolean onMouseDown(double x, double y, boolean hasConsumed);
 
@@ -37,9 +46,10 @@ public class CanvasLayer {
 
         /**
          * function being called when it has previously returned true on onMouseDown, when mouse has been released
-         * @param x x-position of the mouseUp
-         * @param y y-position of the mouseUp
+         * @param x x-position of the mouse
+         * @param y y-position of the mouse
          * @param hasConsumed if this mouseDown is obstructed
+         * @return has the click been consumed on this layer, or if the input has been blocked
          */
         public boolean onMouseUp(double x, double y, boolean hasConsumed);
 
@@ -50,7 +60,7 @@ public class CanvasLayer {
          * @param x x-position of the mouse
          * @param y y-position of the mouse
          * @param hasConsumed if this mouse has been obstructed
-         * @return
+         * @return has the click been consumed on this layer, or if the input has been blocked
          */
         public boolean onMouseMove(double x, double y, boolean hasConsumed);
 
@@ -59,7 +69,7 @@ public class CanvasLayer {
         /**
          * fires every time the layer should be rerendered
          * @param gc graphics context to draw on
-         * @param elapsed time in milliseconds passed
+         * @param elapsed time in milliseconds passed. passed for animation purposes
          */
         public void draw(GraphicsContext gc, long elapsed);
 

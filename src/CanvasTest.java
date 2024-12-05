@@ -22,7 +22,7 @@ public class CanvasTest extends Application {
         Pane pane = new Pane();
         Scene scene = new Scene(pane, 500, 500);
 
-        CanvasCompositor cc = new CanvasCompositor(pane, scene);
+        CanvasCompositor cc = new CanvasCompositor(pane, scene, 500, 500);
 
 
 

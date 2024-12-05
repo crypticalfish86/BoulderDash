@@ -22,7 +22,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 
-        CanvasCompositor cc = new CanvasCompositor(root, scene);
+        CanvasCompositor cc = new CanvasCompositor(root, scene, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 
 
