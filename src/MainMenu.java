@@ -88,11 +88,11 @@ public class MainMenu {
                 UIHelper.drawImageRelativeXX(gc, IMAGE_TITLE, .5, .2, .25);
 
                 
-                //
+                //draws the lower play button
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .8, .1);
 
                 
-                //
+                //draws the upper play button
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .5, .1);
 
                 gc.fillText(null, elapsed, elapsed);
@@ -116,21 +116,42 @@ public class MainMenu {
 
 
 
-
+    /**
+     * Returns true if mouse is on the lower play button, used for opening up a profile selector
+     * @param mouseX x-position of the mouse
+     * @param mouseY y-position of the mouse
+     * @return if the mouse is on the play button
+     */
     private boolean isMouseOnPlay(double mouseX, double mouseY) {
         //check for play button
         return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .8, .1);
     }
 
+
+    /**
+     * Returns true if mouse is on the upper play button, used for opening up a game with no parameter
+     * @param mouseX x-position of the mouse
+     * @param mouseY y-position of the mouse
+     * @return if the mouse is on the play button
+     */
     private boolean isMouseOnPlay2(double mouseX, double mouseY) {
         //check for play button
         return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .5, .1);
     }
 
+
+    /**
+     * Hides the main menu from the canvas
+     * 
+     */
     public void hide() {
         cc.removeLayer(cl);
     }
 
+    /**
+     * Shows the main menu
+     * 
+     */
     public void show() {
         cc.addLayer(cl);
     }
