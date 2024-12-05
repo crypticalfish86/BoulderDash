@@ -11,8 +11,8 @@ public class GamePauseMenu {
     private final GameSession gameSession;
 
 
-    private static final double WINDOW_SIZE_X = .3;
-    private static final double WINDOW_SIZE_Y = .5;
+    private static final double WINDOW_SIZE_X = .3; // the width of the background of this window
+    private static final double WINDOW_SIZE_Y = .5; // the height of the background of this window
 
 
 
@@ -20,6 +20,8 @@ public class GamePauseMenu {
     public static final Image IMAGE_SAVE = new Image("file:Assets/Buttons/MenuTitle.png");
     public static final Image IMAGE_LOAD = new Image("file:Assets/Buttons/MenuTitle.png");
     public static final Image IMAGE_EXIT = new Image("file:Assets/Buttons/MenuTitle.png");
+
+
 
     public GamePauseMenu(GameSession gameSession, CanvasCompositor cc) {
 
@@ -43,7 +45,7 @@ public class GamePauseMenu {
             @Override
             public boolean onMouseDown(double x, double y, boolean hasConsumed) {
                 
-                
+                //indicates if the mouse has been clicked in any of the given buttons
                 mouseDownOnResume[0] = UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_RESUME, .5, .32, .05);
                 mouseDownOnSave[0] = UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_SAVE, .5, .44, .05);
                 mouseDownOnLoad[0] = UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_LOAD, .5, .56, .05);
@@ -61,6 +63,7 @@ public class GamePauseMenu {
             @Override
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
                 
+                //checks for the 4 buttons to determine if any buttons has been clicked
                 if (mouseDownOnResume[0] && UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_RESUME, .5, .32, .05)) {
                     resume();
                 }
@@ -74,7 +77,7 @@ public class GamePauseMenu {
                     exit();
                 }
 
-
+                
                 return isMouseAtBackground(x, y);
             }
 
@@ -107,7 +110,7 @@ public class GamePauseMenu {
                     (WINDOW_SIZE_Y) * Main.WINDOW_HEIGHT
                 );
                 
-                //
+                //draws all the 4 buttons
                 UIHelper.drawImageRelativeYY(gc, IMAGE_RESUME, .5, .32, .05);
                 UIHelper.drawImageRelativeYY(gc, IMAGE_SAVE, .5, .44, .05);
                 UIHelper.drawImageRelativeYY(gc, IMAGE_LOAD, .5, .56, .05);
@@ -118,14 +121,12 @@ public class GamePauseMenu {
 
             @Override
             public void onKeyDown(KeyCode key) {
-                
+                //left empty because this window has no key inputs to listen to
             }
-
-
 
             @Override
             public void onKeyUp(KeyCode key) {
-                
+                //left empty because this window has no key inputs to listen to
             }
         }, 2);
 
@@ -149,13 +150,17 @@ public class GamePauseMenu {
     }
 
 
-
+    /**
+     * Shows this game pause menu
+     */
     public void show() {
         cc.addLayer(cl);
     }
 
 
-
+    /**
+     * Hides this game pause menu
+     */
     public void hide() {
         cc.removeLayer(cl);
     }
