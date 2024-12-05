@@ -23,7 +23,9 @@ public class GameSession {
     private GameSessionData currentSessionData; //Reference to this games' game session data
     private Player player; //Reference to the current single game player (inserted into the level in "interpretLevelData"
 
-    private final ArrayList<AmoebaController> ameobaControllerList;
+    private final ArrayList<AmoebaController> amoebaControllerList;
+    private int amoebaGrowthRate;
+    private int maxAmoebaSize;
 
     private final CanvasLayer cl;
     private final CanvasCompositor cc;
@@ -144,7 +146,7 @@ public class GameSession {
 
         cc.addLayer(this.cl);
         this.cc = cc;
-        ameobaControllerList = new ArrayList<>();
+        amoebaControllerList = new ArrayList<AmoebaController>();
     }
 
 
@@ -167,12 +169,14 @@ public class GameSession {
         this.gridHeight = Integer.parseInt(gameDataArr[1]);
         this.gridWidth = Integer.parseInt(gameDataArr[2]);
 
+        this.gridTileMap = new Tile[this.gridHeight][this.gridWidth];
+
         int score = Integer.parseInt(gameDataArr[3]);
         int timeLeft = Integer.parseInt(gameDataArr[4]);
         int diamondCount = Integer.parseInt(gameDataArr[6]);
         int diamondsRequired = Integer.parseInt(gameDataArr[7]);
-        int amoebaSpreadRate = Integer.parseInt(gameDataArr[8]);
-        int amobaSizeLimit = Integer.parseInt(gameDataArr[9]);
+        this.amoebaGrowthRate = Integer.parseInt(gameDataArr[8]);
+        this.maxAmoebaSize = Integer.parseInt(gameDataArr[9]);
         int redKeys = Integer.parseInt(gameDataArr[10]);
         int blueKeys = Integer.parseInt(gameDataArr[11]);
         int yellowKeys = Integer.parseInt(gameDataArr[12]);
@@ -183,8 +187,97 @@ public class GameSession {
 
         String entireLevelString = gameDataArr[14];
         //TODO fill grid tile map
+        fill2DGrid(entireLevelString);
+
 
     }
+        private void fill2DGrid(String stringGridMap){
+            String[] gridMapLinesArray = stringGridMap.split("\n");//split file by new line
+
+            for (int i = 0; i < gridMapLinesArray.length; i++){
+
+                String[] gridLineTileArray = gridMapLinesArray[i].split(" ");//then split each element of that array by
+
+                for(int ii = 0; ii < gridLineTileArray.length; ii++){
+
+                    Tile newTile = new PathWall(this, ii, i, OPERATION_INTERVAL);//this should never finish itialised as this, it should go through the switch statement
+                    switch (gridLineTileArray[ii]){
+                        case "-":
+                            newTile = new PathWall(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                        case "E":
+                            newTile = new ExitWall(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                        case "W":
+                            newTile = new NormalWall(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                        case "T":
+                            newTile = new TitaniumWall(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                        case "M":
+                            newTile = new MagicWall(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                        case "D":
+                            newTile = new DirtWall(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                        case "*":
+                            newTile = new Diamond(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                        case "@":
+                            newTile = new Boulder(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                        case "RK":
+                            newTile = new Key(this, ii, i, OPERATION_INTERVAL, 'R');//TODO this may break the game when saving, come back to this
+                            break;
+                        case "BK":
+                            newTile = new Key(this, ii, i, OPERATION_INTERVAL, 'B');//TODO this may break the game when saving, come back to this
+                            break;
+                        case "YK":
+                            newTile = new Key(this, ii, i, OPERATION_INTERVAL, 'Y');//TODO this may break the game when saving, come back to this
+                            break;
+                        case "GK":
+                            newTile = new Key(this, ii, i, OPERATION_INTERVAL, 'G');//TODO this may break the game when saving, come back to this
+                            break;
+                        case "RD":
+                            newTile = new Door(this, ii, i, OPERATION_INTERVAL, 'R');//TODO this may break the game when saving, come back to this
+                            break;
+                        case "BD":
+                            newTile = new Door(this, ii, i, OPERATION_INTERVAL, 'B');//TODO this may break the game when saving, come back to this
+                            break;
+                        case "YD":
+                            newTile = new Door(this, ii, i, OPERATION_INTERVAL, 'Y');//TODO this may break the game when saving, come back to this
+                            break;
+                        case "GD":
+                            newTile = new Door(this, ii, i, OPERATION_INTERVAL, 'G');//TODO this may break the game when saving, come back to this
+                            break;
+                        case "P":
+                            player = new Player(this, ii, i, OPERATION_INTERVAL);
+                            this.player = player;
+                            newTile = player;
+                            break;
+                        case "BF"://TODO ask omar or isaac the proper way to do this
+                            newTile = new Butterfly(this, ii, i, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
+                            break;
+                        case "FF"://TODO ask omar or isaac the proper way to do this
+                            newTile = new FireFly(this, ii, i, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
+                            break;
+                        case "F":
+                            newTile = new Frog(this, ii, i);//TODO ask alex why there is no operation interval for frog
+                            break;
+                        case "A":
+                            AmoebaController newAmoebaController = new AmoebaController(this, ii, i, OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize);
+                            this.amoebaControllerList.add(newAmoebaController);
+                            break;
+                        default:
+                            System.out.println("ERROR TILE NOT RECOGNISED, PRINTING PATHWALL BY DEFAULT");
+                            newTile = new PathWall(this, ii, i, OPERATION_INTERVAL);
+                            break;
+                    }
+
+                    this.gridTileMap[i][ii] = newTile;
+                }
+            }
+        }
 
     public String buildSaveString(){
         String saveString = "";
