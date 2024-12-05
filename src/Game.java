@@ -82,14 +82,28 @@ public class Game {
             Scanner scanner = new Scanner(file);
             scanner.useDelimiter("\\Z"); // Read entire file as one string
 
-            if (scanner.hasNext()) {
-                this.currentGamesession = new GameSession(this, scanner.next(), cc);
-                scanner.close();
-                return true;
-            } else {
-                scanner.close();
+            String fileContent;
+            if(scanner.hasNext()){
+                fileContent = scanner.next();
+            }
+            else{
                 return false;
             }
+
+            //If the content of the file is new then load in the default file
+            if(fileContent.equals("NEW;")){
+                //TODO read default level package
+                File levelOneFile = new File("..\\Levels\\level1.txt");
+                Scanner levelOneFileScanner = new Scanner(levelOneFile);
+                levelOneFileScanner.useDelimiter("\\Z");
+                fileContent = levelOneFileScanner.next();
+                this.currentGamesession = new GameSession(this, fileContent, cc);
+            }
+            else{
+                this.currentGamesession = new GameSession(this, fileContent, cc);
+                scanner.close();
+            }
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;

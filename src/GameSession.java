@@ -20,7 +20,7 @@ public class GameSession {
 
     private Tile[][] gridTileMap; //The full 2D grid instantiated on the interpretation of the level data
     private final Game game; // Reference to the game that the current game session is attached to
-    private final GameSessionData currentSessionData; //Reference to this games' game session data
+    private GameSessionData currentSessionData; //Reference to this games' game session data
     private Player player; //Reference to the current single game player (inserted into the level in "interpretLevelData"
 
     private final ArrayList<AmoebaController> ameobaControllerList;
@@ -50,28 +50,9 @@ public class GameSession {
 
     GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
-
-        this.currentSessionData = new GameSessionData(this,
-            0, 0, 0, 0,
-            0, 0, 0, 0
-        );
         this.gamePauseMenu = new GamePauseMenu(this, cc);
-        //TODO update this to account for loading games in the middle of play
 
-
-
-
-        interpretLevelData(gameData);
-
-
-
-
-
-
-
-
-
-
+        interpretLevelData(gameData);//loads gameSessionData and fills the grid tile map
 
 
 
@@ -167,27 +148,42 @@ public class GameSession {
     }
 
 
-    /*
-        method used to interpret the gameData (from a levelFileFormat file) fills the gridTileMap, initiates timer,
-        determine the
-    */
+    /**
+     * Initialises GameSessiondata and fills the 2DGridTileMap.
+     * @param gameData
+     * The data used to fill GameSessionData and the grid tile map.
+     */
     private void interpretLevelData(String gameData) {
-        //TODO implement a function  to interpret level data
-        // String[] gameDataArr = gameData.split(" ");
 
-        // line 1: Height, Width
-        // Line 2: TimeAllowed, DiamondsRequired, AmeobaSpreadRate, AmeobaSizeLimit
-        // Line 3: TimeLeft, Score, DiamondCount
-        // Line 4: RedKey, BlueKey, YellowKey, GreenKey
-        // Line 5+: Actual level
-
-        // Vers2
+        // file structure
         // line 1: Current Level, Height, Width
         // Line 2: Score, TimeLeft, TimeAllowed
         // Line 3: DiamondCount, DiamondsRequired
         // Line 4: AmeobaSpreadRate, AmeobaSizeLimit
         // Line 5: RedKey, BlueKey, YellowKey, GreenKey
         // Line 6+: Actual level
+
+        String[] gameDataArr = gameData.split(";");
+        this.gridHeight = Integer.parseInt(gameDataArr[1]);
+        this.gridWidth = Integer.parseInt(gameDataArr[2]);
+
+        int score = Integer.parseInt(gameDataArr[3]);
+        int timeLeft = Integer.parseInt(gameDataArr[4]);
+        int diamondCount = Integer.parseInt(gameDataArr[6]);
+        int diamondsRequired = Integer.parseInt(gameDataArr[7]);
+        int amoebaSpreadRate = Integer.parseInt(gameDataArr[8]);
+        int amobaSizeLimit = Integer.parseInt(gameDataArr[9]);
+        int redKeys = Integer.parseInt(gameDataArr[10]);
+        int blueKeys = Integer.parseInt(gameDataArr[11]);
+        int yellowKeys = Integer.parseInt(gameDataArr[12]);
+        int greenKeys = Integer.parseInt(gameDataArr[13]);
+
+        this.currentSessionData = new GameSessionData(this, timeLeft, diamondsRequired, redKeys, blueKeys, yellowKeys, greenKeys, diamondCount, score);
+
+
+        String entireLevelString = gameDataArr[14];
+        //TODO fill grid tile map
+
     }
 
     public String buildSaveString(){
