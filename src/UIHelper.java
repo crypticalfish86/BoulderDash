@@ -3,7 +3,14 @@ import javafx.scene.image.Image;
 
 public class UIHelper {
     
-
+    /**
+     * draws an image centered around the given coordinates, with a specified width (size relative to x axis)
+     * @param gc graphics context to draw on
+     * @param img image to be drawn, also used for determining height
+     * @param xPos x-position of the center
+     * @param yPos y-position of the center
+     * @param width width of the image, in ratio to the width
+     */
     public static void drawImageRelativeXX(GraphicsContext gc, Image img, double xPos, double yPos, double width) {
         double xyScale = img.getHeight() / img.getWidth();
         gc.drawImage(img,
@@ -14,6 +21,14 @@ public class UIHelper {
         );
     }
 
+    /**
+     * draws an image centered around the given coordinates, with a specified height (size relative to y axis)
+     * @param gc graphics context to draw on
+     * @param img image to be drawn, also used for determining width
+     * @param xPos x-position of the center
+     * @param yPos y-position of the center
+     * @param height height of the image, in ratio to the height
+     */
     public static void drawImageRelativeYY(GraphicsContext gc, Image img, double xPos, double yPos, double height) {
         double yxScale = img.getWidth() / img.getHeight();
         gc.drawImage(img,
@@ -26,7 +41,16 @@ public class UIHelper {
 
 
 
-
+    /**
+     * Checks if the given mouse x and y (in pixels) is in the given rectangular box defined by the image aspect ratio and the given width
+     * @param mouseX x-coordinate of the mouse
+     * @param mouseY y-coordinate of the mouse
+     * @param img image to evaluate aspect ratio
+     * @param xPos x-position of the box
+     * @param yPos y-position of the box
+     * @param width width of the box in ratio fo the width
+     * @return if the position is in the given box
+     */
     public static boolean checkIsXYInBoxRelativeXX(double mouseX, double mouseY, Image img, double xPos, double yPos, double width) {
         double xyScale = img.getHeight() / img.getWidth();
         
@@ -38,6 +62,18 @@ public class UIHelper {
         );
     }
 
+
+
+    /**
+     * Checks if the given mouse x and y (in pixels) is in the given rectangular box defined by the image aspect ratio and the given height
+     * @param mouseX x-coordinate of the mouse
+     * @param mouseY y-coordinate of the mouse
+     * @param img image to evaluate aspect ratio
+     * @param xPos x-position of the box
+     * @param yPos y-position of the box
+     * @param height height of the box in ratio fo the height
+     * @return if the position is in the given box
+     */
     public static boolean checkIsXYInBoxRelativeYY(double mouseX, double mouseY, Image img, double xPos, double yPos, double height) {
         double yxScale = img.getWidth() / img.getHeight();
         
