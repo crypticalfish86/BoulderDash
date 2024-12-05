@@ -113,21 +113,21 @@ public class GameSessionData {
      * @param increment
      * increments if true, otherwise decrements.
      */
-    public void giveKey(char key) {
+    public void giveKey(String key) {
         switch (key){
-            case 'r':
+            case "RK":
                 this.redKeys++;
                 break;
 
-            case 'b':
+            case "BK":
                 this.blueKeys++;
                 break;
 
-            case 'y':
+            case "YK":
                 this.yellowKeys++;
                 break;
 
-            case 'g':
+            case "GK":
                 this.greenKeys++;
                 break;
 
