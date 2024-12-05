@@ -257,11 +257,17 @@ public class GameSession {
                             this.player = player;
                             newTile = player;
                             break;
-                        case "BF"://TODO ask omar or isaac the proper way to do this
+                        case "BL"://TODO ask omar or isaac the proper way to do this
                             newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
                             break;
-                        case "FF"://TODO ask omar or isaac the proper way to do this
+                        case "BR":
+                            newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, false);//TODO ask omar or isaac about prioritise direction
+                            break;
+                        case "FL"://TODO ask omar or isaac the proper way to do this
                             newTile = new FireFly(this, x, y, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
+                            break;
+                        case "FR"://TODO ask omar or isaac the proper way to do this
+                            newTile = new FireFly(this, x, y, OPERATION_INTERVAL, false);//TODO ask omar or isaac about prioritise direction
                             break;
                         case "F":
                             newTile = new Frog(this, x, y);//TODO ask alex why there is no operation interval for frog
