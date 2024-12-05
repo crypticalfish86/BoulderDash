@@ -241,16 +241,16 @@ public class GameSession {
                             newTile = new Key(this, x, y, OPERATION_INTERVAL, "GK");
                             break;
                         case "RD":
-                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "RD");//TODO this may break the game when saving, come back to this
+                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "RD");
                             break;
                         case "BD":
-                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "BD");//TODO this may break the game when saving, come back to this
+                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "BD");
                             break;
                         case "YD":
-                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "YD");//TODO this may break the game when saving, come back to this
+                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "YD");
                             break;
                         case "GD":
-                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "GD");//TODO this may break the game when saving, come back to this
+                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "GD");
                             break;
                         case "P":
                             Player player = new Player(this, x, y, OPERATION_INTERVAL);
