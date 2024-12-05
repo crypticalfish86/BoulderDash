@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 
 public class Butterfly extends FlyingEnemy{
 
-    
+    private int ticksAlive;
     public static final Image img = new Image("file:Assets/Images/Butterfly.png"); // Placeholder for the image
 
 
@@ -13,6 +13,7 @@ public class Butterfly extends FlyingEnemy{
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseDirection);
         this.amoebaCanSpreadToThisTile = true;
         this.lastTimeStamp = System.currentTimeMillis();
+        ticksAlive = 0;
     }
 
     public void interact(Tile tile){
@@ -32,6 +33,12 @@ public class Butterfly extends FlyingEnemy{
             move(this.x, this.y);
             this.lastTimeStamp = System.currentTimeMillis();
         }
+
+        ticksAlive++;
+        if(ticksAlive % 20 == 0){
+            move(this.x, this.y);
+        }
+
     }
 
 

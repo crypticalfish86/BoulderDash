@@ -21,7 +21,19 @@ public abstract class FlyingEnemy extends Enemy {
         int[] xDir = new int[4];
         int[] yDir = new int[4];
 
+        //Set the direction enemy is facing
+        if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
+            direction = "Right";
+        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
+            direction = "Left";
+        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
+            direction = "Up";
+        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
+            direction = "Down";
+        }
+
         System.out.println(x + "" + y + "" + this.direction);
+
 
         switch (this.direction) {
             case "Up":
@@ -45,10 +57,10 @@ public abstract class FlyingEnemy extends Enemy {
         }
 
 
-        Tile tileToLeft = gameSession.getTileFromGrid(x + xDir[0], y + yDir[0]);
-        Tile tileToRight = gameSession.getTileFromGrid(x + xDir[1], y + yDir[1]);
-        Tile tileBehind = gameSession.getTileFromGrid(x + xDir[2], y + yDir[2]);
-        Tile tileInFront = gameSession.getTileFromGrid(x + xDir[3], y + yDir[3]);
+        Tile tileToLeft = gameSession.getTileFromGrid(x + xDir[0], y + yDir[0]); //Tile to enemies' left
+        Tile tileToRight = gameSession.getTileFromGrid(x + xDir[1], y + yDir[1]); //Tile to enemies' right
+        Tile tileBehind = gameSession.getTileFromGrid(x + xDir[2], y + yDir[2]); //Tile behind enemy
+        Tile tileInFront = gameSession.getTileFromGrid(x + xDir[3], y + yDir[3]); //Tile in front of enemy
 
 
         int newX = x;
@@ -90,6 +102,20 @@ public abstract class FlyingEnemy extends Enemy {
         }
 
 
+    }
+
+    private boolean followEdgeOfThisTile(Tile tile) {
+        switch (tile.getTileType()) {
+            case DIRT_WALL:
+            case TITANIUM_WALL:
+            case MAGIC_WALL:
+            case NORMAL_WALL:
+            case EXIT_WALL:
+            case FALLING_OBJECT:
+                return true;
+            default:
+                return false;
+        }
     }
 
 
