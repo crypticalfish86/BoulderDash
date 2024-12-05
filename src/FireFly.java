@@ -32,6 +32,7 @@ public class FireFly extends FlyingEnemy{
 
 
         }
+
         ticksAlive++;
         if(ticksAlive % 20 == 0){
             if(prioritiseLeft){

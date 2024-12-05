@@ -5,7 +5,7 @@ public abstract class FlyingEnemy extends Enemy {
     //protected int ticksAlive;
     protected String direction;
 
-    public FlyingEnemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, boolean prioritiseDirection) {
+    public FlyingEnemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, boolean prioritiseLeft) {
         super(gameSession, x, y, TileType, operationInterval);
         this.prioritiseLeft = prioritiseLeft; //either true meaning left or false meaning right
         this.x = x;
