@@ -53,6 +53,11 @@ public class Butterfly extends FlyingEnemy{
     }
 
     public String returnStringTileRepresentation(){
-        return "BF";//TODO discuss how we're doing this with omar (the butterfly direction)
+        if(this.prioritiseLeft){
+            return "BL";
+        }
+        else {
+            return "BR";
+        }
     }
 }

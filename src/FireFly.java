@@ -51,6 +51,11 @@ public class FireFly extends FlyingEnemy{
     }
 
     public String returnStringTileRepresentation(){
-        return "FF";//TODO ask omar how we're doing this (firefly directions)
+        if (prioritiseLeft){
+            return "FL";
+        }
+        else {
+            return "FR";
+        }
     }
 }

@@ -257,17 +257,17 @@ public class GameSession {
                             this.player = player;
                             newTile = player;
                             break;
-                        case "BL"://TODO ask omar or isaac the proper way to do this
-                            newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
+                        case "BL":
+                            newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
                             break;
                         case "BR":
-                            newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, false);//TODO ask omar or isaac about prioritise direction
+                            newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, false);
                             break;
-                        case "FL"://TODO ask omar or isaac the proper way to do this
-                            newTile = new FireFly(this, x, y, OPERATION_INTERVAL, true);//TODO ask omar or isaac about prioritise direction
+                        case "FL":
+                            newTile = new FireFly(this, x, y, OPERATION_INTERVAL, true);
                             break;
-                        case "FR"://TODO ask omar or isaac the proper way to do this
-                            newTile = new FireFly(this, x, y, OPERATION_INTERVAL, false);//TODO ask omar or isaac about prioritise direction
+                        case "FR":
+                            newTile = new FireFly(this, x, y, OPERATION_INTERVAL, false);
                             break;
                         case "F":
                             newTile = new Frog(this, x, y);//TODO ask alex why there is no operation interval for frog

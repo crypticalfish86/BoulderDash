@@ -52,7 +52,7 @@ public class Game {
         //Call "buildSaveString in GameSession and then write the file to the correct profile
         String saveString = this.currentGamesession.buildSaveString();
 
-        String filepath = "..\\Levels" + this.loadedPlayerProfileID;
+        String filepath = "./Levels/profile" + this.loadedPlayerProfileID + ".txt";
 
 
         FileWriter fileToSaveTo = new FileWriter(filepath);
