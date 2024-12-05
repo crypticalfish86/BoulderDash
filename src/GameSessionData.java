@@ -77,24 +77,24 @@ public class GameSessionData {
      * @return
      * returns true if the user has picked up at least one key of that colour, otherwise returns false.
      */
-    public boolean tryConsumeKey(char key) {
+    public boolean tryConsumeKey(String key) {
         switch (key){
-            case 'r':
+            case "RK":
                 if (this.redKeys <= 0) { return false; }
                 this.redKeys--;
                 return true;
                 
-            case 'b':
+            case "BK":
                 if (this.blueKeys <= 0) { return false; }
                 this.blueKeys--;
                 return true;
 
-            case 'y':
+            case "YK":
                 if (this.yellowKeys <= 0) { return false; }
                 this.yellowKeys--;
                 return true;
 
-            case 'g':
+            case "GK":
                 if (this.greenKeys <= 0) { return false; }
                 this.greenKeys--;
                 return true;

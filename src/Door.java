@@ -4,9 +4,9 @@ import javafx.scene.image.Image;
 public class Door extends Wall {
 
     private Image img; // The image representing the door
-    private char doorColour; // The color of the door
+    private String doorColour; // The color of the door
 
-    public Door(GameSession gameSession, int x, int y, long operationInterval, char doorColour) {
+    public Door(GameSession gameSession, int x, int y, long operationInterval, String doorColour) {
         super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
         this.doorColour = doorColour;
         this.img = selectImageBasedOnColor(doorColour); // Set the image based on the door color
@@ -14,7 +14,7 @@ public class Door extends Wall {
     }
 
     // Getter for door color
-    public char getDoorColour() {
+    public String getDoorColour() {
         return this.doorColour;
     }
 
@@ -55,19 +55,19 @@ public class Door extends Wall {
     }
 
     public String returnStringTileRepresentation() {
-        return Character.toString(this.doorColour);
+        return this.doorColour;
     }
 
     // Select the image based on the door color
-    private Image selectImageBasedOnColor(char color) {
+    private Image selectImageBasedOnColor(String color) {
         switch (color) {
-            case 'R': // Red door
+            case "RD": // Red door
                 return new Image("file:Assets/Images/RedDoor.png");
-            case 'B': // Blue door
+            case "BD": // Blue door
                 return new Image("file:Assets/Images/BlueDoor.png");
-            case 'Y': // Yellow door
+            case "YD": // Yellow door
                 return new Image("file:Assets/Images/YellowDoor.png");
-            case 'G': // Green door
+            case "GD": // Green door
                 return new Image("file:Assets/Images/GreenDoor.png");
         }
 
