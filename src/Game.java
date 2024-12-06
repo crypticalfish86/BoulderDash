@@ -81,7 +81,7 @@ public class Game {
             if(fileContent.equals("new;")){
                 //TODO read default level package
                 System.out.println("reading level file");
-                File levelOneFile = new File("./Levels/level1.txt");
+                File levelOneFile = new File("./Levels/level0.txt");
                 Scanner levelOneFileScanner = new Scanner(levelOneFile);
                 levelOneFileScanner.useDelimiter("\\A");
                 fileContent = levelOneFileScanner.next();

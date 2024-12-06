@@ -36,6 +36,7 @@ public class Door extends Wall {
         }
     }
 
+
     // Logic to unlock or remove the door
     private void unlockDoor() {
         // Replace the door on the grid with a PathWall (or another passable tile)

@@ -53,7 +53,7 @@ public class GameSession {
     GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
         this.gamePauseMenu = new GamePauseMenu(this, cc);
-
+        amoebaControllerList = new ArrayList<AmoebaController>();
         interpretLevelData(gameData);//loads gameSessionData and fills the grid tile map
 
 
@@ -101,14 +101,17 @@ public class GameSession {
 
 
 
-                
-                //simulate game if the game is not paused
+                // Update game state if not paused
                 if (!isGamePaused) {
-                    timeLeft -= 1000 / 60;
-                    if (timeLeft <= 0) {
-                        player.killPlayer();//LOL
-                    }
+                    timeLeft -= 1000 / 60; // Reduce time (frame-based)
 
+                    // Check if time has run out
+                    if (timeLeft <= 0) {
+                        System.out.println("Time's up! Player killed.");
+                        player.killPlayer();
+                        onGameOver(false); // Trigger the game-over logic
+                        return; // Stop further updates
+                    }
                     for (int y = 0; y < gridHeight; ++y) {
                         for (int x = 0; x < gridWidth; ++x) {
                             if (gridTileMap[y] == null || gridTileMap[y][x] == null) { System.out.printf("%d, %d\n", x, y);}
@@ -146,7 +149,6 @@ public class GameSession {
 
         cc.addLayer(this.cl);
         this.cc = cc;
-        amoebaControllerList = new ArrayList<AmoebaController>();
     }
 
 
@@ -644,8 +646,17 @@ public class GameSession {
      * @param hasWon if the end game is counted as winning
      */
     public void onGameOver(boolean hasWon) {
+        if (hasWon) {
+            System.out.println("Congratulations! Level Complete.");
+        } else {
+            System.out.println("Game Over. Better luck next time.");
+        }
+
+        // Call the game's method to handle the end of the session
         game.onGameOver(hasWon, currentSessionData);
+
     }
+
 
     public int getScoreForGameOverScreen() {
         return currentSessionData.getDiamondCount();
