@@ -273,7 +273,8 @@ public class GameSession {
                             newTile = new Frog(this, x, y);//TODO ask alex why there is no operation interval for frog
                             break;
                         case "A":
-                            AmoebaController newAmoebaController = new AmoebaController(this, x, y, OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize);
+                            AmoebaController newAmoebaController = new AmoebaController(this, x, y,
+                                    OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize);
                             this.amoebaControllerList.add(newAmoebaController);
                             break;
                         default:
