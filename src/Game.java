@@ -148,7 +148,6 @@ public class Game {
     public void onGameOver(boolean hasWon, GameSessionData gameSessionData) {
         //TODO: check the game's level
 
-
         if (hasWon) {
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
                 //TODO: show winning screen with score
@@ -158,6 +157,7 @@ public class Game {
 
             }
         } else {
+            this.currentGamesession.endGame();
             this.gameOver = new GameOver(this, cc, gameSessionData);
         }
     }

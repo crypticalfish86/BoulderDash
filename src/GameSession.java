@@ -396,7 +396,7 @@ public class GameSession {
     }
 
     // decouples the layer to the display
-    private void endGame() {
+    public void endGame() {
         cc.removeLayer(cl);
     }
 

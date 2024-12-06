@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-public class GameOver {
+public class GameWin {
     private final CanvasCompositor cc;
     private final CanvasLayer cl;
     private final GameSessionData gameSessionData;
@@ -17,7 +17,7 @@ public class GameOver {
 
     private final Game game;
 
-    public static final Image IMAGE_GAME_OVER = new Image("file:Assets/Buttons/GameOverButton.png");
+    public static final Image IMAGE_GAME_COMPLETE = new Image("file:Assets/Buttons/GameComplete.png");
     public static final Image IMAGE_SCORE = new Image("file:Assets/Buttons/ScoreButton.png");
     public static final Image IMAGE_RETURN_MENU = new Image("file:Assets/Buttons/ExitToMainMenuButton.png");
 
@@ -30,7 +30,7 @@ public class GameOver {
     public File profile3 = new File("Profiles/profile3.txt");
 
 
-    public GameOver(Game game, CanvasCompositor cc, GameSessionData gameSessionData) {
+    public GameWin(Game game, CanvasCompositor cc, GameSessionData gameSessionData) {
         this.cc = cc;
         this.game = game;
         this.gameSessionData = gameSessionData;
@@ -78,13 +78,13 @@ public class GameOver {
                 gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
-                UIHelper.drawImageRelativeXX(gc, IMAGE_GAME_OVER, .5, .2, .5);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_GAME_COMPLETE, .5, .2, .5);
 
-                UIHelper.drawImageRelativeXX(gc, IMAGE_SCORE, .4, .6, .15);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_SCORE, .4, .45, .15);
 
                 double x = .5;
-                double y = .42;
-                double size = .2;
+                double y = .5;
+                double size = .1;
 
                 if (game.getPlayerProfileID().equals("1")) {
                     displayProfileStatus(gc, profile1, x, y, size);
@@ -97,7 +97,7 @@ public class GameOver {
                 gc.setFill(Color.WHITE);
                 gc.setFont(new Font("Arial", Main.WINDOW_HEIGHT * .08));
                 String score = String.format("%04d", gameSessionData.getScore());
-                gc.fillText(score, Main.WINDOW_WIDTH * .65, Main.WINDOW_HEIGHT * .64);
+                gc.fillText(score, Main.WINDOW_WIDTH * .65, Main.WINDOW_HEIGHT * .49);
 
                 UIHelper.drawImageRelativeXX(gc, IMAGE_RETURN_MENU, .5, .8, .3);
             }
@@ -108,7 +108,6 @@ public class GameOver {
 
         cc.addLayer(cl);
     }
-
 
     private void displayProfileStatus(GraphicsContext gc, File profile, double xPos, double yPos, double width) {
         int currentLine = 0;
@@ -133,7 +132,7 @@ public class GameOver {
         }
     }
 
-    
+
     /**
      * Returns true if mouse is on the lower play button, used for opening up a profile selector
      * @param mouseX x-position of the mouse
@@ -160,6 +159,4 @@ public class GameOver {
     public void show() {
         cc.addLayer(cl);
     }
-
 }
-
