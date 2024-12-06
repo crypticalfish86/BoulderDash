@@ -23,19 +23,19 @@ public class MagicWall extends Wall {
         switch (inputTileObject.getTileType()) {
             case FALLING_OBJECT:
                 if (inputTileObject instanceof Boulder) {
-                    transformTile(inputTileObject, TileType.DIAMOND); // Transform Boulder into Diamond
+                    transformAndEjectTile(inputTileObject, TileType.DIAMOND); // Transform Boulder into Diamond
                 }
                 break;
             case DIAMOND:
-                transformTile(inputTileObject, TileType.FALLING_OBJECT); // Transform Diamond into Boulder
+                transformAndEjectTile(inputTileObject, TileType.FALLING_OBJECT); // Transform Diamond into Boulder
                 break;
             default:
                 System.out.println("No transformation applied by MagicWall.");
         }
     }
 
-    // Transform the tile to the new type
-    private void transformTile(Tile inputTileObject, TileType newTileType) {
+    // Transform and eject the tile to the other side of the Magic Wall
+    private void transformAndEjectTile(Tile inputTileObject, TileType newTileType) {
         int x = inputTileObject.getXPosition();
         int y = inputTileObject.getYPosition();
         Tile newTile;
@@ -54,6 +54,46 @@ public class MagicWall extends Wall {
 
         // Replace the old tile with the new tile
         gameSession.setTile(y, x, newTile);
+
+        // Attempt to eject the new tile to the other side of the Magic Wall
+        boolean ejected = ejectTileToOtherSide(newTile);
+        if (!ejected) {
+            System.out.println("Ejection failed. Leaving the transformed tile at its current position.");
+        }
+    }
+
+    // Eject the tile to the opposite side of the Magic Wall
+    private boolean ejectTileToOtherSide(Tile tile) {
+        int wallX = this.getXPosition();
+        int wallY = this.getYPosition();
+        int tileX = tile.getXPosition();
+        int tileY = tile.getYPosition();
+
+        int dx = tileX - wallX; // Determine the direction of entry
+        int dy = tileY - wallY;
+
+        int exitX = wallX - dx; // Determine the exit point
+        int exitY = wallY - dy;
+
+        // Check if the exit position is within bounds
+        if (exitX >= 0 && exitX < gameSession.getGridWidth() &&
+                exitY >= 0 && exitY < gameSession.getGridHeight()) {
+
+            Tile exitTile = gameSession.getTileFromGrid(exitX, exitY);
+
+            // Check if the exit tile is passable (PathWall or empty)
+            if (exitTile instanceof PathWall || exitTile.getTileType() == TileType.PATH) {
+                // Move the transformed tile to the exit position
+                gameSession.setTile(exitY, exitX, tile);
+                System.out.println("Ejected tile to (" + exitX + ", " + exitY + ").");
+                return true;
+            } else {
+                System.out.println("Exit position (" + exitX + ", " + exitY + ") is blocked.");
+            }
+        } else {
+            System.out.println("Exit position (" + exitX + ", " + exitY + ") is out of bounds.");
+        }
+        return false; // Ejection failed
     }
 
     // Activate the magic wall

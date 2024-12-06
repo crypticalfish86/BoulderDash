@@ -101,14 +101,17 @@ public class GameSession {
 
 
 
-                
-                //simulate game if the game is not paused
+                // Update game state if not paused
                 if (!isGamePaused) {
-                    timeLeft -= 1000 / 60;
-                    if (timeLeft <= 0) {
-                        player.killPlayer();//LOL
-                    }
+                    timeLeft -= 1000 / 60; // Reduce time (frame-based)
 
+                    // Check if time has run out
+                    if (timeLeft <= 0) {
+                        System.out.println("Time's up! Player killed.");
+                        player.killPlayer();
+                        onGameOver(false); // Trigger the game-over logic
+                        return; // Stop further updates
+                    }
                     for (int y = 0; y < gridHeight; ++y) {
                         for (int x = 0; x < gridWidth; ++x) {
                             if (gridTileMap[y] == null || gridTileMap[y][x] == null) { System.out.printf("%d, %d\n", x, y);}
