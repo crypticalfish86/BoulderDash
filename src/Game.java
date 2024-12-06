@@ -30,21 +30,6 @@ public class Game {
 
 
 
-
-
-    /**
-     * @return assigns the profileID and returns the appropiate profile file to read
-     */
-    private File profileDeterminer() {
-        if (loadedPlayerProfileID.equals("1")) {
-            return profileSelector.getProfile1();
-        } else if (loadedPlayerProfileID.equals("2")) {
-            return profileSelector.getProfile2();
-        } else {
-            return profileSelector.getProfile3();
-        }
-    }
-
     //TODO Add proper exceptions and errors like in loadgame
     private boolean saveGame() throws IOException { //TODO add proper exception throwing
         if(this.currentGamesession == null){
@@ -96,16 +81,15 @@ public class Game {
             if(fileContent.equals("new;")){
                 //TODO read default level package
                 System.out.println("reading level file");
-                File levelOneFile = new File("./Levels/TestLevel.txt");
+                File levelOneFile = new File("./Levels/level1.txt");
                 Scanner levelOneFileScanner = new Scanner(levelOneFile);
                 levelOneFileScanner.useDelimiter("\\A");
                 fileContent = levelOneFileScanner.next();
                 this.currentGamesession = new GameSession(this, fileContent, cc);
-            }
-            else{
+            } else {
                 this.currentGamesession = new GameSession(this, fileContent, cc);
-                scanner.close();
             }
+            scanner.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,18 +120,21 @@ public class Game {
 
     public void onProfileBoxClicked1() {
         System.out.println("Profile box 1 has been clicked");
+        this.loadedPlayerProfileID = "1";
         profileSelector.hide();
         loadGame("1");
     }
 
     public void onProfileBoxClicked2() {
         System.out.println("Profile box 2 has been clicked");
+        this.loadedPlayerProfileID = "2";
         profileSelector.hide();
         loadGame("2");
     }
 
     public void onProfileBoxClicked3() {
         System.out.println("Profile box 3 has been clicked");
+        this.loadedPlayerProfileID = "3";
         profileSelector.hide();
         loadGame("3");
     }
@@ -193,5 +180,10 @@ public class Game {
     public void endGame() {
         //TODO: implement returning to main menu
         mainMenu.show();
+    }
+
+
+    public String getPlayerProfileID() {
+        return this.loadedPlayerProfileID;
     }
 }

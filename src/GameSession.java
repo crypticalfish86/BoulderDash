@@ -617,7 +617,6 @@ public class GameSession {
     }
 
 
-
     private void setIsPaused(boolean isPaused) {
         if (isPaused ^ isGamePaused) {
             isGamePaused = isPaused;
