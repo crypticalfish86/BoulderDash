@@ -53,7 +53,7 @@ public class GameSession {
     GameSession(Game game, String gameData, CanvasCompositor cc) {
         this.game = game;
         this.gamePauseMenu = new GamePauseMenu(this, cc);
-
+        amoebaControllerList = new ArrayList<AmoebaController>();
         interpretLevelData(gameData);//loads gameSessionData and fills the grid tile map
 
 
@@ -146,7 +146,6 @@ public class GameSession {
 
         cc.addLayer(this.cl);
         this.cc = cc;
-        amoebaControllerList = new ArrayList<AmoebaController>();
     }
 
 

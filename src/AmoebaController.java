@@ -108,9 +108,11 @@ public class AmoebaController {
         //TODO: Verify this code
         //change it so it only spreads on a path, potentially making a new tiletype for paths
 
-        if(this.gameSession.getTileFromGrid(x,y).tileType == TileType.PATH){
+        if(this.currentAmoebaChildCount != 0 && this.gameSession.getTileFromGrid(x,y).tileType == TileType.PATH){
             // this.gameSession.callKillPlayer();
             // TODO: i don't think amoeba kills players?
+            this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
+        } else if(this.currentAmoebaChildCount == 0){
             this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
         }
 
