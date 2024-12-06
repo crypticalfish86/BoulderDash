@@ -77,7 +77,7 @@ public class MainMenu {
 
                 
                 //draws the lower play button
-                UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .6, .1);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .6, .15);
 
                 gc.fillText(null, elapsed, elapsed);
 
@@ -108,7 +108,7 @@ public class MainMenu {
      */
     private boolean isMouseOnPlay(double mouseX, double mouseY) {
         //check for play button
-        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .6, .1);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .6, .15);
     }
 
 

@@ -635,4 +635,12 @@ public class GameSession {
     public ArrayList<AmoebaController> getAmeobaControllerList() {
         return amoebaControllerList;
     }
+
+    public void runGameOverScreen() {
+        game.onPlayerDeath();
+    }
+
+    public int getScoreForGameOverScreen() {
+        return currentSessionData.getDiamondCount();
+    }
 }

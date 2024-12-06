@@ -118,7 +118,11 @@ public class Game {
     public void onPlayButtonClicked() {
         System.out.println("play is clicked");
         mainMenu.hide();
-        this.profileSelector = new ProfileSelector(this, cc);
+        if (this.profileSelector == null) {
+            this.profileSelector = new ProfileSelector(this, cc);
+        } else {
+            this.profileSelector.show();
+        }
 
         // TODO Auto-generated method stub
         // Run load game function here or move to profileselector to manage save screen
@@ -148,9 +152,23 @@ public class Game {
         loadGame("3");
     }
 
+    public void onPlayerDeath() {
+        this.gameOver = new GameOver(this, cc);
+    }
+
+    public void onExitButtonClicked() {
+        System.out.println("Exit button has been clicked");
+        gameOver.hide();
+        mainMenu.show();
+    }
+
 
     public void setPlayerProfile(String playerProfileID) {
         this.loadedPlayerProfileID = playerProfileID;
+    }
+
+    public int getPlayerScoreForGameOverScreen() {
+        return currentGamesession.getScoreForGameOverScreen();
     }
     
 

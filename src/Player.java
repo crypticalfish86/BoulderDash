@@ -180,6 +180,7 @@ public class Player extends Tile {
     // Add the killPlayer method
     public void killPlayer() {
         System.out.println("Player has been killed.");
+        gameSession.runGameOverScreen();
         gameSession.endGame(); // Assuming endGame is implemented in GameSession
     }
 
