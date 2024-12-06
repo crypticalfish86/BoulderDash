@@ -117,7 +117,9 @@ public class GameOver {
             Scanner input = new Scanner(profile);
             while (input.hasNextLine() && currentLine < 1) {
                 String[] saveCheck = input.nextLine().split(";");
-                if (saveCheck[0].equals("1")) {
+                if (saveCheck[0].equals("new")) {
+                    UIHelper.drawImageRelativeXX(gc, IMAGE_LEVEL1, xPos, yPos, width);
+                } else if (saveCheck[0].equals("1")) {
                     UIHelper.drawImageRelativeXX(gc, IMAGE_LEVEL1, xPos, yPos, width);
                 } else if (saveCheck[0].equals("2")) {
                     UIHelper.drawImageRelativeXX(gc, IMAGE_LEVEL2, xPos, yPos, width);
