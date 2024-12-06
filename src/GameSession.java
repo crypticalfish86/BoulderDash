@@ -397,7 +397,7 @@ public class GameSession {
 
 
     public void endGame() {
-        this.cc.removeLayer(this.cl);
+        cc.removeLayer(cl);
     }
 
     public void exitGame() {
