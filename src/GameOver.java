@@ -71,7 +71,7 @@ public class GameOver {
                 gc.setFill(Color.WHITE);
                 gc.setFont(new Font("Arial", Main.WINDOW_HEIGHT * .08));
                 String score = String.format("%04d", getPlayerScore());
-                gc.fillText(score, Main.WINDOW_WIDTH * .5, Main.WINDOW_HEIGHT * .49);
+                gc.fillText(score, Main.WINDOW_WIDTH * .65, Main.WINDOW_HEIGHT * .49);
 
                 UIHelper.drawImageRelativeXX(gc, IMAGE_RETURN_MENU, .5, .8, .3);
             }
