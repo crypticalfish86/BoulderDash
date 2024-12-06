@@ -22,7 +22,6 @@ public class CanvasCompositor {
     private final Canvas canvas; // internal canvas used for drawing
     private final GraphicsContext gc; // internal graphics context derived from canvas
     private final ArrayList<CanvasLayer> canvasLayerArray = new ArrayList<>(); // array for storing the layers. ordered by ascending z.
-    private final ReentrantReadWriteLock canvasLayerArrayLock = new ReentrantReadWriteLock(); // rw lock for array access
 
 
     private int sizeX; // canvas width
@@ -98,17 +97,19 @@ public class CanvasCompositor {
 
         //redirects key inputs
         scene.setOnKeyPressed(E -> {
-            canvasLayerArrayLock.readLock().lock();
-            for (CanvasLayer cl : canvasLayerArray) {
-                cl.cI.onKeyDown(E.getCode());
+            synchronized (canvasLayerArray) {
+                for (CanvasLayer cl : canvasLayerArray) {
+                    cl.cI.onKeyDown(E.getCode());
+                }
             }
         });
 
         //redirects key inputs
         scene.setOnKeyReleased(E -> {
-            canvasLayerArrayLock.readLock().lock();
-            for (CanvasLayer cl : canvasLayerArray) {
-                cl.cI.onKeyUp(E.getCode());
+            synchronized (canvasLayerArray) {
+                for (CanvasLayer cl : canvasLayerArray) {
+                    cl.cI.onKeyUp(E.getCode());
+                }
             }
         });
 
@@ -128,8 +129,7 @@ public class CanvasCompositor {
 
         boolean hasAdded;
         //tries to acquire the read lock to modify the layer array
-        try {
-            canvasLayerArrayLock.writeLock().lock();
+        synchronized (canvasLayerArray) {
 
 
 
@@ -145,10 +145,6 @@ public class CanvasCompositor {
             canvasLayerArray.add(canvasLayer);
             hasAdded = true;
 
-
-
-        } finally {
-            canvasLayerArrayLock.writeLock().unlock();
         }
         return hasAdded;
     }
@@ -166,13 +162,10 @@ public class CanvasCompositor {
         boolean hasRemoved; // indicates if this process has been successful
 
         //tries to acquire write lock to modify the layer array
-        try {
-            canvasLayerArrayLock.writeLock().lock();
+        synchronized (canvasLayerArray) {
             
 
             hasRemoved = canvasLayerArray.remove(canvasLayer);
-        } finally {
-            canvasLayerArrayLock.writeLock().unlock();
         }
         return hasRemoved;
     }
@@ -195,8 +188,7 @@ public class CanvasCompositor {
     public void draw(long elapsed) {
 
         //tries to acquire read lock for rendering
-        try {
-            canvasLayerArrayLock.readLock().lock();
+        synchronized (canvasLayerArray) {
 
             //clears the window
             gc.clearRect(0, 0, sizeX, sizeY);
@@ -208,8 +200,6 @@ public class CanvasCompositor {
                     cl.cI.draw(gc, elapsed);
                 }
             }
-        } finally {
-            canvasLayerArrayLock.readLock().unlock();
         }
     }
 

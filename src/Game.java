@@ -171,9 +171,11 @@ public class Game {
         return currentGamesession.getScoreForGameOverScreen();
     }
     
-
+    /**
+     * Shows the losing screen.
+     */
     public void endGame() {
         //TODO: implement returning to main menu
-        mainMenu.show();
+        // mainMenu.show();
     }
 }
