@@ -2,7 +2,7 @@ import javafx.scene.shape.MoveTo;
 //TODO resolve any commented out code lines
 public abstract class FlyingEnemy extends Enemy {
 
-    protected static final int DELAY_FACTOR = 20;
+    protected static final int DELAY_FACTOR = 30;
 
     protected boolean prioritiseLeft;
     protected int ticksAlive;
@@ -15,7 +15,6 @@ public abstract class FlyingEnemy extends Enemy {
         this.x = x;
         this.y = y;
         ticksAlive = 0;
-        direction = "Up";
     }
 
 
@@ -24,32 +23,6 @@ public abstract class FlyingEnemy extends Enemy {
     protected void moveLeft(int x, int y){
         int[] xDir = new int[4];
         int[] yDir = new int[4];
-
-        boolean hasFoundDirection = false;
-
-        //Set the direction enemy is facing
-        if(y != 0){
-            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
-                direction = "Right";
-                hasFoundDirection = true;
-            }
-        }
-        if(y != gameSession.getGridHeight() - 1 && !hasFoundDirection){
-            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
-                direction = "Left";
-                hasFoundDirection = true;
-            }
-        }
-        if(x != 0 && !hasFoundDirection){
-            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
-                direction = "Up";
-            }
-        }
-        if(x != gameSession.getGridWidth() - 1 && !hasFoundDirection){
-            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
-                direction = "Down";
-            }
-        }
 
 
         System.out.println(x + "" + y + "" + this.direction);
@@ -187,31 +160,6 @@ public abstract class FlyingEnemy extends Enemy {
         int[] xDir = new int[4];
         int[] yDir = new int[4];
 
-        boolean hasFoundDirection = false;
-
-        //Set the direction enemy is facing
-        if(y != 0){
-            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
-                direction = "Left";
-                hasFoundDirection = true;
-            }
-        }
-        if(y != gameSession.getGridHeight() - 1 && !hasFoundDirection){
-            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
-                direction = "Right";
-                hasFoundDirection = true;
-            }
-        }
-        if(x != 0 && !hasFoundDirection){
-            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
-                direction = "Down";
-            }
-        }
-        if(x != gameSession.getGridWidth() - 1 && !hasFoundDirection){
-            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
-                direction = "Up";
-            }
-        }
 
         //Find which tiles are to enemies' left, right, forward and behind based on direction
         switch (this.direction) {
@@ -340,7 +288,7 @@ public abstract class FlyingEnemy extends Enemy {
         }
     }
 
-    private boolean followEdgeOfThisTile(Tile tile) {
+    protected boolean followEdgeOfThisTile(Tile tile) {
         switch (tile.getTileType()) {
             case DIRT_WALL:
             case TITANIUM_WALL:
