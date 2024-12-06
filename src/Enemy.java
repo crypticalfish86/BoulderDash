@@ -78,7 +78,7 @@ public abstract class Enemy extends Tile {
         Tile targetTile = gameSession.getTileFromGrid(x, y);
 
 
-        if (targetTile.tileType == TileType.PATH) {
+        if (targetTile.tileType == TileType.PATH || targetTile.tileType == TileType.PLAYER) {
             targetTile.interact(this);
             return true;
         } else {
