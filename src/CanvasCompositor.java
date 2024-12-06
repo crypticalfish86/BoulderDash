@@ -52,12 +52,13 @@ public class CanvasCompositor {
             if (E.getButton() != MouseButton.PRIMARY) { return; }
             //checks from the top to the bottom to see which layer it interacts with
             
-            
-            boolean hasConsumed = false;
-            for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
-                CanvasLayer cl = canvasLayerArray.get(i);
+            synchronized (canvasLayerArray) {
+                boolean hasConsumed = false;
+                for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
+                    CanvasLayer cl = canvasLayerArray.get(i);
 
-                hasConsumed |= cl.cI.onMouseDown(E.getSceneX(), E.getSceneY(), hasConsumed);
+                    hasConsumed |= cl.cI.onMouseDown(E.getSceneX(), E.getSceneY(), hasConsumed);
+                }
             }
         });
 
@@ -66,14 +67,16 @@ public class CanvasCompositor {
         //redirects the mouse release event. only process primary mouse clicks due to backwards compability
         scene.setOnMouseReleased(E -> {
             if (E.getButton() != MouseButton.PRIMARY) { return; }
+
+
             //checks from the top to the bottom to see which layer it interacts with
+            synchronized (canvasLayerArray) {
+                boolean hasConsumed = false;
+                for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
+                    CanvasLayer cl = canvasLayerArray.get(i);
 
-            
-            boolean hasConsumed = false;
-            for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
-                CanvasLayer cl = canvasLayerArray.get(i);
-
-                hasConsumed |= cl.cI.onMouseUp(E.getSceneX(), E.getSceneY(), hasConsumed);
+                    hasConsumed |= cl.cI.onMouseUp(E.getSceneX(), E.getSceneY(), hasConsumed);
+                }
             }
         });
 
@@ -84,20 +87,23 @@ public class CanvasCompositor {
             
             
             //checks from the top to the bottom to see which layer it interacts with
+            synchronized (canvasLayerArray) {
             boolean hasConsumed = false;
-            for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
-                CanvasLayer cl = canvasLayerArray.get(i);
+                for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
+                    CanvasLayer cl = canvasLayerArray.get(i);
 
-                hasConsumed |= cl.cI.onMouseMove(E.getSceneX(), E.getSceneY(), hasConsumed);
+                    hasConsumed |= cl.cI.onMouseMove(E.getSceneX(), E.getSceneY(), hasConsumed);
+                }
             }
-            
         });
 
 
         //redirects key inputs
         scene.setOnKeyPressed(E -> {
             synchronized (canvasLayerArray) {
-                for (CanvasLayer cl : canvasLayerArray) {
+                for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
+
+                    CanvasLayer cl = canvasLayerArray.get(i);
                     cl.cI.onKeyDown(E.getCode());
                 }
             }
@@ -106,7 +112,9 @@ public class CanvasCompositor {
         //redirects key inputs
         scene.setOnKeyReleased(E -> {
             synchronized (canvasLayerArray) {
-                for (CanvasLayer cl : canvasLayerArray) {
+                for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
+
+                    CanvasLayer cl = canvasLayerArray.get(i);
                     cl.cI.onKeyUp(E.getCode());
                 }
             }

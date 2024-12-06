@@ -318,7 +318,7 @@ public class GameSession {
                                    int redKeys, int blueKeys, int yellowKeys, int greenKeys) {
         currentSessionData.setAllGameSessionData(score, timeAllowed, startingTime,
                 diamondCount, diamondsRequired,
-                redKeys, blueKeys, yellowKeys, greenKeys);
+                redKeys, blueKeys, yellowKeys, greenKeys, currentLevel);
         this.gridHeight = height;
         this.gridWidth = width;
         this.timeLeft = timeLeft;
@@ -394,11 +394,14 @@ public class GameSession {
         setIsPaused(false);
     }
 
-
-    public void endGame() {
+    // decouples the layer to the display
+    private void endGame() {
         cc.removeLayer(cl);
     }
 
+    /**
+     * Should be called by the pause menu to leave the game
+     */
     public void exitGame() {
         endGame();
         game.endGame();
@@ -635,8 +638,13 @@ public class GameSession {
         return amoebaControllerList;
     }
 
-    public void runGameOverScreen() {
-        game.onPlayerDeath();
+
+    /**
+     * Called by objects to end the game.
+     * @param hasWon if the end game is counted as winning
+     */
+    public void onGameOver(boolean hasWon) {
+        game.onGameOver(hasWon, currentSessionData);
     }
 
     public int getScoreForGameOverScreen() {

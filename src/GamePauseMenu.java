@@ -187,6 +187,6 @@ public class GamePauseMenu {
     /** fired when the exit button is clicked */
     private void exit() {
         hide();
-        gameSession.endGame();
+        gameSession.exitGame();
     }
 }

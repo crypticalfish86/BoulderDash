@@ -6,20 +6,22 @@ import javafx.scene.text.Font;
 
 
 public class GameOver {
-    CanvasCompositor cc;
-    CanvasLayer cl;
+    private final CanvasCompositor cc;
+    private final CanvasLayer cl;
+    private final GameSessionData gameSessionData;
 
 
-    Game game;
+    private final Game game;
 
     public static final Image IMAGE_GAME_OVER = new Image("file:Assets/Buttons/GameOverButton.png");
     public static final Image IMAGE_SCORE = new Image("file:Assets/Buttons/ScoreButton.png");
     public static final Image IMAGE_RETURN_MENU = new Image("file:Assets/Buttons/ExitToMainMenuButton.png");
 
 
-    public GameOver(Game game, CanvasCompositor cc) {
+    public GameOver(Game game, CanvasCompositor cc, GameSessionData gameSessionData) {
         this.cc = cc;
         this.game = game;
+        this.gameSessionData = gameSessionData;
 
         boolean[] mouseDownOnExit = {false};
 
@@ -70,7 +72,7 @@ public class GameOver {
 
                 gc.setFill(Color.WHITE);
                 gc.setFont(new Font("Arial", Main.WINDOW_HEIGHT * .08));
-                String score = String.format("%04d", getPlayerScore());
+                String score = String.format("%04d", gameSessionData.getScore());
                 gc.fillText(score, Main.WINDOW_WIDTH * .65, Main.WINDOW_HEIGHT * .49);
 
                 UIHelper.drawImageRelativeXX(gc, IMAGE_RETURN_MENU, .5, .8, .3);
@@ -82,11 +84,6 @@ public class GameOver {
 
         cc.addLayer(cl);
     }
-
-    public int getPlayerScore() {
-        return game.getPlayerScoreForGameOverScreen();
-    }
-
     /**
      * Returns true if mouse is on the lower play button, used for opening up a profile selector
      * @param mouseX x-position of the mouse

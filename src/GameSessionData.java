@@ -10,6 +10,8 @@ public class GameSessionData {
     private int diamondCount;
     private int score;
 
+    private int level;
+
     // TimeAllowed, DiamondsRequired, AmeobaSpreadRate, AmeobaSizeLimit
     // Line 3: TimeLeft, Score, DiamondCount
     // Line 4: RedKey, BlueKey, YellowKey, GreenKey
@@ -58,7 +60,7 @@ public class GameSessionData {
      */
     public void setAllGameSessionData(int score, int timeAllowed, int startingTime,
                                       int diamondCount, int diamondsRequired,
-                                      int redKeys, int blueKeys, int yellowKeys, int greenKeys) {
+                                      int redKeys, int blueKeys, int yellowKeys, int greenKeys, int level) {
         this.score = score;
         this.timeAllowed = timeAllowed;
         this.startingTime = startingTime;
@@ -68,6 +70,7 @@ public class GameSessionData {
         this.blueKeys = blueKeys;
         this.yellowKeys = yellowKeys;
         this.greenKeys = greenKeys;
+        this.level = level;
     }
 
     /**
@@ -172,4 +175,12 @@ public class GameSessionData {
         return this.diamondsRequired;
     }
 
+
+    /**
+     * Reads the level that this staage represents
+     * @return int of level, can be -1 to indicate if level is non-conventional
+     */
+    public int getLevel() {
+        return this.level;
+    }
 }

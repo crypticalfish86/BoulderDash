@@ -1,4 +1,3 @@
-import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;

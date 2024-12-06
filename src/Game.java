@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Game {
     private String loadedPlayerProfileID;
 
-    
+    private final int MAX_LEVEL = 5;
     
 
 
@@ -152,8 +152,27 @@ public class Game {
         loadGame("3");
     }
 
-    public void onPlayerDeath() {
-        this.gameOver = new GameOver(this, cc);
+
+    /**
+     * Should be called when the game has won or lost not due to the leave menus
+     * @param hasWon if this action is count as winning
+     * @param gameSessionData the internal data of the game to be read
+     */
+    public void onGameOver(boolean hasWon, GameSessionData gameSessionData) {
+        //TODO: check the game's level
+
+
+        if (hasWon) {
+            if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
+                //TODO: show winning screen with score
+            } else {
+                //TODO: start next game with level + 1
+
+
+            }
+        } else {
+            this.gameOver = new GameOver(this, cc, gameSessionData);
+        }
     }
 
     public void onExitButtonClicked() {
@@ -167,15 +186,12 @@ public class Game {
         this.loadedPlayerProfileID = playerProfileID;
     }
 
-    public int getPlayerScoreForGameOverScreen() {
-        return currentGamesession.getScoreForGameOverScreen();
-    }
-    
+
     /**
-     * Shows the losing screen.
+     * Should be called when the player decides to leave the game (through pausing menu)
      */
     public void endGame() {
         //TODO: implement returning to main menu
-        // mainMenu.show();
+        mainMenu.show();
     }
 }
