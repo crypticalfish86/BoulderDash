@@ -53,7 +53,7 @@ public class ExitWall extends Wall {
     public void changeLevel() {
         System.out.println("Level changed!");        // Implement logic to load the next level
 
-        gameSession.endGame(); // Assuming this transitions to the next level
+        gameSession.onGameOver(true); // Assuming this transitions to the next level
     }
 
     // Draw the exit wall

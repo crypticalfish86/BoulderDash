@@ -108,12 +108,7 @@ public class GameOver {
 
         cc.addLayer(cl);
     }
-<<<<<<< HEAD
-=======
 
-    public int getPlayerScore() {
-        return game.getPlayerScoreForGameOverScreen();
-    }
 
     private void displayProfileStatus(GraphicsContext gc, File profile, double xPos, double yPos, double width) {
         int currentLine = 0;
@@ -138,7 +133,7 @@ public class GameOver {
         }
     }
 
->>>>>>> 78197e0c71ec190968bc6407bdb4bff9c90d4f30
+    
     /**
      * Returns true if mouse is on the lower play button, used for opening up a profile selector
      * @param mouseX x-position of the mouse
