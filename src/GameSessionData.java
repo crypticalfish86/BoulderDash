@@ -81,33 +81,37 @@ public class GameSessionData {
      * returns true if the user has picked up at least one key of that colour, otherwise returns false.
      */
     public boolean tryConsumeKey(String key) {
-        switch (key){
-            case "RK":
+        switch (key) {
+            case "RK": // Red Key
+            case "RD": // Red Door requires Red Key
                 if (this.redKeys <= 0) { return false; }
                 this.redKeys--;
                 return true;
-                
-            case "BK":
+
+            case "BK": // Blue Key
+            case "BD": // Blue Door requires Blue Key
                 if (this.blueKeys <= 0) { return false; }
                 this.blueKeys--;
                 return true;
 
-            case "YK":
+            case "YK": // Yellow Key
+            case "YD": // Yellow Door requires Yellow Key
                 if (this.yellowKeys <= 0) { return false; }
                 this.yellowKeys--;
                 return true;
 
-            case "GK":
+            case "GK": // Green Key
+            case "GD": // Green Door requires Green Key
                 if (this.greenKeys <= 0) { return false; }
                 this.greenKeys--;
                 return true;
 
             default:
-                System.out.printf("Error: unknown key type: %c\n", key);
+                System.out.printf("Error: unknown key type: %s\n", key);
                 return false;
         }
-
     }
+
 
     /**
      * Changes how many of a particular item the user has in their inventory.
