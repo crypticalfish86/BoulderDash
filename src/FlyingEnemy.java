@@ -1,16 +1,20 @@
 import javafx.scene.shape.MoveTo;
 //TODO resolve any commented out code lines
 public abstract class FlyingEnemy extends Enemy {
+
+    protected static final int DELAY_FACTOR = 20;
+
     protected boolean prioritiseLeft;
-    //protected int ticksAlive;
+    protected int ticksAlive;
     protected String direction;
+
 
     public FlyingEnemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, boolean prioritiseLeft) {
         super(gameSession, x, y, TileType, operationInterval);
         this.prioritiseLeft = prioritiseLeft; //either true meaning left or false meaning right
         this.x = x;
         this.y = y;
-        //ticksAlive = 0;
+        ticksAlive = 0;
         direction = "Up";
     }
 
@@ -21,36 +25,108 @@ public abstract class FlyingEnemy extends Enemy {
         int[] xDir = new int[4];
         int[] yDir = new int[4];
 
+        boolean hasFoundDirection = false;
+
         //Set the direction enemy is facing
-        if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
-            direction = "Right";
-        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
-            direction = "Left";
-        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
-            direction = "Up";
-        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
-            direction = "Down";
+        if(y != 0){
+            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
+                direction = "Right";
+                hasFoundDirection = true;
+            }
         }
+        if(y != gameSession.getGridHeight() - 1 && !hasFoundDirection){
+            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
+                direction = "Left";
+                hasFoundDirection = true;
+            }
+        }
+        if(x != 0 && !hasFoundDirection){
+            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
+                direction = "Up";
+            }
+        }
+        if(x != gameSession.getGridWidth() - 1 && !hasFoundDirection){
+            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
+                direction = "Down";
+            }
+        }
+
 
         System.out.println(x + "" + y + "" + this.direction);
 
-
+        //Find which tiles are to enemies' left, right, forward and behind based on direction
         switch (this.direction) {
             case "Up":
                 xDir = new int[]{-1, +1, 0, 0};
                 yDir = new int[]{0, 0, +1, -1};
+
+                //Check for out of bounds
+                if(y == 0){
+                    yDir[3] = 0;
+                }
+                if(y == gameSession.getGridHeight() - 1){
+                    yDir[2] = 0;
+                }
+                if(x == 0){
+                    xDir[0] = 0;
+                }
+                if(x == gameSession.getGridWidth() - 1){
+                    xDir[1] = 0;
+                }
                 break;
             case "Down":
                 xDir = new int[]{+1, -1, 0, 0};
                 yDir = new int[]{0, 0, -1, +1};
+
+                //Check for out of bounds
+                if(y == 0){
+                    yDir[2] = 0;
+                }
+                if(y == gameSession.getGridHeight() - 1){
+                    yDir[3] = 0;
+                }
+                if(x == 0){
+                    xDir[1] = 0;
+                }
+                if(x == gameSession.getGridWidth() - 1){
+                    xDir[0] = 0;
+                }
                 break;
             case "Left":
                 xDir = new int[]{0, 0, +1, -1};
                 yDir = new int[]{+1, -1, 0, 0};
+
+                //Check for out of bounds
+                if(y == 0){
+                    yDir[1] = 0;
+                }
+                if(y == gameSession.getGridHeight() - 1){
+                    yDir[0] = 0;
+                }
+                if(x == 0){
+                    xDir[3] = 0;
+                }
+                if(x == gameSession.getGridWidth() - 1){
+                    xDir[2] = 0;
+                }
                 break;
             case "Right":
                 xDir = new int[]{0, 0, -1, +1};
                 yDir = new int[]{-1, +1, 0, 0};
+
+                //Check for out of bounds
+                if(y == 0){
+                    yDir[0] = 0;
+                }
+                if(y == gameSession.getGridHeight() - 1){
+                    yDir[1] = 0;
+                }
+                if(x == 0){
+                    xDir[2] = 0;
+                }
+                if(x == gameSession.getGridWidth() - 1){
+                    xDir[3] = 0;
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Invalid direction: " + direction);
@@ -65,6 +141,8 @@ public abstract class FlyingEnemy extends Enemy {
 
         int newX = x;
         int newY = y;
+
+        //First try to move left, then forward, then right, then behind
         if(tileToLeft.getTileType() == TileType.PATH || tileToLeft.getTileType() == TileType.PLAYER){
             tileToLeft.interact(this);
 
@@ -91,6 +169,7 @@ public abstract class FlyingEnemy extends Enemy {
 
         }
 
+        //Set new direction
         if(newX < x){
             this.direction = "Left";
         }else if(newX > x){
@@ -108,33 +187,105 @@ public abstract class FlyingEnemy extends Enemy {
         int[] xDir = new int[4];
         int[] yDir = new int[4];
 
+        boolean hasFoundDirection = false;
+
         //Set the direction enemy is facing
-        if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
-            direction = "Left";
-        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
-            direction = "Right";
-        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
-            direction = "Down";
-        }else if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
-            direction = "Up";
+        if(y != 0){
+            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
+                direction = "Left";
+                hasFoundDirection = true;
+            }
+        }
+        if(y != gameSession.getGridHeight() - 1 && !hasFoundDirection){
+            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
+                direction = "Right";
+                hasFoundDirection = true;
+            }
+        }
+        if(x != 0 && !hasFoundDirection){
+            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
+                direction = "Down";
+            }
+        }
+        if(x != gameSession.getGridWidth() - 1 && !hasFoundDirection){
+            if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
+                direction = "Up";
+            }
         }
 
+        //Find which tiles are to enemies' left, right, forward and behind based on direction
         switch (this.direction) {
             case "Up":
                 xDir = new int[]{-1, +1, 0, 0};
                 yDir = new int[]{0, 0, +1, -1};
+
+                //Check for out of bounds
+                if(y == 0){
+                    yDir[3] = 0;
+                }
+                if(y == gameSession.getGridHeight() - 1){
+                    yDir[2] = 0;
+                }
+                if(x == 0){
+                    xDir[0] = 0;
+                }
+                if(x == gameSession.getGridWidth() - 1){
+                    xDir[1] = 0;
+                }
                 break;
             case "Down":
                 xDir = new int[]{+1, -1, 0, 0};
                 yDir = new int[]{0, 0, -1, +1};
+
+                //Check for out of bounds
+                if(y == 0){
+                    yDir[2] = 0;
+                }
+                if(y == gameSession.getGridHeight() - 1){
+                    yDir[3] = 0;
+                }
+                if(x == 0){
+                    xDir[1] = 0;
+                }
+                if(x == gameSession.getGridWidth() - 1){
+                    xDir[0] = 0;
+                }
                 break;
             case "Left":
                 xDir = new int[]{0, 0, +1, -1};
                 yDir = new int[]{+1, -1, 0, 0};
+
+                //Check for out of bounds
+                if(y == 0){
+                    yDir[1] = 0;
+                }
+                if(y == gameSession.getGridHeight() - 1){
+                    yDir[0] = 0;
+                }
+                if(x == 0){
+                    xDir[3] = 0;
+                }
+                if(x == gameSession.getGridWidth() - 1){
+                    xDir[2] = 0;
+                }
                 break;
             case "Right":
                 xDir = new int[]{0, 0, -1, +1};
                 yDir = new int[]{-1, +1, 0, 0};
+
+                //Check for out of bounds
+                if(y == 0){
+                    yDir[0] = 0;
+                }
+                if(y == gameSession.getGridHeight() - 1){
+                    yDir[1] = 0;
+                }
+                if(x == 0){
+                    xDir[2] = 0;
+                }
+                if(x == gameSession.getGridWidth() - 1){
+                    xDir[3] = 0;
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Invalid direction: " + direction);
@@ -149,6 +300,8 @@ public abstract class FlyingEnemy extends Enemy {
 
         int newX = x;
         int newY = y;
+
+        //First try to move right, then forward, then left, then behind
         if(tileToRight.getTileType() == TileType.PATH || tileToRight.getTileType() == TileType.PLAYER){
             tileToRight.interact(this);
 
@@ -175,7 +328,7 @@ public abstract class FlyingEnemy extends Enemy {
 
         }
 
-
+        //Set new direction
         if(newX < x){
             this.direction = "Left";
         }else if(newX > x){
