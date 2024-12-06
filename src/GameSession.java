@@ -646,8 +646,17 @@ public class GameSession {
      * @param hasWon if the end game is counted as winning
      */
     public void onGameOver(boolean hasWon) {
+        if (hasWon) {
+            System.out.println("Congratulations! Level Complete.");
+        } else {
+            System.out.println("Game Over. Better luck next time.");
+        }
+
+        // Call the game's method to handle the end of the session
         game.onGameOver(hasWon, currentSessionData);
+
     }
+
 
     public int getScoreForGameOverScreen() {
         return currentSessionData.getDiamondCount();

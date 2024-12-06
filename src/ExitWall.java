@@ -21,10 +21,12 @@ public class ExitWall extends Wall {
 
     // Activate the exit (if all diamonds are collected)
     public void activateIfDiamondsCollected() {
-        GameSessionData sessionData = gameSession.getCurrentSessionData();
-        if (sessionData.getDiamondCount() >= sessionData.getDiamondsRequired()) {
-            this.isActive = true;
-            System.out.println("Exit wall activated! All diamonds have been collected.");
+        if (!isActive) {
+            GameSessionData sessionData = gameSession.getCurrentSessionData();
+            if (sessionData.getDiamondCount() >= sessionData.getDiamondsRequired()) {
+                this.isActive = true;
+                System.out.println("Exit wall activated! All diamonds have been collected.");
+            }
         }
     }
 
@@ -51,8 +53,7 @@ public class ExitWall extends Wall {
 
     // Handle level transition
     public void changeLevel() {
-        System.out.println("Level changed!");        // Implement logic to load the next level
-
+        System.out.println("Level changed!");
         gameSession.onGameOver(true); // Assuming this transitions to the next level
     }
 
