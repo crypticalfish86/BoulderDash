@@ -285,8 +285,9 @@ public class GameSession {
 
 
 
-
-                    this.gridTileMap[y][x] = newTile;
+                    if(!gridLineTileArray[x].equals("A")){
+                        this.gridTileMap[y][x] = newTile;
+                    }
                 }
             }
         }
