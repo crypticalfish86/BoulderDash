@@ -19,6 +19,7 @@ public class Game {
     private MainMenu mainMenu;
     private ProfileSelector profileSelector;
     private GameSession currentGamesession;
+    private GameOver gameOver;
 
     //currentGameSession and loadedPlayerProfileID do not get instantiated in the constructor as they are variable (debatable whether anything gets instantiated in the constructor
     public Game(CanvasCompositor cc) {
