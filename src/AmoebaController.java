@@ -100,7 +100,7 @@ public class AmoebaController {
      * @param y
      * The grid tile y position of the new amoeba tile.
      */
-    public void addNewAmoebaChildToCluster(int x, int y){
+    public void addNewAmoebaChildToCluster(int x, int y) {
         //Add a new amoeba to the array list
         AmoebaTile newAmoeba = new AmoebaTile(this.gameSession, x, y, this.operationInterval, this);//instantiate new amoeba
         this.amoebaChildren.add(newAmoeba);//add new amoeba to cluster

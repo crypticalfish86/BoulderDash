@@ -16,10 +16,10 @@ public class GamePauseMenu {
 
 
 
-    public static final Image IMAGE_RESUME = new Image("file:Assets/Buttons/MenuTitle.png");
-    public static final Image IMAGE_SAVE = new Image("file:Assets/Buttons/MenuTitle.png");
-    public static final Image IMAGE_LOAD = new Image("file:Assets/Buttons/MenuTitle.png");
-    public static final Image IMAGE_EXIT = new Image("file:Assets/Buttons/MenuTitle.png");
+    public static final Image IMAGE_RESUME = new Image("file:Assets/Buttons/ResumeButton.png");
+    public static final Image IMAGE_SAVE = new Image("file:Assets/Buttons/SaveButton.png");
+    public static final Image IMAGE_LOAD = new Image("file:Assets/Buttons/LoadButton.png");
+    public static final Image IMAGE_EXIT = new Image("file:Assets/Buttons/ExitButton.png");
 
 
 
@@ -102,7 +102,7 @@ public class GamePauseMenu {
 
 
                 //draw the background
-                gc.setFill(new Color(.6, .5, .4, .9));
+                gc.setFill(new Color(.6, .6, .6, .6));
                 gc.fillRect(
                     (.5 - WINDOW_SIZE_X / 2) * Main.WINDOW_WIDTH,
                     (.5 - WINDOW_SIZE_Y / 2) * Main.WINDOW_HEIGHT,
