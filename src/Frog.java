@@ -16,7 +16,7 @@ public class Frog extends Enemy {
     private int pathRefresh = 0;
     
 
-    private static final int COOLDOWN_MOVE = 15;
+    private static final int COOLDOWN_MOVE = 30;
     private static final int PATH_REFRESH_RATE = 120;
 
     public Frog(GameSession gameSession, int x, int y){
