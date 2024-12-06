@@ -178,30 +178,6 @@ public class ProfileSelector {
         return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .8, .4);
     }
 
-    public boolean isProfileOneSelected() {
-        return profileOneSelected;
-    }
-
-    public void setProfileOneSelected(boolean profileOneSelected) {
-        this.profileOneSelected = profileOneSelected;
-    }
-
-    public boolean isProfileTwoSelected() {
-        return profileTwoSelected;
-    }
-
-    public void setProfileTwoSelected(boolean profileTwoSelected) {
-        this.profileTwoSelected = profileTwoSelected;
-    }
-
-    public boolean isProfileThreeSelected() {
-        return profileThreeSelected;
-    }
-
-    public void setProfileThreeSelected(boolean profileThreeSelected) {
-        this.profileThreeSelected = profileThreeSelected;
-    }
-
     public File getProfile1() {
         return profile1;
     }
