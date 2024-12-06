@@ -28,20 +28,12 @@ public class MainMenu {
 
 
 
-
-
-
-
-
-
         boolean[] mouseDownOnPlay = {false};
-        boolean[] mouseDownOnPlay2 = {false};
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
             public boolean onMouseDown(double x, double y, boolean hasConsumed) {
                 mouseDownOnPlay[0] = isMouseOnPlay(x, y);
-                mouseDownOnPlay2[0] = isMouseOnPlay2(x, y);
                 return true;
             }
 
@@ -49,10 +41,6 @@ public class MainMenu {
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
                 if (mouseDownOnPlay[0] && isMouseOnPlay(x, y)) {
                     game.onPlayButtonClicked();
-                }
-
-                if (mouseDownOnPlay2[0] && isMouseOnPlay2(x, y)) {
-                    game.startSampleGame();
                 }
                 return true;
             }
@@ -85,15 +73,11 @@ public class MainMenu {
 
 
                 //draw the title
-                UIHelper.drawImageRelativeXX(gc, IMAGE_TITLE, .5, .2, .25);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_TITLE, .5, .2, .5);
 
                 
                 //draws the lower play button
-                UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .8, .1);
-
-                
-                //draws the upper play button
-                UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .5, .1);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .6, .1);
 
                 gc.fillText(null, elapsed, elapsed);
 
@@ -124,19 +108,7 @@ public class MainMenu {
      */
     private boolean isMouseOnPlay(double mouseX, double mouseY) {
         //check for play button
-        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .8, .1);
-    }
-
-
-    /**
-     * Returns true if mouse is on the upper play button, used for opening up a game with no parameter
-     * @param mouseX x-position of the mouse
-     * @param mouseY y-position of the mouse
-     * @return if the mouse is on the play button
-     */
-    private boolean isMouseOnPlay2(double mouseX, double mouseY) {
-        //check for play button
-        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .5, .1);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .6, .1);
     }
 
 
