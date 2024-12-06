@@ -194,12 +194,12 @@ public class GameSession {
 
     }
         private void fill2DGrid(String stringGridMap){
-            String[] gridMapLinesArray = stringGridMap.split("\n");//split file by new line
+            String[] gridMapLinesArray = stringGridMap.split(System.lineSeparator());//split file by new line
             System.out.println(gridMapLinesArray.length);
             for (int y = 0; y < gridMapLinesArray.length; y++){
 
                 String[] gridLineTileArray = gridMapLinesArray[y].split(" ");//then split each element of that array by
-
+                
                 for(int x = 0; x < gridLineTileArray.length; x++){
 
                     Tile newTile = new PathWall(this, x, y, OPERATION_INTERVAL);//this should never finish itialised as this, it should go through the switch statement
@@ -281,11 +281,10 @@ public class GameSession {
                             newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
                             break;
                     }
-//                    System.out.printf("filling (%d, %d)\n", x, y);
 
 
 
-                    if(!gridLineTileArray[x].equals("A")){
+                    if(!gridLineTileArray[x].equals("A")) {
                         this.gridTileMap[y][x] = newTile;
                     }
                 }
