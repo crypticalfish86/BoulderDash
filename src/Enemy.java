@@ -132,6 +132,35 @@ public abstract class Enemy extends Tile {
             return false;
         }
     }
+
+    /**
+     * Determines if an enemy is next to an amoeba in any of the four cardinal directions
+     * @return true if there is an amoeba next to the enemy, false otherwise
+     */
+    protected boolean isNextToAmoeba(int x, int y){
+        if(x != 0){
+            if(gameSession.getTileFromGrid(this.x - 1, this.y).getTileType() == TileType.AMOEBA){
+                return true;
+            }
+        }
+        if(this.x != gameSession.getGridWidth() - 1){
+            if(gameSession.getTileFromGrid(this.x + 1, this.y).getTileType() == TileType.AMOEBA){
+                return true;
+            }
+        }
+        if(this.y != 0){
+            if(gameSession.getTileFromGrid(this.x, this.y - 1).getTileType() == TileType.AMOEBA){
+                return true;
+            }
+        }
+        if(this.y != gameSession.getGridHeight() - 1){
+            if(gameSession.getTileFromGrid(this.x, this.y + 1).getTileType() == TileType.AMOEBA){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
 
 
