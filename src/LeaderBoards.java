@@ -98,8 +98,13 @@ public class LeaderBoards {
     public String getLeaderBoardDisplay() {
         StringBuilder leaderBoard = new StringBuilder();
 
-        for(String entry: leaderBoardDisplay){
-            leaderBoard.append(entry + System.lineSeparator());
+        int linesToPrint = leaderBoardDisplay.size();
+
+        if (leaderBoardDisplay.size() > 10) {
+            linesToPrint = 9;
+        }
+        for(int i = 0; i <= linesToPrint; i++){
+            leaderBoard.append(leaderBoardDisplay.get(i) + "\n");
         }
         return leaderBoard.toString();
     }
