@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -46,7 +47,7 @@ public class Frog extends Enemy {
         //moves the frog if there is a path, if not, generate one
         if (pathRefresh == 0 || path.size() == 0) { refreshPath(); }
 
-        if (path.size() == 0) { return; }
+        if (path.size() == 0) { doRandomMove(); return; }
 
 
         int[] pathTarget = path.remove(0);
@@ -67,14 +68,75 @@ public class Frog extends Enemy {
         pathRefresh = PATH_REFRESH_RATE;
         
         PathFinder<Tile> pf = new PathFinder<>(gameSession.getGridTileMap(), gameSession.getGridWidth(), gameSession.getGridHeight());
-        System.out.println("recalculating path");
-        this.path = pf.computeGridFill(new int[] {this.x, this.y}, new int[] {gameSession.getPlayerX(), gameSession.getPlayerY()}, Tile -> {
-            return Tile.tileType == TileType.PATH || Tile.tileType == TileType.PLAYER;
+        // System.out.println("recalculating path");
+        this.path = pf.computeGridFill(new int[] {this.x, this.y}, new int[] {gameSession.getPlayerX(), gameSession.getPlayerY()}, tile -> {
+            return canMoveToTileType(tile.tileType);
         });
     }
 
 
+    /**
+     * Allows the frog to do a random move along its possible moves
+     */
+    private void doRandomMove() {
 
+        int[][] possibleMoves = new int[4][2];
+        int numPossibleMoves = 0;
+
+
+
+        //check moves out of the 4 directions
+
+        //up
+        if (isXYInBounds(this.x, this.y - 1)) {
+            if (canMoveToTileType(gameSession.getTileFromGrid(this.x, this.y - 1).getTileType())) {
+                possibleMoves[numPossibleMoves][0] = 0;
+                possibleMoves[numPossibleMoves][1] = -1;
+                ++numPossibleMoves;
+            }
+        }
+
+        //down
+        if (isXYInBounds(this.x, this.y + 1)) {
+            if (canMoveToTileType(gameSession.getTileFromGrid(this.x, this.y + 1).getTileType())) {
+                possibleMoves[numPossibleMoves][0] = 0;
+                possibleMoves[numPossibleMoves][1] = 1;
+                ++numPossibleMoves;
+            }
+        }
+
+        //left
+        if (isXYInBounds(this.x - 1, this.y)) {
+            if (canMoveToTileType(gameSession.getTileFromGrid(this.x - 1, this.y).getTileType())) {
+                possibleMoves[numPossibleMoves][0] = -1;
+                possibleMoves[numPossibleMoves][1] = 0;
+                ++numPossibleMoves;
+            }
+        }
+
+        //right
+        if (isXYInBounds(this.x + 1, this.y)) {
+            if (canMoveToTileType(gameSession.getTileFromGrid(this.x + 1, this.y).getTileType())) {
+                possibleMoves[numPossibleMoves][0] = 1;
+                possibleMoves[numPossibleMoves][1] = 0;
+                ++numPossibleMoves;
+            }
+        }
+
+
+        
+        //perform the move out of the possible moves
+
+
+        if (numPossibleMoves == 0) { return; }
+
+
+        Random rand = new Random();
+        int nextMoveInArray = (numPossibleMoves == 1) ? 0 : (rand.nextInt(numPossibleMoves));
+        
+
+        moveTo(this.x + possibleMoves[nextMoveInArray][0], this.y + possibleMoves[nextMoveInArray][1]);
+    }
 
 
 
@@ -85,7 +147,9 @@ public class Frog extends Enemy {
 
     
 
-
+    public boolean canMoveToTileType(TileType tileType) {
+        return tileType == TileType.PATH || tileType == TileType.PLAYER;
+    }
 
     public String returnStringTileRepresentation() {
         return "F";
