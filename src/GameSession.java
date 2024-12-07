@@ -398,7 +398,7 @@ public class GameSession {
     }
 
     // decouples the layer to the display
-    public void endGame() {
+    private void endGame() {
         cc.removeLayer(cl);
     }
 
@@ -655,6 +655,7 @@ public class GameSession {
         // Call the game's method to handle the end of the session
         game.onGameOver(hasWon, currentSessionData);
 
+        endGame();
     }
 
 

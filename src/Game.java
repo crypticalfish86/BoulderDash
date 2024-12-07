@@ -157,7 +157,6 @@ public class Game {
 
             }
         } else {
-            this.currentGamesession.endGame();
             this.gameOver = new GameOver(this, cc, gameSessionData);
         }
     }
