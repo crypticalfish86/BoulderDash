@@ -69,32 +69,61 @@ public class Game {
             scanner.useDelimiter("\\A"); // Read entire file as one string
 
             String fileContent;
-            if(scanner.hasNext()){
+            if (scanner.hasNext()) {
                 System.out.println("file read");
                 fileContent = scanner.next();
-            }
-            else{
+                scanner.close();
+            } else {
+                scanner.close();
                 return false;
             }
+
+            
+
+
             System.out.println(fileContent);
+
+
             //If the content of the file is new then load in the default file
-            if(fileContent.equals("new;")){
+            if (fileContent.equals("new;")) {
                 //TODO read default level package
-                System.out.println("reading level file");
-                File levelOneFile = new File("./Levels/level0.txt");
-                Scanner levelOneFileScanner = new Scanner(levelOneFile);
-                levelOneFileScanner.useDelimiter("\\A");
-                fileContent = levelOneFileScanner.next();
-                this.currentGamesession = new GameSession(this, fileContent, cc);
+                startGameWithLevel(0, 0);
             } else {
-                this.currentGamesession = new GameSession(this, fileContent, cc);
+                this.currentGamesession = new GameSession(this, fileContent, cc, 0);
             }
-            scanner.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Starts a game with a specified level
+     * @param level
+     */
+    private void startGameWithLevel(int level, int accumulatedScore) {
+        
+        System.out.println("reading level file");
+        File levelOneFile = new File(String.format("./Levels/level%d.txt", level));
+        
+        try {
+            Scanner levelFileScanner = new Scanner(levelOneFile);
+
+            levelFileScanner.useDelimiter("\\A");
+
+            String fileContent = levelFileScanner.next();
+            levelFileScanner.close();
+
+
+
+            this.currentGamesession = new GameSession(this, fileContent, cc, accumulatedScore);
+
+        } catch (FileNotFoundException e) {
+            System.err.printf("level%d.txt not found.\n", level);
+        }
+        
+
     }
 
 
@@ -151,10 +180,12 @@ public class Game {
         if (hasWon) {
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
                 //TODO: show winning screen with score
+
+
             } else {
                 //TODO: start next game with level + 1
 
-
+                startGameWithLevel(gameSessionData.getLevel() + 1, gameSessionData.getScore());
             }
         } else {
             this.gameOver = new GameOver(this, cc, gameSessionData);

@@ -50,13 +50,13 @@ public class GameSession {
 
 
 
-    GameSession(Game game, String gameData, CanvasCompositor cc) {
+    GameSession(Game game, String gameData, CanvasCompositor cc, int accumulatedScore) {
         this.game = game;
         this.gamePauseMenu = new GamePauseMenu(this, cc);
         amoebaControllerList = new ArrayList<AmoebaController>();
-        interpretLevelData(gameData);//loads gameSessionData and fills the grid tile map
+        interpretLevelData(gameData, accumulatedScore);//loads gameSessionData and fills the grid tile map
 
-
+        
 
 
          //generateSampleGame();
@@ -154,10 +154,11 @@ public class GameSession {
 
     /**
      * Initialises GameSessiondata and fills the 2DGridTileMap.
-     * @param gameData
+     * @param gameData the string to be converted to data
+     * @param accumulatedScore the score to be carried on from last level
      * The data used to fill GameSessionData and the grid tile map.
      */
-    private void interpretLevelData(String gameData) {
+    private void interpretLevelData(String gameData, int accumulatedScore) {
 
         // file structure
         // line 1: Current Level, Height, Width
@@ -174,7 +175,7 @@ public class GameSession {
 
         this.gridTileMap = new Tile[this.gridHeight][this.gridWidth];
 
-        int score = Integer.parseInt(gameDataArr[3]);
+        int score = Integer.parseInt(gameDataArr[3]) + accumulatedScore;
         int timeLeft = Integer.parseInt(gameDataArr[4]) * 1000;
         int diamondCount = Integer.parseInt(gameDataArr[6]);
         int diamondsRequired = Integer.parseInt(gameDataArr[7]);
