@@ -180,7 +180,10 @@ public class Game {
         if (hasWon) {
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
                 //TODO: show winning screen with score
+                new LeaderBoards().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
 
+                
+                this.gameOver = new GameFinish(this, cc, gameSessionData);
 
             } else {
                 //TODO: start next game with level + 1
@@ -188,6 +191,7 @@ public class Game {
                 startGameWithLevel(gameSessionData.getLevel() + 1, gameSessionData.getScore());
             }
         } else {
+            new LeaderBoards().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
             this.gameOver = new GameOver(this, cc, gameSessionData);
         }
     }

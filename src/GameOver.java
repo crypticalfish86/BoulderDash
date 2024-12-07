@@ -80,11 +80,11 @@ public class GameOver {
 
                 UIHelper.drawImageRelativeXX(gc, IMAGE_GAME_OVER, .5, .2, .5);
 
-                UIHelper.drawImageRelativeXX(gc, IMAGE_SCORE, .4, .6, .15);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_SCORE, .4, .45, .15);
 
                 double x = .5;
-                double y = .42;
-                double size = .2;
+                double y = .5;
+                double size = .1;
 
                 if (game.getPlayerProfileID().equals("1")) {
                     displayProfileStatus(gc, profile1, x, y, size);
@@ -97,7 +97,7 @@ public class GameOver {
                 gc.setFill(Color.WHITE);
                 gc.setFont(new Font("Arial", Main.WINDOW_HEIGHT * .08));
                 String score = String.format("%04d", gameSessionData.getScore());
-                gc.fillText(score, Main.WINDOW_WIDTH * .65, Main.WINDOW_HEIGHT * .64);
+                gc.fillText(score, Main.WINDOW_WIDTH * .65, Main.WINDOW_HEIGHT * .49);
 
                 UIHelper.drawImageRelativeXX(gc, IMAGE_RETURN_MENU, .5, .8, .3);
             }

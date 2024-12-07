@@ -2,6 +2,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 
 
@@ -20,13 +22,13 @@ public class MainMenu {
     public static final Image IMAGE_TITLE = new Image("file:Assets/Buttons/MenuTitle.png");
     public static final Image IMAGE_PLAY = new Image("file:Assets/Buttons/PlayButton.png");
     
-
+    private final String leaderboardDisplay;
 
     public MainMenu(Game game, CanvasCompositor cc) {
         this.cc = cc;
         this.game = game;
 
-
+        leaderboardDisplay = new LeaderBoards().getLeaderBoardDisplay();
 
         boolean[] mouseDownOnPlay = {false};
 
@@ -81,7 +83,7 @@ public class MainMenu {
 
                 gc.fillText(null, elapsed, elapsed);
 
-
+                drawLeaderboard(gc);
             }
         }, 1);
 
@@ -93,6 +95,8 @@ public class MainMenu {
         // Create function to check what button you are on
         // This will use the three functions above (mouseUp, mouseDown, mouseMove)
 
+
+        // System.out.println(leaderboardDisplay);
     }
 
 
@@ -126,5 +130,22 @@ public class MainMenu {
      */
     public void show() {
         cc.addLayer(cl);
+    }
+
+
+
+
+
+
+
+
+
+
+    private void drawLeaderboard(GraphicsContext gc) {
+        gc.setTextAlign(TextAlignment.CENTER);
+
+        gc.setFill(new Color(1, 1, 1, 1));
+        gc.setFont(new Font(Main.WINDOW_WIDTH * .04));
+        gc.fillText(leaderboardDisplay, Main.WINDOW_WIDTH * .8, Main.WINDOW_HEIGHT * .7, Main.WINDOW_WIDTH * .2);
     }
 }

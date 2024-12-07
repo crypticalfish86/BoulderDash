@@ -27,7 +27,7 @@ public class Frog extends Enemy {
 
     public void interact(Tile tile) {
 
-        if ((tile.getTileType() == TileType.BOULDER || tile.getTileType() == TileType.DIAMOND) && tile.getYPosition() == this.y - 1) {
+        if ((tile.getTileType() == TileType.BOULDER || tile.getTileType() == TileType.DIAMOND || tile.getTileType() == TileType.AMOEBA) && tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, false);
         }
     }

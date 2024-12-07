@@ -10,7 +10,7 @@ public class LeaderBoards {
      * Instantiates a leaderboard object which can be used to add new names/scores to the leaderboard and
      * get a display of the entire leaderboard.
      */
-    public LeaderBoards(){
+    public LeaderBoards() {
         leaderBoardDisplay = new ArrayList<String>();
 
         File file = new File(filepath);
@@ -27,7 +27,7 @@ public class LeaderBoards {
         if(scanner.hasNext()){
             fileContent = scanner.next();
         }
-
+        scanner.close();
 
         if(fileContent != null){
 
@@ -47,10 +47,9 @@ public class LeaderBoards {
         for(int i = 0; i < leaderBoardDisplay.size(); i++){
             int leaderboardScore = Integer.parseInt(leaderBoardDisplay.get(i).split(" ")[1]);
 
-            if (score >= leaderboardScore){
+            if (score >= leaderboardScore) {
                 leaderBoardDisplay.add(i, newLeaderBoardEntry);
-            }
-            else if (i == leaderBoardDisplay.size() - 1){
+            } else if (i == leaderBoardDisplay.size() - 1) {
                 leaderBoardDisplay.add(newLeaderBoardEntry);
             }
         }
@@ -58,7 +57,7 @@ public class LeaderBoards {
         writeLeaderBoardArrayToFile();
     }
 
-    public void deleteNameFromLeaderboard(int entryLineNumber){
+    public void deleteNameFromLeaderboard(int entryLineNumber) {
         this.leaderBoardDisplay.remove(entryLineNumber);
         writeLeaderBoardArrayToFile();
     }
@@ -66,7 +65,7 @@ public class LeaderBoards {
     /**
      * Rewrite the leaderBoardArray to the file.
      */
-    private void writeLeaderBoardArrayToFile(){
+    private void writeLeaderBoardArrayToFile() {
         String newLeaderboards = "";
         for(int i = 0; i < leaderBoardDisplay.size(); i++){
             String leaderBoardEntry = leaderBoardDisplay.get(i) + "\n";
@@ -76,6 +75,7 @@ public class LeaderBoards {
         try{
             FileWriter fileWriter = new FileWriter(this.filepath);
             fileWriter.write(newLeaderboards);
+            fileWriter.close();
         }
         catch (Exception error){
             System.err.println(error);
@@ -87,16 +87,16 @@ public class LeaderBoards {
      * @return
      * A string representation of the entire leaderboard
      */
-    public String getLeaderBoardDisplay(){
-        String leaderBoard = "";
+    public String getLeaderBoardDisplay() {
+        StringBuilder leaderBoard = new StringBuilder();
 
         for(String entry: leaderBoardDisplay){
-            leaderBoard += entry + "\n";
+            leaderBoard.append(entry + "\n");
         }
-        return leaderBoard;
+        return leaderBoard.toString();
     }
 
-    public ArrayList<String> getLeaderBoardArray(){
+    public ArrayList<String> getLeaderBoardArray() {
         return this.leaderBoardDisplay;
     }
 }

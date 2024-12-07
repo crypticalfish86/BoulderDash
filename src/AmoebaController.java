@@ -121,7 +121,6 @@ public class AmoebaController {
         
         
         for (int i = 0; i < amoebaChildren.size(); ++i) {
-
             if (amoebaChildren.get(i).tryGrow()) {
 
                 this.currentAttempts = 0;
