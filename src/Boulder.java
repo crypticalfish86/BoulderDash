@@ -10,7 +10,7 @@ public class Boulder extends FallingObject{
     private static final int DELAY_PUSH_BOULDER = 10;
 
     public Boulder(GameSession gameSession, int x, int y, long operationInterval){
-        super(gameSession, x, y, TileType.FALLING_OBJECT, operationInterval);
+        super(gameSession, x, y, TileType.BOULDER, operationInterval);
         this.amoebaCanSpreadToThisTile = false;
     }
 

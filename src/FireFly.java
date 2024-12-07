@@ -13,7 +13,7 @@ public class FireFly extends FlyingEnemy{
         this.lastTimeStamp = System.currentTimeMillis();
     }
     public void interact(Tile tile){
-        if (tile.getTileType() == TileType.FALLING_OBJECT && tile.getYPosition() == this.y - 1) {
+        if ((tile.getTileType() == TileType.BOULDER || tile.getTileType() == TileType.DIAMOND)&& tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, false);
         }
     }

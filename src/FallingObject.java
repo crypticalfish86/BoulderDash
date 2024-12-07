@@ -123,9 +123,12 @@ public abstract class FallingObject extends Tile {
      */
     private boolean onCurvedTile(int x, int y) {
         Tile tileBelow = gameSession.getTileFromGrid(x,y + 1);
-        if(tileBelow.getTileType() == TileType.FALLING_OBJECT){
+        if(tileBelow.getTileType() == TileType.BOULDER){
             return true;
-        }else if(tileBelow.getTileType() == TileType.TITANIUM_WALL){
+        }else if(tileBelow.getTileType() == TileType.DIAMOND){
+            return true;
+        }
+        else if(tileBelow.getTileType() == TileType.TITANIUM_WALL){
             return true;
         }else if(tileBelow.getTileType() == TileType.DIRT_WALL) {
             return true;

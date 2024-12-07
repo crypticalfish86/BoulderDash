@@ -3,10 +3,10 @@ import javafx.scene.shape.MoveTo;
 public abstract class FlyingEnemy extends Enemy {
 
     protected static final int DELAY_FACTOR = 30; //Number of update loops per movement
-    protected static final String UP_DIRECTION = "up";
-    protected static final String DOWN_DIRECTION = "down";
-    protected static final String LEFT_DIRECTION = "left";
-    protected static final String RIGHT_DIRECTION = "right";
+    private static final String UP_DIRECTION = "up";
+    private static final String DOWN_DIRECTION = "down";
+    private static final String LEFT_DIRECTION = "left";
+    private static final String RIGHT_DIRECTION = "right";
 
     protected boolean prioritiseLeft;
     protected int ticksAlive; //Number of update loops since object constructed
@@ -314,7 +314,8 @@ public abstract class FlyingEnemy extends Enemy {
             case MAGIC_WALL:
             case NORMAL_WALL:
             case EXIT_WALL:
-            case FALLING_OBJECT:
+            case BOULDER:
+            case DIAMOND:
                 return true;
             default:
                 return false;

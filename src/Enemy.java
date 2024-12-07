@@ -96,7 +96,8 @@ public abstract class Enemy extends Tile {
 
     private boolean isExplodable(Tile tile) {
         switch (tile.getTileType()) {
-            case FALLING_OBJECT:
+            case BOULDER:
+            case DIAMOND:
             case DOOR:
             case KEY:
             case MOVING_ENEMY:
