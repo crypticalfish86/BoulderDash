@@ -31,7 +31,7 @@ public class LeaderBoards {
 
         if(fileContent != null){
 
-            String[] leaderBoardArray = fileContent.split("\n");
+            String[] leaderBoardArray = fileContent.split(System.lineSeparator());
             for(String entry :leaderBoardArray){
                 leaderBoardDisplay.add(entry);
             }
@@ -39,19 +39,27 @@ public class LeaderBoards {
     }
 
 
-    public void writeNewNameToLeaderboard(String name, int score){
+    public void writeNewNameToLeaderboard(String name, int newScore) {
 
-        String newLeaderBoardEntry = name + ": " + Integer.toString(score);
+        String newLeaderBoardEntry = name + ": " + Integer.toString(newScore);
 
         //sort the leaderboard entry into the leaderboards at the right place
-        for(int i = 0; i < leaderBoardDisplay.size(); i++){
+        
+        boolean hasAdded = false;
+        for(int i = leaderBoardDisplay.size() - 1; i >= 0; i++){
+            
             int leaderboardScore = Integer.parseInt(leaderBoardDisplay.get(i).split(" ")[1]);
 
-            if (score >= leaderboardScore) {
+            System.out.printf("score: current: %d, list: %d\n", newScore, leaderboardScore);
+            if (newScore <= leaderboardScore) {
                 leaderBoardDisplay.add(i, newLeaderBoardEntry);
-            } else if (i == leaderBoardDisplay.size() - 1) {
-                leaderBoardDisplay.add(newLeaderBoardEntry);
+                hasAdded = true;
+                break;
             }
+        }
+
+        if (!hasAdded) {
+            leaderBoardDisplay.add(newLeaderBoardEntry);
         }
 
         writeLeaderBoardArrayToFile();
@@ -67,17 +75,17 @@ public class LeaderBoards {
      */
     private void writeLeaderBoardArrayToFile() {
         String newLeaderboards = "";
-        for(int i = 0; i < leaderBoardDisplay.size(); i++){
-            String leaderBoardEntry = leaderBoardDisplay.get(i) + "\n";
+        for (int i = 0; i < leaderBoardDisplay.size(); i++) {
+            String leaderBoardEntry = leaderBoardDisplay.get(i) + System.lineSeparator();
             newLeaderboards += leaderBoardEntry;
         }
 
-        try{
+        try {
             FileWriter fileWriter = new FileWriter(this.filepath);
             fileWriter.write(newLeaderboards);
             fileWriter.close();
         }
-        catch (Exception error){
+        catch (Exception error) {
             System.err.println(error);
         }
     }
@@ -91,7 +99,7 @@ public class LeaderBoards {
         StringBuilder leaderBoard = new StringBuilder();
 
         for(String entry: leaderBoardDisplay){
-            leaderBoard.append(entry + "\n");
+            leaderBoard.append(entry + System.lineSeparator());
         }
         return leaderBoard.toString();
     }

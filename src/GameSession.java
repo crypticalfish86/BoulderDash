@@ -304,23 +304,27 @@ public class GameSession {
             }
         }
 
-    public String buildSaveString(){
+    public String buildSaveString() {
         String saveString = "";
 
         int[] data = this.currentSessionData.returnAllGameSessionData();
         //TODO figure out where "current level" is stored, also clean up inline comments
-        saveString += "1;"; //change this when you figure it out
-        saveString += Integer.toString(this.gridHeight) + ";" + Integer.toString(this.gridWidth) + ";"; //height and width
-        saveString += Integer.toString(data[0]) + ";" + Integer.toString(data[1]) + ";" + Integer.toString(data[2]); //Score, timeleft, time allowed
-        saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4]) + ";";//diamondCount and diamondsRequired
-        saveString += "4;4;"; //TODO add amoebaspreadrate and ameoba max size somewhere in gamesession
-        saveString += Integer.toString(data[5]) + ";" + Integer.toString(data[6]) + ";" + Integer.toString(data[7]) + ";" + Integer.toString(data[8]);//keys
+        String newLineString = System.lineSeparator();
 
-        for (int i = 0; i < gridTileMap.length; i++){
-            for (int ii = 0; i < gridTileMap[i].length; ii++){
-                saveString += gridTileMap[i][ii].returnStringTileRepresentation() + " ";
+        saveString += "1;"; //change this when you figure it out
+        saveString += Integer.toString(this.gridWidth) + ";" + Integer.toString(this.gridHeight) + ";" + newLineString; //height and width
+        saveString += Integer.toString(data[0]) + ";" + timeLeft / 1000 + ";" + Integer.toString(data[2] / 1000) + ";" + newLineString; //Score, timeleft, time allowed
+        saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4]) + ";\n";//diamondCount and diamondsRequired
+        saveString += Integer.toString(this.amoebaGrowthRate) + ";" + Integer.toString(this.maxAmoebaSize) + ";" + newLineString; //TODO add amoebaspreadrate and ameoba max size somewhere in gamesession
+        saveString += Integer.toString(data[5]) + ";" + Integer.toString(data[6]) + ";" + Integer.toString(data[7]) + ";" + Integer.toString(data[8]) + ";";//keys
+
+        for (int y = 0; y < gridTileMap.length; y++){
+            saveString += newLineString + gridTileMap[y][0].returnStringTileRepresentation();
+            for (int x = 1; x < gridTileMap[y].length; x++){
+                saveString += " " + gridTileMap[y][x].returnStringTileRepresentation();
             }
-            saveString += "\n";
+
+
         }
         return saveString;
     }
@@ -622,7 +626,7 @@ public class GameSession {
         gc.setTextAlign(TextAlignment.RIGHT);
         //draw the score
 
-        String scoreString = String.format("%04d", currentSessionData.getDiamondCount());
+        String scoreString = String.format("%04d", currentSessionData.getScore());
         gc.fillText(scoreString, Main.WINDOW_WIDTH * .95, Main.WINDOW_HEIGHT * .07);
 
 
@@ -671,6 +675,19 @@ public class GameSession {
 
     
 
+
+    public void onSaveGameClicked() {
+        game.saveGameButton();
+        gamePauseMenu.hide();
+    }
+
+
+    public void onLoadGameClicked() {
+        game.loadGameButton();
+        endGame();
+        gamePauseMenu.hide();
+    }
+
     //primarily used for amoeba, removed
     // public void connectToGameUpdate(Function<Long, Void> function) {
     //     updateConnections.add(function);
@@ -679,4 +696,6 @@ public class GameSession {
     // public void disconnectToGameUpdate(Function<Long, Void> function) {
     //     updateConnections.remove(function);
     // }
+
+
 }

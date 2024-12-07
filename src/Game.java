@@ -31,19 +31,26 @@ public class Game {
 
 
     //TODO Add proper exceptions and errors like in loadgame
-    private boolean saveGame() throws IOException { //TODO add proper exception throwing
+    private boolean saveGame() { //TODO add proper exception throwing
         if(this.currentGamesession == null){
             return false;
         }
         //Call "buildSaveString in GameSession and then write the file to the correct profile
         String saveString = this.currentGamesession.buildSaveString();
 
-        String filepath = "./Levels/profile" + this.loadedPlayerProfileID + ".txt";
+        String filepath = "./Profiles/profile" + this.loadedPlayerProfileID + ".txt";
 
-
-        FileWriter fileToSaveTo = new FileWriter(filepath);
-        fileToSaveTo.write(saveString);
-        return true;
+        try {
+            FileWriter fileToSaveTo = new FileWriter(filepath);
+            fileToSaveTo.write(saveString);
+            fileToSaveTo.close();
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
+        
     }
 
     /**
@@ -219,5 +226,17 @@ public class Game {
 
     public String getPlayerProfileID() {
         return this.loadedPlayerProfileID;
+    }
+
+
+
+    
+    public void loadGameButton() {
+        profileSelector.show();
+    }
+
+    public void saveGameButton() {
+        boolean saved = saveGame();
+        System.out.println(saved);
     }
 }

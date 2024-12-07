@@ -4,7 +4,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 

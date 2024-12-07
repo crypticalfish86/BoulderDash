@@ -14,7 +14,6 @@ public class GameOver extends DisplayLayer {
     private final CanvasLayer cl;
     private final GameSessionData gameSessionData;
 
-
     private final Game game;
 
     public static final Image IMAGE_GAME_OVER = new Image("file:Assets/Buttons/GameOverButton.png");
