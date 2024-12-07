@@ -1,0 +1,11 @@
+Player1: 4000
+Player2: 100
+Player3: 0
+Player3: 0
+Player3: 0
+Player3: 0
+Player3: 0
+Player3: 0
+Player3: 0
+Player3: 0
+Player4: 0

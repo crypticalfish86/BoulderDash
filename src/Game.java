@@ -20,6 +20,7 @@ public class Game {
     private ProfileSelector profileSelector;
     private GameSession currentGamesession;
     private DisplayLayer gameOver;
+    private LeaderboardShowcase leaderboardShowcase;
 
     //currentGameSession and loadedPlayerProfileID do not get instantiated in the constructor as they are variable (debatable whether anything gets instantiated in the constructor
     public Game(CanvasCompositor cc) {
@@ -168,6 +169,12 @@ public class Game {
         loadGame("3");
     }
 
+    public void onExitToMainMenuButtonClicked() {
+        System.out.println("back to main menu button has been clicked");
+        leaderboardShowcase.hide();
+        mainMenu.show();
+    }
+
 
     /**
      * Should be called when the game has won or lost not due to the leave menus
@@ -200,6 +207,16 @@ public class Game {
         System.out.println("Exit button has been clicked");
         gameOver.hide();
         mainMenu.show();
+    }
+
+    public void onLeaderboardButtonClicked() {
+        System.out.println("Leaderboard button has been clicked");
+        mainMenu.hide();
+        if (this.leaderboardShowcase == null) {
+            this.leaderboardShowcase = new LeaderboardShowcase(this, cc);
+        }
+        leaderboardShowcase.show();
+
     }
 
 
