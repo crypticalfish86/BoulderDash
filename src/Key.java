@@ -23,9 +23,8 @@ public class Key extends Wall {
             // Add the key to GameSessionData
             gameSession.getCurrentSessionData().giveKey(returnStringTileRepresentation());
 
-            // Replace the key on the grid with a PathWall (or another appropriate tile)
-            PathWall pathWall = new PathWall(gameSession, getXPosition(), getYPosition(), getOperationInterval());
-            gameSession.setTile(getYPosition(), getXPosition(), pathWall);
+            PathWall pathWall = new PathWall(gameSession, inputTileObject.getXPosition(), inputTileObject.getYPosition(), getOperationInterval());
+            gameSession.updateTilePositions(pathWall, inputTileObject, this);
 
             System.out.println("Key of color " + returnStringTileRepresentation() + " added to GameSessionData and removed from the grid.");
         } else {

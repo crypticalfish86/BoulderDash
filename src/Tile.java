@@ -36,9 +36,9 @@ public abstract class Tile {
 
 
 
-    public boolean amoebaCanSpreadToThisTile() {
-        return this.amoebaCanSpreadToThisTile;
-    }
+//    public boolean amoebaCanSpreadToThisTile() {
+//        return this.amoebaCanSpreadToThisTile;
+//    }
     public abstract void interact(Tile Tile);
     public abstract void updateTile(long currentTimeInMilliseconds);
     public abstract String returnStringTileRepresentation();
