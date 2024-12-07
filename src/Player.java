@@ -167,6 +167,10 @@ public class Player extends Tile {
         }
 
 
+        //Kill player if they next to an enemy
+        if(isNextToEnemy()){
+            this.killPlayer();
+        }
         
     }
 
@@ -181,6 +185,35 @@ public class Player extends Tile {
     public void killPlayer() {
         System.out.println("Player has been killed.");
         gameSession.onGameOver(false);
+    }
+
+    /**
+     * Determines if an enemy is next to the player in any of the four cardinal directions
+     * @return true if there is an enemy next to the player, false otherwise
+     */
+    private boolean isNextToEnemy(){
+        if(this.x != 0){
+            if(gameSession.getTileFromGrid(this.x - 1, this.y).getTileType() == TileType.MOVING_ENEMY){
+                return true;
+            }
+        }
+        if(this.x != gameSession.getGridWidth() - 1){
+            if(gameSession.getTileFromGrid(this.x + 1, this.y).getTileType() == TileType.MOVING_ENEMY){
+                return true;
+            }
+        }
+        if(this.y != 0){
+            if(gameSession.getTileFromGrid(this.x, this.y - 1).getTileType() == TileType.MOVING_ENEMY){
+                return true;
+            }
+        }
+        if(this.y != gameSession.getGridHeight() - 1){
+            if(gameSession.getTileFromGrid(this.x, this.y + 1).getTileType() == TileType.MOVING_ENEMY){
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

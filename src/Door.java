@@ -27,7 +27,7 @@ public class Door extends Wall {
             // Check if the player has the correct key in their inventory
             if (gameSession.getCurrentSessionData().tryConsumeKey(getDoorColour())) {
                 System.out.println("Door unlocked with the correct key: " + getDoorColour());
-                unlockDoor(); // Unlock the door
+                unlockDoor(inputTileObject); // Unlock the door
             } else {
                 System.out.println("Door cannot be opened without the correct key: " + getDoorColour());
             }
@@ -38,10 +38,10 @@ public class Door extends Wall {
 
 
     // Logic to unlock or remove the door
-    private void unlockDoor() {
+    private void unlockDoor(Tile inputTileObject) {
         // Replace the door on the grid with a PathWall (or another passable tile)
-        PathWall pathWall = new PathWall(gameSession, getXPosition(), getYPosition(), getOperationInterval());
-        gameSession.setTile(getYPosition(), getXPosition(), pathWall);
+        PathWall pathWall = new PathWall(gameSession, inputTileObject.getXPosition(), inputTileObject.getYPosition(), getOperationInterval());
+        gameSession.updateTilePositions(pathWall, inputTileObject, this);
 
         System.out.println("Door at (" + getXPosition() + ", " + getYPosition() + ") has been unlocked and replaced with a PathWall.");
     }
