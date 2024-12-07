@@ -109,7 +109,7 @@ public class GameSession {
                     // Check if time has run out
                     if (timeLeft <= 0) {
                         System.out.println("Time's up! Player killed.");
-                        player.killPlayer();
+                        
                         onGameOver(false); // Trigger the game-over logic
                         return; // Stop further updates
                     }
