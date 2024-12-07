@@ -9,7 +9,7 @@ public class Key extends Wall {
         super(gameSession, x, y, TileType.KEY, operationInterval);
         this.keyColour = keyColour;
         this.img = selectImageBasedOnColor(keyColour); // Set the image based on the key color
-        this.amoebaCanSpreadToThisTile = false; // Keys cannot spread amoebas
+         // Keys cannot spread amoebas
     }
 
 

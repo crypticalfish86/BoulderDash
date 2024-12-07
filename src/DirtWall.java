@@ -7,7 +7,7 @@ public class DirtWall extends Wall {
 
     public DirtWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.DIRT_WALL, operationInterval);
-        this.amoebaCanSpreadToThisTile = true; // Amoebas can spread to dirt walls
+         // Amoebas can spread to dirt walls
     }
 
     // Interaction logic for the dirt wall

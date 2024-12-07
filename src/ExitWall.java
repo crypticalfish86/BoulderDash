@@ -11,7 +11,7 @@ public class ExitWall extends Wall {
     public ExitWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.EXIT_WALL, operationInterval);
         this.isActive = false; // Exit is initially inactive
-        this.amoebaCanSpreadToThisTile = false;
+        
     }
 
     // Check if the exit is active

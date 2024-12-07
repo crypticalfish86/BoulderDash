@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -40,6 +39,8 @@ public class GameSession {
 
 
     public static final long OPERATION_INTERVAL = 100;
+
+    // private final ArrayList<Function<Long, Void>> updateConnections = new ArrayList<>();
     
 
     
@@ -112,12 +113,20 @@ public class GameSession {
                         onGameOver(false); // Trigger the game-over logic
                         return; // Stop further updates
                     }
+
+                    //update individual tiles
                     for (int y = 0; y < gridHeight; ++y) {
                         for (int x = 0; x < gridWidth; ++x) {
                             if (gridTileMap[y] == null || gridTileMap[y][x] == null) { System.out.printf("%d, %d\n", x, y);}
                             gridTileMap[y][x].updateTile(elapsed);
     
                         }
+                    }
+
+                    //update amoeba
+                    long currentTime = System.currentTimeMillis();
+                    for (int i = 0; i < amoebaControllerList.size(); ++i) {
+                        amoebaControllerList.get(i).updateAmoebaCluster(currentTime);
                     }
                     
                     double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
@@ -660,7 +669,14 @@ public class GameSession {
     }
 
 
-    public int getScoreForGameOverScreen() {
-        return currentSessionData.getDiamondCount();
-    }
+    
+
+    //primarily used for amoeba, removed
+    // public void connectToGameUpdate(Function<Long, Void> function) {
+    //     updateConnections.add(function);
+    // }
+
+    // public void disconnectToGameUpdate(Function<Long, Void> function) {
+    //     updateConnections.remove(function);
+    // }
 }

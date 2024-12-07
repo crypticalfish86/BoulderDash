@@ -9,7 +9,7 @@ public class MagicWall extends Wall {
 
     public MagicWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.MAGIC_WALL, operationInterval);
-        this.amoebaCanSpreadToThisTile = false;
+        
         this.isActive = false; // Initially inactive
         this.activationStartTime = 0;
     }

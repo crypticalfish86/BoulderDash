@@ -9,7 +9,7 @@ public class FireFly extends FlyingEnemy{
 
     public FireFly(GameSession gameSession, int x, int y, long operationInterval, boolean prioritiseLeft){
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseLeft);
-        this.amoebaCanSpreadToThisTile = true;
+        
         this.lastTimeStamp = System.currentTimeMillis();
     }
     public void interact(Tile tile){

@@ -10,7 +10,7 @@ public class Butterfly extends FlyingEnemy{
 
     public Butterfly(GameSession gameSession, int x, int y, long operationInterval, boolean prioritiseLeft){
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseLeft);
-        this.amoebaCanSpreadToThisTile = true;
+        
         this.lastTimeStamp = System.currentTimeMillis();
     }
 

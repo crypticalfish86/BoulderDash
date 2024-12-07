@@ -11,7 +11,7 @@ public class Boulder extends FallingObject{
 
     public Boulder(GameSession gameSession, int x, int y, long operationInterval){
         super(gameSession, x, y, TileType.BOULDER, operationInterval);
-        this.amoebaCanSpreadToThisTile = false;
+        
     }
 
 

@@ -10,7 +10,7 @@ public class Door extends Wall {
         super(gameSession, x, y, TileType.DOOR, operationInterval);
         this.doorColour = doorColour;
         this.img = selectImageBasedOnColor(doorColour); // Set the image based on the door color
-        this.amoebaCanSpreadToThisTile = false;
+        
     }
 
     // Getter for door color

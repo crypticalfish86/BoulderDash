@@ -51,7 +51,7 @@ public class PathFinder<T> {
             }
 
             int nextCost = distances[pos[1]][pos[0]] + 1;
-            System.out.println(nextCost);
+            // System.out.println(nextCost);
 
             pushIfLower(distances, q, nextCost, pos[0] - 1, pos[1], canWalk);
             pushIfLower(distances, q, nextCost, pos[0] + 1, pos[1], canWalk);
@@ -65,7 +65,7 @@ public class PathFinder<T> {
         //back swipe to obtain the path
 
 
-        System.out.println(finalCost);
+        // System.out.println(finalCost);
 
         ArrayList<int[]> output = new ArrayList<>();
         for (int i = 0; i < finalCost; ++i) {

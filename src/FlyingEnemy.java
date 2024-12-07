@@ -32,7 +32,7 @@ public abstract class FlyingEnemy extends Enemy {
         int[] yDir = new int[4];
 
 
-        System.out.println(x + "" + y + "" + this.direction);
+        // System.out.println(x + "" + y + "" + this.direction);
 
         //Find which tiles are to enemies' left, right, forward and behind based on direction
 

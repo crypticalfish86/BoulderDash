@@ -8,7 +8,7 @@ public class NormalWall extends Wall {
 
     public NormalWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.NORMAL_WALL, operationInterval);
-        this.amoebaCanSpreadToThisTile = false;
+        
     }
 
     @Override

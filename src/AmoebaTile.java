@@ -43,31 +43,43 @@ public class AmoebaTile extends Tile{
      * The current time in ms since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds) {
+        
         return;
     }
 
     //TODO make it randomly spread to a tile instead of always starting with a north tile then east then south etc.
-    public void growThisAmoebaTile(int numberOfGrowthAttempts){
-        Tile northTile = gameSession.getTileFromGrid(x,y + 1);
-        Tile eastTile = gameSession.getTileFromGrid(x + 1, y);
-        Tile southTile = gameSession.getTileFromGrid(x, y - 1);
-        Tile westTile = gameSession.getTileFromGrid(x - 1, y);
+    
+    /**
+     * Try if this amoeba can grow to its neighbour
+     * @return if this growth was successful
+     */
+    public boolean tryGrow() {
 
-        if(northTile.amoebaCanSpreadToThisTile()) {
+        //up
+        if (AmoebaController.canAmoebaSpreadTo(gameSession.getTileFromGrid(x, y + 1).getTileType())) {
             this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x, y + 1);
+            return true;
         }
-        else if(eastTile.amoebaCanSpreadToThisTile()) {
-            this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x + 1, y);
-        }
-        else if(southTile.amoebaCanSpreadToThisTile()){
+
+        //down
+        if (AmoebaController.canAmoebaSpreadTo(gameSession.getTileFromGrid(x, y - 1).getTileType())) {
             this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x, y - 1);
+            return true;
         }
-        else if(westTile.amoebaCanSpreadToThisTile()){
+
+        //right
+        if (AmoebaController.canAmoebaSpreadTo(gameSession.getTileFromGrid(x + 1, y).getTileType())) {
+            this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x + 1, y);
+            return true;
+        }
+
+        //left
+        if (AmoebaController.canAmoebaSpreadTo(gameSession.getTileFromGrid(x - 1, y).getTileType())) {
             this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x - 1, y);
+            return true;
         }
-        else{
-            this.thisAmoebaTilesController.attemptAmoebaClusterGrowth(numberOfGrowthAttempts + 1);
-        }
+
+        return false;
     }
 
     //TODO ask what this does so you can write javadoc

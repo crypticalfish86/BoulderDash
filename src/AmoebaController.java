@@ -11,6 +11,10 @@ public class AmoebaController {
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
 
+    private static final int AMOEBA_ATTEMPTS = 100;
+    private int currentAttempts = 0;
+
+
     /**
      * Construct an amoeba controller which acts as the controller for an amoeba cluster, regulating growth and cluster members.
      * @param gameSession
@@ -33,6 +37,11 @@ public class AmoebaController {
             this.currentAmoebaChildCount = 0;
             addNewAmoebaChildToCluster(startingAmoebaX, startingAmoebaY);
         }
+
+        // System.out.printf("created amoeba with data: max: %d, current: %d\n", maxAmoebaChildCount, this.amoebaChildren.size());
+
+
+
         this.maxAmoebaChildCount = maxAmoebaChildCount;
         this.operationInterval = operationInterval;
         this.operationIntervalsPerAmoebaGrowthRate = amoebaGrowthRatePerOperationInterval;
@@ -46,32 +55,53 @@ public class AmoebaController {
      * The current time in milliseconds since 1970
      */
     public void updateAmoebaCluster(long currentTimeInMilliseconds){
-        if(this.currentAmoebaChildCount == 0){//TODO replace this with a removal of this amoeba cluster from the arraylist in game session
+        // System.out.printf("Amoeba growing: %d, child count: %d\n", currentTimeInMilliseconds, this.currentAmoebaChildCount);
+
+        //tries to grow the amoeba, if it cannot grow, it will be converted to other items
+
+        if (this.currentAmoebaChildCount == 0) {//TODO replace this with a removal of this amoeba cluster from the arraylist in game session
+            stopController();
             return;
         }
 
-        if(this.currentAmoebaChildCount >= this.maxAmoebaChildCount){
-            triggerDiamondConversion();
+        if (this.currentAmoebaChildCount >= this.maxAmoebaChildCount) {
+            convertToBoulder();
             return;
         }
 
-        if(currentTimeInMilliseconds - this.lastTimeStamp >= this.operationInterval){
-            this.currentNumberOfIntervals++;
-            //TODO update the timestamp here
+        if(currentTimeInMilliseconds - this.lastTimeStamp >= this.operationInterval) {
+            this.lastTimeStamp = currentTimeInMilliseconds;
+
+            ++(this.currentNumberOfIntervals);
+
+            if (this.currentNumberOfIntervals >= this.operationIntervalsPerAmoebaGrowthRate) {
+                attemptAmoebaClusterGrowth();
+                this.currentNumberOfIntervals = 0;
+            }
         }
 
-        if(this.currentNumberOfIntervals >= this.operationIntervalsPerAmoebaGrowthRate){
-            attemptAmoebaClusterGrowth(0);
-        }
+        
     }
 
     /**
      * Convert all amoeba tiles in this cluster into diamonds.
      */
-    public void triggerDiamondConversion(){
-        for(AmoebaTile amoeba : this.amoebaChildren){
+    public void convertToDiamond() {
+        for (AmoebaTile amoeba : this.amoebaChildren) {
             Diamond replacementDiamond = new Diamond(this.gameSession, amoeba.getXPosition(), amoeba.getYPosition(), this.operationInterval);
-            this.gameSession.setTile(amoeba.getXPosition(), amoeba.getYPosition(), replacementDiamond);
+            this.gameSession.setTile(amoeba.getYPosition(), amoeba.getXPosition(), replacementDiamond);
+        }
+
+        this.currentAmoebaChildCount = 0;
+    }
+
+    /**
+     * Convert all amoeba tiles in this cluster into boulder.
+     */
+    public void convertToBoulder() {
+        for (AmoebaTile amoeba : this.amoebaChildren) {
+            Boulder replacementBoulder = new Boulder(this.gameSession, amoeba.getXPosition(), amoeba.getYPosition(), this.operationInterval);
+            this.gameSession.setTile(amoeba.getYPosition(), amoeba.getXPosition(), replacementBoulder);
         }
 
         this.currentAmoebaChildCount = 0;
@@ -79,18 +109,27 @@ public class AmoebaController {
 
     /**
      * Randomly select and amoeba in the cluster to spread one tile (if possible).
-     * @param numberOfGrowthAttempts
-     * The number of attempts the amoeba has attempted to grow in the current growth attempt.
+     * Converts to diamond if it hasn't been grown for too long.
+     * 
      */
-    public void attemptAmoebaClusterGrowth(int numberOfGrowthAttempts){
-        if(numberOfGrowthAttempts >= 100){ //change to (> number in cluster) this should be done by copying the array list and removing from list when once isn't possible
+    public void attemptAmoebaClusterGrowth() {
+
+        if (this.currentAttempts > AMOEBA_ATTEMPTS) {
+            convertToDiamond();
             return;
         }
-        else{
-            Random random = new Random();
-            int randomIndex = random.nextInt(amoebaChildren.size());
-            amoebaChildren.get(randomIndex).growThisAmoebaTile(numberOfGrowthAttempts);
+        
+        
+        for (int i = 0; i < amoebaChildren.size(); ++i) {
+
+            if (amoebaChildren.get(i).tryGrow()) {
+
+                this.currentAttempts = 0;
+                return;
+            }
         }
+
+        ++(this.currentAttempts);
     }
 
     /**
@@ -102,21 +141,20 @@ public class AmoebaController {
      */
     public void addNewAmoebaChildToCluster(int x, int y) {
         //Add a new amoeba to the array list
-        AmoebaTile newAmoeba = new AmoebaTile(this.gameSession, x, y, this.operationInterval, this);//instantiate new amoeba
-        this.amoebaChildren.add(newAmoeba);//add new amoeba to cluster
+        
 
         //TODO: Verify this code
         //change it so it only spreads on a path, potentially making a new tiletype for paths
 
-        if(this.currentAmoebaChildCount != 0 && this.gameSession.getTileFromGrid(x,y).tileType == TileType.PATH){
-            // this.gameSession.callKillPlayer();
-            // TODO: i don't think amoeba kills players?
-            this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
-        } else if(this.currentAmoebaChildCount == 0){
-            this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
-        }
+        // if (canAmoebaSpreadTo(this.gameSession.getTileFromGrid(x, y).tileType) || this.currentAmoebaChildCount == 0) {
 
+            
+        AmoebaTile newAmoeba = new AmoebaTile(this.gameSession, x, y, this.operationInterval, this);//instantiate new amoeba
+        this.amoebaChildren.add(newAmoeba);//add new amoeba to cluster
+        this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
+        
         this.currentAmoebaChildCount++;
+
     }
 
     /**
@@ -136,5 +174,24 @@ public class AmoebaController {
                 this.currentAmoebaChildCount--;
             }
         }
+    }
+
+
+
+
+    /**
+     * Removes the current controlelr from the game
+     */
+    private void stopController() {
+        gameSession.getAmeobaControllerList().remove(this);
+    }
+
+
+    public static boolean canAmoebaSpreadTo(TileType tileType) {
+        return (
+            tileType == TileType.PATH ||
+            tileType == TileType.DIRT_WALL ||
+            tileType == TileType.MOVING_ENEMY
+        );
     }
 }

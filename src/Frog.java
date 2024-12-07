@@ -21,7 +21,7 @@ public class Frog extends Enemy {
 
     public Frog(GameSession gameSession, int x, int y){
         super(gameSession, x, y, TileType.MOVING_ENEMY, 0);
-        this.amoebaCanSpreadToThisTile = true;
+        
     }
 
 
