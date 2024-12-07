@@ -33,6 +33,12 @@ public class Frog extends Enemy {
     }
 
     public void updateTile(long currentTimeInMilliseconds) {
+
+        //Kill frog if next to an amoeba
+        if(isNextToAmoeba(this.x,this.y)){
+            PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
+            gameSession.setTile(this.y,this.x,pathWall);
+        }
         
         //checks if the frog should move
         if (pathRefresh > 0) {

@@ -38,14 +38,13 @@ public class FireFly extends FlyingEnemy{
             }else{
                 moveRight(this.x, this.y);
             }
-
         }
-        //    if(currentTimeInMilliseconds - this.lastTimeStamp >= this.operationInterval){
-//            //move(this.x, this.y);
-//            this.lastTimeStamp = System.currentTimeMillis();
-//
-//
-//        }
+
+        //Kill firefly if next to an amoeba
+        if(isNextToAmoeba(this.x,this.y)){
+            PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
+            gameSession.setTile(this.y,this.x,pathWall);
+        }
     }
 
 

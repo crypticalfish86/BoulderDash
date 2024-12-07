@@ -10,6 +10,7 @@ public class GameSessionData {
     private int diamondCount;
     private int score;
 
+
     private int level;
 
     // TimeAllowed, DiamondsRequired, AmeobaSpreadRate, AmeobaSizeLimit
@@ -20,7 +21,7 @@ public class GameSessionData {
 
     GameSession currentGame;
 
-    public GameSessionData(GameSession gameSession, int timeAllowed, int diamondsRequired ,int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score) {
+    public GameSessionData(GameSession gameSession, int timeAllowed, int diamondsRequired, int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score) {
         this.gameSession = gameSession;
         this.timeAllowed = timeAllowed;
         this.diamondsRequired = diamondsRequired;
@@ -42,7 +43,8 @@ public class GameSessionData {
         return new int[]{
                 this.score, this.timeAllowed - this.startingTime, this.timeAllowed,
                 this.diamondCount, this.diamondsRequired,
-                this.redKeys, this.blueKeys, this.yellowKeys, this.greenKeys
+                this.redKeys, this.blueKeys, this.yellowKeys, this.greenKeys,
+                
         };
     }
 

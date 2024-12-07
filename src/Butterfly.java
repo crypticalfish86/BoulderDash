@@ -44,12 +44,14 @@ public class Butterfly extends FlyingEnemy{
 
         }
 
-//        if(currentTimeInMilliseconds - this.lastTimeStamp >= this.operationInterval){
-//            //move(this.x, this.y, true);
-//            this.lastTimeStamp = System.currentTimeMillis();
-//        }
+        //Kill butterfly if next to an amoeba
+        if(isNextToAmoeba(this.x,this.y)){
+            PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
+            gameSession.setTile(this.y,this.x,pathWall);
+        }
 
     }
+
 
 
 
