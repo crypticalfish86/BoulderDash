@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-public class GameOver {
+public class GameOver extends DisplayLayer {
     private final CanvasCompositor cc;
     private final CanvasLayer cl;
     private final GameSessionData gameSessionData;

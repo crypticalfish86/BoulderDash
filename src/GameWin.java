@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-public class GameWin {
+public class GameWin extends DisplayLayer {
     private final CanvasCompositor cc;
     private final CanvasLayer cl;
     private final GameSessionData gameSessionData;

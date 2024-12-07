@@ -19,7 +19,7 @@ public class Game {
     private MainMenu mainMenu;
     private ProfileSelector profileSelector;
     private GameSession currentGamesession;
-    private GameOver gameOver;
+    private DisplayLayer gameOver;
 
     //currentGameSession and loadedPlayerProfileID do not get instantiated in the constructor as they are variable (debatable whether anything gets instantiated in the constructor
     public Game(CanvasCompositor cc) {
@@ -183,7 +183,7 @@ public class Game {
                 new LeaderBoards().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
 
                 
-                this.gameOver = new GameFinish(this, cc, gameSessionData);
+                this.gameOver = new GameWin(this, cc, gameSessionData);
 
             } else {
                 //TODO: start next game with level + 1
