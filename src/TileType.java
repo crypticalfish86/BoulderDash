@@ -1,6 +1,6 @@
 public enum TileType {
     PLAYER,
-    FALLING_OBJECT,
+    //FALLING_OBJECT,
     EXPLOSION,
     MOVING_ENEMY,
     AMOEBA,
@@ -11,6 +11,7 @@ public enum TileType {
     DIRT_WALL,
     MAGIC_WALL,
     DIAMOND,
+    BOULDER,
     NORMAL_WALL,
     TITANIUM_WALL,
     EXIT_WALL

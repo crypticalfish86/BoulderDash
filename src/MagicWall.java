@@ -21,13 +21,13 @@ public class MagicWall extends Wall {
 
         // Check the type of the interacting tile
         switch (inputTileObject.getTileType()) {
-            case FALLING_OBJECT:
+            case BOULDER:
                 if (inputTileObject instanceof Boulder) {
                     transformAndEjectTile(inputTileObject, TileType.DIAMOND); // Transform Boulder into Diamond
                 }
                 break;
             case DIAMOND:
-                transformAndEjectTile(inputTileObject, TileType.FALLING_OBJECT); // Transform Diamond into Boulder
+                transformAndEjectTile(inputTileObject, TileType.BOULDER); // Transform Diamond into Boulder
                 break;
             default:
                 System.out.println("No transformation applied by MagicWall.");
@@ -41,7 +41,7 @@ public class MagicWall extends Wall {
         Tile newTile;
 
         // Create the new tile based on the new tile type
-        if (newTileType == TileType.FALLING_OBJECT) {
+        if (newTileType == TileType.BOULDER) {
             newTile = new Boulder(gameSession, x, y, inputTileObject.getOperationInterval());
             System.out.println("Transformed Diamond into Boulder at (" + x + ", " + y + ").");
         } else if (newTileType == TileType.DIAMOND) {

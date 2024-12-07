@@ -14,7 +14,7 @@ public class Diamond extends FallingObject{
 
 
     public Diamond(GameSession gameSession, int x, int y, long operationInterval){
-        super(gameSession, x, y, TileType.FALLING_OBJECT, operationInterval);
+        super(gameSession, x, y, TileType.DIAMOND, operationInterval);
         this.amoebaCanSpreadToThisTile = false;
     }
 
