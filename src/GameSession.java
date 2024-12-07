@@ -373,12 +373,12 @@ public class GameSession {
         tile.setNewPosition(xTileLocation, yTileLocation);
     }
 
-    // /**
-    //  * Calls the kill player method on this game session's player.
-    //  */
-    // public void callKillPlayer() {
-    //     player.killPlayer();
-    // }
+     /**
+      * Calls the kill player method on this game session's player.
+      */
+     public void callKillPlayer() {
+         player.killPlayer();
+     }
 
 
     
