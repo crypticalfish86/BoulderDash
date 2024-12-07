@@ -7,7 +7,7 @@ public class Door extends Wall {
     private String doorColour; // The color of the door
 
     public Door(GameSession gameSession, int x, int y, long operationInterval, String doorColour) {
-        super(gameSession, x, y, TileType.STATIC_TILE, operationInterval);
+        super(gameSession, x, y, TileType.DOOR, operationInterval);
         this.doorColour = doorColour;
         this.img = selectImageBasedOnColor(doorColour); // Set the image based on the door color
         this.amoebaCanSpreadToThisTile = false;

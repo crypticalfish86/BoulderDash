@@ -22,13 +22,15 @@ public class Butterfly extends FlyingEnemy{
 
 
     /**
-     * Moves one tile every operation interval.
+     * Finds the next move to make and moves every certain number of ticks
      * @param currentTimeInMilliseconds
      * The number of milliseconds since the unix epoch (01/01/1970).
      */
     public void updateTile(long currentTimeInMilliseconds){
+        //Set initial direction
+        //Doing here because can't be done in constructor
         if(ticksAlive == 0){
-            setInitialDirection();
+            setInitialDirection(this.x,this.y,this.prioritiseLeft);
         }
 
         ticksAlive++;
@@ -49,76 +51,7 @@ public class Butterfly extends FlyingEnemy{
 
     }
 
-    private void setInitialDirection(){
 
-        if(prioritiseLeft){
-            boolean hasFoundDirection = false;
-
-            if(x != 0 && !hasFoundDirection){
-                if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
-                    direction = "Up";
-                    hasFoundDirection = true;
-                }
-            }
-            if(y != gameSession.getGridHeight() - 1 && !hasFoundDirection){
-                if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
-                    direction = "Left";
-                    hasFoundDirection = true;
-                }
-            }
-            if(y != 0 && !hasFoundDirection){
-                if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
-                    direction = "Right";
-                    hasFoundDirection = true;
-                }
-            }
-            if(x != gameSession.getGridWidth() - 1 && !hasFoundDirection){
-                if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
-                    direction = "Down";
-                    hasFoundDirection = true;
-                }
-            }
-
-            //Set default value
-            if(!hasFoundDirection){
-                direction = "Up";
-            }
-
-
-        }else{
-            boolean hasFoundDirection = false;
-
-            if(x != 0 && !hasFoundDirection){
-                if(followEdgeOfThisTile(gameSession.getTileFromGrid(x - 1, y))){
-                    direction = "Down";
-                    hasFoundDirection = true;
-                }
-            }
-            if(y != gameSession.getGridHeight() - 1 && !hasFoundDirection){
-                if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y + 1))){
-                    direction = "Right";
-                    hasFoundDirection = true;
-                }
-            }
-            if(y != 0 && !hasFoundDirection){
-                if(followEdgeOfThisTile(gameSession.getTileFromGrid(x, y - 1))){
-                    direction = "Left";
-                    hasFoundDirection = true;
-                }
-            }
-            if(x != gameSession.getGridWidth() - 1 && !hasFoundDirection){
-                if(followEdgeOfThisTile(gameSession.getTileFromGrid(x + 1, y))){
-                    direction = "Up";
-                    hasFoundDirection = true;
-                }
-            }
-
-            //Set default value
-            if(!hasFoundDirection){
-                direction = "Up";
-            }
-        }
-    }
 
     @Override
     public void drawTile(GraphicsContext gc) {

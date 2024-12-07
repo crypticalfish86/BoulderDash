@@ -59,7 +59,7 @@ public abstract class Enemy extends Tile {
                 if((gameSession.getTileFromGrid(i,j).getTileType() == TileType.PLAYER)){
                     Explosion explosion = new Explosion(gameSession, i, j, operationInterval, replaceWithDiamond);
                     gameSession.setTile(j, i, explosion);
-                    //gameSession.callKillPlayer();
+                    //gameSession.callKillPlayer(); //TODO How to kill player
                 }
             }
         }

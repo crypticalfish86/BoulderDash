@@ -114,17 +114,27 @@ public abstract class FallingObject extends Tile {
         }
     }
 
+
+    /**
+     * Determines whether a falling object is on a curved tile.
+     * @param x the x position of the falling object.
+     * @param y the y position of the falling object.
+     * @return true if the falling object is on a curved tile, false otherwise.
+     */
     private boolean onCurvedTile(int x, int y) {
         Tile tileBelow = gameSession.getTileFromGrid(x,y + 1);
         if(tileBelow.getTileType() == TileType.FALLING_OBJECT){
             return true;
-        }else if(tileBelow.getTileType() == TileType.STATIC_TILE){
+        }else if(tileBelow.getTileType() == TileType.TITANIUM_WALL){
             return true;
         }else if(tileBelow.getTileType() == TileType.DIRT_WALL) {
             return true;
         }else if(tileBelow.getTileType() == TileType.NORMAL_WALL) {
             return true;
-        }else{
+        }else if(tileBelow.getTileType() == TileType.EXIT_WALL){
+            return true;
+        }
+        else{
             return false;
         }
     }

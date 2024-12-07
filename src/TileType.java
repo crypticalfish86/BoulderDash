@@ -6,7 +6,7 @@ public enum TileType {
     AMOEBA,
     DOOR,
     KEY,
-    STATIC_TILE,
+    //STATIC_TILE,
     PATH,
     DIRT_WALL,
     MAGIC_WALL,

@@ -16,7 +16,7 @@ public class Explosion extends Tile {
     public Explosion(GameSession gameSession, int x, int y, long operationInterval, Boolean replaceWithDiamond) {
         super(gameSession, x, y, TileType.EXPLOSION, operationInterval);
         this.replaceWithDiamond = replaceWithDiamond;
-        ticksAlive = 1;
+        ticksAlive = 0;
 
     }
     public void interact(Tile Tile) {
