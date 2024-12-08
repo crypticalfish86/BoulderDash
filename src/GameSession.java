@@ -65,7 +65,7 @@ public class GameSession {
          //generateSampleGame();
 
         //the draw method is under the draw of this interface
-        //the main class controlls it to draw
+        //the main class controls it to draw
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
 
             @Override
@@ -110,9 +110,8 @@ public class GameSession {
 
                     // Check if time has run out
                     if (timeLeft <= 0) {
-                        System.out.println("Time's up! Player killed.");
-                        
-                        onGameOver(false); // Trigger the game-over logic
+                        System.out.println("Time's up!");
+                        callKillPlayer();
                         return; // Stop further updates
                     }
 
@@ -164,7 +163,7 @@ public class GameSession {
 
 
     /**
-     * Initialises GameSessiondata and fills the 2DGridTileMap.
+     * Initialises GameSessionData and fills the 2DGridTileMap.
      * @param gameData the string to be converted to data
      * @param accumulatedScore the score to be carried on from last level
      * The data used to fill GameSessionData and the grid tile map.
@@ -175,7 +174,7 @@ public class GameSession {
         // line 1: Current Level, Height, Width
         // Line 2: Score, TimeLeft, TimeAllowed
         // Line 3: DiamondCount, DiamondsRequired
-        // Line 4: AmeobaSpreadRate, AmeobaSizeLimit
+        // Line 4: AmoebaSpreadRate, AmoebaSizeLimit
         // Line 5: RedKey, BlueKey, YellowKey, GreenKey
         // Line 6+: Actual level
 
@@ -216,7 +215,7 @@ public class GameSession {
                 
                 for(int x = 0; x < gridLineTileArray.length; x++){
 
-                    Tile newTile = new PathWall(this, x, y, OPERATION_INTERVAL);//this should never finish itialised as this, it should go through the switch statement
+                    Tile newTile = new PathWall(this, x, y, OPERATION_INTERVAL);//this should never finish initialised as this, it should go through the switch statement
                     switch (gridLineTileArray[x]){
                         case "-":
                             newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
@@ -332,7 +331,7 @@ public class GameSession {
 
 
                         default:
-                            System.out.println("ERROR TILE NOT RECOGNISED, PRINTING PATHWALL BY DEFAULT");
+                            System.out.println("ERROR TILE NOT RECOGNISED, PRINTING PATH-WALL BY DEFAULT");
                             newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
                             break;
                     }
@@ -381,9 +380,9 @@ public class GameSession {
 
         saveString += "1;"; //change this when you figure it out
         saveString += Integer.toString(this.gridWidth) + ";" + Integer.toString(this.gridHeight) + ";" + newLineString; //height and width
-        saveString += Integer.toString(data[0]) + ";" + timeLeft / 1000 + ";" + Integer.toString(data[2] / 1000) + ";" + newLineString; //Score, timeleft, time allowed
+        saveString += Integer.toString(data[0]) + ";" + timeLeft / 1000 + ";" + Integer.toString(data[2] / 1000) + ";" + newLineString; //Score, timeLeft, time allowed
         saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4]) + ";\n";//diamondCount and diamondsRequired
-        saveString += Integer.toString(this.amoebaGrowthRate) + ";" + Integer.toString(this.maxAmoebaSize) + ";" + newLineString; //TODO add amoebaspreadrate and ameoba max size somewhere in gamesession
+        saveString += Integer.toString(this.amoebaGrowthRate) + ";" + Integer.toString(this.maxAmoebaSize) + ";" + newLineString; //TODO add amoebaSpreadRate and amoeba max size somewhere in gameSession
         saveString += Integer.toString(data[5]) + ";" + Integer.toString(data[6]) + ";" + Integer.toString(data[7]) + ";" + Integer.toString(data[8]) + ";";//keys
 
         for (int y = 0; y < gridTileMap.length; y++){
@@ -418,11 +417,11 @@ public class GameSession {
     //updates the incoming tile position with the replacement tile and the outgoing tile with the incoming tile
 
     /**
-     * move a tile to another tile in the gridmap and replace where the tile was with another tile.
+     * move a tile to another tile in the gridMap and replace where the tile was with another tile.
      * @param replacementTile
      * The tile that will replace the current incoming tiles location.
      * @param incomingTile
-     * The incoming tile that will be moved to the outgoing tiles location.
+     * The incoming tile that will be moved to the outgoing tile location.
      * @param outgoingTile
      * The outgoing tile that is being deleted.
      */
@@ -432,11 +431,11 @@ public class GameSession {
     }
 
     /**
-     * Set a new or existing tile at a specific location in the gridmap.
+     * Set a new or existing tile at a specific location in the gridMap.
      * @param yTileLocation
-     * The y location in the gridmap you want to set a new tile for.
+     * The y location in the gridMap you want to set a new tile for.
      * @param xTileLocation
-     * The x location in the gridmap you want to set a new tile for.
+     * The x location in the gridMap you want to set a new tile for.
      * @param tile
      * The tile that will be set at this location.
      */
@@ -723,7 +722,7 @@ public class GameSession {
      * @return
      * The amoeba controller list.
      */
-    public ArrayList<AmoebaController> getAmeobaControllerList() {
+    public ArrayList<AmoebaController> getAmoebaControllerList() {
         return amoebaControllerList;
     }
 
@@ -791,15 +790,6 @@ public class GameSession {
         endGame();
         gamePauseMenu.hide();
     }
-
-    //primarily used for amoeba, removed
-    // public void connectToGameUpdate(Function<Long, Void> function) {
-    //     updateConnections.add(function);
-    // }
-
-    // public void disconnectToGameUpdate(Function<Long, Void> function) {
-    //     updateConnections.remove(function);
-    // }
 
 
 }
