@@ -61,6 +61,8 @@ public class Frog extends Enemy {
         if (!moveTo(pathTarget[0], pathTarget[1])) {
             refreshPath();
         }
+
+        checkForPlayer();
     }
 
 

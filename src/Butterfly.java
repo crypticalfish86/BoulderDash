@@ -50,6 +50,8 @@ public class Butterfly extends FlyingEnemy{
             gameSession.setTile(this.y,this.x,pathWall);
         }
 
+        checkForPlayer();
+
     }
 
 

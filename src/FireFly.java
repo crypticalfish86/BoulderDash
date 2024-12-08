@@ -45,6 +45,8 @@ public class FireFly extends FlyingEnemy{
             PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
             gameSession.setTile(this.y,this.x,pathWall);
         }
+
+        checkForPlayer();
     }
 
 

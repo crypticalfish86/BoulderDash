@@ -161,6 +161,24 @@ public abstract class Enemy extends Tile {
 
         return false;
     }
+
+    /**
+     * Checks if the player is one tile away in any of the four cardinal directions and if so kills the player.
+     */
+    protected void checkForPlayer(){
+        if(this.gameSession.getTileFromGrid(this.x - 1, this.y).getTileType() == TileType.PLAYER){
+            this.gameSession.exitGame();
+        }
+        else if(this.gameSession.getTileFromGrid(this.x + 1, this.y).getTileType() == TileType.PLAYER){
+            this.gameSession.exitGame();
+        }
+        else if(this.gameSession.getTileFromGrid(this.x,this.y - 1).getTileType() == TileType.PLAYER){
+            this.gameSession.exitGame();
+        }
+        else if(this.gameSession.getTileFromGrid(this.x,this.y + 1).getTileType() == TileType.PLAYER){
+            this.gameSession.exitGame();
+        }
+    }
 }
 
 
