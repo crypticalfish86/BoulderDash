@@ -88,8 +88,13 @@ public class AmoebaTile extends Tile{
         draw(gc, img, 0, 0);
     }
 
+    /**
+     * Return a string representation of the amoeba tile.
+     * @return
+     * The string representation of the amoeba tile.
+     */
     public String returnStringTileRepresentation(){
-        return "A";
+        return "A" + Integer.toString(this.thisAmoebaTilesController.getClusterID());
     }
 
 }
