@@ -3,6 +3,10 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
+
 
 
 
@@ -12,8 +16,8 @@ public class Game {
 
     private final int MAX_LEVEL = 5;
     private final int SCORE_PER_SECOND_LEFT = 3;
-    
 
+    private MusicPlayer musicPlayer;
 
     private final CanvasCompositor cc;
 
@@ -29,9 +33,33 @@ public class Game {
 
         this.mainMenu = new MainMenu(this, cc);
         this.cc = cc;
+
+        initializeMusicPlayer();
+
     }
 
+    private void initializeMusicPlayer() {
+        try {
+            // Set the path to your music file
+            String musicFilePath = "./Assets/level_music.mp3";
+            musicPlayer = new MusicPlayer(musicFilePath);
+        } catch (Exception e) {
+            System.out.println("Failed to initialize music player.");
+            e.printStackTrace();
+        }
+    }
 
+    private void startMusic() {
+        if (musicPlayer != null) {
+            musicPlayer.play();
+        }
+    }
+
+    private void stopMusic() {
+        if (musicPlayer != null) {
+            musicPlayer.stop();
+        }
+    }
 
     //TODO Add proper exceptions and errors like in loadgame
     private boolean saveGame() { //TODO add proper exception throwing
@@ -64,10 +92,9 @@ public class Game {
      * A boolean value that determines if the loading of the GameSession was successful.
      */
     public boolean loadGame(String profileID) {
-        if(profileID.equals("1") || profileID.equals("2") || profileID.equals("3")){
+        if (profileID.equals("1") || profileID.equals("2") || profileID.equals("3")) {
             this.loadedPlayerProfileID = profileID;
-        }
-        else {
+        } else {
             return false;
         }
 
@@ -76,11 +103,10 @@ public class Game {
         try {
             File file = new File(filepath);
             Scanner scanner = new Scanner(file);
-            scanner.useDelimiter("\\A"); // Read entire file as one string
+            scanner.useDelimiter("\\A");
 
             String fileContent;
             if (scanner.hasNext()) {
-                System.out.println("file read");
                 fileContent = scanner.next();
                 scanner.close();
             } else {
@@ -88,19 +114,13 @@ public class Game {
                 return false;
             }
 
-            
-
-
-            System.out.println(fileContent);
-
-
-            //If the content of the file is new then load in the default file
             if (fileContent.equals("NEW;")) {
-                //TODO read default level package
-                startGameWithLevel(2, 0);
+                startGameWithLevel(0, 0);
             } else {
                 this.currentGamesession = new GameSession(this, fileContent, cc, 0);
             }
+
+            startMusic(); // Start music when game is loaded
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,10 +133,10 @@ public class Game {
      * @param level
      */
     private void startGameWithLevel(int level, int accumulatedScore) {
-        
+
         System.out.println("reading level file");
         File levelOneFile = new File(String.format("./Levels/level%d.txt", level));
-        
+
         try {
             Scanner levelFileScanner = new Scanner(levelOneFile);
 
@@ -128,11 +148,12 @@ public class Game {
 
 
             this.currentGamesession = new GameSession(this, fileContent, cc, accumulatedScore);
+            startMusic(); // Start music when the level starts
 
         } catch (FileNotFoundException e) {
             System.err.printf("level%d.txt not found.\n", level);
         }
-        
+
 
     }
 
@@ -191,18 +212,21 @@ public class Game {
      * @param gameSessionData the internal data of the game to be read
      * @param timeLeft time in milliseconds left
      */
+
     public void onGameOver(boolean hasWon, GameSessionData gameSessionData, long timeLeft) {
-        //TODO: check the game's level
+        //TODO: check Game Level
+
+        stopMusic(); // Stop music on game over
 
         if (hasWon) {
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
                 //TODO: show winning screen with score
                 new Leaderboard().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
 
-                
+
                 gameSessionData.updateScore((int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000));
 
-                
+
                 this.gameWin = new GameWin(this, cc, gameSessionData);
 
             } else {
@@ -214,6 +238,7 @@ public class Game {
         } else {
             this.gameOver = new GameOver(this, cc, gameSessionData);
             // showMenu();
+            stopMusic(); // Stop music on game over
         }
     }
 
@@ -221,6 +246,7 @@ public class Game {
         System.out.println("Exit button has been clicked");
         gameOver.hide();
         mainMenu.show();
+        stopMusic();
     }
 
     public void onLeaderboardButtonClicked() {
