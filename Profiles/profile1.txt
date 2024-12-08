@@ -4,7 +4,7 @@
 25;50;
 0;0;0;0;
 T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T
-T - - P - - - - - - - - - - - - - - - - - - - W W W W W W W W W W W W W W W * T
+T - - P - - - - - - - - TE1 - - - - - - - - - - W W W W W W W W W W W W W W W * T
 T W W W W W W @ @ @ W W W W D D D D D D D D D D D D D D D W D D D D @ @ D D D T
 T D D D D D D D D D D D D D D RK - - - - - - - - - D D D D W D D D D D D D D D T
 T D D D D D D D D M D D D D D D D D D D D D D D D D D D D W D D D D D D D D D T
@@ -31,5 +31,5 @@ T M D D D D D D D D D D D D - FL - - - - - - - D D D D D D D D D D @ @ @ @ @ @ T
 T D D D D D D D D D D D D D - W W W W W W W - D D D D D D D D @ @ D D D D D D T
 T D D D D @ @ @ D D D D D D - D D D BK * D W - D D D D D D D D D D D D D D D D T
 T D D D @ D D D D D D D D D - W W W W W W W - D D D @ @ D D @ @ D D D W W W W T
-T D D D D D D D D D D D D D - - - - - - - - - D D D D D D @ D D D @ D BD D D E T
+T D D D D D D D D D D D D D - - - - - - TE1 - - D D D D D D @ D D D @ D BD D D E T
 T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T

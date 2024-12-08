@@ -14,5 +14,6 @@ public enum TileType {
     BOULDER,
     NORMAL_WALL,
     TITANIUM_WALL,
+    TELEPORT_WALL,
     EXIT_WALL
 }

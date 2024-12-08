@@ -26,6 +26,7 @@ public class GameSession {
     private int amoebaGrowthRate;
     private int maxAmoebaSize;
 
+    private ArrayList<TeleportWall> teleportWallList;
     private final CanvasLayer cl;
     private final CanvasCompositor cc;
 
@@ -55,6 +56,7 @@ public class GameSession {
         this.game = game;
         this.gamePauseMenu = new GamePauseMenu(this, cc);
         amoebaControllerList = new ArrayList<AmoebaController>();
+        teleportWallList = new ArrayList<TeleportWall>();
         interpretLevelData(gameData, accumulatedScore);//loads gameSessionData and fills the grid tile map
 
         
@@ -108,9 +110,9 @@ public class GameSession {
 
                     // Check if time has run out
                     if (timeLeft <= 0) {
-                        System.out.println("Time's up!");
-                        callKillPlayer();
-                        //onGameOver(false); // Trigger the game-over logic
+                        System.out.println("Time's up! Player killed.");
+                        
+                        onGameOver(false); // Trigger the game-over logic
                         return; // Stop further updates
                     }
 
@@ -304,6 +306,29 @@ public class GameSession {
                                 this.amoebaControllerList.add(newAmoebaController);
                             }
                             break;
+                        case "TE1":
+                        case "TE2":
+                        case "TE3":
+                        case "TE4":
+                        case "TE5":
+                        case "TE6":
+                        case "TE7":
+                        case "TE8":
+                        case "TE9":
+                            int teleportWallID = Integer.parseInt(Character.toString(gridLineTileArray[x].charAt(2)));
+                            TeleportWall teleportWall = this.returnTeleportWallByID(teleportWallID);
+
+                            TeleportWall newTeleportWall = new TeleportWall(this, x, y, TileType.TELEPORT_WALL, OPERATION_INTERVAL, teleportWallID);
+
+                            if(teleportWall != null){
+                                teleportWall.setTeleportWallBrother(newTeleportWall);
+                                this.gridTileMap[y][x] = newTeleportWall;
+                            }
+                            else {
+                                this.teleportWallList.add(newTeleportWall);
+                                this.gridTileMap[y][x] = newTeleportWall;
+                            }
+                            break;
 
 
                         default:
@@ -320,6 +345,32 @@ public class GameSession {
                 }
             }
         }
+
+    public boolean doesNotEqualAmoebaOrTeleportTile(String tileString){
+        switch(tileString){
+            case "A1":
+            case "A2":
+            case "A3":
+            case "A4":
+            case "A5":
+            case "A6":
+            case "A7":
+            case "A8":
+            case "A9":
+            case "TE1":
+            case "TE2":
+            case "TE3":
+            case "TE4":
+            case "TE5":
+            case "TE6":
+            case "TE7":
+            case "TE8":
+            case "TE9":
+                return false;
+            default:
+                return true;
+        }
+    }
 
     public String buildSaveString() {
         String saveString = "";
@@ -439,6 +490,70 @@ public class GameSession {
     public void exitGame() {
         endGame();
         game.endGame();
+    }
+
+
+    private void generateSampleGame() {
+        Random rand = new Random();
+        int sizeX = rand.nextInt(10) + 10;
+        int sizeY = rand.nextInt(10) + 10;
+
+
+
+
+        //fills the game with dirt
+        //fills the border with wall
+        gridHeight = sizeY;
+        gridWidth = sizeX;
+
+        this.gridTileMap = new Tile[sizeY][sizeX];
+
+        for (int y = 0; y < sizeY; ++y) {
+            this.gridTileMap[y][0] = new TitaniumWall(this, 0, y, OPERATION_INTERVAL);
+            this.gridTileMap[y][sizeX - 1] = new TitaniumWall(this, sizeX - 1, y, OPERATION_INTERVAL);
+        }
+
+        for (int x = 1; x < sizeX - 1; ++x) {
+            this.gridTileMap[0][x] = new TitaniumWall(this, x, 0, OPERATION_INTERVAL);
+            this.gridTileMap[sizeY - 1][x] = new TitaniumWall(this, x, sizeY - 1, OPERATION_INTERVAL);
+        }
+
+
+
+        for (int y = 1; y < sizeY - 1; ++y) {
+            for (int x = 1; x < sizeX - 1; ++x) {
+                
+                int random = rand.nextInt(100);
+
+                if (random < 4) {
+                    this.gridTileMap[y][x] = new TitaniumWall(this, x, y, OPERATION_INTERVAL);
+                } else if (random < 4) {
+                    this.gridTileMap[y][x] = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
+                }  else {
+                    this.gridTileMap[y][x] = new DirtWall(this, x, y, OPERATION_INTERVAL);
+                }
+
+                Tile butterfly = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
+                this.setTile(3,3, butterfly);
+            } 
+        }
+
+        //set the player
+        int playerX = rand.nextInt(sizeX - 5) + 2;
+        int playerY = rand.nextInt(sizeY - 5) + 2;
+
+        this.player = new Player(this, playerX, playerY, OPERATION_INTERVAL);
+        this.gridTileMap[playerY][playerX] = this.player;
+
+
+        this.timeLeft = 60*60*1000;
+
+
+        
+        int frogX = rand.nextInt(sizeX - 2) + 1;
+        int frogY = rand.nextInt(sizeY - 2) + 1;
+        this.gridTileMap[frogY][frogX] = new Frog(this, frogX, frogY);
+
     }
 
     private void startProfile1() {
@@ -623,6 +738,22 @@ public class GameSession {
         for(AmoebaController controller : this.amoebaControllerList){
             if(controller.getClusterID() == idNumber){
                 return controller;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * returns a teleport wall in the teleportWallList by its ID.
+     * @param idNumber
+     * The id number of the teleport wall you're searching for.
+     * @return
+     * If the TeleportWall exists it is returned, otherwise return null.
+     */
+    public TeleportWall returnTeleportWallByID(int idNumber){
+        for(TeleportWall teleportWall : this.teleportWallList){
+            if(teleportWall.getTeleportWallID() == idNumber){
+                return teleportWall;
             }
         }
         return null;
