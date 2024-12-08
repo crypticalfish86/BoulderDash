@@ -37,10 +37,6 @@ public class ExitWall extends Wall {
         if (this.isActive && inputTileObject.getTileType() == TileType.PLAYER) {
             System.out.println("Player exits through the exit wall!");
             changeLevel(); // Trigger level change
-        } else if (!this.isActive) {
-            System.out.println("Exit wall is not active. Collect all diamonds to activate it.");
-        } else {
-            System.out.println("Only the player can interact with the exit wall.");
         }
     }
 

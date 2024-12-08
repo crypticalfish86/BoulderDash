@@ -3,7 +3,7 @@
  * rolling and falling.
  * @author Isaac Atkinson
  * @author Alex (Tsz Tung Yee)
- * @version 1.0
+ * @version 1.2
  */
 
 
@@ -21,14 +21,19 @@ public abstract class FallingObject extends Tile {
 
 
 
-
+    /**
+     * Constructor blueprint for falling objects.
+     * @param gameSession The current game session.
+     * @param x the x position of the falling object.
+     * @param y the y position of the object.
+     * @param operationInterval The time in ms between operations.
+     */
     public FallingObject(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);
     }
 
     /**
-     * Causes the object to fall downwards and
-     * replaces its currentTile with a {@link PathWall}.
+     * Causes the object to fall downwards.
      * @param lowerTile the tile below the boulder.
      */
     private boolean fall(Tile lowerTile) {
@@ -47,8 +52,7 @@ public abstract class FallingObject extends Tile {
     }
 
     /**
-     * Causes the object to roll in a specified direction and
-     * replaces its currentTile with a {@link PathWall}.
+     * Causes the object to roll in a specified direction.
      * @param nextTile the adjacent tile.
      * @param nextTileBelow the adjacent tile's lower tile.
      */

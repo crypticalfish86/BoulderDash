@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
  * This class represents a diamond in the game, which can be collected by the player.
  * @author Isaac Atkinson
  * @author Alex (Tsz Tung Yee)
- * @version 1.0
+ * @version 1.2
  */
 
 public class Diamond extends FallingObject{
@@ -19,7 +19,13 @@ public class Diamond extends FallingObject{
 
 
 
-
+    /**
+     * Constructs a diamond tile.
+     * @param gameSession The current game session.
+     * @param x the x position of the diamond.
+     * @param y the y position of the diamond.
+     * @param operationInterval The time in ms between operations.
+     */
     public Diamond(GameSession gameSession, int x, int y, long operationInterval){
         super(gameSession, x, y, TileType.DIAMOND, operationInterval);
         
