@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
  * This class represents a boulder in the game, which can be pushed by the player.
  * @author Isaac Atkinson
  * @author Alex (Tsz Tung Yee)
- * @version 1.0
+ * @version 1.2
  */
 
 public class Boulder extends FallingObject{
@@ -16,6 +16,13 @@ public class Boulder extends FallingObject{
 
     private static final int DELAY_PUSH_BOULDER = 10;
 
+    /**
+     * Constructs a boulder tile.
+     * @param gameSession The current game session.
+     * @param x the x position of the boulder.
+     * @param y the y position of the boulder.
+     * @param operationInterval The time in ms between operations.
+     */
     public Boulder(GameSession gameSession, int x, int y, long operationInterval){
         super(gameSession, x, y, TileType.BOULDER, operationInterval);
         

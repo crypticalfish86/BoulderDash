@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
  * This class represents an explosion in the game, which quickly disappear and are
  * replaced by either a path or a diamond.
  * @author Isaac Atkinson
- * @version 1.0
+ * @version 1.1
  */
 
 public class Explosion extends Tile {
@@ -18,7 +18,14 @@ public class Explosion extends Tile {
     public static final Image img = new Image("file:Assets/Images/Explosion.png"); // Placeholder for the image
 
 
-    
+    /**
+     * Constructs an explosion tile.
+     * @param gameSession The current game session.
+     * @param x the x position of the explosion.
+     * @param y the y position of the explosion.
+     * @param operationInterval The time in ms between operations.
+     * @param replaceWithDiamond Represents whether the explosion should leave behind a diamond.
+     */
     public Explosion(GameSession gameSession, int x, int y, long operationInterval, Boolean replaceWithDiamond) {
         super(gameSession, x, y, TileType.EXPLOSION, operationInterval);
         this.replaceWithDiamond = replaceWithDiamond;
