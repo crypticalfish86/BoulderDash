@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
  * This class represents a firefly in the game.
  * @author Isaac Atkinson
  * @author Omar Zarugh
- * @version 1.0
+ * @version 1.2
  */
 
 public class FireFly extends FlyingEnemy{
@@ -13,7 +13,14 @@ public class FireFly extends FlyingEnemy{
     public static final Image img = new Image("file:Assets/Images/FireFly.png"); // Placeholder for the image
 
 
-
+    /**
+     * Constructs an instance of a firefly.
+     * @param gameSession The current game session.
+     * @param x The x position of the firefly.
+     * @param y The y position of the firefly.
+     * @param operationInterval The time interval between each operation.
+     * @param prioritiseLeft The edge the firefly is following.
+     */
     public FireFly(GameSession gameSession, int x, int y, long operationInterval, boolean prioritiseLeft){
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseLeft);
         

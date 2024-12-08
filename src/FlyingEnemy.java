@@ -5,7 +5,7 @@ import javafx.scene.shape.MoveTo;
  * follow either the left or right edge of certain tiles.
  * @author Isaac Atkinson
  * @author Omar Zarugh
- * @version 1.0
+ * @version 1.6
  */
 
 
@@ -22,7 +22,15 @@ public abstract class FlyingEnemy extends Enemy {
     protected int ticksAlive; //Number of update loops since object constructed
     protected String direction;
 
-
+    /**
+     * Constructs an instance of a flying enemy.
+     * @param gameSession The current game session.
+     * @param x The x position of the flying enemy.
+     * @param y The y position of the flying enemy.
+     * @param TileType The type of flying enemy.
+     * @param operationInterval The time interval between each operation.
+     * @param prioritiseLeft The edge the flying enemy is following.
+     */
     public FlyingEnemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval, boolean prioritiseLeft) {
         super(gameSession, x, y, TileType, operationInterval);
         this.prioritiseLeft = prioritiseLeft; //either true meaning left or false meaning right

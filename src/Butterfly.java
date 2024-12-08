@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
  * falling object.
  * @author Isaac Atkinson
  * @author Omar Zarugh
- * @version 1.0
+ * @version 1.2
  */
 
 public class Butterfly extends FlyingEnemy{
@@ -16,7 +16,14 @@ public class Butterfly extends FlyingEnemy{
 
 
 
-
+    /**
+     * Constructs an instance of a butterfly.
+     * @param gameSession The current game session.
+     * @param x The x position of the butterfly.
+     * @param y The y position of the butterfly.
+     * @param operationInterval The time interval between each operation.
+     * @param prioritiseLeft The edge the butterfly is following.
+     */
     public Butterfly(GameSession gameSession, int x, int y, long operationInterval, boolean prioritiseLeft){
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseLeft);
         
