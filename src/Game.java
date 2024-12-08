@@ -95,7 +95,7 @@ public class Game {
 
 
             //If the content of the file is new then load in the default file
-            if (fileContent.equals("new;")) {
+            if (fileContent.equals("NEW;")) {
                 //TODO read default level package
                 startGameWithLevel(0, 0);
             } else {
