@@ -87,7 +87,7 @@ public abstract class FallingObject extends Tile {
 
 
         //boulder will try to interact with tiles below if it has momentum, or if the lower tile os a path
-        if (tileBelow.tileType == TileType.PATH || isFalling) {
+        if (tileBelow.tileType == TileType.PATH || tileBelow.tileType == TileType.MAGIC_WALL|| isFalling) {
             if (fall(tileBelow)) { return; }
         }
 
