@@ -194,7 +194,7 @@ public class AmoebaController {
      * Removes the current controlelr from the game
      */
     private void stopController() {
-        gameSession.getAmeobaControllerList().remove(this);
+        gameSession.getAmoebaControllerList().remove(this);
     }
 
 
