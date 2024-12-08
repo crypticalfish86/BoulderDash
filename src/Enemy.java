@@ -4,15 +4,23 @@
  * @author Isaac Atkinson
  * @author Alex (Tsz Tung Yee)
  * @author Jace Weerawardena
- * @version 1.0
+ * @version 1.1
  */
 
 
 
 
 public abstract class Enemy extends Tile {
-    public Enemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
-        super(gameSession, x, y, TileType, operationInterval);
+
+    /**
+     * Constructor blueprint for Enemies.
+     * @param gameSession The current game session.
+     * @param x the x position of the enemy.
+     * @param y the y position of the enemy.
+     * @param operationInterval The time in ms between operations.
+     */
+    public Enemy(GameSession gameSession, int x, int y, long operationInterval) {
+        super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval);
     }
 
 

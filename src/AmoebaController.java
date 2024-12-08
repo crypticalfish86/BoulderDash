@@ -1,5 +1,12 @@
 import java.util.ArrayList;
 import java.util.Random;
+
+/**
+ * The AmoebaController class regulates an amoeba cluster of AmoebaTile's on the board.
+ * @author
+ * Jace Weerawardena(crypticalfish86).
+ * @version 2.0
+ */
 public class AmoebaController {
     private final GameSession gameSession;
     private final ArrayList<AmoebaTile> amoebaChildren; //The list of children to this amoeba controller
@@ -36,14 +43,11 @@ public class AmoebaController {
         this.gameSession = gameSession;
         this.amoebaChildren = new ArrayList<AmoebaTile>();
         this.clusterID = clusterID;
+
         if(maxAmoebaChildCount > 0){
             this.currentAmoebaChildCount = 0;
             addNewAmoebaChildToCluster(startingAmoebaX, startingAmoebaY);
         }
-
-        // System.out.printf("created amoeba with data: max: %d, current: %d\n", maxAmoebaChildCount, this.amoebaChildren.size());
-
-
 
         this.maxAmoebaChildCount = maxAmoebaChildCount;
         this.operationInterval = operationInterval;
@@ -64,14 +68,11 @@ public class AmoebaController {
     /**
      *If the amoeba cluster still contains tiles on the grid, regulate amoeba growth and check for diamond conversion trigger.
      * @param currentTimeInMilliseconds
-     * The current time in milliseconds since 1970
+     * The current time in milliseconds since the unix epoch (01/01/1970).
      */
     public void updateAmoebaCluster(long currentTimeInMilliseconds){
-        // System.out.printf("Amoeba growing: %d, child count: %d\n", currentTimeInMilliseconds, this.currentAmoebaChildCount);
 
-        //tries to grow the amoeba, if it cannot grow, it will be converted to other items
-
-        if (this.currentAmoebaChildCount == 0) {//TODO replace this with a removal of this amoeba cluster from the arraylist in game session
+        if (this.currentAmoebaChildCount == 0) {
             stopController();
             return;
         }
@@ -81,7 +82,7 @@ public class AmoebaController {
             return;
         }
 
-        if(currentTimeInMilliseconds - this.lastTimeStamp >= this.operationInterval) {
+        if (currentTimeInMilliseconds - this.lastTimeStamp >= this.operationInterval) {
             this.lastTimeStamp = currentTimeInMilliseconds;
 
             ++(this.currentNumberOfIntervals);
@@ -120,9 +121,8 @@ public class AmoebaController {
     }
 
     /**
-     * Randomly select and amoeba in the cluster to spread one tile (if possible).
-     * Converts to diamond if it hasn't been grown for too long.
-     * 
+     * Randomly select and amoeba in the cluster to spread one tile (if possible),
+     * converts to diamond if it hasn't been able to grow for too long.
      */
     public void attemptAmoebaClusterGrowth() {
 
@@ -151,15 +151,7 @@ public class AmoebaController {
      * The grid tile y position of the new amoeba tile.
      */
     public void addNewAmoebaChildToCluster(int x, int y) {
-        //Add a new amoeba to the array list
-        
 
-        //TODO: Verify this code
-        //change it so it only spreads on a path, potentially making a new tiletype for paths
-
-        // if (canAmoebaSpreadTo(this.gameSession.getTileFromGrid(x, y).tileType) || this.currentAmoebaChildCount == 0) {
-
-            
         AmoebaTile newAmoeba = new AmoebaTile(this.gameSession, x, y, this.operationInterval, this);//instantiate new amoeba
         this.amoebaChildren.add(newAmoeba);//add new amoeba to cluster
         this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
@@ -191,13 +183,20 @@ public class AmoebaController {
 
 
     /**
-     * Removes the current controlelr from the game
+     * Removes the current controller from the game.
      */
     private void stopController() {
         gameSession.getAmoebaControllerList().remove(this);
     }
 
 
+    /**
+     * Check if the amoeba can spread to a neighbouring tile.
+     * @param tileType
+     * The neighbouring tile.
+     * @return
+     * True if the tile can be spread to, false otherwise.
+     */
     public static boolean canAmoebaSpreadTo(TileType tileType) {
         return (
             tileType == TileType.PATH ||

@@ -12,12 +12,15 @@ public class Frog extends Enemy {
     public static final Image img = new Image("file:Assets/Images/Frog.png"); // Placeholder for the image
 
     private ArrayList<int[]> path = new ArrayList<>();
-    private int cooldown = 0;
-    private int pathRefresh = 0;
+    private int cooldown = 0; // holds the amount of frames that the frong should not move for
+    private int pathRefresh = 0; // holds the amount of frames until the path should refresh automatically
     
 
     private static final int COOLDOWN_MOVE = 30;
     private static final int PATH_REFRESH_RATE = 120;
+
+
+
 
     public Frog(GameSession gameSession, int x, int y){
         super(gameSession, x, y, TileType.MOVING_ENEMY, 0);
@@ -25,6 +28,7 @@ public class Frog extends Enemy {
     }
 
 
+    @Override
     public void interact(Tile tile) {
 
         if ((tile.getTileType() == TileType.BOULDER || tile.getTileType() == TileType.DIAMOND || tile.getTileType() == TileType.AMOEBA) && tile.getYPosition() == this.y - 1) {
@@ -32,6 +36,8 @@ public class Frog extends Enemy {
         }
     }
 
+    
+    @Override
     public void updateTile(long currentTimeInMilliseconds) {
 
         //Kill frog if next to an amoeba
