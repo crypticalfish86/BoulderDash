@@ -488,7 +488,7 @@ public class GameSession {
      */
     public void exitGame() {
         endGame();
-        game.endGame();
+        game.showMenu();
     }
 
 
