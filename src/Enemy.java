@@ -33,7 +33,9 @@ public abstract class Enemy extends Tile {
      * @param replaceWithDiamond represents whether the explosion should leave behind
      *                           a diamond once it disappears.
      */
-    protected void triggerExplosion(int xPosition, int yPosition, Boolean replaceWithDiamond){
+    protected void triggerExplosion(int xPosition, int yPosition,
+                                    Boolean replaceWithDiamond){
+
         int startX;
         int endX;
         int startY;
@@ -71,12 +73,16 @@ public abstract class Enemy extends Tile {
         for(int i = startX; i < endX + 1; i++){
             for(int j = startY; j < endY + 1; j++){
                 if ((isExplodable(gameSession.getTileFromGrid(i,j)))){ //Check if tile can explode
-                    Explosion explosion = new Explosion(gameSession, i, j, operationInterval, replaceWithDiamond);
+                    Explosion explosion = new Explosion(gameSession, i, j,
+                            operationInterval, replaceWithDiamond);
+
                     gameSession.setTile(j, i, explosion);
                 }
 
                 if((gameSession.getTileFromGrid(i,j).getTileType() == TileType.PLAYER)){
-                    Explosion explosion = new Explosion(gameSession, i, j, operationInterval, replaceWithDiamond);
+                    Explosion explosion = new Explosion(gameSession, i, j,
+                            operationInterval, replaceWithDiamond);
+
                     gameSession.setTile(j, i, explosion);
 
                     gameSession.callKillPlayer();
@@ -98,7 +104,9 @@ public abstract class Enemy extends Tile {
         Tile targetTile = gameSession.getTileFromGrid(x, y);
 
 
-        if (targetTile.tileType == TileType.PATH || targetTile.tileType == TileType.PLAYER) {
+        if (targetTile.tileType == TileType.PATH ||
+                targetTile.tileType == TileType.PLAYER) {
+
             targetTile.interact(this);
             return true;
         } else {
@@ -152,27 +160,33 @@ public abstract class Enemy extends Tile {
     }
 
     /**
-     * Determines if an enemy is next to an amoeba in any of the four cardinal directions.
+     * Determines if an enemy is next to an amoeba in any of
+     * the four cardinal directions.
      * @return true if there is an amoeba next to the enemy, false otherwise.
      */
     protected boolean isNextToAmoeba(int x, int y){
+
         if(x != 0){
-            if(gameSession.getTileFromGrid(this.x - 1, this.y).getTileType() == TileType.AMOEBA){
+            if(gameSession.getTileFromGrid(this.x - 1, this.y).getTileType()
+                    == TileType.AMOEBA){
                 return true;
             }
         }
         if(this.x != gameSession.getGridWidth() - 1){
-            if(gameSession.getTileFromGrid(this.x + 1, this.y).getTileType() == TileType.AMOEBA){
+            if(gameSession.getTileFromGrid(this.x + 1, this.y).getTileType()
+                    == TileType.AMOEBA){
                 return true;
             }
         }
         if(this.y != 0){
-            if(gameSession.getTileFromGrid(this.x, this.y - 1).getTileType() == TileType.AMOEBA){
+            if(gameSession.getTileFromGrid(this.x, this.y - 1).getTileType()
+                    == TileType.AMOEBA){
                 return true;
             }
         }
         if(this.y != gameSession.getGridHeight() - 1){
-            if(gameSession.getTileFromGrid(this.x, this.y + 1).getTileType() == TileType.AMOEBA){
+            if(gameSession.getTileFromGrid(this.x, this.y + 1).getTileType()
+                    == TileType.AMOEBA){
                 return true;
             }
         }
@@ -184,13 +198,24 @@ public abstract class Enemy extends Tile {
      * Checks if the player is one tile away in any of the four cardinal directions and if so kills the player.
      */
     protected void checkForPlayer(){
-        if(this.gameSession.getTileFromGrid(this.x - 1, this.y).getTileType() == TileType.PLAYER){
+        if(this.gameSession.getTileFromGrid(this.x - 1, this.y).getTileType()
+                == TileType.PLAYER){
+
             this.gameSession.onGameOver(false);
-        } else if(this.gameSession.getTileFromGrid(this.x + 1, this.y).getTileType() == TileType.PLAYER){
+
+        } else if(this.gameSession.getTileFromGrid(this.x + 1, this.y).getTileType()
+                == TileType.PLAYER){
+
             this.gameSession.onGameOver(false);
-        } else if(this.gameSession.getTileFromGrid(this.x,this.y - 1).getTileType() == TileType.PLAYER){
+
+        } else if(this.gameSession.getTileFromGrid(this.x,this.y - 1).getTileType()
+                == TileType.PLAYER){
+
             this.gameSession.onGameOver(false);
-        } else if(this.gameSession.getTileFromGrid(this.x,this.y + 1).getTileType() == TileType.PLAYER){
+
+        } else if(this.gameSession.getTileFromGrid(this.x,this.y + 1).getTileType()
+                == TileType.PLAYER){
+
             this.gameSession.onGameOver(false);
         }
     }

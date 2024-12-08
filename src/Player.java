@@ -7,8 +7,7 @@ import javafx.scene.image.Image;
 public class Player extends Tile {
 
     public static final Image img = new Image("file:Assets/Images/PlayerForward.png"); // Placeholder for the image
-    
-    //added because NOBODY DECIDED TO CODE THE PLAYER
+
     private boolean keyUp = false;
     private boolean keyDown = false;
     private boolean keyLeft = false;
@@ -30,12 +29,6 @@ public class Player extends Tile {
         // Initialize the inventory, not needed because you should call the game session data, and key should decide the logic instead of the player
     }
 
-    public void somePlayerLogic() {
-        GameSession session = getGameSession();
-        if (session != null) {
-            System.out.println("Game Session is available.");
-        }
-    }
 
 
 
@@ -183,7 +176,6 @@ public class Player extends Tile {
 
     // Add the killPlayer method
     public void killPlayer() {
-        System.out.println("Player has been killed.");
         gameSession.onGameOver(false);
     }
 

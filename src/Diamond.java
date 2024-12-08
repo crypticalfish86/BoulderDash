@@ -12,7 +12,7 @@ public class Diamond extends FallingObject{
 
     private final static int SCORE_VALUE = 50;
     
-    private static final Image img = new Image("file:Assets/Images/Diamond.png");//TODO: add the image here
+    private static final Image img = new Image("file:Assets/Images/Diamond.png");
 
 
 
@@ -37,7 +37,10 @@ public class Diamond extends FallingObject{
      */
     public void interact(Tile tile){
         if(tile.getTileType() == TileType.PLAYER){
-            PathWall pathWall = new PathWall(gameSession, tile.getXPosition(), tile.getYPosition(), getOperationInterval());
+
+            PathWall pathWall = new PathWall(gameSession, tile.getXPosition(),
+                    tile.getYPosition(), getOperationInterval());
+
             gameSession.updateTilePositions(pathWall, tile,this); //Move player to this tile and delete diamond
 
             updateGameSessionData();

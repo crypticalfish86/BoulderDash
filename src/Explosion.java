@@ -15,7 +15,7 @@ public class Explosion extends Tile {
 
     private Boolean replaceWithDiamond;
     
-    private static final Image img = new Image("file:Assets/Images/Explosion.png"); // Placeholder for the image
+    private static final Image img = new Image("file:Assets/Images/Explosion.png");
 
 
     /**
@@ -24,9 +24,12 @@ public class Explosion extends Tile {
      * @param x the x position of the explosion.
      * @param y the y position of the explosion.
      * @param operationInterval The time in ms between operations.
-     * @param replaceWithDiamond Represents whether the explosion should leave behind a diamond.
+     * @param replaceWithDiamond Represents whether the explosion
+     *                           should leave behind a diamond.
      */
-    public Explosion(GameSession gameSession, int x, int y, long operationInterval, Boolean replaceWithDiamond) {
+    public Explosion(GameSession gameSession, int x, int y,
+                     long operationInterval, Boolean replaceWithDiamond) {
+
         super(gameSession, x, y, TileType.EXPLOSION, operationInterval);
         this.replaceWithDiamond = replaceWithDiamond;
         ticksAlive = 0;
@@ -61,10 +64,12 @@ public class Explosion extends Tile {
      */
     private void convertExplosion(){
         if(replaceWithDiamond){
-            Diamond diamond = new Diamond(gameSession, this.x, this.y, operationInterval);
+            Diamond diamond = new Diamond(gameSession, this.x, this.y,
+                    operationInterval);
             gameSession.setTile(this.y,this.x, diamond);
         }else{
-            PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
+            PathWall pathWall = new PathWall(gameSession, this.x, this.y,
+                    operationInterval);
             gameSession.setTile(this.y,this.x, pathWall);
         }
     }

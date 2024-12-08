@@ -29,7 +29,8 @@ public abstract class FallingObject extends Tile {
      * @param TileType The tile type.
      * @param operationInterval The time in ms between operations.
      */
-    public FallingObject(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
+    public FallingObject(GameSession gameSession, int x, int y, TileType TileType,
+                         long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);
     }
 
@@ -40,7 +41,7 @@ public abstract class FallingObject extends Tile {
     private boolean fall(Tile lowerTile) {
         
         int thisY = this.getYPosition();
-        lowerTile.interact(this); //somebody decided to not make interact to return a boolean so i have to check :(
+        lowerTile.interact(this);
         
         if (thisY != getYPosition()) {
             fallReload = DELAY_FALL;
@@ -91,8 +92,12 @@ public abstract class FallingObject extends Tile {
         Tile tileBelow = gameSession.getTileFromGrid(xPosition, yPosition + 1);
 
 
-        //boulder will try to interact with tiles below if it has momentum, or if the lower tile os a path
-        if (tileBelow.tileType == TileType.PATH || tileBelow.tileType == TileType.MAGIC_WALL|| isFalling) {
+        //boulder will try to interact with tiles below if it has momentum,
+        // or if the lower tile is a path or magic wall
+        if (    tileBelow.tileType == TileType.PATH ||
+                tileBelow.tileType == TileType.MAGIC_WALL ||
+                isFalling) {
+
             if (fall(tileBelow)) { return; }
         }
 
@@ -101,12 +106,15 @@ public abstract class FallingObject extends Tile {
 
         //try to roll left
         if (xPosition > 0) {
-            Tile tileLeft = gameSession.getTileFromGrid(xPosition - 1, yPosition);
-            Tile tileLeftBelow = gameSession.getTileFromGrid(xPosition - 1, yPosition + 1);
+            Tile tileLeft =
+                    gameSession.getTileFromGrid(xPosition - 1, yPosition);
+            Tile tileLeftBelow =
+                    gameSession.getTileFromGrid(xPosition - 1, yPosition + 1);
 
             //Check if boulder should roll left
-            if (tileLeft.getTileType() == TileType.PATH && tileLeftBelow.getTileType() == TileType.PATH
-            && onCurvedTile(this.x,this.y)) {
+            if (    tileLeft.getTileType() == TileType.PATH &&
+                    tileLeftBelow.getTileType() == TileType.PATH &&
+                    onCurvedTile(this.x,this.y)) {
                 this.roll(tileLeft, tileLeftBelow);
                 return;
             }
@@ -117,12 +125,15 @@ public abstract class FallingObject extends Tile {
 
         //try to roll right
         if (xPosition < gameSession.getGridWidth() - 1) {
-            Tile tileRight = gameSession.getTileFromGrid(xPosition + 1, yPosition);
-            Tile tileRightBelow = gameSession.getTileFromGrid(xPosition + 1, yPosition + 1);
+            Tile tileRight =
+                    gameSession.getTileFromGrid(xPosition + 1, yPosition);
+            Tile tileRightBelow =
+                    gameSession.getTileFromGrid(xPosition + 1, yPosition + 1);
 
             //Check if boulder should roll right
-            if (tileRight.getTileType() == TileType.PATH && tileRightBelow.getTileType() == TileType.PATH
-                    && onCurvedTile(this.x,this.y)){
+            if (    tileRight.getTileType() == TileType.PATH &&
+                    tileRightBelow.getTileType() == TileType.PATH &&
+                    onCurvedTile(this.x,this.y)){
                 this.roll(tileRight, tileRightBelow);
                 return;
             }

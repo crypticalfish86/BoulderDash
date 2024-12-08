@@ -1,5 +1,3 @@
-import javafx.scene.shape.MoveTo;
-
 /**
  * This class represents a blueprint for flying enemies which try to
  * follow either the left or right edge of certain tiles.
@@ -9,7 +7,6 @@ import javafx.scene.shape.MoveTo;
  */
 
 
-//TODO resolve any commented out code lines
 public abstract class FlyingEnemy extends Enemy {
 
     protected static final int DELAY_FACTOR = 30; //Number of update loops per movement
@@ -23,7 +20,9 @@ public abstract class FlyingEnemy extends Enemy {
     protected String direction;
 
 
-    public FlyingEnemy(GameSession gameSession, int x, int y, TileType tileType, long operationInterval, boolean prioritiseLeft) {
+    public FlyingEnemy(GameSession gameSession, int x, int y, TileType tileType,
+                       long operationInterval, boolean prioritiseLeft) {
+
         super(gameSession, x, y, operationInterval);
         this.prioritiseLeft = prioritiseLeft; //either true meaning left or false meaning right
         this.x = x;
@@ -42,7 +41,8 @@ public abstract class FlyingEnemy extends Enemy {
         int[] yDir = new int[4];
 
 
-        //Find which tiles are to enemies' left, right, forward and behind based on direction
+        //Find which tiles are to enemies' left, right, forward and behind
+        //based on direction
         switch (this.direction) {
             case UP_DIRECTION:
                 xDir = new int[]{-1, +1, 0, 0};
@@ -121,35 +121,39 @@ public abstract class FlyingEnemy extends Enemy {
         }
 
 
-        Tile tileToLeft = gameSession.getTileFromGrid(x + xDir[0], y + yDir[0]); //Tile to enemies' left
-        Tile tileToRight = gameSession.getTileFromGrid(x + xDir[1], y + yDir[1]); //Tile to enemies' right
-        Tile tileBehind = gameSession.getTileFromGrid(x + xDir[2], y + yDir[2]); //Tile behind enemy
-        Tile tileInFront = gameSession.getTileFromGrid(x + xDir[3], y + yDir[3]); //Tile in front of enemy
+        Tile tileToLeft = gameSession.getTileFromGrid(x + xDir[0], y + yDir[0]);
+        Tile tileToRight = gameSession.getTileFromGrid(x + xDir[1], y + yDir[1]);
+        Tile tileBehind = gameSession.getTileFromGrid(x + xDir[2], y + yDir[2]);
+        Tile tileInFront = gameSession.getTileFromGrid(x + xDir[3], y + yDir[3]);
 
 
         int newX = x;
         int newY = y;
 
         //First try to move left, then forward, then right, then behind
-        if(tileToLeft.getTileType() == TileType.PATH || tileToLeft.getTileType() == TileType.PLAYER){
+        if(     tileToLeft.getTileType() == TileType.PATH ||
+                tileToLeft.getTileType() == TileType.PLAYER){
             tileToLeft.interact(this);
 
             newX = x + xDir[0];
             newY = y + yDir[0];
 
-        }else if(tileInFront.getTileType() == TileType.PATH || tileInFront.getTileType() == TileType.PLAYER){
+        }else if(tileInFront.getTileType() == TileType.PATH ||
+                 tileInFront.getTileType() == TileType.PLAYER){
             tileInFront.interact(this);
 
             newX = x + xDir[3];
             newY = y + yDir[3];
 
-        }else if(tileToRight.getTileType() == TileType.PATH || tileToRight.getTileType() == TileType.PLAYER){
+        }else if(tileToRight.getTileType() == TileType.PATH ||
+                 tileToRight.getTileType() == TileType.PLAYER){
             tileToRight.interact(this);
 
             newX = x + xDir[1];
             newY = y + yDir[1];
 
-        }else if(tileBehind.getTileType() == TileType.PATH || tileBehind.getTileType() == TileType.PLAYER){
+        }else if(tileBehind.getTileType() == TileType.PATH ||
+                 tileBehind.getTileType() == TileType.PLAYER){
             tileBehind.interact(this);
 
             newX = x + xDir[2];
@@ -180,7 +184,8 @@ public abstract class FlyingEnemy extends Enemy {
         int[] yDir = new int[4];
 
 
-        //Find which tiles are to enemies' left, right, forward and behind based on direction
+        //Find which tiles are to enemies' left, right, forward and behind
+        //based on direction
         switch (this.direction) {
             case UP_DIRECTION:
                 xDir = new int[]{-1, +1, 0, 0};
@@ -259,35 +264,39 @@ public abstract class FlyingEnemy extends Enemy {
         }
 
 
-        Tile tileToLeft = gameSession.getTileFromGrid(x + xDir[0], y + yDir[0]); //Tile to enemies' left
-        Tile tileToRight = gameSession.getTileFromGrid(x + xDir[1], y + yDir[1]); //Tile to enemies' right
-        Tile tileBehind = gameSession.getTileFromGrid(x + xDir[2], y + yDir[2]); //Tile behind enemy
-        Tile tileInFront = gameSession.getTileFromGrid(x + xDir[3], y + yDir[3]); //Tile in front of enemy
+        Tile tileToLeft = gameSession.getTileFromGrid(x + xDir[0], y + yDir[0]);
+        Tile tileToRight = gameSession.getTileFromGrid(x + xDir[1], y + yDir[1]);
+        Tile tileBehind = gameSession.getTileFromGrid(x + xDir[2], y + yDir[2]);
+        Tile tileInFront = gameSession.getTileFromGrid(x + xDir[3], y + yDir[3]);
 
 
         int newX = x;
         int newY = y;
 
         //First try to move right, then forward, then left, then behind
-        if(tileToRight.getTileType() == TileType.PATH || tileToRight.getTileType() == TileType.PLAYER){
+        if(     tileToRight.getTileType() == TileType.PATH ||
+                tileToRight.getTileType() == TileType.PLAYER){
             tileToRight.interact(this);
 
             newX = x + xDir[1];
             newY = y + yDir[1];
 
-        }else if(tileInFront.getTileType() == TileType.PATH || tileInFront.getTileType() == TileType.PLAYER){
+        }else if(tileInFront.getTileType() == TileType.PATH ||
+                 tileInFront.getTileType() == TileType.PLAYER){
             tileInFront.interact(this);
 
             newX = x + xDir[3];
             newY = y + yDir[3];
 
-        }else if(tileToLeft.getTileType() == TileType.PATH || tileToLeft.getTileType() == TileType.PLAYER){
+        }else if(tileToLeft.getTileType() == TileType.PATH ||
+                 tileToLeft.getTileType() == TileType.PLAYER){
             tileToLeft.interact(this);
 
             newX = x + xDir[0];
             newY = y + yDir[0];
 
-        }else if(tileBehind.getTileType() == TileType.PATH || tileBehind.getTileType() == TileType.PLAYER){
+        }else if(tileBehind.getTileType() == TileType.PATH ||
+                 tileBehind.getTileType() == TileType.PLAYER){
             tileBehind.interact(this);
 
             newX = x + xDir[2];
