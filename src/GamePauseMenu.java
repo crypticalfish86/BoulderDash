@@ -4,33 +4,20 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 public class GamePauseMenu {
-    
-
     private final CanvasLayer cl;
     private final CanvasCompositor cc;
     private final GameSession gameSession;
 
-
     private static final double WINDOW_SIZE_X = .3; // the width of the background of this window
     private static final double WINDOW_SIZE_Y = .5; // the height of the background of this window
-
-
 
     public static final Image IMAGE_RESUME = new Image("file:Assets/Buttons/ResumeButton.png");
     public static final Image IMAGE_SAVE = new Image("file:Assets/Buttons/SaveButton.png");
     public static final Image IMAGE_LOAD = new Image("file:Assets/Buttons/LoadButton.png");
     public static final Image IMAGE_EXIT = new Image("file:Assets/Buttons/ExitButton.png");
 
-
-
     public GamePauseMenu(GameSession gameSession, CanvasCompositor cc) {
-
-
-
         this.gameSession = gameSession;
-
-
-
 
         boolean[] mouseDownOnResume = {false};
         boolean[] mouseDownOnSave = {false};
@@ -38,31 +25,18 @@ public class GamePauseMenu {
         boolean[] mouseDownOnExit = {false};
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
-
-
-
-
             @Override
             public boolean onMouseDown(double x, double y, boolean hasConsumed) {
-                
                 //indicates if the mouse has been clicked in any of the given buttons
                 mouseDownOnResume[0] = UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_RESUME, .5, .32, .05);
                 mouseDownOnSave[0] = UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_SAVE, .5, .44, .05);
                 mouseDownOnLoad[0] = UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_LOAD, .5, .56, .05);
                 mouseDownOnExit[0] = UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_EXIT, .5, .68, .05);
-
-
-
                 return isMouseAtBackground(x, y);
             }
 
-
-
-
-
             @Override
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
-                
                 //checks for the 4 buttons to determine if any buttons has been clicked
                 if (mouseDownOnResume[0] && UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_RESUME, .5, .32, .05)) {
                     resume();
@@ -76,30 +50,19 @@ public class GamePauseMenu {
                 if (mouseDownOnExit[0] && UIHelper.checkIsXYInBoxRelativeYY(x, y, IMAGE_EXIT, .5, .68, .05)) {
                     exit();
                 }
-
-                
                 return isMouseAtBackground(x, y);
             }
-
-
-
 
             @Override
             public boolean onMouseMove(double x, double y, boolean hasConsumed) {
                 return isMouseAtBackground(x, y);
             }
 
-
-
-
-
             @Override
             public void draw(GraphicsContext gc, long elapsed) {
                 //draw a shade
-
                 gc.setFill(new Color(.3, .3, .3, .3));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-
 
                 //draw the background
                 gc.setFill(new Color(.6, .6, .6, .6));
@@ -116,8 +79,6 @@ public class GamePauseMenu {
                 UIHelper.drawImageRelativeYY(gc, IMAGE_LOAD, .5, .56, .05);
                 UIHelper.drawImageRelativeYY(gc, IMAGE_EXIT, .5, .68, .05);
             }
-
-
 
             @Override
             public void onKeyDown(KeyCode key) {

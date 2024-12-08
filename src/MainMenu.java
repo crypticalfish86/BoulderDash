@@ -47,9 +47,6 @@ public class MainMenu {
 
             @Override
             public boolean onMouseMove(double x, double y, boolean hasConsumed) {
-                // TODO Auto-generated method stub
-                // getMouseOnButton(x, y);
-
                 return true;
             }
 
@@ -71,14 +68,11 @@ public class MainMenu {
                 gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
-
                 //draw the title
                 UIHelper.drawImageRelativeXX(gc, IMAGE_TITLE, .5, .2, .5);
 
-
                 //draws the lower play button
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .5, .13);
-
 
                 UIHelper.drawImageRelativeXX(gc, IMAGE_LEADERBOARD, .5, .65, .25);
                 gc.fillText(null, elapsed, elapsed);
@@ -86,12 +80,6 @@ public class MainMenu {
         }, 1);
 
         cc.addLayer(cl);
-
-        // Create function to check what button you are on
-        // This will use the three functions above (mouseUp, mouseDown, mouseMove)
-
-
-        // System.out.println(leaderboardDisplay);
     }
 
 

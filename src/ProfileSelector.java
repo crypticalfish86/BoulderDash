@@ -143,7 +143,7 @@ public class ProfileSelector extends DisplayLayer {
             Scanner input = new Scanner(profile);
             while (input.hasNextLine() && currentLine < 1) {
                 String[] saveCheck = input.nextLine().split(";");
-                if (saveCheck[0].equals("new")) {
+                if (saveCheck[0].equals("NEW")) {
                     UIHelper.drawImageRelativeXX(gc, IMAGE_NEW_SAVE, xPos, yPos, width);
                 } else {
                     if (saveCheck[0].equals("1")) {

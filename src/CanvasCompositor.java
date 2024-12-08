@@ -12,7 +12,6 @@ import javafx.scene.layout.Pane;
 /**
  * A canvas that is used for allowing multiple classes to add their custom layer ({@link CanvasLayer}) to the drawing pipeline
  * Each layer is required to define its behaviour to certain events
- * 
  * By using this object, a timeline is required to operate its drawing loop, and the elapsed time is also required to pass into the object
  * @see javafx.animation.Timeline
  */
@@ -47,7 +46,7 @@ public class CanvasCompositor {
 
         
 
-        //redirects the mouse press event. only process primary mouse clicks due to backwards compability
+        //redirects the mouse press event. only process primary mouse clicks due to backwards compatibility
         scene.setOnMousePressed(E -> {
             if (E.getButton() != MouseButton.PRIMARY) { return; }
             //checks from the top to the bottom to see which layer it interacts with
@@ -64,7 +63,7 @@ public class CanvasCompositor {
 
 
         
-        //redirects the mouse release event. only process primary mouse clicks due to backwards compability
+        //redirects the mouse release event. only process primary mouse clicks due to backwards compatibility
         scene.setOnMouseReleased(E -> {
             if (E.getButton() != MouseButton.PRIMARY) { return; }
 
@@ -81,7 +80,7 @@ public class CanvasCompositor {
         });
 
         
-        //redirects the mouse move event. only process primary mouse clicks due to backwards compability
+        //redirects the mouse move event. only process primary mouse clicks due to backwards compatibility
         scene.setOnMouseMoved(E -> {
 
             
