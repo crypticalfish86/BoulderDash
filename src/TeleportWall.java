@@ -1,6 +1,11 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * @author
+ * Jace Weerawardena(crypticalfish86).
+ * @version 1.0
+ */
 public class TeleportWall extends Wall{
     private int teleportWallID;
     private TeleportWall teleportWallBrother;
@@ -39,7 +44,10 @@ public class TeleportWall extends Wall{
      * The TeleportWall object that is related to this TeleportWall.
      */
     public void setTeleportWallBrother(TeleportWall brother){
-        this.teleportWallBrother = brother;
+        if(this.teleportWallBrother == null){
+            this.teleportWallBrother = brother;
+            this.teleportWallBrother.setTeleportWallBrother(this);
+        }
     }
 
     /**
@@ -52,6 +60,10 @@ public class TeleportWall extends Wall{
 
     }
 
+    /**
+     * If allows the player to teleport to
+     * @param tile
+     */
     @Override
     public void interact(Tile tile) {
         if (tile.getTileType() == TileType.PLAYER && this.teleportWallBrother != null){
@@ -89,6 +101,11 @@ public class TeleportWall extends Wall{
     }
 
 
+    /**
+     * Returns a string tile representation of the teleport wall.
+     * @return
+     * The string tile representation of the teleport wall.
+     */
     @Override
     public String returnStringTileRepresentation() {
         return "TE" + Integer.toString(this.teleportWallID);
