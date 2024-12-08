@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
-public class LeaderBoards {
-    private final String filepath = "./LeaderBoards/LeaderBoard.txt";
+public class Leaderboard {
+    private final String filepath = "./LeaderBoards/leaderboard.txt";
     private ArrayList<String> leaderBoardDisplay;
 
     /**
      * Instantiates a leaderboard object which can be used to add new names/scores to the leaderboard and
      * get a display of the entire leaderboard.
      */
-    public LeaderBoards() {
+    public Leaderboard() {
         leaderBoardDisplay = new ArrayList<String>();
 
         File file = new File(filepath);
@@ -104,7 +104,7 @@ public class LeaderBoards {
             linesToPrint = 9;
         }
         for(int i = 0; i <= linesToPrint; i++){
-            leaderBoard.append(leaderBoardDisplay.get(i) + "\n");
+            leaderBoard.append(leaderBoardDisplay.get(i) + System.lineSeparator());
         }
         return leaderBoard.toString();
     }

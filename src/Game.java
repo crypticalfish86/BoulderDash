@@ -21,6 +21,7 @@ public class Game {
     private GameSession currentGamesession;
     private DisplayLayer gameOver;
     private LeaderboardShowcase leaderboardShowcase;
+    private GameWin gameWin;
 
     //currentGameSession and loadedPlayerProfileID do not get instantiated in the constructor as they are variable (debatable whether anything gets instantiated in the constructor
     public Game(CanvasCompositor cc) {
@@ -139,11 +140,7 @@ public class Game {
     public void onPlayButtonClicked() {
         System.out.println("play is clicked");
         mainMenu.hide();
-        if (this.profileSelector == null) {
-            this.profileSelector = new ProfileSelector(this, cc);
-        } else {
-            this.profileSelector.show();
-        }
+        this.profileSelector = new ProfileSelector(this, cc);
 
         // TODO Auto-generated method stub
         // Run load game function here or move to profileselector to manage save screen
@@ -194,10 +191,10 @@ public class Game {
         if (hasWon) {
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
                 //TODO: show winning screen with score
-                new LeaderBoards().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
+                new Leaderboard().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
 
                 
-                this.gameOver = new GameWin(this, cc, gameSessionData);
+                this.gameWin = new GameWin(this, cc, gameSessionData);
 
             } else {
                 //TODO: start next game with level + 1
@@ -205,7 +202,7 @@ public class Game {
                 startGameWithLevel(gameSessionData.getLevel() + 1, gameSessionData.getScore());
             }
         } else {
-            new LeaderBoards().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
+            endGame();
             this.gameOver = new GameOver(this, cc, gameSessionData);
         }
     }
@@ -219,9 +216,7 @@ public class Game {
     public void onLeaderboardButtonClicked() {
         System.out.println("Leaderboard button has been clicked");
         mainMenu.hide();
-        if (this.leaderboardShowcase == null) {
-            this.leaderboardShowcase = new LeaderboardShowcase(this, cc);
-        }
+        this.leaderboardShowcase = new LeaderboardShowcase(this, cc);
         leaderboardShowcase.show();
 
     }

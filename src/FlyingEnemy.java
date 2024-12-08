@@ -1,4 +1,14 @@
 import javafx.scene.shape.MoveTo;
+
+/**
+ * This class represents a blueprint for flying enemies which try to
+ * follow either the left or right edge of certain tiles.
+ * @author Isaac Atkinson
+ * @author Omar Zarugh
+ * @version 1.0
+ */
+
+
 //TODO resolve any commented out code lines
 public abstract class FlyingEnemy extends Enemy {
 
@@ -32,7 +42,7 @@ public abstract class FlyingEnemy extends Enemy {
         int[] yDir = new int[4];
 
 
-        // System.out.println(x + "" + y + "" + this.direction);
+
 
         //Find which tiles are to enemies' left, right, forward and behind based on direction
 
@@ -327,9 +337,9 @@ public abstract class FlyingEnemy extends Enemy {
      * Sets the initial direction of a flying enemy based on the surrounding tiles
      * that it should follow the edge of,
      * If no edge found to follow, direction to set to up by default.
-     * @param x the x position of the flying enemy
-     * @param y the y position of the flying enemy
-     * @param prioritiseLeft represents if the flying enemy should follow the left edge
+     * @param x the x position of the flying enemy.
+     * @param y the y position of the flying enemy.
+     * @param prioritiseLeft represents if the flying enemy should follow the left edge.
      */
     protected void setInitialDirection(int x, int y, boolean prioritiseLeft) {
 

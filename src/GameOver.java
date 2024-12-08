@@ -82,8 +82,8 @@ public class GameOver extends DisplayLayer {
                 UIHelper.drawImageRelativeXX(gc, IMAGE_SCORE, .4, .45, .15);
 
                 double x = .5;
-                double y = .5;
-                double size = .1;
+                double y = .6;
+                double size = .2;
 
                 if (game.getPlayerProfileID().equals("1")) {
                     displayProfileStatus(gc, profile1, x, y, size);
