@@ -23,7 +23,7 @@ public class LeaderboardShowcase {
         this.cc = cc;
         this.game = game;
 
-        leaderboardDisplay = new LeaderBoards().getLeaderBoardDisplay();
+        leaderboardDisplay = new Leaderboard().getLeaderBoardDisplay();
 
         boolean[] mouseDownOnExitToMainMenu = {false};
 

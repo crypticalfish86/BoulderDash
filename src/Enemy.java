@@ -179,16 +179,13 @@ public abstract class Enemy extends Tile {
      */
     protected void checkForPlayer(){
         if(this.gameSession.getTileFromGrid(this.x - 1, this.y).getTileType() == TileType.PLAYER){
-            this.gameSession.exitGame();
-        }
-        else if(this.gameSession.getTileFromGrid(this.x + 1, this.y).getTileType() == TileType.PLAYER){
-            this.gameSession.exitGame();
-        }
-        else if(this.gameSession.getTileFromGrid(this.x,this.y - 1).getTileType() == TileType.PLAYER){
-            this.gameSession.exitGame();
-        }
-        else if(this.gameSession.getTileFromGrid(this.x,this.y + 1).getTileType() == TileType.PLAYER){
-            this.gameSession.exitGame();
+            this.gameSession.onGameOver(false);
+        } else if(this.gameSession.getTileFromGrid(this.x + 1, this.y).getTileType() == TileType.PLAYER){
+            this.gameSession.onGameOver(false);
+        } else if(this.gameSession.getTileFromGrid(this.x,this.y - 1).getTileType() == TileType.PLAYER){
+            this.gameSession.onGameOver(false);
+        } else if(this.gameSession.getTileFromGrid(this.x,this.y + 1).getTileType() == TileType.PLAYER){
+            this.gameSession.onGameOver(false);
         }
     }
 }

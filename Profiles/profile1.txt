@@ -1,31 +1,31 @@
 1;40;30;
-500;147;174;
-10;8;
+0;177;180;
+0;8;
 25;50;
 0;0;0;0;
 T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T
-T - - - - - - - - - - - - - - - - - - - - - - W W W W W W W W W W W W W W W * T
-T W W W W W W @ @ @ W W W W D D - D D D D D D D D D D D D W D D D D @ @ D D D T
-T D D D D D D D D M D D D D D RK - - - - - - - - - D D D D W D D D D D D D D D T
-T D D D D D D D D D D D D D D D - D D D D D D D D D D D D W D D D D D D D D D T
-T D D D D D D D D - - - - - - - - - - - - - - - D - - D D RD D D D D D D D D D T
-T * D D D D D D - - - - - - - - - D D D D D D - - - D D D W D D D D D D D D D T
-T D D D D D D - - - - - - P D - - - - - - - - - - - - D D W D D D D D D D D D T
-T D D D D D D D D D D D - - D - - - - - - - - - - - - - - W - - D D D D * D D T
-T D D D D D D D D D D D - - - - - D D D D D D D @ - - D D W D D D D D D D D D T
-T @ @ @ @ @ @ @ @ @ @ D - - - - D D D @ @ @ D D D D D D D W W W W W W W W W W T
-T A D A D D D D D D D D - - - - - @ D D D D D D D D D @ @ D D D D D @ @ D D YK T
-T A A A D D @ D D D D D - - - @ D D D D W W W W W W D D D D D D D D D D D D D T
-T A A A A D M D D D D D D - D D D D D D W D GK * D W D D D D D @ D D D D D @ @ T
-T A A A A A D D @ @ @ D D - D D D @ D D W D D D D W D D @ D D D @ D D D D D D T
-T A A A A A A D D D D D D D D D D D D D W W W YD W W D D D D D D D D D D D D D T
-T A A A A A A D D D D D D D D D D D D D D D D @ D D D D D D D D D D D D D D D T
-T A A A A A A A D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D T
-T W W W W W W W W W W W W W W GD D W W W W W W W W W W W W W W W W W W W W W W T
+T - - P - - - - - - - - - - - - - - - - - - - W W W W W W W W W W W W W W W * T
+T W W W W W W @ @ @ W W W W D D D D D D D D D D D D D D D W D D D D @ @ D D D T
+T D D D D D D D D D D D D D D RK - - - - - - - - - D D D D W D D D D D D D D D T
+T D D D D D D D D M D D D D D D D D D D D D D D D D D D D W D D D D D D D D D T
+T D D D D D D D D BR - - - - - - D D D D D D D D D @ @ D D RD D D D D D D D D D T
+T * D D D D D D D - - - - - - - D D D D D D D D D D D D D W D D D D D D D D D T
+T D D D D D D D D D D D D D D D D D D D D D D D D D D D D W D D D D D D D D D T
+T D D D D D D D D D D D D D D D D - - - - - - - - - - - - W - - D D D D * D D T
+T D D D D D D D D D D D D D D D D D D D D D D D D D D D D W D D D D D D D D D T
+T @ @ @ @ @ @ @ @ @ @ D D D D D D D D @ @ @ D D D D D D D W W W W W W W W W W T
+T D D D D D D D D D D D D - D D @ @ D D D D D D D D D @ @ D D D D D @ @ D D YK T
+T D D D D D @ D D D D D - * - D D D D D W W W W W W D D D D D D D D D D D D D T
+T - - - - D M D D D D D D D D D D D D D W D GK * D W D D D D D @ D D D D D @ @ T
+T D D D D D D D @ @ @ D D D D D D @ D D W D D D D W D D @ D D D @ D D D D D D T
+T D D D D D D D D D D D D D D D D D D D W W W YD W W D D D D D D D D D D D D D T
+T D D D D D D D D D D D D D D D D D D D D D D @ D D D D D D D D D D D D D D D T
+T D D A D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D T
+T W W W W W W W W W W W W W W GD W W W W W W W W W W W W W W W W W W W W W W W T
 T D D D D D D D D D D D D D D D D D D D D D D D @ @ D D @ D D @ @ D D D D D D T
 T D D D @ @ D D - - - - - - - D D D D D @ @ D D D D @ D D D @ @ @ D D D D D @ T
 T D D @ D D D D D D D D D D D D @ @ D * D D D D D D D D D D D D D D D @ D D D T
-T D D @ D D D D D D D - - F - D D D D D D D D D D @ @ @ D D D D D D D D D D D T
+T D D @ D D D D D D D F - - - D D D D D D D D D D @ @ @ D D D D D D D D D D D T
 T * D D D D D D - - - - D D D D D D D D D D D D D D D D D D D D D D D D D D D T
 T M D D D D D D D D D D D D - FL - - - - - - - D D D D D D D D D D @ @ @ @ @ @ T
 T D D D D D D D D D D D D D - W W W W W W W - D D D D D D D D @ @ D D D D D D T

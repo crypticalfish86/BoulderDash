@@ -8,4 +8,7 @@ Player3: 0
 Player3: 0
 Player3: 0
 Player3: 0
+3: 0
+1: 0
+1: 0
 Player4: 0
