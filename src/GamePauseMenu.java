@@ -3,6 +3,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
+
+/**
+ * A class used for the visual representation of the pause menu, of a game.
+ * Links to the game session to perform actions over the game, does not handle logic on its own.
+ * 
+ */
 public class GamePauseMenu {
     private final CanvasLayer cl;
     private final CanvasCompositor cc;
@@ -16,6 +22,12 @@ public class GamePauseMenu {
     public static final Image IMAGE_LOAD = new Image("file:Assets/Buttons/LoadButton.png");
     public static final Image IMAGE_EXIT = new Image("file:Assets/Buttons/ExitButton.png");
 
+
+    /**
+     * Creates a pause menu, that is used to overlay a game.
+     * @param gameSession the current game session to interact with.
+     * @param cc canvas to add the layer on.
+     */
     public GamePauseMenu(GameSession gameSession, CanvasCompositor cc) {
         this.gameSession = gameSession;
 

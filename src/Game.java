@@ -95,7 +95,7 @@ public class Game {
 
 
             //If the content of the file is new then load in the default file
-            if (fileContent.equals("NEW;")) {
+            if (fileContent.equals("new;")) {
                 //TODO read default level package
                 startGameWithLevel(0, 0);
             } else {
@@ -174,6 +174,10 @@ public class Game {
         loadGame("3");
     }
 
+
+    /**
+     * Should be fired when the main menu button is clicked
+     */
     public void onExitToMainMenuButtonClicked() {
         System.out.println("back to main menu button has been clicked");
         leaderboardShowcase.hide();
