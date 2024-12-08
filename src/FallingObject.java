@@ -28,8 +28,8 @@ public abstract class FallingObject extends Tile {
 
     /**
      * Causes the object to fall downwards and
-     * replaces its currentTile with a {@link PathWall}
-     * @param lowerTile the tile below the boulder
+     * replaces its currentTile with a {@link PathWall}.
+     * @param lowerTile the tile below the boulder.
      */
     private boolean fall(Tile lowerTile) {
         
@@ -48,9 +48,9 @@ public abstract class FallingObject extends Tile {
 
     /**
      * Causes the object to roll in a specified direction and
-     * replaces its currentTile with a {@link PathWall}
-     * @param nextTile the adjacent tile
-     * @param nextTileBelow the adjacent tile's lower tile
+     * replaces its currentTile with a {@link PathWall}.
+     * @param nextTile the adjacent tile.
+     * @param nextTileBelow the adjacent tile's lower tile.
      */
     protected void roll(Tile nextTile, Tile nextTileBelow){
 

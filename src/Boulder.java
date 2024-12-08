@@ -26,8 +26,8 @@ public class Boulder extends FallingObject{
      * Handles pushing the boulder based on the
      * player's position relative to the boulder and
      * whether there is a path in the direction the boulder
-     * is being pushed
-     * @param tile the tile that is interacting with this tile
+     * is being pushed.
+     * @param tile the tile that is interacting with this tile.
      */
     public void interact(Tile tile) {
         switch (tile.tileType) {
@@ -51,7 +51,7 @@ public class Boulder extends FallingObject{
 
     /**
      * Checks if the boulder should fall or roll based on
-     * the presence of tiles surrounding it
+     * the presence of tiles surrounding it.
      * @param currentTimeInMilliseconds
      * The number of milliseconds since 01/01/1970.
      */
@@ -61,9 +61,9 @@ public class Boulder extends FallingObject{
 
 
     /**
-     * Pushes the boulder in a specified direction
-     * @param player the player that is pushing the boulder
-     * @param isRight the direction the boulder is being pushed
+     * Pushes the boulder in a specified direction.
+     * @param player the player that is pushing the boulder.
+     * @param isRight the direction the boulder is being pushed.
      */
     private void pushBoulder(Tile player, boolean isRight) {
         System.out.println(isRight);

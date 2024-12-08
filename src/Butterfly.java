@@ -23,6 +23,11 @@ public class Butterfly extends FlyingEnemy{
         this.lastTimeStamp = System.currentTimeMillis();
     }
 
+    /**
+     * Handles killing the butterfly and triggering an explosion if the butterfly is
+     * hit by a boulder or diamond.
+     * @param tile The tile that is interacting with this tile.
+     */
     public void interact(Tile tile){
         if ((tile.getTileType() == TileType.BOULDER || tile.getTileType() == TileType.DIAMOND) && tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, true);
@@ -31,7 +36,7 @@ public class Butterfly extends FlyingEnemy{
 
 
     /**
-     * Finds the next move to make and moves every certain number of ticks
+     * Finds the next move to make and moves every certain number of ticks.
      * @param currentTimeInMilliseconds
      * The number of milliseconds since the unix epoch (01/01/1970).
      */

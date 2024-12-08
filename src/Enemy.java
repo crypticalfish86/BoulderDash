@@ -20,11 +20,11 @@ public abstract class Enemy extends Tile {
 
     /**
      * Converts all explodable tiles in a certain radius to an explosion,
-     * centered around the enemy that is exploding
-     * @param xPosition the x position of the enemy
-     * @param yPosition the y position of the enemy
+     * centered around the enemy that is exploding.
+     * @param xPosition the x position of the enemy.
+     * @param yPosition the y position of the enemy.
      * @param replaceWithDiamond represents whether the explosion should leave behind
-     *                           a diamond once it disappears
+     *                           a diamond once it disappears.
      */
     protected void triggerExplosion(int xPosition, int yPosition, Boolean replaceWithDiamond){
         int startX;
@@ -81,7 +81,7 @@ public abstract class Enemy extends Tile {
 
 
     /**
-     * moves this item to a target x and y
+     * moves this item to a target x and y.
      * @param x
      * @param y
      * @return
@@ -102,9 +102,9 @@ public abstract class Enemy extends Tile {
 
 
     /**
-     * Checks whether a tile can explode based on its type
-     * @param tile the tile to check
-     * @return true if the tile can be affected by explosion, false otherwise
+     * Checks whether a tile can explode based on its type.
+     * @param tile the tile to check.
+     * @return true if the tile can be affected by explosion, false otherwise.
      */
 
     private boolean isExplodable(Tile tile) {
@@ -129,10 +129,10 @@ public abstract class Enemy extends Tile {
 
 
     /**
-     * checks if a given x and y is in bounds
-     * @param x
-     * @param y
-     * @return
+     * checks if a given x and y is in bounds.
+     * @param x The x position to check.
+     * @param y The y position to check.
+     * @return True if the position is in bounds, false otherwise.
      */
     protected boolean isXYInBounds(int x, int y) {
         int gridHeight = gameSession.getGridHeight();
@@ -146,8 +146,8 @@ public abstract class Enemy extends Tile {
     }
 
     /**
-     * Determines if an enemy is next to an amoeba in any of the four cardinal directions
-     * @return true if there is an amoeba next to the enemy, false otherwise
+     * Determines if an enemy is next to an amoeba in any of the four cardinal directions.
+     * @return true if there is an amoeba next to the enemy, false otherwise.
      */
     protected boolean isNextToAmoeba(int x, int y){
         if(x != 0){

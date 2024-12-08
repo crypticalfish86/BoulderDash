@@ -18,20 +18,19 @@ public class Explosion extends Tile {
     public static final Image img = new Image("file:Assets/Images/Explosion.png"); // Placeholder for the image
 
 
-
-
+    
     public Explosion(GameSession gameSession, int x, int y, long operationInterval, Boolean replaceWithDiamond) {
         super(gameSession, x, y, TileType.EXPLOSION, operationInterval);
         this.replaceWithDiamond = replaceWithDiamond;
         ticksAlive = 0;
-
     }
+
     public void interact(Tile Tile) {
 
     }
 
     /**
-     * Converts the explosion to another tile after a certain number of ticks
+     * Converts the explosion to another tile after a certain number of ticks.
      * @param currentTimeInMilliseconds The number of milliseconds since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds) {
@@ -51,7 +50,7 @@ public class Explosion extends Tile {
 
 
     /**
-     * Converts the explosion to a path or a diamond based on what enemy exploded
+     * Converts the explosion to a path or a diamond based on what enemy exploded.
      */
     private void convertExplosion(){
         if(replaceWithDiamond){

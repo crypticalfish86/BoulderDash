@@ -337,9 +337,9 @@ public abstract class FlyingEnemy extends Enemy {
      * Sets the initial direction of a flying enemy based on the surrounding tiles
      * that it should follow the edge of,
      * If no edge found to follow, direction to set to up by default.
-     * @param x the x position of the flying enemy
-     * @param y the y position of the flying enemy
-     * @param prioritiseLeft represents if the flying enemy should follow the left edge
+     * @param x the x position of the flying enemy.
+     * @param y the y position of the flying enemy.
+     * @param prioritiseLeft represents if the flying enemy should follow the left edge.
      */
     protected void setInitialDirection(int x, int y, boolean prioritiseLeft) {
 

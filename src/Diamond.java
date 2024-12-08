@@ -29,7 +29,7 @@ public class Diamond extends FallingObject{
      * Moves player to current tile and deletes diamond if player interacts
      * with this tile. Also updates the score and diamond count for
      * the current game session.
-     * @param tile the tile that is interacting with this tile
+     * @param tile the tile that is interacting with this tile.
      */
     public void interact(Tile tile){
         if(tile.getTileType() == TileType.PLAYER){
@@ -42,7 +42,7 @@ public class Diamond extends FallingObject{
 
     /**
      * Checks if the diamond should fall or roll based on
-     * the presence of tiles surrounding it
+     * the presence of tiles surrounding it.
      * @param currentTimeInMilliseconds
      * The number of milliseconds since 01/01/1970.
      */
