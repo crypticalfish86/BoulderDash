@@ -14,6 +14,8 @@ public class AmoebaController {
     private static final int AMOEBA_ATTEMPTS = 100;
     private int currentAttempts = 0;
 
+    private int clusterID;
+
 
     /**
      * Construct an amoeba controller which acts as the controller for an amoeba cluster, regulating growth and cluster members.
@@ -30,9 +32,10 @@ public class AmoebaController {
      * @param maxAmoebaChildCount
      * The maximum number of amoeba tiles in the cluster before diamond conversion triggers.
      */
-    public AmoebaController(GameSession gameSession, int startingAmoebaX, int startingAmoebaY, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount){
+    public AmoebaController(GameSession gameSession, int startingAmoebaX, int startingAmoebaY, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount, int clusterID){
         this.gameSession = gameSession;
         this.amoebaChildren = new ArrayList<AmoebaTile>();
+        this.clusterID = clusterID;
         if(maxAmoebaChildCount > 0){
             this.currentAmoebaChildCount = 0;
             addNewAmoebaChildToCluster(startingAmoebaX, startingAmoebaY);
