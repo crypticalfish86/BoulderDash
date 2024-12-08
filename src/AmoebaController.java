@@ -53,6 +53,15 @@ public class AmoebaController {
     }
 
     /**
+     * Gets the clusterID of the amoeba cluster (an int between 1-9).
+     * @return
+     * The amoeba clusterID.
+     */
+    public int getClusterID() {
+        return this.clusterID;
+    }
+
+    /**
      *If the amoeba cluster still contains tiles on the grid, regulate amoeba growth and check for diamond conversion trigger.
      * @param currentTimeInMilliseconds
      * The current time in milliseconds since 1970

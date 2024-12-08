@@ -293,10 +293,19 @@ public class GameSession {
                         case "A7":
                         case "A8":
                         case "A9":
-                            AmoebaController newAmoebaController = new AmoebaController(this, x, y,
-                                    OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize, Integer.parseInt(Character.toString(gridLineTileArray[x].charAt(1))));
-                            this.amoebaControllerList.add(newAmoebaController);
+                            int amoebaID = Integer.parseInt(Character.toString(gridLineTileArray[x].charAt(1)));
+                            AmoebaController amoebaController = this.returnAmoebaControllerByID(amoebaID);
+
+                            if(amoebaController != null){
+                                amoebaController.addNewAmoebaChildToCluster(x, y);
+                            } else{
+                                AmoebaController newAmoebaController = new AmoebaController(this, x, y,
+                                        OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize, amoebaID);
+                                this.amoebaControllerList.add(newAmoebaController);
+                            }
                             break;
+
+
                         default:
                             System.out.println("ERROR TILE NOT RECOGNISED, PRINTING PATHWALL BY DEFAULT");
                             newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
@@ -658,10 +667,30 @@ public class GameSession {
         return timeLeft;
     }
 
+    /**
+     * return the amoeba controller list.
+     * @return
+     * The amoeba controller list.
+     */
     public ArrayList<AmoebaController> getAmeobaControllerList() {
         return amoebaControllerList;
     }
 
+    /**
+     * returns the AmoebaController by ID.
+     * @param idNumber
+     * The id number of the amoeba controller you're searching for.
+     * @return
+     * If the AmoebaController exists it is returned, otherwise return null.
+     */
+    public AmoebaController returnAmoebaControllerByID(int idNumber){
+        for(AmoebaController controller : this.amoebaControllerList){
+            if(controller.getClusterID() == idNumber){
+                return controller;
+            }
+        }
+        return null;
+    }
 
     /**
      * Called by objects to end the game.
