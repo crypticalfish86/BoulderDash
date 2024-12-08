@@ -34,27 +34,44 @@ public class Game {
         this.mainMenu = new MainMenu(this, cc);
         this.cc = cc;
 
-        initializeMusicPlayer();
+        initialiseMusicPlayer();
 
     }
 
-    private void initializeMusicPlayer() {
+
+    /**
+     * Initialises the music player by setting the path to the music file
+     * and creates a new instance of the MusicPlayer class.
+     *
+     * If initialisation fails, an error message is printed to the console.
+     */
+    private void initialiseMusicPlayer() {
         try {
             // Set the path to your music file
             String musicFilePath = "./Assets/level_music.mp3";
             musicPlayer = new MusicPlayer(musicFilePath);
         } catch (Exception e) {
-            System.out.println("Failed to initialize music player.");
+            System.out.println("Failed to initialise music player.");
             e.printStackTrace();
         }
     }
 
+    /**
+     * Starts playing the music using the MusicPlayer instance.
+     *
+     * If the music player has not been initialised, this method does nothing.
+     */
     private void startMusic() {
         if (musicPlayer != null) {
             musicPlayer.play();
         }
     }
 
+    /**
+     * Stops the music playback using the MusicPlayer instance.
+     *
+     * If the music player has not been initialised, this method does nothing.
+     */
     private void stopMusic() {
         if (musicPlayer != null) {
             musicPlayer.stop();

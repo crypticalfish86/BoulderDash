@@ -4,16 +4,16 @@ import javafx.scene.image.Image;
 public class Door extends Wall {
 
     private Image img; // The image representing the door
-    private String doorColour; // The color of the door
+    private String doorColour; // The colour of the door
 
     public Door(GameSession gameSession, int x, int y, long operationInterval, String doorColour) {
         super(gameSession, x, y, TileType.DOOR, operationInterval);
         this.doorColour = doorColour;
-        this.img = selectImageBasedOnColor(doorColour); // Set the image based on the door color
+        this.img = selectImageBasedOnColour(doorColour); // Set the image based on the door colour
         
     }
 
-    // Getter for door color
+    // Getter for door colour
     public String getDoorColour() {
         return this.doorColour;
     }
@@ -50,9 +50,9 @@ public class Door extends Wall {
         return this.doorColour;
     }
 
-    // Select the image based on the door color
-    private Image selectImageBasedOnColor(String color) {
-        switch (color) {
+    // Select the image based on the door colour
+    private Image selectImageBasedOnColour(String colour) {
+        switch (colour) {
             case "RD": // Red door
                 return new Image("file:Assets/Images/RedDoor.png");
             case "BD": // Blue door
@@ -64,6 +64,6 @@ public class Door extends Wall {
         }
 
         // If no case matches, throw an exception
-        throw new IllegalArgumentException("Unsupported door color: " + color);
+        throw new IllegalArgumentException("Unsupported door colour: " + colour);
     }
 }
