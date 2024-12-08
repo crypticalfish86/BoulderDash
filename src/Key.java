@@ -3,12 +3,12 @@ import javafx.scene.image.Image;
 
 public class Key extends Wall {
     private Image img; // Image representing the key
-    private String keyColour; // Key's color or unique identifier
+    private String keyColour; // Key's colour or unique identifier
 
     public Key(GameSession gameSession, int x, int y, long operationInterval, String keyColour) {
         super(gameSession, x, y, TileType.KEY, operationInterval);
         this.keyColour = keyColour;
-        this.img = selectImageBasedOnColour(keyColour); // Set the image based on the key color
+        this.img = selectImageBasedOnColour(keyColour); // Set the image based on the key colour
         // Keys cannot spread amoebas
     }
 
