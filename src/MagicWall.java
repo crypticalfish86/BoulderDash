@@ -60,11 +60,14 @@ public class MagicWall extends Wall {
         // Replace the old tile with the new tile
         gameSession.setTile(y, x, newTile);
 
+        PathWall pathWall = new PathWall(gameSession, this.x, this.y -1, inputTileObject.getOperationInterval());
+        gameSession.setTile(this.y -1, this.x, pathWall);
+
         // Attempt to eject the new tile to the other side of the Magic Wall
         boolean ejected = ejectTileToOtherSide(newTile);
-        if (!ejected) {
-            System.out.println("Ejection failed. Leaving the transformed tile at its current position.");
-        }
+//        if (!ejected) {
+//            System.out.println("Ejection failed. Leaving the transformed tile at its current position.");
+//        }
     }
 
     // Eject the tile to the opposite side of the Magic Wall
@@ -101,18 +104,18 @@ public class MagicWall extends Wall {
         return false; // Ejection failed
     }
 
-    // Activate the magic wall
-    private void activateWall() {
-        this.isActive = true;
-        this.activationStartTime = System.currentTimeMillis();
-        System.out.println("MagicWall activated!");
-    }
-
-    // Deactivate the magic wall
-    private void deactivateWall() {
-        this.isActive = false;
-        System.out.println("MagicWall deactivated.");
-    }
+//    // Activate the magic wall
+//    private void activateWall() {
+//        this.isActive = true;
+//        this.activationStartTime = System.currentTimeMillis();
+//        System.out.println("MagicWall activated!");
+//    }
+//
+//    // Deactivate the magic wall
+//    private void deactivateWall() {
+//        this.isActive = false;
+//        System.out.println("MagicWall deactivated.");
+//    }
 
     // Update logic for the magic wall
     @Override
