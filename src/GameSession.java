@@ -339,7 +339,7 @@ public class GameSession {
 
 
 
-                    if(!gridLineTileArray[x].equals("A")) {
+                    if(doesNotEqualAmoebaOrTeleportTile(gridLineTileArray[x])) {
                         this.gridTileMap[y][x] = newTile;
                     }
                 }
