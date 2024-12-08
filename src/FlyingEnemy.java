@@ -5,7 +5,7 @@ import javafx.scene.shape.MoveTo;
  * follow either the left or right edge of certain tiles.
  * @author Isaac Atkinson
  * @author Omar Zarugh
- * @version 1.0
+ * @version 1.6
  */
 
 
