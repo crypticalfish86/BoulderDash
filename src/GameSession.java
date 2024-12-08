@@ -91,63 +91,19 @@ public class GameSession {
 
             @Override
             public void draw(GraphicsContext gc, long elapsed) {
-
-
-                //draw the tiles
                 gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
-
-                for (int y = 0; y < gridHeight; ++y) {
-                    for (int x = 0; x < gridWidth; ++x) {
-
-                        gridTileMap[y][x].drawTile(gc);
-
-                    }
-                }
+                
+                //draw the tiles
+                drawTiles(gc);
 
                 // draw the top bar :)
                 drawTopBar(gc);
 
-
-
                 // Update game state if not paused
                 if (!isGamePaused) {
-                    timeLeft -= 1000 / 60; // Reduce time (frame-based)
-
-                    // Check if time has run out
-                    if (timeLeft <= 0) {
-                        System.out.println("Time's up!");
-                        callKillPlayer();
-                        return; // Stop further updates
-                    }
-
-                    //update individual tiles
-                    for (int y = 0; y < gridHeight; ++y) {
-                        for (int x = 0; x < gridWidth; ++x) {
-                            if (gridTileMap[y] == null || gridTileMap[y][x] == null) { System.out.printf("%d, %d\n", x, y);}
-                            gridTileMap[y][x].updateTile(elapsed);
-    
-                        }
-                    }
-
-                    //update amoeba
-                    long currentTime = System.currentTimeMillis();
-                    for (int i = 0; i < amoebaControllerList.size(); ++i) {
-                        amoebaControllerList.get(i).updateAmoebaCluster(currentTime);
-                    }
-                    
-                    double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
-                    
-                    cameraScale = 60;
-
-                    cameraX = (double) player.getXPosition() * epsilon + cameraX * (1 - epsilon);
-                    cameraY = (double) player.getYPosition() * epsilon + cameraY * (1 - epsilon);
+                    updateGameState(elapsed);
                 }
-
-
-
-                
-                
             }
 
             @Override
@@ -159,7 +115,6 @@ public class GameSession {
             public void onKeyUp(KeyCode key) {
                 keyUp(key);
             }
-
         }, 1);
 
 
@@ -631,6 +586,20 @@ public class GameSession {
 
 
 
+    
+    /**
+     * draws the tiles to a given graphics context
+     * @param gc Graphics context derived from a canvas
+     */
+    private void drawTiles(GraphicsContext gc) {
+        for (int y = 0; y < gridHeight; ++y) {
+            for (int x = 0; x < gridWidth; ++x) {
+                gridTileMap[y][x].drawTile(gc);
+            }
+        }
+    }
+
+
     /**
      * draws the top bar on the given graphics context.
      * @param gc Graphics context derived from a canvas
@@ -641,13 +610,10 @@ public class GameSession {
 
 
         
-
-        
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("Arial", Main.WINDOW_HEIGHT * .05));
 
-        
-        // long timeDiff = startTimeStamp + maxTimeToCompleteLevel - System.currentTimeMillis();
+
         int secondsLeft = (int) (timeLeft / 1000);
 
         //draw the timer
@@ -656,30 +622,65 @@ public class GameSession {
         gc.fillText(timeString, Main.WINDOW_WIDTH * .05, Main.WINDOW_HEIGHT * .07);
 
 
-
-
-        
-        //draw the score
+        //draw the diamond
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setFill(new Color(.5, .6, .9, 1));
         String diamondString = String.format("%03d", currentSessionData.getDiamondCount());
         gc.fillText(diamondString, Main.WINDOW_WIDTH * .5, Main.WINDOW_HEIGHT * .07);
 
 
-
-        
         //draw the score
         gc.setTextAlign(TextAlignment.RIGHT);
         gc.setFill(new Color(1, 1, 1, 1));
         String scoreString = String.format("%04d", currentSessionData.getScore());
         gc.fillText(scoreString, Main.WINDOW_WIDTH * .95, Main.WINDOW_HEIGHT * .07);
+    }
 
+    
+    /**
+     * Updates the game
+     * @param elapsed milliseconds of the game has passed between last frame
+     */
+    private void updateGameState(long elapsed) {
+        timeLeft -= 1000 / 60; // Reduce time (frame-based)
 
+        // Check if time has run out
+        if (timeLeft <= 0) {
+            System.out.println("Time's up!");
+            callKillPlayer();
+            return; // Stop further updates
+        }
 
+        //update individual tiles
+        for (int y = 0; y < gridHeight; ++y) {
+            for (int x = 0; x < gridWidth; ++x) {
+                if (gridTileMap[y] == null || gridTileMap[y][x] == null) { System.out.printf("%d, %d\n", x, y);}
+                gridTileMap[y][x].updateTile(elapsed);
+
+            }
+        }
+
+        //update amoeba
+        long currentTime = System.currentTimeMillis();
+        for (int i = 0; i < amoebaControllerList.size(); ++i) {
+            amoebaControllerList.get(i).updateAmoebaCluster(currentTime);
+        }
+        
+        double epsilon = Math.min(.5, Math.log(Math.max(10, elapsed)) / Math.log(1000));
+        
+        cameraScale = 60;
+
+        cameraX = (double) player.getXPosition() * epsilon + cameraX * (1 - epsilon);
+        cameraY = (double) player.getYPosition() * epsilon + cameraY * (1 - epsilon);
     }
 
 
-    
+
+
+
+
+
+
     /**
      * Set the paused state of the game.
      * @param isPaused if the game should be paused
