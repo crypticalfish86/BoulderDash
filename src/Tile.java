@@ -35,7 +35,6 @@ public abstract class Tile {
         this.x = x;
         this.y = y;
         this.tileType = tileType;
-        //TODO add a starting timestamp here
     }
 
     /**
