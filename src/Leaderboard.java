@@ -104,7 +104,7 @@ public class Leaderboard {
             linesToPrint = 9;
         }
         for(int i = 0; i <= linesToPrint; i++){
-            leaderBoard.append(leaderBoardDisplay.get(i) + "\n");
+            leaderBoard.append(leaderBoardDisplay.get(i) + System.lineSeparator());
         }
         return leaderBoard.toString();
     }
