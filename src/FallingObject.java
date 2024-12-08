@@ -26,6 +26,7 @@ public abstract class FallingObject extends Tile {
      * @param gameSession The current game session.
      * @param x the x position of the falling object.
      * @param y the y position of the object.
+     * @param TileType The tile type.
      * @param operationInterval The time in ms between operations.
      */
     public FallingObject(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
