@@ -9,12 +9,12 @@ import java.util.Random;
  */
 public class AmoebaController {
     private final GameSession gameSession;
-    private final ArrayList<AmoebaTile> amoebaChildren; //The list of children to this amoeba controller
+    private final ArrayList<AmoebaTile> amoebaChildren; //The list of children to this cluster
     private int maxAmoebaChildCount; //The maximum amount of allowed children to this amoeba
     private int currentAmoebaChildCount; //The current number of children
     protected long lastTimeStamp;
     private final long operationInterval;
-    private long operationIntervalsPerAmoebaGrowthRate; //how many operation intervals before the amoeba grows by one
+    private long operationIntervalsPerAmoebaGrowthRate; //how many operation intervals per growth
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
 
@@ -25,7 +25,8 @@ public class AmoebaController {
 
 
     /**
-     * Construct an amoeba controller which acts as the controller for an amoeba cluster, regulating growth and cluster members.
+     * Construct an amoeba controller which acts as the controller for an amoeba cluster,
+     * regulating growth and cluster members.
      * @param gameSession
      * The game session the amoeba cluster is a part of.
      * @param startingAmoebaX
@@ -39,7 +40,15 @@ public class AmoebaController {
      * @param maxAmoebaChildCount
      * The maximum number of amoeba tiles in the cluster before diamond conversion triggers.
      */
-    public AmoebaController(GameSession gameSession, int startingAmoebaX, int startingAmoebaY, long operationInterval, long amoebaGrowthRatePerOperationInterval, int maxAmoebaChildCount, int clusterID){
+    public AmoebaController(
+            GameSession gameSession,
+            int startingAmoebaX,
+            int startingAmoebaY,
+            long operationInterval,
+            long amoebaGrowthRatePerOperationInterval,
+            int maxAmoebaChildCount,
+            int clusterID
+    ){
         this.gameSession = gameSession;
         this.amoebaChildren = new ArrayList<AmoebaTile>();
         this.clusterID = clusterID;
@@ -66,7 +75,8 @@ public class AmoebaController {
     }
 
     /**
-     *If the amoeba cluster still contains tiles on the grid, regulate amoeba growth and check for diamond conversion trigger.
+     *If the amoeba cluster still contains tiles on the grid, regulate amoeba growth and check,
+     *  for diamond conversion trigger.
      * @param currentTimeInMilliseconds
      * The current time in milliseconds since the unix epoch (01/01/1970).
      */
@@ -101,8 +111,18 @@ public class AmoebaController {
      */
     public void convertToDiamond() {
         for (AmoebaTile amoeba : this.amoebaChildren) {
-            Diamond replacementDiamond = new Diamond(this.gameSession, amoeba.getXPosition(), amoeba.getYPosition(), this.operationInterval);
-            this.gameSession.setTile(amoeba.getYPosition(), amoeba.getXPosition(), replacementDiamond);
+            Diamond replacementDiamond =
+                    new Diamond(
+                            this.gameSession,
+                            amoeba.getXPosition(),
+                            amoeba.getYPosition(),
+                            this.operationInterval
+                    );
+            this.gameSession.setTile(
+                    amoeba.getYPosition(),
+                    amoeba.getXPosition(),
+                    replacementDiamond
+            );
         }
 
         this.currentAmoebaChildCount = 0;
@@ -113,8 +133,18 @@ public class AmoebaController {
      */
     public void convertToBoulder() {
         for (AmoebaTile amoeba : this.amoebaChildren) {
-            Boulder replacementBoulder = new Boulder(this.gameSession, amoeba.getXPosition(), amoeba.getYPosition(), this.operationInterval);
-            this.gameSession.setTile(amoeba.getYPosition(), amoeba.getXPosition(), replacementBoulder);
+            Boulder replacementBoulder =
+                    new Boulder(
+                            this.gameSession,
+                            amoeba.getXPosition(),
+                            amoeba.getYPosition(),
+                            this.operationInterval
+                    );
+
+            this.gameSession.setTile(amoeba.getYPosition(),
+                    amoeba.getXPosition(),
+                    replacementBoulder
+            );
         }
 
         this.currentAmoebaChildCount = 0;
@@ -152,7 +182,14 @@ public class AmoebaController {
      */
     public void addNewAmoebaChildToCluster(int x, int y) {
 
-        AmoebaTile newAmoeba = new AmoebaTile(this.gameSession, x, y, this.operationInterval, this);//instantiate new amoeba
+        AmoebaTile newAmoeba =
+                new AmoebaTile(
+                        this.gameSession,
+                        x,
+                        y,
+                        this.operationInterval,
+                        this
+                );
         this.amoebaChildren.add(newAmoeba);//add new amoeba to cluster
         this.gameSession.setTile(newAmoeba.getYPosition(), newAmoeba.getXPosition(), newAmoeba);
         
@@ -167,7 +204,7 @@ public class AmoebaController {
      * @param y
      * The y position of the amoeba tile that is being removed from the cluster.
      * @param explosion
-     * The obj reference for the explosion tile that will replace the amoeba tile at it's position.
+     * The obj reference for the explosion tile that will replace the amoeba tile at its position.
      */
     public void removeChildFromController(int x, int y, Tile explosion){
         for(AmoebaTile amoeba : this.amoebaChildren){
