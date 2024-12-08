@@ -15,8 +15,8 @@ public class Leaderboard {
     private ArrayList<String> leaderBoardDisplay;
 
     /**
-     * Instantiates a leaderboard object which can be used to add new names/scores to the leaderboard and
-     * get a display of the entire leaderboard.
+     * Instantiates a leaderboard object which can be used to add new names/scores to the
+     * leaderboard and get a display of the entire leaderboard.
      */
     public Leaderboard() {
         leaderBoardDisplay = new ArrayList<String>();
