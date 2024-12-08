@@ -9,33 +9,43 @@ public class MagicWall extends Wall {
 
     public MagicWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.MAGIC_WALL, operationInterval);
-        
-        this.isActive = false; // Initially inactive
         this.activationStartTime = 0;
     }
 
     // Interaction logic for the Magic Wall
     @Override
     public void interact(Tile inputTileObject) {
-        System.out.println("MagicWall interacted with tile: " + inputTileObject.getTileType());
 
         // Check the type of the interacting tile
         switch (inputTileObject.getTileType()) {
             case BOULDER:
-                if (inputTileObject instanceof Boulder) {
+                if (inputTileObject.getYPosition() == this.y - 1) {
                     transformAndEjectTile(inputTileObject, TileType.DIAMOND); // Transform Boulder into Diamond
                 }
                 break;
             case DIAMOND:
-                transformAndEjectTile(inputTileObject, TileType.BOULDER); // Transform Diamond into Boulder
+                if (inputTileObject.getYPosition() == this.y - 1) {
+                    transformAndEjectTile(inputTileObject, TileType.BOULDER); // Transform Diamond into Boulder
+                }
                 break;
             default:
-                System.out.println("No transformation applied by MagicWall.");
+
         }
     }
 
     // Transform and eject the tile to the other side of the Magic Wall
     private void transformAndEjectTile(Tile inputTileObject, TileType newTileType) {
+        if(this.y == gameSession.getGridHeight() - 1){
+            System.out.println("ahhhhhhhhh");
+            return;
+
+        }
+        if(!(gameSession.getTileFromGrid(this.x,this.y + 1).getTileType() == TileType.PATH)){
+            System.out.println("ahhhhhhhhhheeeeeeeeeeeeeeee");
+            return;
+
+        }
+
         int x = inputTileObject.getXPosition();
         int y = inputTileObject.getYPosition();
         Tile newTile;
@@ -43,12 +53,9 @@ public class MagicWall extends Wall {
         // Create the new tile based on the new tile type
         if (newTileType == TileType.BOULDER) {
             newTile = new Boulder(gameSession, x, y, inputTileObject.getOperationInterval());
-            System.out.println("Transformed Diamond into Boulder at (" + x + ", " + y + ").");
         } else if (newTileType == TileType.DIAMOND) {
             newTile = new Diamond(gameSession, x, y, inputTileObject.getOperationInterval());
-            System.out.println("Transformed Boulder into Diamond at (" + x + ", " + y + ").");
         } else {
-            System.out.println("Unknown transformation type.");
             return;
         }
 
@@ -112,14 +119,14 @@ public class MagicWall extends Wall {
     // Update logic for the magic wall
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        if (isActive) {
-            long elapsedTime = currentTimeInMilliseconds - activationStartTime;
-
-            // Example behavior: Deactivate after 10 seconds
-            if (elapsedTime > 10_000) {
-                deactivateWall();
-            }
-        }
+//        if (isActive) {
+//            long elapsedTime = currentTimeInMilliseconds - activationStartTime;
+//
+//            // Example behavior: Deactivate after 10 seconds
+//            if (elapsedTime > 10_000) {
+//                deactivateWall();
+//            }
+//        }
     }
 
     // Draw the magic wall
