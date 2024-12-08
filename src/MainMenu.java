@@ -4,7 +4,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 
-
+/**
+ * A class used for presenting the main menu.
+ * Interacts with the game to perform click operations.
+ */
 public class MainMenu {
     private final CanvasCompositor cc;
     private final CanvasLayer cl;
@@ -21,6 +24,11 @@ public class MainMenu {
 
 
 
+    /**
+     * Creates a main menu.
+     * @param game the game to interact with.
+     * @param cc the canvas to insert layer to
+     */
     public MainMenu(Game game, CanvasCompositor cc) {
         this.cc = cc;
 
@@ -98,6 +106,14 @@ public class MainMenu {
         return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_PLAY, .5, .5, .13);
     }
 
+
+
+    /**
+     * Returns true if mouse is on the leaderboard button, used for opening up a profile selector
+     * @param mouseX x-position of the mouse
+     * @param mouseY y-position of the mouse
+     * @return if the mouse is on the leaderboard button
+     */
     private boolean isMouseOnLeaderboard(double mouseX, double mouseY) {
         return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_LEADERBOARD, .5, .65, .25);
     }
