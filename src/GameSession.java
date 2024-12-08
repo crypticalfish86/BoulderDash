@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -7,6 +6,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+
+
+/**
+ * Manages the game logic internally by providing the canvas.
+ * Collaborates with game to work with external features.
+ */
 public class GameSession {
 
     private int gridHeight; //The height of the grid
@@ -39,7 +44,6 @@ public class GameSession {
 
     public static final long OPERATION_INTERVAL = 100;
 
-    // private final ArrayList<Function<Long, Void>> updateConnections = new ArrayList<>();
     
 
     
@@ -62,10 +66,6 @@ public class GameSession {
         amoebaControllerList = new ArrayList<AmoebaController>();
         teleportWallList = new ArrayList<TeleportWall>();
         interpretLevelData(gameData, accumulatedScore);//loads gameSessionData and fills the grid tile map
-
-        
-
-
         
 
         //the draw method is under the draw of this interface
@@ -73,19 +73,13 @@ public class GameSession {
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
 
             @Override
-            public boolean onMouseDown(double x, double y, boolean hasConsumed) {
-                return true;
-            }
+            public boolean onMouseDown(double x, double y, boolean hasConsumed) { return true; }
 
             @Override
-            public boolean onMouseUp(double x, double y, boolean hasConsumed) {
-                return true;
-            }
+            public boolean onMouseUp(double x, double y, boolean hasConsumed) { return true; }
 
             @Override
-            public boolean onMouseMove(double x, double y, boolean hasConsumed) {
-                return true;
-            }
+            public boolean onMouseMove(double x, double y, boolean hasConsumed) { return true; }
 
             @Override
             public void draw(GraphicsContext gc, long elapsed) {
@@ -128,6 +122,7 @@ public class GameSession {
      * The data used to fill GameSessionData and the grid tile map.
      */
     private void interpretLevelData(String gameData, int accumulatedScore) {
+        String[] gameDataArr = gameData.split(";\\s*");
 
         // file structure
         // line 1: Current Level, Height, Width
@@ -135,32 +130,51 @@ public class GameSession {
         // Line 3: DiamondCount, DiamondsRequired
         // Line 4: AmoebaSpreadRate, AmoebaSizeLimit
         // Line 5: RedKey, BlueKey, YellowKey, GreenKey
-        // Line 6+: Actual level
 
-        String[] gameDataArr = gameData.split(";\\s*");
+        
+        
+        // line 1: Current Level, Height, Width
         this.gridHeight = Integer.parseInt(gameDataArr[2]);
         this.gridWidth = Integer.parseInt(gameDataArr[1]);
         System.out.printf("Map size: (%d, %d)\n", this.gridWidth, this.gridHeight);
-
-        this.gridTileMap = new Tile[this.gridHeight][this.gridWidth];
-
+        
+        
+        
+        // Line 2: Score, TimeLeft, TimeAllowed
         int score = Integer.parseInt(gameDataArr[3]) + accumulatedScore;
         int timeLeft = Integer.parseInt(gameDataArr[4]) * 1000;
+        this.timeLeft = timeLeft;
+        
+        
+        // Line 3: DiamondCount, DiamondsRequired
         int diamondCount = Integer.parseInt(gameDataArr[6]);
         int diamondsRequired = Integer.parseInt(gameDataArr[7]);
+        
+        
+        // Line 4: AmoebaSpreadRate, AmoebaSizeLimit
         this.amoebaGrowthRate = Integer.parseInt(gameDataArr[8]);
         this.maxAmoebaSize = Integer.parseInt(gameDataArr[9]);
+        
+        
+        // Line 5: RedKey, BlueKey, YellowKey, GreenKey
         int redKeys = Integer.parseInt(gameDataArr[10]);
         int blueKeys = Integer.parseInt(gameDataArr[11]);
         int yellowKeys = Integer.parseInt(gameDataArr[12]);
         int greenKeys = Integer.parseInt(gameDataArr[13]);
+        
 
-        this.timeLeft = timeLeft;
-        this.currentSessionData = new GameSessionData(this, timeLeft, diamondsRequired, redKeys, blueKeys, yellowKeys, greenKeys, diamondCount, score);
-
-
+        
+        this.currentSessionData = new GameSessionData(
+            this, timeLeft, diamondsRequired, redKeys, blueKeys, yellowKeys, greenKeys,
+            diamondCount, score
+        );
+            
+            
+        
+        
+        // Line 6+: Actual level
         String entireLevelString = gameDataArr[14];
-        //TODO fill grid tile map
+        this.gridTileMap = new Tile[this.gridHeight][this.gridWidth];
         fill2DGrid(entireLevelString);
 
 
@@ -171,17 +185,20 @@ public class GameSession {
      * fills the 2d grid of this game by a given string
      * @param stringGridMap the string that is derived from the save file format to be read
      */
-    private void fill2DGrid(String stringGridMap){
+    private void fill2DGrid(String stringGridMap) {
         String[] gridMapLinesArray = stringGridMap.split(System.lineSeparator());//split file by new line
         System.out.println(gridMapLinesArray.length);
-        for (int y = 0; y < gridMapLinesArray.length; y++){
+        for (int y = 0; y < gridMapLinesArray.length; y++) {
 
             String[] gridLineTileArray = gridMapLinesArray[y].split(" ");//then split each element of that array by
             
-            for(int x = 0; x < gridLineTileArray.length; x++){
+            for(int x = 0; x < gridLineTileArray.length; x++) {
 
-                Tile newTile = new PathWall(this, x, y, OPERATION_INTERVAL);//this should never finish initialised as this, it should go through the switch statement
-                switch (gridLineTileArray[x]){
+                Tile newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
+                //this should never finish initialised as this, it should go through the switch statement
+
+
+                switch (gridLineTileArray[x]) {
                     case "-":
                         newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
                         break;
@@ -262,9 +279,9 @@ public class GameSession {
                         int amoebaID = Integer.parseInt(Character.toString(gridLineTileArray[x].charAt(1)));
                         AmoebaController amoebaController = this.returnAmoebaControllerByID(amoebaID);
 
-                        if(amoebaController != null){
+                        if (amoebaController != null) {
                             amoebaController.addNewAmoebaChildToCluster(x, y);
-                        } else{
+                        } else {
                             AmoebaController newAmoebaController = new AmoebaController(this, x, y,
                                     OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize, amoebaID);
                             this.amoebaControllerList.add(newAmoebaController);
@@ -284,11 +301,10 @@ public class GameSession {
 
                         TeleportWall newTeleportWall = new TeleportWall(this, x, y, TileType.TELEPORT_WALL, OPERATION_INTERVAL, teleportWallID);
 
-                        if(teleportWall != null){
+                        if (teleportWall != null) {
                             teleportWall.setTeleportWallBrother(newTeleportWall);
                             this.gridTileMap[y][x] = newTeleportWall;
-                        }
-                        else {
+                        } else {
                             this.teleportWallList.add(newTeleportWall);
                             this.gridTileMap[y][x] = newTeleportWall;
                         }
@@ -310,8 +326,8 @@ public class GameSession {
         }
     }
 
-    public boolean doesNotEqualAmoebaOrTeleportTile(String tileString){
-        switch(tileString){
+    public boolean doesNotEqualAmoebaOrTeleportTile(String tileString) {
+        switch(tileString) {
             case "A1":
             case "A2":
             case "A3":
@@ -348,44 +364,59 @@ public class GameSession {
         //TODO figure out where "current level" is stored, also clean up inline comments
         String newLineString = System.lineSeparator();
 
-        saveString += "1;"; //change this when you figure it out
-        saveString += Integer.toString(this.gridWidth) + ";" + Integer.toString(this.gridHeight) + ";" + newLineString; //height and width
-        saveString += Integer.toString(data[0]) + ";" + timeLeft / 1000 + ";" + Integer.toString(data[2] / 1000) + ";" + newLineString; //Score, timeLeft, time allowed
-        saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4]) + ";\n";//diamondCount and diamondsRequired
-        saveString += Integer.toString(this.amoebaGrowthRate) + ";" + Integer.toString(this.maxAmoebaSize) + ";" + newLineString; //TODO add amoebaSpreadRate and amoeba max size somewhere in gameSession
-        saveString += Integer.toString(data[5]) + ";" + Integer.toString(data[6]) + ";" + Integer.toString(data[7]) + ";" + Integer.toString(data[8]) + ";";//keys
+        saveString += "1;"; // change this when you figure it out
 
-        for (int y = 0; y < gridTileMap.length; y++){
+
+        // height and width
+        saveString += Integer.toString(this.gridWidth) + ";" +
+                    Integer.toString(this.gridHeight) + ";" + newLineString;
+
+
+        // Score, timeLeft, time allowed
+        saveString += Integer.toString(data[0]) + ";" + timeLeft / 1000 + ";" +
+                    Integer.toString(data[2] / 1000) + ";" + newLineString;
+
+
+        // diamondCount and diamondsRequired
+        saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4]) + ";\n";
+
+
+        // amoebaSpreadRate and amoeba max size 
+        saveString += Integer.toString(this.amoebaGrowthRate) + ";" +
+                    Integer.toString(this.maxAmoebaSize) + ";" + newLineString;
+
+
+        // keys
+        saveString += Integer.toString(data[5]) + ";" + Integer.toString(data[6]) + ";" +
+                    Integer.toString(data[7]) + ";" + Integer.toString(data[8]) + ";";
+
+
+
+
+        for (int y = 0; y < gridTileMap.length; y++) {
             saveString += newLineString + gridTileMap[y][0].returnStringTileRepresentation();
-            for (int x = 1; x < gridTileMap[y].length; x++){
+            for (int x = 1; x < gridTileMap[y].length; x++) {
                 saveString += " " + gridTileMap[y][x].returnStringTileRepresentation();
             }
-
-
         }
+
+
         return saveString;
     }
 
-    public void setAllGameSession(int currentLevel, int height, int width,
-                                   int score, int timeLeft, int timeAllowed, int startingTime,
-                                   int diamondCount, int diamondsRequired,
-                                   int redKeys, int blueKeys, int yellowKeys, int greenKeys) {
-        currentSessionData.setAllGameSessionData(score, timeAllowed, startingTime,
-                diamondCount, diamondsRequired,
-                redKeys, blueKeys, yellowKeys, greenKeys, currentLevel);
-        this.gridHeight = height;
-        this.gridWidth = width;
-        this.timeLeft = timeLeft;
-    }
 
 
-    //returns a specific tile from the gridTileMap
+    /**
+     * Gets the tile on the specified x and y. may error if x and y are out of bounds.
+     * @param x x-position of the grid, from left to right.
+     * @param y y-position of the grid, from top to down.
+     * @return tile on the grid
+     */
     public Tile getTileFromGrid(int x, int y) {
         return gridTileMap[y][x];
     }
 
-    //updates the incoming tile position with the replacement tile and the outgoing tile with the incoming tile
-
+    
     /**
      * move a tile to another tile in the gridMap and replace where the tile was with another tile.
      * @param replacementTile
@@ -414,12 +445,12 @@ public class GameSession {
         tile.setNewPosition(xTileLocation, yTileLocation);
     }
 
-     /**
-      * Calls the kill player method on this game session's player.
-      */
-     public void callKillPlayer() {
-         player.killPlayer();
-     }
+    /**
+     * Calls the kill player method on this game session's player.
+     */
+    public void callKillPlayer() {
+        player.killPlayer();
+    }
 
 
     
@@ -432,7 +463,7 @@ public class GameSession {
         return this.gridHeight;
     }
 
-    public Tile[][] getGridTileMap(){ return this.gridTileMap; }
+    public Tile[][] getGridTileMap() { return this.gridTileMap; }
 
     public int getPlayerX() { return this.player.getXPosition(); }
     public int getPlayerY() { return this.player.getYPosition(); }
@@ -787,6 +818,4 @@ public class GameSession {
         endGame();
         gamePauseMenu.hide();
     }
-
-
 }
