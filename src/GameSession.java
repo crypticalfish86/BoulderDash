@@ -12,8 +12,6 @@ public class GameSession {
     private int gridHeight; //The height of the grid
     private int gridWidth; //The width of the grid
 
-
-
     private long timeLeft; //The starting time stamp (ms since 1970)
     // private long maxTimeToCompleteLevel; //The time given to complete level (in ms)
 

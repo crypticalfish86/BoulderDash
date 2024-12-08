@@ -203,6 +203,8 @@ public class Game {
         System.out.println("back to main menu button has been clicked");
         leaderboardShowcase.hide();
         mainMenu.show();
+        stopMusic(); // Stop the music when exiting the game
+
     }
 
 
@@ -269,6 +271,8 @@ public class Game {
     public void showMenu() {
         //TODO: implement returning to main menu
         mainMenu.show();
+        stopMusic();
+
     }
 
 
