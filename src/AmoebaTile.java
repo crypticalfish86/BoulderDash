@@ -26,7 +26,13 @@ public class AmoebaTile extends Tile{
      * @param thisAmoebaTilesController
      * Obj reference to the amoeba cluster controller that this amoeba tile is a part of.
      */
-    public AmoebaTile(GameSession gameSession, int x, int y, long operationInterval, AmoebaController thisAmoebaTilesController){
+    public AmoebaTile(
+            GameSession gameSession,
+            int x,
+            int y,
+            long operationInterval,
+            AmoebaController thisAmoebaTilesController
+    ){
         super(gameSession, x, y,TileType.AMOEBA, operationInterval);
         this.thisAmoebaTilesController = thisAmoebaTilesController;
     }
@@ -59,27 +65,43 @@ public class AmoebaTile extends Tile{
      * @return if this growth was successful.
      */
     public boolean tryGrow() {
+        boolean canSpreadNorth =
+                AmoebaController.canAmoebaSpreadTo(
+                        gameSession.getTileFromGrid(x, y + 1).getTileType()
+                );
+        boolean canSpreadSouth =
+                AmoebaController.canAmoebaSpreadTo(
+                        gameSession.getTileFromGrid(x, y - 1).getTileType()
+                );
+        boolean canSpreadEast =
+                AmoebaController.canAmoebaSpreadTo(
+                        gameSession.getTileFromGrid(x + 1, y).getTileType()
+                );
+        boolean canSpreadWest =
+                AmoebaController.canAmoebaSpreadTo(
+                        gameSession.getTileFromGrid(x - 1, y).getTileType()
+                );
 
         //up
-        if (AmoebaController.canAmoebaSpreadTo(gameSession.getTileFromGrid(x, y + 1).getTileType())) {
+        if (canSpreadNorth) {
             this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x, y + 1);
             return true;
         }
 
         //down
-        if (AmoebaController.canAmoebaSpreadTo(gameSession.getTileFromGrid(x, y - 1).getTileType())) {
+        if (canSpreadSouth) {
             this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x, y - 1);
             return true;
         }
 
         //right
-        if (AmoebaController.canAmoebaSpreadTo(gameSession.getTileFromGrid(x + 1, y).getTileType())) {
+        if (canSpreadEast) {
             this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x + 1, y);
             return true;
         }
 
         //left
-        if (AmoebaController.canAmoebaSpreadTo(gameSession.getTileFromGrid(x - 1, y).getTileType())) {
+        if (canSpreadWest) {
             this.thisAmoebaTilesController.addNewAmoebaChildToCluster(x - 1, y);
             return true;
         }
