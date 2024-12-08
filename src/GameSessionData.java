@@ -1,3 +1,8 @@
+/**
+ * GameSessionData holds all the more static data for the GameSession in one place.
+ * @version 3.0
+ * @author Jace Weerawardena (crypticalfish86).
+ */
 public class GameSessionData {
     private GameSession gameSession;
     private int timeAllowed;
@@ -9,18 +14,29 @@ public class GameSessionData {
     private int greenKeys;
     private int diamondCount;
     private int score;
-
-
     private int level;
 
-    // TimeAllowed, DiamondsRequired, AmeobaSpreadRate, AmeobaSizeLimit
-    // Line 3: TimeLeft, Score, DiamondCount
-    // Line 4: RedKey, BlueKey, YellowKey, GreenKey
-    // Line 5+: Actual level
-
-
-    GameSession currentGame;
-
+    /**
+     * Initialises a GameSessionData object which holds all the more static data for a GameSession.
+     * @param gameSession
+     * The GameSession associated with this data.
+     * @param timeAllowed
+     * The time allowed to complete the level in seconds.
+     * @param diamondsRequired
+     * The diamonds required to open the ExitWall so the player can advance levels.
+     * @param redKeys
+     * How many red keys the player has picked up.
+     * @param blueKeys
+     * How many blue keys the player has picked up.
+     * @param yellowKeys
+     * How many yellow keys the player has picked up.
+     * @param greenKeys
+     * How many green keys the player has picked up.
+     * @param diamondCount
+     * The current number of diamonds the player has picked up in this level.
+     * @param score
+     * The current score of the player.
+     */
     public GameSessionData(GameSession gameSession, int timeAllowed, int diamondsRequired, int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score) {
         this.gameSession = gameSession;
         this.timeAllowed = timeAllowed;
@@ -49,16 +65,25 @@ public class GameSessionData {
     }
 
     /**
-     * Set the values of game session data when loading in a save
+     * Set the values of game session data when loading in a save.
      * @param score
+     * The current score of the player.
      * @param timeAllowed
+     * The time left that you're allowed to complete the level by.
      * @param startingTime
+     * The time that has already elapsed in the level.
      * @param diamondCount
+     * The current number of diamonds the player has picked up.
      * @param diamondsRequired
+     * The diamonds required to complete the level.
      * @param redKeys
+     * The number of red keys the player has picked up.
      * @param blueKeys
+     * The number of blue keys the player has picked up.
      * @param yellowKeys
+     * The number of yellow keys the player has picked up.
      * @param greenKeys
+     * The number of green keys the player has picked up.
      */
     public void setAllGameSessionData(int score, int timeAllowed, int startingTime,
                                       int diamondCount, int diamondsRequired,
@@ -76,8 +101,8 @@ public class GameSessionData {
     }
 
     /**
-     * checks whether the gamesession data has logged that the user has a key in their inventory.
-     * @param item
+     * checks whether the GameSessionData has logged that the user has a key in their inventory.
+     * @param key
      * The string that represents the key colour.
      * @return
      * returns true if the user has picked up at least one key of that colour, otherwise returns false.
@@ -117,10 +142,8 @@ public class GameSessionData {
 
     /**
      * Changes how many of a particular item the user has in their inventory.
-     * @param item
+     * @param key
      * A string that represents the key colour they are updating.
-     * @param increment
-     * increments if true, otherwise decrements.
      */
     public void giveKey(String key) {
         switch (key){
@@ -148,7 +171,7 @@ public class GameSessionData {
     /**
      * gets the current score of the game.
      * @return
-     * The current score of the gamesession.
+     * The current score of the GameSession.
      */
     public int getScore() {
         return score;
@@ -177,14 +200,19 @@ public class GameSessionData {
         diamondCount++;
     }
 
+    /**
+     * Get the number of diamonds required to open the exit door.
+     * @return
+     * The number of diamonds required to open the exit door.
+     */
     public int getDiamondsRequired() {
         return this.diamondsRequired;
     }
 
 
     /**
-     * Reads the level that this staage represents
-     * @return int of level, can be -1 to indicate if level is non-conventional
+     * Reads the level that this stage represents.
+     * @return int of level, can be -1 to indicate if level is non-conventional.
      */
     public int getLevel() {
         return this.level;
