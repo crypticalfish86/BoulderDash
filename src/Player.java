@@ -208,7 +208,7 @@ public class Player extends Tile {
             }
         }
         if(this.y != gameSession.getGridHeight() - 1){
-            if(gameSession.getTileFromGrid(this.x, this.y + 1).getTileType() == TileType.MOVING_ENEMY){
+            if (gameSession.getTileFromGrid(this.x, this.y + 1).getTileType() == TileType.MOVING_ENEMY){
                 return true;
             }
         }

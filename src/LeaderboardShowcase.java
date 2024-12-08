@@ -6,26 +6,24 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 public class LeaderboardShowcase {
-    CanvasCompositor cc;
-    CanvasLayer cl;
+    private final CanvasCompositor cc;
+    private final CanvasLayer cl;
 
-
-    Game game;
+    private final boolean[] mouseDownOnExitToMainMenu;
 
     public static final Image IMAGE_EXIT_TO_MAIN_MENU =
             new Image("file:Assets/Buttons/ExitToMainMenuButton.png");
     public static final Image IMAGE_LEADERBOARD =
             new Image("file:Assets/Buttons/LeaderboardButton.png");
 
-    private String leaderboardDisplay;
+    private final String leaderboardDisplay;
 
     public LeaderboardShowcase(Game game, CanvasCompositor cc) {
         this.cc = cc;
-        this.game = game;
 
         leaderboardDisplay = new Leaderboard().getLeaderBoardDisplay();
 
-        boolean[] mouseDownOnExitToMainMenu = {false};
+        mouseDownOnExitToMainMenu = new boolean[]{false};
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
@@ -40,14 +38,11 @@ public class LeaderboardShowcase {
                     game.onExitToMainMenuButtonClicked();
                 }
                 return true;
-
-
             }
 
             @Override
             public boolean onMouseMove(double x, double y, boolean hasConsumed) {
                 // TODO Auto-generated method stub
-                // getMouseOnButton(x, y);
 
                 return true;
             }
@@ -70,10 +65,8 @@ public class LeaderboardShowcase {
                 gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
-
                 //draw the title
                 UIHelper.drawImageRelativeXX(gc, IMAGE_LEADERBOARD, .5, .15, .5);
-
 
                 //draws the lower play button
                 UIHelper.drawImageRelativeXX(gc, IMAGE_EXIT_TO_MAIN_MENU, .5, .85, .25);
