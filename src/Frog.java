@@ -12,7 +12,7 @@ public class Frog extends Enemy {
     public static final Image img = new Image("file:Assets/Images/Frog.png"); // Placeholder for the image
 
     private ArrayList<int[]> path = new ArrayList<>();
-    private int cooldown = 0; // holds the amount of frames that the frong should not move for
+    private int coolDown = 0; // holds the amount of frames that the frog should not move for
     private int pathRefresh = 0; // holds the amount of frames until the path should refresh automatically
     
 
@@ -51,8 +51,8 @@ public class Frog extends Enemy {
             pathRefresh--;
         }
 
-        if (cooldown > 0) { cooldown--; return; }
-        cooldown = COOLDOWN_MOVE;
+        if (coolDown > 0) { coolDown--; return; }
+        coolDown = COOLDOWN_MOVE;
 
 
 
