@@ -690,9 +690,20 @@ public class GameSession {
 
 
 
-        gc.setTextAlign(TextAlignment.RIGHT);
-        //draw the score
 
+        
+        //draw the score
+        gc.setTextAlign(TextAlignment.CENTER);
+        gc.setFill(new Color(.5, .6, .9, 1));
+        String diamondString = String.format("%03d", currentSessionData.getDiamondCount());
+        gc.fillText(diamondString, Main.WINDOW_WIDTH * .5, Main.WINDOW_HEIGHT * .07);
+
+
+
+        
+        //draw the score
+        gc.setTextAlign(TextAlignment.RIGHT);
+        gc.setFill(new Color(1, 1, 1, 1));
         String scoreString = String.format("%04d", currentSessionData.getScore());
         gc.fillText(scoreString, Main.WINDOW_WIDTH * .95, Main.WINDOW_HEIGHT * .07);
 

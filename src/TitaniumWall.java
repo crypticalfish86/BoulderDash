@@ -10,7 +10,7 @@ public class TitaniumWall extends Wall {
     }
 
     public void interact(Tile inputTileObject) {
-        System.out.println("Titanium walls cannot be destroyed or interacted with.");
+        // System.out.println("Titanium walls cannot be destroyed or interacted with.");
     }
 
     public void updateTile(long currentTimeInMilliseconds) {
