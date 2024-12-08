@@ -17,8 +17,6 @@ public class Diamond extends FallingObject{
 
 
 
-
-
     /**
      * Constructs a diamond tile.
      * @param gameSession The current game session.

@@ -23,7 +23,6 @@ public class FireFly extends FlyingEnemy{
      */
     public FireFly(GameSession gameSession, int x, int y, long operationInterval, boolean prioritiseLeft){
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseLeft);
-        
         this.lastTimeStamp = System.currentTimeMillis();
     }
 
@@ -45,7 +44,6 @@ public class FireFly extends FlyingEnemy{
      */
     public void updateTile(long currentTimeInMilliseconds){
         //Set initial direction
-        //Doing here because can't be done in constructor
         if(ticksAlive == 0){
             setInitialDirection(this.x,this.y,this.prioritiseLeft);
         }

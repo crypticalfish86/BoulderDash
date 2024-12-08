@@ -42,10 +42,7 @@ public abstract class FlyingEnemy extends Enemy {
         int[] yDir = new int[4];
 
 
-
-
         //Find which tiles are to enemies' left, right, forward and behind based on direction
-
         switch (this.direction) {
             case UP_DIRECTION:
                 xDir = new int[]{-1, +1, 0, 0};
@@ -170,8 +167,6 @@ public abstract class FlyingEnemy extends Enemy {
         }else if(newY > y){
             this.direction = DOWN_DIRECTION;
         }
-
-
     }
 
 

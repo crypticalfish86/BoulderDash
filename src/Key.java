@@ -18,17 +18,11 @@ public class Key extends Wall {
     @Override
     public void interact(Tile inputTileObject) {
         if (inputTileObject.getTileType() == TileType.PLAYER) {
-            System.out.println("Player picked up the key of color: " + returnStringTileRepresentation());
-
             // Add the key to GameSessionData
             gameSession.getCurrentSessionData().giveKey(returnStringTileRepresentation());
 
             PathWall pathWall = new PathWall(gameSession, inputTileObject.getXPosition(), inputTileObject.getYPosition(), getOperationInterval());
             gameSession.updateTilePositions(pathWall, inputTileObject, this);
-
-            System.out.println("Key of color " + returnStringTileRepresentation() + " added to GameSessionData and removed from the grid.");
-        } else {
-            System.out.println("Only the player can pick up keys.");
         }
     }
 

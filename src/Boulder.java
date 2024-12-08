@@ -38,10 +38,6 @@ public class Boulder extends FallingObject{
      */
     public void interact(Tile tile) {
         switch (tile.tileType) {
-            case EXPLOSION:
-                //put something here :D
-                break;
-
             case PLAYER:
                 if (tile.getYPosition() == this.getYPosition()) {
                     int otherX = tile.getXPosition();

@@ -25,7 +25,6 @@ public abstract class Enemy extends Tile {
 
 
 
-
     /**
      * Converts all explodable tiles in a certain radius to an explosion,
      * centered around the enemy that is exploding.
@@ -114,7 +113,6 @@ public abstract class Enemy extends Tile {
      * @param tile the tile to check.
      * @return true if the tile can be affected by explosion, false otherwise.
      */
-
     private boolean isExplodable(Tile tile) {
         switch (tile.getTileType()) {
             case BOULDER:

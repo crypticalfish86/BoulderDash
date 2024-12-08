@@ -26,7 +26,6 @@ public class Butterfly extends FlyingEnemy{
      */
     public Butterfly(GameSession gameSession, int x, int y, long operationInterval, boolean prioritiseLeft){
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseLeft);
-        
         this.lastTimeStamp = System.currentTimeMillis();
     }
 
@@ -49,7 +48,6 @@ public class Butterfly extends FlyingEnemy{
      */
     public void updateTile(long currentTimeInMilliseconds){
         //Set initial direction
-        //Doing here because can't be done in constructor
         if(ticksAlive == 0){
             setInitialDirection(this.x,this.y,this.prioritiseLeft);
         }
@@ -70,6 +68,7 @@ public class Butterfly extends FlyingEnemy{
             PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
             gameSession.setTile(this.y,this.x,pathWall);
         }
+
 
         checkForPlayer();
 

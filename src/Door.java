@@ -22,17 +22,10 @@ public class Door extends Wall {
     @Override
     public void interact(Tile inputTileObject) {
         if (inputTileObject.getTileType() == TileType.PLAYER) {
-            System.out.println("Player is interacting with a door of color: " + getDoorColour());
-
             // Check if the player has the correct key in their inventory
             if (gameSession.getCurrentSessionData().tryConsumeKey(getDoorColour())) {
-                System.out.println("Door unlocked with the correct key: " + getDoorColour());
                 unlockDoor(inputTileObject); // Unlock the door
-            } else {
-                System.out.println("Door cannot be opened without the correct key: " + getDoorColour());
             }
-        } else {
-            System.out.println("Only the player can interact with the door.");
         }
     }
 
@@ -42,8 +35,6 @@ public class Door extends Wall {
         // Replace the door on the grid with a PathWall (or another passable tile)
         PathWall pathWall = new PathWall(gameSession, inputTileObject.getXPosition(), inputTileObject.getYPosition(), getOperationInterval());
         gameSession.updateTilePositions(pathWall, inputTileObject, this);
-
-        System.out.println("Door at (" + getXPosition() + ", " + getYPosition() + ") has been unlocked and replaced with a PathWall.");
     }
 
     @Override

@@ -7,7 +7,6 @@ public class DirtWall extends Wall {
 
     public DirtWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.DIRT_WALL, operationInterval);
-         // Amoebas can spread to dirt walls
     }
 
     // Interaction logic for the dirt wall
@@ -30,7 +29,7 @@ public class DirtWall extends Wall {
     // Update logic for dirt walls
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        // Dirt walls typically don't have dynamic behavior, but this can be extended
+
     }
 
     // Draw the dirt wall image

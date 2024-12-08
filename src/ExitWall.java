@@ -11,47 +11,48 @@ public class ExitWall extends Wall {
     public ExitWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.EXIT_WALL, operationInterval);
         this.isActive = false; // Exit is initially inactive
-        
     }
 
-    // Check if the exit is active
-    public boolean isActive() {
-        return this.isActive;
-    }
-
-    // Activate the exit (if all diamonds are collected)
-    public void activateIfDiamondsCollected() {
-        if (!isActive) {
-            GameSessionData sessionData = gameSession.getCurrentSessionData();
-            if (sessionData.getDiamondCount() >= sessionData.getDiamondsRequired()) {
-                this.isActive = true;
-                System.out.println("Exit wall activated! All diamonds have been collected.");
-            }
-        }
-    }
 
     // Handle interaction with the exit wall
     @Override
     public void interact(Tile inputTileObject) {
         // Ensure the wall is active before allowing the player to exit
         if (this.isActive && inputTileObject.getTileType() == TileType.PLAYER) {
-            System.out.println("Player exits through the exit wall!");
             changeLevel(); // Trigger level change
         }
     }
 
-    // Update tile (periodically check if the wall should be activated)
+    // periodically check if the wall should be activated
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
         // Check activation condition
         activateIfDiamondsCollected();
     }
 
+
+
+    // Activate the exit if all diamonds are collected
+    public void activateIfDiamondsCollected() {
+        if (!isActive) {
+            GameSessionData sessionData = gameSession.getCurrentSessionData();
+            if (sessionData.getDiamondCount() >= sessionData.getDiamondsRequired()) {
+                this.isActive = true;
+            }
+        }
+    }
+
+
     // Handle level transition
     public void changeLevel() {
-        System.out.println("Level changed!");
-        gameSession.onGameOver(true); // Assuming this transitions to the next level
+        gameSession.onGameOver(true);
     }
+
+
+    public boolean isActive() {
+        return this.isActive;
+    }
+
 
     // Draw the exit wall
     @Override
