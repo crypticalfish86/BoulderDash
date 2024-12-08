@@ -97,7 +97,7 @@ public class Game {
             //If the content of the file is new then load in the default file
             if (fileContent.equals("NEW;")) {
                 //TODO read default level package
-                startGameWithLevel(0, 0);
+                startGameWithLevel(2, 0);
             } else {
                 this.currentGamesession = new GameSession(this, fileContent, cc, 0);
             }

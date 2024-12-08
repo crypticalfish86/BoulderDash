@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 public class Boulder extends FallingObject{
 
 
-    public static final Image img = new Image("file:Assets/Images/BoulderSymmetrical.png");//TODO: add the image here
+    private static final Image img = new Image("file:Assets/Images/BoulderSymmetrical.png");//TODO: add the image here
 
 
     private static final int DELAY_PUSH_BOULDER = 10;

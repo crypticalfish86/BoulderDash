@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 
 public class FireFly extends FlyingEnemy{
 
-    public static final Image img = new Image("file:Assets/Images/FireFly.png"); // Placeholder for the image
+    private static final Image img = new Image("file:Assets/Images/FireFly.png"); // Placeholder for the image
 
 
     /**

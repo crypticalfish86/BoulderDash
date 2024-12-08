@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 
 public class Butterfly extends FlyingEnemy{
 
-    public static final Image img = new Image("file:Assets/Images/Butterfly.png"); // Placeholder for the image
+    private static final Image img = new Image("file:Assets/Images/Butterfly.png"); // Placeholder for the image
 
 
 

@@ -12,7 +12,7 @@ public class Diamond extends FallingObject{
 
     private final static int SCORE_VALUE = 50;
     
-    public static final Image img = new Image("file:Assets/Images/Diamond.png");//TODO: add the image here
+    private static final Image img = new Image("file:Assets/Images/Diamond.png");//TODO: add the image here
 
 
 

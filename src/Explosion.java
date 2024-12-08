@@ -15,7 +15,7 @@ public class Explosion extends Tile {
 
     private Boolean replaceWithDiamond;
     
-    public static final Image img = new Image("file:Assets/Images/Explosion.png"); // Placeholder for the image
+    private static final Image img = new Image("file:Assets/Images/Explosion.png"); // Placeholder for the image
 
 
     /**

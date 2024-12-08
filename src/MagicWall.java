@@ -64,14 +64,11 @@ public class MagicWall extends Wall {
         gameSession.setTile(this.y -1, this.x, pathWall);
 
         // Attempt to eject the new tile to the other side of the Magic Wall
-        boolean ejected = ejectTileToOtherSide(newTile);
-//        if (!ejected) {
-//            System.out.println("Ejection failed. Leaving the transformed tile at its current position.");
-//        }
+        ejectTileToOtherSide(newTile);
     }
 
     // Eject the tile to the opposite side of the Magic Wall
-    private boolean ejectTileToOtherSide(Tile tile) {
+    private void ejectTileToOtherSide(Tile tile) {
         int wallX = this.getXPosition();
         int wallY = this.getYPosition();
         int tileX = tile.getXPosition();
@@ -90,44 +87,19 @@ public class MagicWall extends Wall {
             Tile exitTile = gameSession.getTileFromGrid(exitX, exitY);
 
             // Check if the exit tile is passable (PathWall or empty)
-            if (exitTile instanceof PathWall || exitTile.getTileType() == TileType.PATH) {
+            if (exitTile.getTileType() == TileType.PATH) {
                 // Move the transformed tile to the exit position
                 gameSession.setTile(exitY, exitX, tile);
-                System.out.println("Ejected tile to (" + exitX + ", " + exitY + ").");
-                return true;
-            } else {
-                System.out.println("Exit position (" + exitX + ", " + exitY + ") is blocked.");
             }
-        } else {
-            System.out.println("Exit position (" + exitX + ", " + exitY + ") is out of bounds.");
         }
-        return false; // Ejection failed
+
     }
 
-//    // Activate the magic wall
-//    private void activateWall() {
-//        this.isActive = true;
-//        this.activationStartTime = System.currentTimeMillis();
-//        System.out.println("MagicWall activated!");
-//    }
-//
-//    // Deactivate the magic wall
-//    private void deactivateWall() {
-//        this.isActive = false;
-//        System.out.println("MagicWall deactivated.");
-//    }
 
     // Update logic for the magic wall
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-//        if (isActive) {
-//            long elapsedTime = currentTimeInMilliseconds - activationStartTime;
-//
-//            // Example behavior: Deactivate after 10 seconds
-//            if (elapsedTime > 10_000) {
-//                deactivateWall();
-//            }
-//        }
+
     }
 
     // Draw the magic wall
