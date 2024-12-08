@@ -104,8 +104,7 @@ public class TeleportWall extends Wall{
         }
 
         if(tileToTeleportPlayerTo != null){
-            PathWall pathWall = new PathWall(gameSession, x, y, operationInterval);
-            this.gameSession.updateTilePositions(pathWall, player, tileToTeleportPlayerTo);
+            tileToTeleportPlayerTo.interact(player);
         }
 
     }
