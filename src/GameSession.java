@@ -51,7 +51,13 @@ public class GameSession {
     private double cameraY;
 
 
-
+    /**
+     * Creates a game session with a given initial state in the second parameter, and with a given starting score.
+     * @param game
+     * @param gameData the string that represents a state of the game.
+     * @param cc a canvas to add a drawing layer.
+     * @param accumulatedScore score of the game that is carried on from the last level.
+     */
     GameSession(Game game, String gameData, CanvasCompositor cc, int accumulatedScore) {
         this.game = game;
         this.gamePauseMenu = new GamePauseMenu(this, cc);
@@ -62,7 +68,7 @@ public class GameSession {
         
 
 
-         //generateSampleGame();
+        
 
         //the draw method is under the draw of this interface
         //the main class controls it to draw
@@ -206,144 +212,150 @@ public class GameSession {
 
 
     }
-        private void fill2DGrid(String stringGridMap){
-            String[] gridMapLinesArray = stringGridMap.split(System.lineSeparator());//split file by new line
-            System.out.println(gridMapLinesArray.length);
-            for (int y = 0; y < gridMapLinesArray.length; y++){
-
-                String[] gridLineTileArray = gridMapLinesArray[y].split(" ");//then split each element of that array by
-                
-                for(int x = 0; x < gridLineTileArray.length; x++){
-
-                    Tile newTile = new PathWall(this, x, y, OPERATION_INTERVAL);//this should never finish initialised as this, it should go through the switch statement
-                    switch (gridLineTileArray[x]){
-                        case "-":
-                            newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
-                            break;
-                        case "E":
-                            newTile = new ExitWall(this, x, y, OPERATION_INTERVAL);
-                            break;
-                        case "W":
-                            newTile = new NormalWall(this, x, y, OPERATION_INTERVAL);
-                            break;
-                        case "T":
-                            newTile = new TitaniumWall(this, x, y, OPERATION_INTERVAL);
-                            break;
-                        case "M":
-                            newTile = new MagicWall(this, x, y, OPERATION_INTERVAL);
-                            break;
-                        case "D":
-                            newTile = new DirtWall(this, x, y, OPERATION_INTERVAL);
-                            break;
-                        case "*":
-                            newTile = new Diamond(this, x, y, OPERATION_INTERVAL);
-                            break;
-                        case "@":
-                            newTile = new Boulder(this, x, y, OPERATION_INTERVAL);
-                            break;
-                        case "RK":
-                            newTile = new Key(this, x, y, OPERATION_INTERVAL, "RK");
-                            break;
-                        case "BK":
-                            newTile = new Key(this, x, y, OPERATION_INTERVAL, "BK");
-                            break;
-                        case "YK":
-                            newTile = new Key(this, x, y, OPERATION_INTERVAL, "YK");
-                            break;
-                        case "GK":
-                            newTile = new Key(this, x, y, OPERATION_INTERVAL, "GK");
-                            break;
-                        case "RD":
-                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "RD");
-                            break;
-                        case "BD":
-                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "BD");
-                            break;
-                        case "YD":
-                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "YD");
-                            break;
-                        case "GD":
-                            newTile = new Door(this, x, y, OPERATION_INTERVAL, "GD");
-                            break;
-                        case "P":
-                            Player player = new Player(this, x, y, OPERATION_INTERVAL);
-                            this.player = player;
-                            newTile = player;
-                            break;
-                        case "BL":
-                            newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
-                            break;
-                        case "BR":
-                            newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, false);
-                            break;
-                        case "FL":
-                            newTile = new FireFly(this, x, y, OPERATION_INTERVAL, true);
-                            break;
-                        case "FR":
-                            newTile = new FireFly(this, x, y, OPERATION_INTERVAL, false);
-                            break;
-                        case "F":
-                            newTile = new Frog(this, x, y);//TODO ask alex why there is no operation interval for frog
-                            break;
-                        case "A1":
-                        case "A2":
-                        case "A3":
-                        case "A4":
-                        case "A5":
-                        case "A6":
-                        case "A7":
-                        case "A8":
-                        case "A9":
-                            int amoebaID = Integer.parseInt(Character.toString(gridLineTileArray[x].charAt(1)));
-                            AmoebaController amoebaController = this.returnAmoebaControllerByID(amoebaID);
-
-                            if(amoebaController != null){
-                                amoebaController.addNewAmoebaChildToCluster(x, y);
-                            } else{
-                                AmoebaController newAmoebaController = new AmoebaController(this, x, y,
-                                        OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize, amoebaID);
-                                this.amoebaControllerList.add(newAmoebaController);
-                            }
-                            break;
-                        case "TE1":
-                        case "TE2":
-                        case "TE3":
-                        case "TE4":
-                        case "TE5":
-                        case "TE6":
-                        case "TE7":
-                        case "TE8":
-                        case "TE9":
-                            int teleportWallID = Integer.parseInt(Character.toString(gridLineTileArray[x].charAt(2)));
-                            TeleportWall teleportWall = this.returnTeleportWallByID(teleportWallID);
-
-                            TeleportWall newTeleportWall = new TeleportWall(this, x, y, TileType.TELEPORT_WALL, OPERATION_INTERVAL, teleportWallID);
-
-                            if(teleportWall != null){
-                                teleportWall.setTeleportWallBrother(newTeleportWall);
-                                this.gridTileMap[y][x] = newTeleportWall;
-                            }
-                            else {
-                                this.teleportWallList.add(newTeleportWall);
-                                this.gridTileMap[y][x] = newTeleportWall;
-                            }
-                            break;
 
 
-                        default:
-                            System.out.println("ERROR TILE NOT RECOGNISED, PRINTING PATH-WALL BY DEFAULT");
-                            newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
-                            break;
-                    }
+    /**
+     * fills the 2d grid of this game by a given string
+     * @param stringGridMap the string that is derived from the save file format to be read
+     */
+    private void fill2DGrid(String stringGridMap){
+        String[] gridMapLinesArray = stringGridMap.split(System.lineSeparator());//split file by new line
+        System.out.println(gridMapLinesArray.length);
+        for (int y = 0; y < gridMapLinesArray.length; y++){
+
+            String[] gridLineTileArray = gridMapLinesArray[y].split(" ");//then split each element of that array by
+            
+            for(int x = 0; x < gridLineTileArray.length; x++){
+
+                Tile newTile = new PathWall(this, x, y, OPERATION_INTERVAL);//this should never finish initialised as this, it should go through the switch statement
+                switch (gridLineTileArray[x]){
+                    case "-":
+                        newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
+                        break;
+                    case "E":
+                        newTile = new ExitWall(this, x, y, OPERATION_INTERVAL);
+                        break;
+                    case "W":
+                        newTile = new NormalWall(this, x, y, OPERATION_INTERVAL);
+                        break;
+                    case "T":
+                        newTile = new TitaniumWall(this, x, y, OPERATION_INTERVAL);
+                        break;
+                    case "M":
+                        newTile = new MagicWall(this, x, y, OPERATION_INTERVAL);
+                        break;
+                    case "D":
+                        newTile = new DirtWall(this, x, y, OPERATION_INTERVAL);
+                        break;
+                    case "*":
+                        newTile = new Diamond(this, x, y, OPERATION_INTERVAL);
+                        break;
+                    case "@":
+                        newTile = new Boulder(this, x, y, OPERATION_INTERVAL);
+                        break;
+                    case "RK":
+                        newTile = new Key(this, x, y, OPERATION_INTERVAL, "RK");
+                        break;
+                    case "BK":
+                        newTile = new Key(this, x, y, OPERATION_INTERVAL, "BK");
+                        break;
+                    case "YK":
+                        newTile = new Key(this, x, y, OPERATION_INTERVAL, "YK");
+                        break;
+                    case "GK":
+                        newTile = new Key(this, x, y, OPERATION_INTERVAL, "GK");
+                        break;
+                    case "RD":
+                        newTile = new Door(this, x, y, OPERATION_INTERVAL, "RD");
+                        break;
+                    case "BD":
+                        newTile = new Door(this, x, y, OPERATION_INTERVAL, "BD");
+                        break;
+                    case "YD":
+                        newTile = new Door(this, x, y, OPERATION_INTERVAL, "YD");
+                        break;
+                    case "GD":
+                        newTile = new Door(this, x, y, OPERATION_INTERVAL, "GD");
+                        break;
+                    case "P":
+                        Player player = new Player(this, x, y, OPERATION_INTERVAL);
+                        this.player = player;
+                        newTile = player;
+                        break;
+                    case "BL":
+                        newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
+                        break;
+                    case "BR":
+                        newTile = new Butterfly(this, x, y, OPERATION_INTERVAL, false);
+                        break;
+                    case "FL":
+                        newTile = new FireFly(this, x, y, OPERATION_INTERVAL, true);
+                        break;
+                    case "FR":
+                        newTile = new FireFly(this, x, y, OPERATION_INTERVAL, false);
+                        break;
+                    case "F":
+                        newTile = new Frog(this, x, y);//TODO ask alex why there is no operation interval for frog
+                        break;
+                    case "A1":
+                    case "A2":
+                    case "A3":
+                    case "A4":
+                    case "A5":
+                    case "A6":
+                    case "A7":
+                    case "A8":
+                    case "A9":
+                        int amoebaID = Integer.parseInt(Character.toString(gridLineTileArray[x].charAt(1)));
+                        AmoebaController amoebaController = this.returnAmoebaControllerByID(amoebaID);
+
+                        if(amoebaController != null){
+                            amoebaController.addNewAmoebaChildToCluster(x, y);
+                        } else{
+                            AmoebaController newAmoebaController = new AmoebaController(this, x, y,
+                                    OPERATION_INTERVAL, this.amoebaGrowthRate, this.maxAmoebaSize, amoebaID);
+                            this.amoebaControllerList.add(newAmoebaController);
+                        }
+                        break;
+                    case "TE1":
+                    case "TE2":
+                    case "TE3":
+                    case "TE4":
+                    case "TE5":
+                    case "TE6":
+                    case "TE7":
+                    case "TE8":
+                    case "TE9":
+                        int teleportWallID = Integer.parseInt(Character.toString(gridLineTileArray[x].charAt(2)));
+                        TeleportWall teleportWall = this.returnTeleportWallByID(teleportWallID);
+
+                        TeleportWall newTeleportWall = new TeleportWall(this, x, y, TileType.TELEPORT_WALL, OPERATION_INTERVAL, teleportWallID);
+
+                        if(teleportWall != null){
+                            teleportWall.setTeleportWallBrother(newTeleportWall);
+                            this.gridTileMap[y][x] = newTeleportWall;
+                        }
+                        else {
+                            this.teleportWallList.add(newTeleportWall);
+                            this.gridTileMap[y][x] = newTeleportWall;
+                        }
+                        break;
+
+
+                    default:
+                        System.out.println("ERROR TILE NOT RECOGNISED, PRINTING PATH-WALL BY DEFAULT");
+                        newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
+                        break;
+                }
 
 
 
-                    if(doesNotEqualAmoebaOrTeleportTile(gridLineTileArray[x])) {
-                        this.gridTileMap[y][x] = newTile;
-                    }
+                if(doesNotEqualAmoebaOrTeleportTile(gridLineTileArray[x])) {
+                    this.gridTileMap[y][x] = newTile;
                 }
             }
         }
+    }
 
     public boolean doesNotEqualAmoebaOrTeleportTile(String tileString){
         switch(tileString){
@@ -371,6 +383,11 @@ public class GameSession {
         }
     }
 
+
+    /**
+     * Retreives the save string that can be used to reconstruct this game
+     * @return string of the data, can be saved in a text file
+     */
     public String buildSaveString() {
         String saveString = "";
 
@@ -492,68 +509,7 @@ public class GameSession {
     }
 
 
-    private void generateSampleGame() {
-        Random rand = new Random();
-        int sizeX = rand.nextInt(10) + 10;
-        int sizeY = rand.nextInt(10) + 10;
-
-
-
-
-        //fills the game with dirt
-        //fills the border with wall
-        gridHeight = sizeY;
-        gridWidth = sizeX;
-
-        this.gridTileMap = new Tile[sizeY][sizeX];
-
-        for (int y = 0; y < sizeY; ++y) {
-            this.gridTileMap[y][0] = new TitaniumWall(this, 0, y, OPERATION_INTERVAL);
-            this.gridTileMap[y][sizeX - 1] = new TitaniumWall(this, sizeX - 1, y, OPERATION_INTERVAL);
-        }
-
-        for (int x = 1; x < sizeX - 1; ++x) {
-            this.gridTileMap[0][x] = new TitaniumWall(this, x, 0, OPERATION_INTERVAL);
-            this.gridTileMap[sizeY - 1][x] = new TitaniumWall(this, x, sizeY - 1, OPERATION_INTERVAL);
-        }
-
-
-
-        for (int y = 1; y < sizeY - 1; ++y) {
-            for (int x = 1; x < sizeX - 1; ++x) {
-                
-                int random = rand.nextInt(100);
-
-                if (random < 4) {
-                    this.gridTileMap[y][x] = new TitaniumWall(this, x, y, OPERATION_INTERVAL);
-                } else if (random < 4) {
-                    this.gridTileMap[y][x] = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
-                }  else {
-                    this.gridTileMap[y][x] = new DirtWall(this, x, y, OPERATION_INTERVAL);
-                }
-
-                Tile butterfly = new Butterfly(this, x, y, OPERATION_INTERVAL, true);
-                this.setTile(3,3, butterfly);
-            } 
-        }
-
-        //set the player
-        int playerX = rand.nextInt(sizeX - 5) + 2;
-        int playerY = rand.nextInt(sizeY - 5) + 2;
-
-        this.player = new Player(this, playerX, playerY, OPERATION_INTERVAL);
-        this.gridTileMap[playerY][playerX] = this.player;
-
-
-        this.timeLeft = 60*60*1000;
-
-
-        
-        int frogX = rand.nextInt(sizeX - 2) + 1;
-        int frogY = rand.nextInt(sizeY - 2) + 1;
-        this.gridTileMap[frogY][frogX] = new Frog(this, frogX, frogY);
-
-    }
+    
 
     private void startProfile1() {
         game.loadGame("Profiles/profile1.txt");
@@ -585,7 +541,10 @@ public class GameSession {
 
 
 
-
+    /**
+     * Function that is called when a keyboard button is down.
+     * @param key the keycode that corresponds to the down key event.
+     */
     private void keyDown(KeyCode key) {
         switch (key) {
             case ESCAPE:
@@ -628,7 +587,12 @@ public class GameSession {
                 break;
         }
     }
+    
 
+    /**
+     * Function that is called when a keyboard button is up.
+     * @param key the keycode that corresponds to the up key event.
+     */
     private void keyUp(KeyCode key) {
         switch (key) {
             case UP:
@@ -667,7 +631,10 @@ public class GameSession {
 
 
 
-
+    /**
+     * draws the top bar on the given graphics context.
+     * @param gc Graphics context derived from a canvas
+     */
     private void drawTopBar(GraphicsContext gc) {
         gc.setFill(new Color(.5, .5, .5, .7));
         gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT * .1);
@@ -712,6 +679,11 @@ public class GameSession {
     }
 
 
+    
+    /**
+     * Set the paused state of the game.
+     * @param isPaused if the game should be paused
+     */
     private void setIsPaused(boolean isPaused) {
         if (isPaused ^ isGamePaused) {
             isGamePaused = isPaused;
@@ -724,9 +696,17 @@ public class GameSession {
         }
     }
 
+
+
+    /**
+     * Get how many milliseconds are there left in the game
+     * @return milliseconds the player has for the game
+     */
     public long getTimeLeft() {
         return timeLeft;
     }
+
+
 
     /**
      * return the amoeba controller list.
@@ -736,6 +716,8 @@ public class GameSession {
     public ArrayList<AmoebaController> getAmoebaControllerList() {
         return amoebaControllerList;
     }
+
+
 
     /**
      * returns the AmoebaController by ID.
@@ -790,13 +772,17 @@ public class GameSession {
 
     
 
-
+    /**
+     * performs save game on this game session.
+     */
     public void onSaveGameClicked() {
         game.saveGameButton();
         gamePauseMenu.hide();
     }
 
-
+    /**
+     * performs load game on this game session. Brings up the menu and ends the current game.
+     */
     public void onLoadGameClicked() {
         game.loadGameButton();
         endGame();
