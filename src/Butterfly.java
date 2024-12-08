@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 
 public class Butterfly extends FlyingEnemy{
 
-    private static final Image img = new Image("file:Assets/Images/Butterfly.png"); // Placeholder for the image
+    private static final Image img = new Image("file:Assets/Images/Butterfly.png");
 
 
 
@@ -24,18 +24,24 @@ public class Butterfly extends FlyingEnemy{
      * @param operationInterval The time interval between each operation.
      * @param prioritiseLeft The edge the butterfly is following.
      */
-    public Butterfly(GameSession gameSession, int x, int y, long operationInterval, boolean prioritiseLeft){
-        super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval, prioritiseLeft);
+    public Butterfly(GameSession gameSession, int x, int y,
+                     long operationInterval, boolean prioritiseLeft){
+
+        super(gameSession, x, y, TileType.MOVING_ENEMY,
+                operationInterval, prioritiseLeft);
+
         this.lastTimeStamp = System.currentTimeMillis();
     }
 
     /**
-     * Handles killing the butterfly and triggering an explosion if the butterfly is
-     * hit by a boulder or diamond.
+     * Handles killing the butterfly and triggering an explosion if the
+     * butterfly is hit by a boulder or diamond.
      * @param tile The tile that is interacting with this tile.
      */
     public void interact(Tile tile){
-        if ((tile.getTileType() == TileType.BOULDER || tile.getTileType() == TileType.DIAMOND) && tile.getYPosition() == this.y - 1) {
+        if ((   tile.getTileType() == TileType.BOULDER ||
+                tile.getTileType() == TileType.DIAMOND) &&
+                tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, true);
         }
     }
@@ -65,7 +71,8 @@ public class Butterfly extends FlyingEnemy{
 
         //Kill butterfly if next to an amoeba
         if(isNextToAmoeba(this.x,this.y)){
-            PathWall pathWall = new PathWall(gameSession, this.x, this.y, operationInterval);
+            PathWall pathWall = new PathWall(gameSession, this.x, this.y,
+                    operationInterval);
             gameSession.setTile(this.y,this.x,pathWall);
         }
 

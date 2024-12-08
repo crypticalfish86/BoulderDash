@@ -11,7 +11,8 @@ import javafx.scene.image.Image;
 public class Boulder extends FallingObject{
 
 
-    private static final Image img = new Image("file:Assets/Images/BoulderSymmetrical.png");//TODO: add the image here
+    private static final Image img =
+            new Image("file:Assets/Images/BoulderSymmetrical.png");
 
 
     private static final int DELAY_PUSH_BOULDER = 10;
@@ -74,7 +75,8 @@ public class Boulder extends FallingObject{
         //tries to interact behind
         int thisX = getXPosition();
         int thisY = getYPosition();
-        Tile nextTile = gameSession.getTileFromGrid(thisX + (isRight ? 1 : -1), thisY);
+        Tile nextTile = gameSession.getTileFromGrid(
+                thisX + (isRight ? 1 : -1), thisY);
 
 
 
