@@ -2,13 +2,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
+ * The AmoebaTile is an actual tile on the map that is part of the cluster,
+ * regulated through the AmoebaController class.
  * @author
  * Jace Weerawardena (Crypticalfish86).
  * @version 2.0
  */
 public class AmoebaTile extends Tile{
 
-    public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
+    public static final Image img = new Image("file:Assets/Images/Ameoba.png");
     private final AmoebaController thisAmoebaTilesController;
 
     /**
@@ -53,8 +55,8 @@ public class AmoebaTile extends Tile{
     }
 
     /**
-     * Try if this amoeba can grow to its neighbour
-     * @return if this growth was successful
+     * Try if this amoeba can grow to its neighbour.
+     * @return if this growth was successful.
      */
     public boolean tryGrow() {
 

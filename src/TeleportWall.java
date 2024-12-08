@@ -2,6 +2,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
+ * The teleport tile should allow the player (and only the player)
+ * to teleport to its brother teleport tile on the map.
  * @author
  * Jace Weerawardena(crypticalfish86).
  * @version 1.0
