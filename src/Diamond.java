@@ -1,6 +1,13 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * This class represents a diamond in the game, which can be collected by the player.
+ * @author Isaac Atkinson
+ * @author Alex (Tsz Tung Yee)
+ * @version 1.0
+ */
+
 public class Diamond extends FallingObject{
 
     private final static int SCORE_VALUE = 50;

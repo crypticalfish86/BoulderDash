@@ -1,6 +1,13 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * This class represents an explosion in the game, which quickly disappear and are
+ * replaced by either a path or a diamond.
+ * @author Isaac Atkinson
+ * @version 1.0
+ */
+
 public class Explosion extends Tile {
 
     private int ticksAlive;

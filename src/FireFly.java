@@ -1,6 +1,13 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * This class represents a firefly in the game.
+ * @author Isaac Atkinson
+ * @author Omar Zarugh
+ * @version 1.0
+ */
+
 public class FireFly extends FlyingEnemy{
 
     public static final Image img = new Image("file:Assets/Images/FireFly.png"); // Placeholder for the image

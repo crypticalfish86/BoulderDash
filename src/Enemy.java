@@ -1,3 +1,15 @@
+/**
+ * This class represents a blueprint for enemies in the game, which move around the grid,
+ * kill the player and cause an explosion when hit by falling objects.
+ * @author Isaac Atkinson
+ * @author Alex (Tsz Tung Yee)
+ * @author Jace Weerawardena
+ * @version 1.0
+ */
+
+
+
+
 public abstract class Enemy extends Tile {
     public Enemy(GameSession gameSession, int x, int y, TileType TileType, long operationInterval) {
         super(gameSession, x, y, TileType, operationInterval);

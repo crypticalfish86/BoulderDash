@@ -1,3 +1,13 @@
+/**
+ * This class represents a blueprint for falling objects which are capable of
+ * rolling and falling.
+ * @author Isaac Atkinson
+ * @author Alex (Tsz Tung Yee)
+ * @version 1.0
+ */
+
+
+
 public abstract class FallingObject extends Tile {
     
 

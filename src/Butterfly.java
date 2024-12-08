@@ -1,6 +1,15 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+
+/**
+ * This class represents a butterfly in the game, which drops diamonds when killed by a
+ * falling object.
+ * @author Isaac Atkinson
+ * @author Omar Zarugh
+ * @version 1.0
+ */
+
 public class Butterfly extends FlyingEnemy{
 
     public static final Image img = new Image("file:Assets/Images/Butterfly.png"); // Placeholder for the image
