@@ -14,7 +14,8 @@ public class TeleportWall extends Wall{
     private static final Image img = new Image("file:Assets/Images/TeleportationPortal.png");
 
     /**
-     * Instantiates a new TeleportWall which allows the player to teleport to its brother TeleportWall tile.
+     * Instantiates a new TeleportWall which allows the player to teleport to its brother
+     * TeleportWall tile.
      * @param gameSession
      * The game session associated with the tile.
      * @param x
@@ -26,7 +27,14 @@ public class TeleportWall extends Wall{
      * @param operationInterval
      * The tiles operation interval.
      */
-    public TeleportWall(GameSession gameSession, int x, int y, TileType tileType, long operationInterval, int teleportWallID){
+    public TeleportWall(
+            GameSession gameSession,
+            int x,
+            int y,
+            TileType tileType,
+            long operationInterval,
+            int teleportWallID
+    ){
         super(gameSession, x, y, tileType, operationInterval);
         this.teleportWallID = teleportWallID;
     }
@@ -80,18 +88,23 @@ public class TeleportWall extends Wall{
     public void teleportPlayer(Tile player){
         System.out.println("attempting teleport");
         Tile tileToTeleportPlayerTo = null;
-        if(this.gameSession.getTileFromGrid(this. x + 1, this.y).getTileType() == TileType.PATH){
+
+        Tile northTile = this.gameSession.getTileFromGrid(this.x, this.y + 1);
+        Tile eastTile = this.gameSession.getTileFromGrid(this.x + 1, this.y);
+        Tile southTile = this.gameSession.getTileFromGrid(this.x, this.y - 1);
+        Tile westTile = this.gameSession.getTileFromGrid(this.x - 1, this.y);
+        if(northTile.getTileType() == TileType.PATH){
             tileToTeleportPlayerTo = this.gameSession.getTileFromGrid(this.x + 1, this.y);
-        } else if(this.gameSession.getTileFromGrid(this. x - 1, this.y).getTileType() == TileType.PATH){
+        } else if(eastTile.getTileType() == TileType.PATH){
             tileToTeleportPlayerTo = this.gameSession.getTileFromGrid(this.x - 1, this.y);
-        } else if(this.gameSession.getTileFromGrid(this. x, this.y + 1).getTileType() == TileType.PATH){
+        } else if(southTile.getTileType() == TileType.PATH){
             tileToTeleportPlayerTo = this.gameSession.getTileFromGrid(this.x, this.y + 1);
-        } else if(this.gameSession.getTileFromGrid(this. x, this.y - 1).getTileType() == TileType.PATH){
+        } else if(westTile.getTileType() == TileType.PATH){
             tileToTeleportPlayerTo = this.gameSession.getTileFromGrid(this.x, this.y - 1);
         }
 
         if(tileToTeleportPlayerTo != null){
-            PathWall pathWall = new PathWall(this.gameSession, this.x, this.y, this.operationInterval);
+            PathWall pathWall = new PathWall(gameSession, x, y, operationInterval);
             this.gameSession.updateTilePositions(pathWall, player, tileToTeleportPlayerTo);
         }
 
