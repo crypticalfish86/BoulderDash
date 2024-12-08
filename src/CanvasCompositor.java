@@ -200,7 +200,7 @@ public class CanvasCompositor {
             //clears the window
             gc.clearRect(0, 0, sizeX, sizeY);
 
-            System.out.println(canvasLayerArray.size());
+
             //attempts to draw all the layers
             if (!canvasLayerArray.isEmpty()) {
                 for (int i = 0; i < canvasLayerArray.size(); ++i) {
