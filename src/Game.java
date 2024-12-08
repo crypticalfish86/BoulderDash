@@ -11,6 +11,7 @@ public class Game {
     private String loadedPlayerProfileID;
 
     private final int MAX_LEVEL = 5;
+    private final int SCORE_PER_SECOND_LEFT = 3;
     
 
 
@@ -184,8 +185,9 @@ public class Game {
      * Should be called when the game has won or lost not due to the leave menus
      * @param hasWon if this action is count as winning
      * @param gameSessionData the internal data of the game to be read
+     * @param timeLeft time in milliseconds left
      */
-    public void onGameOver(boolean hasWon, GameSessionData gameSessionData) {
+    public void onGameOver(boolean hasWon, GameSessionData gameSessionData, long timeLeft) {
         //TODO: check the game's level
 
         if (hasWon) {
@@ -194,12 +196,16 @@ public class Game {
                 new Leaderboard().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
 
                 
+                gameSessionData.updateScore((int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000));
+
+                
                 this.gameWin = new GameWin(this, cc, gameSessionData);
 
             } else {
                 //TODO: start next game with level + 1
 
-                startGameWithLevel(gameSessionData.getLevel() + 1, gameSessionData.getScore());
+                int finalScore = gameSessionData.getScore() + (int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000);
+                startGameWithLevel(gameSessionData.getLevel() + 1, finalScore);
             }
         } else {
             this.gameOver = new GameOver(this, cc, gameSessionData);

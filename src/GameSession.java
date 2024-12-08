@@ -781,7 +781,7 @@ public class GameSession {
         }
 
         // Call the game's method to handle the end of the session
-        game.onGameOver(hasWon, currentSessionData);
+        game.onGameOver(hasWon, currentSessionData, timeLeft);
 
         endGame();
         gamePauseMenu.hide();
