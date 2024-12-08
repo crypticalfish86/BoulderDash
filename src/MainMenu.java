@@ -2,34 +2,30 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
 
 
 public class MainMenu {
-    
+    private final CanvasCompositor cc;
+    private final CanvasLayer cl;
 
+    private final boolean[] mouseDownOnPlay;
+    private final boolean[] mouseDownOnLeaderboard;
 
-
-    CanvasCompositor cc;
-    CanvasLayer cl;
-
-
-    Game game;
-
-
-    public static final Image IMAGE_TITLE = new Image("file:Assets/Buttons/MenuTitle.png");
-    public static final Image IMAGE_PLAY = new Image("file:Assets/Buttons/PlayButton.png");
+    public static final Image IMAGE_TITLE =
+            new Image("file:Assets/Buttons/MenuTitle.png");
+    public static final Image IMAGE_PLAY =
+            new Image("file:Assets/Buttons/PlayButton.png");
     public static final Image IMAGE_LEADERBOARD =
             new Image("file:Assets/Buttons/LeaderboardButton.png");
 
+
+
     public MainMenu(Game game, CanvasCompositor cc) {
         this.cc = cc;
-        this.game = game;
 
-        boolean[] mouseDownOnPlay = {false};
-        boolean[] mouseDownOnLeaderboard = {false};
+        mouseDownOnPlay = new boolean[]{false};
+        mouseDownOnLeaderboard = new boolean[]{false};
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
@@ -60,13 +56,13 @@ public class MainMenu {
             @Override
             public void onKeyDown(KeyCode key) {
                 // TODO Auto-generated method stub
-                
+
             }
 
             @Override
             public void onKeyUp(KeyCode key) {
                 // TODO Auto-generated method stub
-                
+
             }
 
             @Override
@@ -79,7 +75,7 @@ public class MainMenu {
                 //draw the title
                 UIHelper.drawImageRelativeXX(gc, IMAGE_TITLE, .5, .2, .5);
 
-                
+
                 //draws the lower play button
                 UIHelper.drawImageRelativeXX(gc, IMAGE_PLAY, .5, .5, .13);
 
@@ -88,9 +84,6 @@ public class MainMenu {
                 gc.fillText(null, elapsed, elapsed);
             }
         }, 1);
-
-
-
 
         cc.addLayer(cl);
 
