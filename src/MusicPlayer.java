@@ -1,40 +1,60 @@
+/**
+ * MusicPlayer is a class that uses JavaFX to play music during levels.
+ * It supports the looping of music.
+ *
+ * Author: Cameron McDonald (cmcoff)
+ * Version: 2.0
+ */
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 public class MusicPlayer {
 
+    // Handles the music playback
     private MediaPlayer mediaPlayer;
 
+    /**
+     * Creates a MusicPlayer object that plays a music file.
+     *
+     * @param musicFilePath The file path of the music file to play.
+     */
     public MusicPlayer(String musicFilePath) {
         try {
-            // Load the music file
+            // Load the music file and set up the MediaPlayer
             Media media = new Media(new File(musicFilePath).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
 
-            // Set the music to loop
+            // Loop the music forever
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-
         } catch (Exception e) {
-            System.out.println("Error loading music file: " + e.getMessage());
+            System.out.println("Error: Couldn't load the music file. Details: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    // Start playing music
+    /**
+     * Starts playing the music.
+     */
     public void play() {
         if (mediaPlayer != null) {
             mediaPlayer.play();
-            System.out.println("Playing music...");
+            System.out.println("Music is playing...");
+        } else {
+            System.out.println("No music loaded to play.");
         }
     }
 
-    // Stop the music
+    /**
+     * Stops the music playback.
+     */
     public void stop() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             System.out.println("Music stopped.");
+        } else {
+            System.out.println("No music loaded to stop.");
         }
     }
 }
-
