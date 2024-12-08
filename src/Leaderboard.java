@@ -2,6 +2,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
+
+/**
+ * The Leaderboards class is the back end for the writing, and display of the leaderboards,
+ * which is a .txt document at: root/LeaderBoards/leaderboard.txt.
+ * @author
+ * Jace Weerawardena (Crypticalfish86).
+ * @version 1.0
+ */
 public class Leaderboard {
     private final String filepath = "./LeaderBoards/leaderboard.txt";
     private ArrayList<String> leaderBoardDisplay;
@@ -39,12 +47,17 @@ public class Leaderboard {
     }
 
 
+    /**
+     * Writes a new entry to the leaderboards.
+     * @param name
+     * The name of the person adding the entry.
+     * @param newScore
+     * The score that is to be posted to that entry in the leaderboards.
+     */
     public void writeNewNameToLeaderboard(String name, int newScore) {
 
         String newLeaderBoardEntry = name + ": " + Integer.toString(newScore);
 
-        //sort the leaderboard entry into the leaderboards at the right place
-        
         boolean hasAdded = false;
         for(int i = leaderBoardDisplay.size() - 1; i >= 0; i++){
             
@@ -65,6 +78,11 @@ public class Leaderboard {
         writeLeaderBoardArrayToFile();
     }
 
+    /**
+     * Delete an entry by line number in the leaderboard.txt.
+     * @param entryLineNumber
+     * The line number you are deleting.
+     */
     public void deleteNameFromLeaderboard(int entryLineNumber) {
         this.leaderBoardDisplay.remove(entryLineNumber);
         writeLeaderBoardArrayToFile();
@@ -91,9 +109,9 @@ public class Leaderboard {
     }
 
     /**
-     * Get a string representation of the entire leaderboard
+     * Get a string representation of the entire leaderboard.
      * @return
-     * A string representation of the entire leaderboard
+     * A string representation of the entire leaderboard.
      */
     public String getLeaderBoardDisplay() {
         StringBuilder leaderBoard = new StringBuilder();
@@ -109,6 +127,11 @@ public class Leaderboard {
         return leaderBoard.toString();
     }
 
+    /**
+     * Get an ArrayList representation of the leaderboards.
+     * @return
+     * The ArrayList of the leaderboards.
+     */
     public ArrayList<String> getLeaderBoardArray() {
         return this.leaderBoardDisplay;
     }
