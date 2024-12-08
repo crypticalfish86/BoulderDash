@@ -1,5 +1,5 @@
 1;40;31;
-300;149;150;
+300;146;149;
 3;11;
 0;0;
 0;0;0;0;
@@ -16,17 +16,17 @@ T T T T T T - T T T T T T T T T T T T - T T T T T T T - T T T T T T T - T T T T
 T T T T T T - T - - - - - - - - - - T - T T T T T T T - - - - - - T T - T T T T
 T T T T T T - T - T T T T T T T T - T - T T T T - T T T T T T T - T T - T T T T
 T T T T T T - T - T - T T T T T T - T - T T T T - T T T T T T T - T T - T T T T
-T T T T T T - T - T * - - - - - - - T - T T T T - T T T T T T T - T T * T T T T
+T T T T T T - T - T * - - - - - - - T - T T T T - T T T T T T T - T T - T T T T
 T T T T T T - T - T T T T T T T T T T - T T T T - T T T T T T T - T T - T T T T
 T T T T T T - T - - - - - - - - - - - - T T T T - T T T T T T T - T T - T T T T
-T T T T T T - T T T T T T T T T T T T - T T T T * T T - - - - - * - - - T T T T
+T T T T T T - T T T T T T T T T T T T - T T T T - T T - - - - - * - - * T T T T
 T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T T T T T T T T
 T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T T T T T T T T
 T T T T T T - T T T T T T T T T T T T - T T T T - T T - T T T T T T T T T T T T
-T T T T T T * - - - - - - - - - - T T - T T T T - T T - T T T T T T T T T T T T
+T T T T T T - - - - - - - - - - - T T - T T T T - T T - T T T T T T T T T T T T
 T T T T T T - T T T - T T T T T - T T - T T T T - T T - T T T T T T T T T T T T
-T T T T T T - T T T - T T T T T - T T - - - - - - T T - - - - - - - T T T T T T
-T T T T T T - T T T - T T T T T - T T T T T - T T T T - T T T T T - T T T T T T
+T T T T T T - T T T - T T T T T - T T - - - - - * T T - - - - - - - T T T T T T
+T T T T T T * T T T - T T T T T - T T T T T - T T T T - T T T T T - T T T T T T
 T T - - - - * T T T - T T T T T * - - - - - - - - - - - T T T T T - T T T T T T
 T T - T T T T T T T - T T T T T T T T T T T - T T T T T T T T T T - T T T T T T
 T T - - - - - - - - - T T T T T T T T T T T - T T T T T T T T T T - T T T T T T

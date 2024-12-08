@@ -202,8 +202,8 @@ public class Game {
                 startGameWithLevel(gameSessionData.getLevel() + 1, gameSessionData.getScore());
             }
         } else {
-            endGame();
             this.gameOver = new GameOver(this, cc, gameSessionData);
+            // showMenu();
         }
     }
 
@@ -230,7 +230,7 @@ public class Game {
     /**
      * Should be called when the player decides to leave the game (through pausing menu)
      */
-    public void endGame() {
+    public void showMenu() {
         //TODO: implement returning to main menu
         mainMenu.show();
     }

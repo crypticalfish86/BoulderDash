@@ -44,6 +44,7 @@ public class ProfileSelector extends DisplayLayer {
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
             public boolean onMouseDown(double x, double y, boolean hasConsumed) {
+                if (hasConsumed) { return true; }
                 mouseDownOnBackButton[0] = isMouseOnBackButton(x, y);
                 mouseDownOnProfileBox1[0] = isMouseOnProfileBox1(x, y);
                 mouseDownOnProfileBox2[0] = isMouseOnProfileBox2(x, y);
@@ -53,19 +54,24 @@ public class ProfileSelector extends DisplayLayer {
 
             @Override
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
+                if (hasConsumed) { return true; }
                 if (mouseDownOnBackButton[0] && isMouseOnBackButton(x, y)) {
                     game.onBackButtonClicked();
+                    hide();
                 }
                 if (mouseDownOnProfileBox1[0] && isMouseOnProfileBox1(x, y)) {
                     game.onProfileBoxClicked1();
+                    hide();
                     profileOneSelected = true;
                 }
                 if (mouseDownOnProfileBox2[0] && isMouseOnProfileBox2(x, y)) {
                     game.onProfileBoxClicked2();
+                    hide();
                     profileTwoSelected = true;
                 }
                 if (mouseDownOnProfileBox3[0] && isMouseOnProfileBox3(x, y)) {
                     game.onProfileBoxClicked3();
+                    hide();
                     profileThreeSelected = true;
                 }
                 return true;

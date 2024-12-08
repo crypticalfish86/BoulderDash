@@ -774,6 +774,7 @@ public class GameSession {
         game.onGameOver(hasWon, currentSessionData);
 
         endGame();
+        gamePauseMenu.hide();
     }
 
 

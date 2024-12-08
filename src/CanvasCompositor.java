@@ -88,7 +88,7 @@ public class CanvasCompositor {
             
             //checks from the top to the bottom to see which layer it interacts with
             synchronized (canvasLayerArray) {
-            boolean hasConsumed = false;
+                boolean hasConsumed = false;
                 for (int i = canvasLayerArray.size() - 1; i >= 0; --i) {
                     CanvasLayer cl = canvasLayerArray.get(i);
 
@@ -200,11 +200,11 @@ public class CanvasCompositor {
             //clears the window
             gc.clearRect(0, 0, sizeX, sizeY);
 
-
+            System.out.println(canvasLayerArray.size());
             //attempts to draw all the layers
             if (!canvasLayerArray.isEmpty()) {
-                for (CanvasLayer cl : canvasLayerArray) {
-                    cl.cI.draw(gc, elapsed);
+                for (int i = 0; i < canvasLayerArray.size(); ++i) {
+                    canvasLayerArray.get(i).cI.draw(gc, elapsed);
                 }
             }
         }
