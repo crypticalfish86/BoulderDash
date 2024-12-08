@@ -53,6 +53,11 @@ public abstract class Tile {
         );
     }
 
+    /**
+     * Draws the tile to the graphics context.
+     * @param gc
+     * The graphics context you're drawing to.
+     */
     public abstract void drawTile(GraphicsContext gc);
 
     public GameSession getGameSession() {

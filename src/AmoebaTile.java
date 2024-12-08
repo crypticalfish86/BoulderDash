@@ -1,6 +1,11 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * @author
+ * Jace Weerawardena (Crypticalfish86).
+ * @version 2.0
+ */
 public class AmoebaTile extends Tile{
 
     public static final Image img = new Image("file:Assets/Images/Ameoba.png"); // Placeholder for the image
@@ -47,8 +52,6 @@ public class AmoebaTile extends Tile{
         return;
     }
 
-    //TODO make it randomly spread to a tile instead of always starting with a north tile then east then south etc.
-    
     /**
      * Try if this amoeba can grow to its neighbour
      * @return if this growth was successful
@@ -82,7 +85,7 @@ public class AmoebaTile extends Tile{
         return false;
     }
 
-    //TODO ask what this does so you can write javadoc
+
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);

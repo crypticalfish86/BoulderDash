@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 import java.util.Random;
+
+/**
+ * @author
+ * Jace Weerawardena(crypticalfish86).
+ * @version 2.0
+ */
 public class AmoebaController {
     private final GameSession gameSession;
     private final ArrayList<AmoebaTile> amoebaChildren; //The list of children to this amoeba controller
@@ -198,6 +204,13 @@ public class AmoebaController {
     }
 
 
+    /**
+     * Check if the amoeba can spread to a neighbouring tile.
+     * @param tileType
+     * The neighbouring tile.
+     * @return
+     * True if the tile can be spread to, false otherwise.
+     */
     public static boolean canAmoebaSpreadTo(TileType tileType) {
         return (
             tileType == TileType.PATH ||
