@@ -36,12 +36,10 @@ public class MagicWall extends Wall {
     // Transform and eject the tile to the other side of the Magic Wall
     private void transformAndEjectTile(Tile inputTileObject, TileType newTileType) {
         if(this.y == gameSession.getGridHeight() - 1){
-            System.out.println("ahhhhhhhhh");
             return;
 
         }
         if(!(gameSession.getTileFromGrid(this.x,this.y + 1).getTileType() == TileType.PATH)){
-            System.out.println("ahhhhhhhhhheeeeeeeeeeeeeeee");
             return;
 
         }
