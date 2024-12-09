@@ -48,7 +48,6 @@ public class Game {
     /**
      * Initialises the music player by setting the path to the music file
      * and creates a new instance of the MusicPlayer class.
-     *
      * If initialisation fails, an error message is printed to the console.
      */
     private void initialiseMusicPlayer() {
@@ -63,7 +62,6 @@ public class Game {
 
     /**
      * Starts playing the music using the MusicPlayer instance.
-     *
      * If the music player has not been initialised, this method does nothing.
      */
     private void startMusic() {
@@ -74,7 +72,6 @@ public class Game {
 
     /**
      * Stops the music playback using the MusicPlayer instance.
-     *
      * If the music player has not been initialised, this method does nothing.
      */
     private void stopMusic() {
@@ -91,7 +88,7 @@ public class Game {
         if(this.currentGamesession == null){
             return false;
         }
-        //Call "buildSaveString in GameSession and then write the file to the correct profile
+        //Call buildSaveString in GameSession and then write the file to the correct profile
         String saveString = this.currentGamesession.buildSaveString();
 
         String filepath = "./Profiles/profile" + this.loadedPlayerProfileID + ".txt";
@@ -156,6 +153,7 @@ public class Game {
     /**
      * Starts a game with a specified level
      * @param level
+     * @param accumulatedScore
      */
     private void startGameWithLevel(int level, int accumulatedScore) {
 
@@ -286,12 +284,6 @@ public class Game {
 
     }
 
-
-    public void setPlayerProfile(String playerProfileID) {
-        this.loadedPlayerProfileID = playerProfileID;
-    }
-
-
     /**
      * Should be called when the player decides to leave the game (through pausing menu)
      */
@@ -301,14 +293,6 @@ public class Game {
 
     }
 
-
-    public String getPlayerProfileID() {
-        return this.loadedPlayerProfileID;
-    }
-
-
-
-    
     public void loadGameButton() {
         profileSelector.show();
     }

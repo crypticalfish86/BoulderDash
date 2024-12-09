@@ -57,7 +57,6 @@ public class GameWin extends DisplayLayer {
             @Override
             public boolean onMouseDown(double x,
                                        double y, boolean hasConsumed) {
-
                 textBox.onMouseDown(x, y);
                 mouseDownOnExit[0] = isMouseOnExit(x, y);
                 return true;
@@ -66,7 +65,6 @@ public class GameWin extends DisplayLayer {
             @Override
             public boolean onMouseUp(double x,
                                      double y, boolean hasConsumed) {
-
                 textBox.onMouseUp(x, y);
                 if (mouseDownOnExit[0] && isMouseOnExit(x, y)) {
                     addScoreToLeaderboard(textBox.getText());
