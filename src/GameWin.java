@@ -99,9 +99,7 @@ public class GameWin extends DisplayLayer {
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_SCORE, .4, .45, .15);
 
-                // Displays last level (as you won the game)
-                UIHelper.drawImageRelativeXX(gc, IMAGE_LEVEL5,
-                        .5, .5, .1);
+
 
                 // Sets the text colour to white and writes out the user's score
                 // at the end of the level
