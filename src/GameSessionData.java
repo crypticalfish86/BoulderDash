@@ -2,7 +2,6 @@
  * GameSessionData holds all the more static data for the GameSession in one place.
  * @version 3.0
  * @author Jace Weerawardena (crypticalfish86).
- * @author Cameron McDonald (cmcoff)
  */
 public class GameSessionData {
     private GameSession gameSession;
