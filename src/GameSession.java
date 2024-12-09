@@ -388,7 +388,8 @@ public class GameSession {
 
 
         // diamondCount and diamondsRequired
-        saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4]) + ";\n";
+        saveString += Integer.toString(data[3]) + ";" + Integer.toString(data[4])
+                + ";" + newLineString;
 
 
         // amoebaSpreadRate and amoeba max size 
