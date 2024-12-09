@@ -82,7 +82,6 @@ public class Frog extends Enemy {
         pathRefresh = PATH_REFRESH_RATE;
         
         PathFinder<Tile> pf = new PathFinder<>(gameSession.getGridTileMap(), gameSession.getGridWidth(), gameSession.getGridHeight());
-        // System.out.println("recalculating path");
         this.path = pf.computeGridFill(new int[] {this.x, this.y}, new int[] {gameSession.getPlayerX(), gameSession.getPlayerY()}, tile -> {
             return canMoveToTileType(tile.tileType);
         });

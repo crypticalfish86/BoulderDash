@@ -51,21 +51,24 @@ public class LeaderboardShowcase {
 
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
-            public boolean onMouseDown(double x, double y, boolean hasConsumed) {
+            public boolean onMouseDown(double x,
+                                       double y, boolean hasConsumed) {
                 mouseDownOnExitToMainMenu[0] = isMouseOnExitToMainMenu(x, y);
                 return true;
             }
 
             @Override
             public boolean onMouseUp(double x, double y, boolean hasConsumed) {
-                if (mouseDownOnExitToMainMenu[0] && isMouseOnExitToMainMenu(x, y)) {
+                if (mouseDownOnExitToMainMenu[0]
+                        && isMouseOnExitToMainMenu(x, y)) {
                     game.onExitToMainMenuButtonClicked();
                 }
                 return true;
             }
 
             @Override
-            public boolean onMouseMove(double x, double y, boolean hasConsumed) {
+            public boolean onMouseMove(double x,
+                                       double y, boolean hasConsumed) {
                 return true;
             }
 
@@ -84,10 +87,12 @@ public class LeaderboardShowcase {
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
                 //draw the title
-                UIHelper.drawImageRelativeXX(gc, IMAGE_LEADERBOARD, .5, .15, .5);
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_LEADERBOARD, .5, .15, .5);
 
                 //draws the lower play button
-                UIHelper.drawImageRelativeXX(gc, IMAGE_EXIT_TO_MAIN_MENU, .5, .85, .25);
+                UIHelper.drawImageRelativeXX(gc, IMAGE_EXIT_TO_MAIN_MENU,
+                        .5, .85, .25);
 
                 gc.fillText(null, elapsed, elapsed);
 
@@ -109,7 +114,8 @@ public class LeaderboardShowcase {
      */
     private boolean isMouseOnExitToMainMenu(double mouseX, double mouseY) {
         // Check for exit to main menu button
-        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_EXIT_TO_MAIN_MENU, .5, .85, .25);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX,
+                mouseY, IMAGE_EXIT_TO_MAIN_MENU, .5, .85, .25);
     }
 
 
@@ -139,7 +145,8 @@ public class LeaderboardShowcase {
         // string to the screen
         gc.setFill(new Color(1, 1, 1, 1));
         gc.setFont(new Font(Main.WINDOW_WIDTH * .03));
-        gc.fillText(leaderboardDisplay, Main.WINDOW_WIDTH * .5, Main.WINDOW_HEIGHT * .315,
+        gc.fillText(leaderboardDisplay, Main.WINDOW_WIDTH * .5,
+                Main.WINDOW_HEIGHT * .315,
                 Main.WINDOW_WIDTH * .4);
     }
 }

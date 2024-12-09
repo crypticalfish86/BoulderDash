@@ -85,6 +85,6 @@ public class Explosion extends Tile {
     }
 
     public String returnStringTileRepresentation(){
-        return "EX"; //TODO make sure we code for this in loading, inform armaan
+        return "EX";
     }
 }

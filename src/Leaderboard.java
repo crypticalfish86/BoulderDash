@@ -126,9 +126,9 @@ public class Leaderboard {
         int linesToPrint = leaderBoardDisplay.size();
 
         if (leaderBoardDisplay.size() > 10) {
-            linesToPrint = 9;
+            linesToPrint = 10;
         }
-        for(int i = 0; i <= linesToPrint; i++){
+        for(int i = 0; i < linesToPrint; i++){
             leaderBoard.append(leaderBoardDisplay.get(i) + System.lineSeparator());
         }
         return leaderBoard.toString();

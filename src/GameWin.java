@@ -11,11 +11,9 @@ public class GameWin extends DisplayLayer {
     private final CanvasLayer cl;
     private final Game game;
 
-
     private boolean hasAddedScore = false;
 
-
-
+    // Textbox creation
     private final UITextBox textBox;
 
     // Includes data for the game stored in the GameSessionData class
@@ -50,13 +48,15 @@ public class GameWin extends DisplayLayer {
         // clicked on the button yet
         mouseDownOnExit = new boolean[]{false};
 
-        this.textBox = new UITextBox(.5, .65, .4, .1, new Color(1, 1, 1, 1));
+        this.textBox = new UITextBox(.5, .65, .4, .1,
+                new Color(1, 1, 1, 1));
 
         // Creates a new canvas layer to manage interaction between the player
         // and the screen
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
-            public boolean onMouseDown(double x, double y, boolean hasConsumed) {
+            public boolean onMouseDown(double x,
+                                       double y, boolean hasConsumed) {
 
                 textBox.onMouseDown(x, y);
                 mouseDownOnExit[0] = isMouseOnExit(x, y);
@@ -64,7 +64,8 @@ public class GameWin extends DisplayLayer {
             }
 
             @Override
-            public boolean onMouseUp(double x, double y, boolean hasConsumed) {
+            public boolean onMouseUp(double x,
+                                     double y, boolean hasConsumed) {
 
                 textBox.onMouseUp(x, y);
                 if (mouseDownOnExit[0] && isMouseOnExit(x, y)) {
@@ -92,7 +93,6 @@ public class GameWin extends DisplayLayer {
 
             @Override
             public void draw(GraphicsContext gc, long elapsed) {
-                // gc.setFill(new Color(.15, .1, .05, 1));
                 gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 
@@ -103,8 +103,6 @@ public class GameWin extends DisplayLayer {
                 // Draws the score image
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_SCORE, .4, .45, .15);
-
-
 
                 // Sets the text colour to white and writes out the user's score
                 // at the end of the level
@@ -183,7 +181,8 @@ public class GameWin extends DisplayLayer {
 
         if (!hasAddedScore) {
             hasAddedScore = true;
-            new Leaderboard().writeNewNameToLeaderboard(finalName, gameSessionData.getScore());
+            new Leaderboard().writeNewNameToLeaderboard(finalName,
+                    gameSessionData.getScore());
         }
     }
 }

@@ -86,7 +86,6 @@ public class TeleportWall extends Wall{
      * @param player
      */
     public void teleportPlayer(Tile player){
-        System.out.println("attempting teleport");
         Tile tileToTeleportPlayerTo = null;
 
         Tile northTile = this.gameSession.getTileFromGrid(this.x, this.y + 1);

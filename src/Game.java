@@ -38,7 +38,6 @@ public class Game {
 
     }
 
-
     /**
      * Initialises the music player by setting the path to the music file
      * and creates a new instance of the MusicPlayer class.
@@ -51,7 +50,6 @@ public class Game {
             String musicFilePath = "./Assets/level_music.mp3";
             musicPlayer = new MusicPlayer(musicFilePath);
         } catch (Exception e) {
-            System.out.println("Failed to initialise music player.");
             e.printStackTrace();
         }
     }
@@ -78,8 +76,11 @@ public class Game {
         }
     }
 
-    //TODO Add proper exceptions and errors like in loadgame
-    private boolean saveGame() { //TODO add proper exception throwing
+    /**
+     * Save the current game state.
+     * @return True if the game saves properly, false otherwise.
+     */
+    private boolean saveGame() {
         if(this.currentGamesession == null){
             return false;
         }
@@ -151,7 +152,7 @@ public class Game {
      */
     private void startGameWithLevel(int level, int accumulatedScore) {
 
-        System.out.println("reading level file");
+
         File levelOneFile = new File(String.format("./Levels/level%d.txt", level));
 
         try {
@@ -164,7 +165,8 @@ public class Game {
 
 
 
-            this.currentGamesession = new GameSession(this, fileContent, cc, accumulatedScore);
+            this.currentGamesession = new GameSession(this,
+                    fileContent, cc, accumulatedScore);
             startMusic(); // Start music when the level starts
 
         } catch (FileNotFoundException e) {
@@ -174,39 +176,29 @@ public class Game {
 
     }
 
-
-
     public void onPlayButtonClicked() {
-        System.out.println("play is clicked");
         mainMenu.hide();
         this.profileSelector = new ProfileSelector(this, cc);
-
-        // TODO Auto-generated method stub
-        // Run load game function here or move to profileselector to manage save screen
     }
 
     public void onBackButtonClicked() {
-        System.out.println("back button has been clicked");
         profileSelector.hide();
         mainMenu.show();
     }
 
     public void onProfileBoxClicked1() {
-        System.out.println("Profile box 1 has been clicked");
         this.loadedPlayerProfileID = "1";
         profileSelector.hide();
         loadGame("1");
     }
 
     public void onProfileBoxClicked2() {
-        System.out.println("Profile box 2 has been clicked");
         this.loadedPlayerProfileID = "2";
         profileSelector.hide();
         loadGame("2");
     }
 
     public void onProfileBoxClicked3() {
-        System.out.println("Profile box 3 has been clicked");
         this.loadedPlayerProfileID = "3";
         profileSelector.hide();
         loadGame("3");
@@ -217,11 +209,33 @@ public class Game {
      * Should be fired when the main menu button is clicked
      */
     public void onExitToMainMenuButtonClicked() {
-        System.out.println("back to main menu button has been clicked");
         leaderboardShowcase.hide();
         mainMenu.show();
         stopMusic(); // Stop the music when exiting the game
 
+    }
+
+    public void onCreateButtonClicked1() {
+    }
+
+    public void onCreateButtonClicked2() {
+    }
+
+    public void onCreateButtonClicked3() {
+    }
+
+    public void onDeleteButtonClicked1() {
+        profileSelector.deleteProfile(profileSelector.getProfile1());
+        this.profileSelector.hide();
+        this.profileSelector = new ProfileSelector(this, cc);
+    }
+
+    public void onDeleteButtonClicked2() {
+        profileSelector.deleteProfile(profileSelector.getProfile2());
+    }
+
+    public void onDeleteButtonClicked3() {
+        profileSelector.deleteProfile(profileSelector.getProfile3());
     }
 
 
@@ -233,8 +247,6 @@ public class Game {
      */
 
     public void onGameOver(boolean hasWon, GameSessionData gameSessionData, long timeLeft) {
-        //TODO: check Game Level
-
         stopMusic(); // Stop music on game over
 
         if (hasWon) {
@@ -250,20 +262,17 @@ public class Game {
             }
         } else {
             this.gameOver = new GameOver(this, cc, gameSessionData);
-            // showMenu();
             stopMusic(); // Stop music on game over
         }
     }
 
     public void onExitButtonClicked() {
-        System.out.println("Exit button has been clicked");
         gameOver.hide();
         mainMenu.show();
         stopMusic();
     }
 
     public void onLeaderboardButtonClicked() {
-        System.out.println("Leaderboard button has been clicked");
         mainMenu.hide();
         this.leaderboardShowcase = new LeaderboardShowcase(this, cc);
         leaderboardShowcase.show();
@@ -280,7 +289,6 @@ public class Game {
      * Should be called when the player decides to leave the game (through pausing menu)
      */
     public void showMenu() {
-        //TODO: implement returning to main menu
         mainMenu.show();
         stopMusic();
 
