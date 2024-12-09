@@ -57,6 +57,9 @@ public class Diamond extends FallingObject{
     }
 
 
+    /**
+     * Update the player's diamond count and score.
+     */
     private void updateGameSessionData(){
         GameSessionData currentSessionData = gameSession.getCurrentSessionData();
         currentSessionData.updateScore(SCORE_VALUE); //Update player's score
