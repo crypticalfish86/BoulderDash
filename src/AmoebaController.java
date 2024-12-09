@@ -74,8 +74,8 @@ public class AmoebaController {
     }
 
     /**
-     *If the amoeba cluster still contains tiles on the grid, regulate amoeba growth and check
-     *  for diamond conversion trigger.
+     * If the amoeba cluster still contains tiles on the grid, regulate amoeba growth and check
+     * for diamond conversion trigger.
      * @param currentTimeInMilliseconds
      * The current time in milliseconds since the unix epoch (01/01/1970).
      */
@@ -161,8 +161,7 @@ public class AmoebaController {
             convertToDiamond();
             return;
         }
-        
-        
+
         for (int i = 0; i < amoebaChildren.size(); ++i) {
             if (amoebaChildren.get(i).tryGrow()) {
 
@@ -176,10 +175,8 @@ public class AmoebaController {
 
     /**
      * Add a new amoeba to the cluster at a specified position.
-     * @param x
-     * The grid tile x position of the new amoeba tile.
-     * @param y
-     * The grid tile y position of the new amoeba tile.
+     * @param x The grid tile x position of the new amoeba tile.
+     * @param y The grid tile y position of the new amoeba tile.
      */
     public void addNewAmoebaChildToCluster(int x, int y) {
 
@@ -200,12 +197,9 @@ public class AmoebaController {
 
     /**
      * Remove amoeba from cluster and replace with an explosion.
-     * @param x
-     * The x position of the amoeba tile that is being removed from the cluster.
-     * @param y
-     * The y position of the amoeba tile that is being removed from the cluster.
-     * @param explosion
-     * The obj reference for the explosion tile that will replace the amoeba tile at its position.
+     * @param x The x position of the amoeba tile that is being removed from the cluster.
+     * @param y The y position of the amoeba tile that is being removed from the cluster.
+     * @param explosion The obj reference for the explosion tile that will replace the amoeba tile at its position.
      */
     public void removeChildFromController(int x, int y, Tile explosion){
         for(AmoebaTile amoeba : this.amoebaChildren){
@@ -217,9 +211,6 @@ public class AmoebaController {
         }
     }
 
-
-
-
     /**
      * Removes the current controller from the game.
      */
@@ -227,13 +218,10 @@ public class AmoebaController {
         gameSession.getAmoebaControllerList().remove(this);
     }
 
-
     /**
      * Check if the amoeba can spread to a neighbouring tile.
-     * @param tileType
-     * The neighbouring tile.
-     * @return
-     * True if the tile can be spread to, false otherwise.
+     * @param tileType The neighbouring tile.
+     * @return True if the tile can be spread to, false otherwise.
      */
     public static boolean canAmoebaSpreadTo(TileType tileType) {
         return (

@@ -5,21 +5,13 @@
  * @author Alex (Tsz Tung Yee)
  * @version 1.2
  */
-
-
-
 public abstract class FallingObject extends Tile {
-    
-
 
     private static final int DELAY_FALL = 8;
     private static final int DELAY_ROLL = 13;
 
     protected int fallReload = 0;
     private boolean isFalling = false;
-
-
-
 
     /**
      * Constructor blueprint for falling objects.
@@ -60,8 +52,6 @@ public abstract class FallingObject extends Tile {
      * @param nextTileBelow the adjacent tile's lower tile.
      */
     protected void roll(Tile nextTile, Tile nextTileBelow){
-
-        
         nextTile.interact(this);
         nextTileBelow.interact(this);
         isFalling = true;
@@ -77,7 +67,6 @@ public abstract class FallingObject extends Tile {
      * Should be called during update when other calculations are done.
      */
     protected void updatePhysics() {
-
         if (fallReload > 0) { fallReload--; return; }
 
         
@@ -123,8 +112,6 @@ public abstract class FallingObject extends Tile {
 
         }
 
-
-
         //try to roll right
         if (xPosition < gameSession.getGridWidth() - 1) {
             Tile tileRight =
@@ -142,7 +129,6 @@ public abstract class FallingObject extends Tile {
             }
         }
     }
-
 
     /**
      * Determines whether a falling object is on a curved tile.

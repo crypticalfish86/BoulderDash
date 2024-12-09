@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
  * @author Isaac Atkinson
  * @version 1.1
  */
-
 public class Explosion extends Tile {
 
     private int ticksAlive;
@@ -17,7 +16,6 @@ public class Explosion extends Tile {
     private boolean wasPlayer;
     
     private static final Image img = new Image("file:Assets/Images/Explosion.png");
-
 
     /**
      * Constructs an explosion tile.
@@ -58,7 +56,6 @@ public class Explosion extends Tile {
         }
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -66,7 +63,6 @@ public class Explosion extends Tile {
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
-
 
     /**
      * Converts the explosion to a path or a diamond based on what enemy exploded.
@@ -85,8 +81,6 @@ public class Explosion extends Tile {
         if(wasPlayer){
             gameSession.onGameOver(false);
         }
-
-
     }
 
     /**

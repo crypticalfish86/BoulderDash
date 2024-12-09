@@ -9,12 +9,9 @@ import javafx.scene.image.Image;
  * @author Omar Zarugh
  * @version 1.2
  */
-
 public class Butterfly extends FlyingEnemy{
 
     private static final Image img = new Image("file:Assets/Images/Butterfly.png");
-
-
 
     /**
      * Constructs an instance of a butterfly.
@@ -76,9 +73,7 @@ public class Butterfly extends FlyingEnemy{
             gameSession.setTile(this.y,this.x,pathWall);
         }
 
-
         checkForPlayer();
-
     }
 
 

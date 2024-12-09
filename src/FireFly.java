@@ -7,11 +7,9 @@ import javafx.scene.image.Image;
  * @author Omar Zarugh
  * @version 1.2
  */
-
 public class FireFly extends FlyingEnemy{
 
     private static final Image img = new Image("file:Assets/Images/FireFly.png");
-
 
     /**
      * Constructs an instance of a firefly.

@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
  * @author Cameron mcDonald
  * @version 1.1
  */
-
 public class ExitWall extends Wall {
 
     private static final Image activeImg = new Image("file:Assets/Images/NetherPortal.png"); // Active portal image
@@ -27,7 +26,6 @@ public class ExitWall extends Wall {
         super(gameSession, x, y, TileType.EXIT_WALL, operationInterval);
         this.isActive = false; // Exit is initially inactive
     }
-
 
     /**
      * Handles moving to the next level if the player tries to interact with
@@ -53,7 +51,6 @@ public class ExitWall extends Wall {
         activateIfDiamondsCollected();
     }
 
-
     /**
      * Activates the exit wall if the player has collected the required
      * number of diamonds.
@@ -66,7 +63,6 @@ public class ExitWall extends Wall {
             }
         }
     }
-
 
     /**
      * Change the current level

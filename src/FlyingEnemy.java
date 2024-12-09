@@ -5,8 +5,6 @@
  * @author Omar Zarugh
  * @version 1.6
  */
-
-
 public abstract class FlyingEnemy extends Enemy {
 
     protected static final int DELAY_FACTOR = 30; //Number of update loops per movement

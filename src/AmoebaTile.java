@@ -31,8 +31,8 @@ public class AmoebaTile extends Tile{
             int x,
             int y,
             long operationInterval,
-            AmoebaController thisAmoebaTilesController
-    ){
+            AmoebaController thisAmoebaTilesController)
+    {
         super(gameSession, x, y,TileType.AMOEBA, operationInterval);
         this.thisAmoebaTilesController = thisAmoebaTilesController;
     }

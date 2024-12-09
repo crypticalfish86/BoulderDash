@@ -9,11 +9,7 @@ import javafx.scene.image.Image;
  * @author Alex (Tsz Tung Yee)
  * @version 1.1
  */
-
 public class Frog extends Enemy {
-
-
-
 
     private static final Image img = new Image("file:Assets/Images/Frog.png"); // Placeholder for the image
 

@@ -6,10 +6,6 @@
  * @author Jace Weerawardena
  * @version 1.1
  */
-
-
-
-
 public abstract class Enemy extends Tile {
 
     /**
@@ -22,8 +18,6 @@ public abstract class Enemy extends Tile {
     public Enemy(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.MOVING_ENEMY, operationInterval);
     }
-
-
 
     /**
      * Converts all explodable tiles in a certain radius to an explosion,
@@ -96,15 +90,10 @@ public abstract class Enemy extends Tile {
                     );
 
                     gameSession.setTile(j, i, explosion);
-
-
-
-
                 }
             }
         }
     }
-
 
 
     /**
@@ -127,8 +116,6 @@ public abstract class Enemy extends Tile {
             return false;
         }
     }
-
-
 
     /**
      * Checks whether a tile can explode based on its type.
@@ -153,8 +140,6 @@ public abstract class Enemy extends Tile {
                 return false;
         }
     }
-
-
 
     /**
      * checks if a given x and y is in bounds.
@@ -234,5 +219,3 @@ public abstract class Enemy extends Tile {
         }
     }
 }
-
-
