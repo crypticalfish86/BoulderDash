@@ -183,11 +183,19 @@ public class Game {
 
     }
 
+    /**
+     * When clicked, the player is taken to the profile selector from the main
+     * menu to select a profile.
+     */
     public void onPlayButtonClicked() {
         mainMenu.hide();
         this.profileSelector = new ProfileSelector(this, cc);
     }
 
+    /**
+     * When clicked, the player is taken back to the previous page (in this
+     * case the main menu from the profile selector).
+     */
     public void onBackButtonClicked() {
         profileSelector.hide();
         mainMenu.show();
@@ -282,12 +290,20 @@ public class Game {
         }
     }
 
+    /**
+     * When clicked, the game will end and the player is returned to the main
+     * menu.
+     */
     public void onExitButtonClicked() {
         gameOver.hide();
         mainMenu.show();
         stopMusic();
     }
 
+    /**
+     * When clicked, the game will send you to the leaderboard screen to see
+     * the top 10 scores.
+     */
     public void onLeaderboardButtonClicked() {
         mainMenu.hide();
         this.leaderboardShowcase = new LeaderboardShowcase(this, cc);
@@ -295,7 +311,8 @@ public class Game {
     }
 
     /**
-     * Should be called when the player decides to leave the game (through pausing menu)
+     * Should be called when the player decides to leave the game
+     * (through pausing menu).
      */
     public void showMenu() {
         mainMenu.show();
