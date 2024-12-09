@@ -13,7 +13,8 @@ public class Key extends Wall {
     private String keyColour; // Key's colour or unique identifier
 
     /**
-     * Constructs a key tile and sets the correct image for the colour of the key.
+     * Constructs a key tile and sets the correct image for the key
+     * based on its colour.
      * @param gameSession The current game session.
      * @param x the x position of the diamond.
      * @param y the y position of the diamond.
