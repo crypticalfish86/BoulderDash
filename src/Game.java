@@ -132,7 +132,7 @@ public class Game {
             }
 
             if (fileContent.equals("NEW;")) {
-                startGameWithLevel(0, 0);
+                startGameWithLevel(1, 0);
             } else {
                 this.currentGamesession = new GameSession(this, fileContent, cc, 0);
             }
