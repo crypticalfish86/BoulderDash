@@ -17,7 +17,9 @@ import java.io.File;
  */
 
 
-
+/**
+ * Constructs a game.
+ */
 public class Game {
     private String loadedPlayerProfileID;
 
