@@ -160,9 +160,9 @@ public class UITextBox {
     private boolean isMouseInArea(double mouseX, double mouseY) {
         return (
             mouseX >= (x - width / 2) * WINDOW_SIZE_X &&
-            mouseX <= (x - width / 2) * WINDOW_SIZE_X &&
+            mouseX <= (x + width / 2) * WINDOW_SIZE_X &&
             mouseY >= (y - height / 2) * WINDOW_SIZE_Y &&
-            mouseY <= (y - height / 2) * WINDOW_SIZE_Y
+            mouseY <= (y + height / 2) * WINDOW_SIZE_Y
         );
     }
 
