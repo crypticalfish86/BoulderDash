@@ -13,7 +13,8 @@ public class Explosion extends Tile {
     private int ticksAlive;
     private final int ticksToConvert = 35;
 
-    private Boolean replaceWithDiamond;
+    private boolean replaceWithDiamond;
+    private boolean wasPlayer;
     
     private static final Image img = new Image("file:Assets/Images/Explosion.png");
 
@@ -26,12 +27,15 @@ public class Explosion extends Tile {
      * @param operationInterval The time in ms between operations.
      * @param replaceWithDiamond Represents whether the explosion
      *                           should leave behind a diamond.
+     * @param wasPlayer Represents whether the tile was the player
+     *                  before becoming an explosion.
      */
     public Explosion(GameSession gameSession, int x, int y,
-                     long operationInterval, Boolean replaceWithDiamond) {
+                     long operationInterval, boolean replaceWithDiamond, boolean wasPlayer) {
 
         super(gameSession, x, y, TileType.EXPLOSION, operationInterval);
         this.replaceWithDiamond = replaceWithDiamond;
+        this.wasPlayer = wasPlayer;
         ticksAlive = 0;
     }
 
@@ -72,6 +76,12 @@ public class Explosion extends Tile {
                     operationInterval);
             gameSession.setTile(this.y,this.x, pathWall);
         }
+
+        if(wasPlayer){
+            gameSession.onGameOver(false);
+        }
+
+
     }
 
     public String returnStringTileRepresentation(){

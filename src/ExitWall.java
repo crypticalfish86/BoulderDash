@@ -1,6 +1,14 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * This class represents an exit wall in the game, which allows the player
+ * to complete the current level and progress to the next level if they have
+ * collected the required number of diamonds.
+ * @author Cameron mcDonald
+ * @version 1.1
+ */
+
 public class ExitWall extends Wall {
 
     private static final Image activeImg = new Image("file:Assets/Images/NetherPortal.png"); // Active portal image
@@ -8,31 +16,47 @@ public class ExitWall extends Wall {
 
     private boolean isActive; // Indicates whether the exit is active
 
+    /**
+     * Constructs an exit wall tile and initially sets it to be inactive.
+     * @param gameSession The current game session.
+     * @param x the x position of the exit wall.
+     * @param y the y position of the exit wall.
+     * @param operationInterval The time in ms between operations.
+     */
     public ExitWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.EXIT_WALL, operationInterval);
         this.isActive = false; // Exit is initially inactive
     }
 
 
-    // Handle interaction with the exit wall
+    /**
+     * Handles moving to the next level if the player tries to interact with
+     * this tile and the exit wall is active.
+     * @param tile The tile that is interacting with this tile.
+     */
     @Override
-    public void interact(Tile inputTileObject) {
+    public void interact(Tile tile) {
         // Ensure the wall is active before allowing the player to exit
-        if (this.isActive && inputTileObject.getTileType() == TileType.PLAYER) {
+        if (this.isActive && tile.getTileType() == TileType.PLAYER) {
             changeLevel(); // Trigger level change
         }
     }
 
-    // periodically check if the wall should be activated
+    /**
+     * Checks if the exit wall should be activated.
+     * @param currentTimeInMilliseconds
+     * The current time in milliseconds since the unix epoch (01/01/1970).
+     */
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
-        // Check activation condition
         activateIfDiamondsCollected();
     }
 
 
-
-    // Activate the exit if all diamonds are collected
+    /**
+     * Activates the exit wall if the player has collected the required
+     * number of diamonds.
+     */
     public void activateIfDiamondsCollected() {
         if (!isActive) {
             GameSessionData sessionData = gameSession.getCurrentSessionData();
@@ -43,15 +67,15 @@ public class ExitWall extends Wall {
     }
 
 
-    // Handle level transition
+    /**
+     * Change the current level
+     */
     public void changeLevel() {
         gameSession.onGameOver(true);
     }
 
 
-    public boolean isActive() {
-        return this.isActive;
-    }
+    public boolean isActive() {return this.isActive;}
 
 
     // Draw the exit wall

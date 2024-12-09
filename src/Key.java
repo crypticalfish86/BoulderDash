@@ -1,27 +1,46 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * This class represents a key in the game which can be collected by the player
+ * and used to unlock doors.
+ * @author Cameron mcDonald
+ * @version 1.1
+ */
+
 public class Key extends Wall {
     private Image img; // Image representing the key
     private String keyColour; // Key's colour or unique identifier
 
+    /**
+     * Constructs a key tile and sets the correct image for the colour of the key.
+     * @param gameSession The current game session.
+     * @param x the x position of the diamond.
+     * @param y the y position of the diamond.
+     * @param operationInterval The time in ms between operations.
+     * @param keyColour The colour of the key.
+     */
     public Key(GameSession gameSession, int x, int y, long operationInterval, String keyColour) {
         super(gameSession, x, y, TileType.KEY, operationInterval);
         this.keyColour = keyColour;
         this.img = selectImageBasedOnColour(keyColour); // Set the image based on the key colour
-        // Keys cannot spread amoebas
+
     }
 
 
-    // Interaction logic for when the player interacts with the key
+    /**
+     * Handles the player picking up the key and moving the player to this tile.
+     * Also updates the number of keys the player has in their inventory.
+     * @param tile The tile that is interacting with this tile.
+     */
     @Override
-    public void interact(Tile inputTileObject) {
-        if (inputTileObject.getTileType() == TileType.PLAYER) {
+    public void interact(Tile tile) {
+        if (tile.getTileType() == TileType.PLAYER) {
             // Add the key to GameSessionData
             gameSession.getCurrentSessionData().giveKey(returnStringTileRepresentation());
 
-            PathWall pathWall = new PathWall(gameSession, inputTileObject.getXPosition(), inputTileObject.getYPosition(), getOperationInterval());
-            gameSession.updateTilePositions(pathWall, inputTileObject, this);
+            PathWall pathWall = new PathWall(gameSession, tile.getXPosition(), tile.getYPosition(), getOperationInterval());
+            gameSession.updateTilePositions(pathWall, tile, this);
         }
     }
 
@@ -40,16 +59,9 @@ public class Key extends Wall {
     }
 
     /**
-     * Selects an image corresponding to a specific key colour.
-     * <p>
-     * This method determines which image to load based on the
-     * colour key string. (e.g., red, blue, yellow, green).
-     * If the provided colour key is not recognised,
-     * an exception is thrown.
-     *
-     * @param colour The colour code of the key as a String.
-     * @return The Image corresponding to the specified key colour.
-     * @throws IllegalArgumentException If the specified key colour is unsupported.
+     * Select the correct image for the key based on its colour.
+     * @param colour The colour of the key.
+     * @return The key image to be drawn.
      */
     private Image selectImageBasedOnColour(String colour) {
         switch (colour) {
@@ -64,7 +76,6 @@ public class Key extends Wall {
         }
 
         // If no case matches, throw an exception
-        throw new IllegalArgumentException("Unsupported key colour: " + colour);
+        throw new IllegalArgumentException("Unsupported key color: " + colour);
     }
-
 }

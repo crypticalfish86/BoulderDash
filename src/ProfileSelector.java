@@ -28,6 +28,10 @@ public class ProfileSelector extends DisplayLayer {
             new Image("file:Assets/Buttons/LevelTwo.png");
     private static final Image IMAGE_LEVEL3 =
             new Image("file:Assets/Buttons/LevelThree.png");
+    private static final Image IMAGE_LEVEL4 =
+            new Image("file:Assets/Buttons/LevelThree.png");
+    private static final Image IMAGE_LEVEL5 =
+            new Image("file:Assets/Buttons/LevelThree.png");
     private static final Image IMAGE_BACK =
             new Image("file:Assets/Buttons/BackButton.png");
     private static final Image IMAGE_NEW_SAVE =
@@ -207,6 +211,12 @@ public class ProfileSelector extends DisplayLayer {
                         case "3":
                             UIHelper.drawImageRelativeXX(
                                     gc, IMAGE_LEVEL3, xPos, yPos, width);
+                        case "4":
+                            UIHelper.drawImageRelativeXX(
+                                    gc, IMAGE_LEVEL4, xPos, yPos, width);
+                        case "5":
+                            UIHelper.drawImageRelativeXX(
+                                    gc, IMAGE_LEVEL5, xPos, yPos, width);
                     }
                 }
                 currentLine++;

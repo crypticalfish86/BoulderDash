@@ -36,6 +36,10 @@ public class GameOver extends DisplayLayer {
             new Image("file:Assets/Buttons/LevelTwo.png");
     private static final Image IMAGE_LEVEL3 =
             new Image("file:Assets/Buttons/LevelThree.png");
+    private static final Image IMAGE_LEVEL4 =
+            new Image("file:Assets/Buttons/LevelFour.png");
+    private static final Image IMAGE_LEVEL5 =
+            new Image("file:Assets/Buttons/LevelFive.png");
 
     // Text files which import the current state of the profiles
     private final File profile1 =
@@ -111,19 +115,8 @@ public class GameOver extends DisplayLayer {
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_SCORE, .4, .45, .15);
 
-                // Takes an x, y and size parameter to draw the level status
-                double x = .5;
-                double y = .6;
-                double size = .2;
-
-                // Displays current level based on profile status
-                if (game.getPlayerProfileID().equals("1")) {
-                    displayProfileStatus(gc, profile1, x, y, size);
-                } else if (game.getPlayerProfileID().equals("2")) {
-                    displayProfileStatus(gc, profile2, x, y, size);
-                } else {
-                    displayProfileStatus(gc, profile3, x, y, size);
-                }
+                // Displays current level
+                displayLevel(gc, .5, .6, .2);
 
                 // Sets the text colour to white and writes out the user's score
                 // at the end of the level
@@ -145,52 +138,33 @@ public class GameOver extends DisplayLayer {
     }
 
     /**
-     * Draws the relevant level image to the screen depending on what level the
-     * user was on before they died.
-     * xPos, yPos and width are included as parameters in case these values want
-     * to be varied for future use if the case arises.
-     * @param gc Used to issue draw calls to the canvas using a buffer.
-     * @param profile profile file to read from.
-     * @param xPos x-position to print the image in the correct horizontal
-     *             plane.
-     * @param yPos y-position to print the image in the correct vertical
-     *      *             plane.
-     * @param width recalculates the size of the image given a double.
+     * Outputs the relevant level image based on the current level that the
+     * player died on
+     * @param gc Issues draw calls to a Canvas using a buffer.
+     * @param xPos X-position for where the image is to be placed horizontally.
+     * @param yPos Y-position for where the image is to be placed vertically.
+     * @param size Double value to indicate the size of the image.
      */
-    private void displayProfileStatus(GraphicsContext gc, File profile,
-                                      double xPos, double yPos, double width) {
-        displayProfileStatus(gc, profile, xPos, yPos, width, IMAGE_LEVEL1, IMAGE_LEVEL2, IMAGE_LEVEL3);
-    }
-
-    static void displayProfileStatus(GraphicsContext gc, File profile, double xPos, double yPos, double width, Image imageLevel1, Image imageLevel2, Image imageLevel3) {
-        int currentLine = 0;
-        try { // Checks the first line of the profile (specifically the level)
-            Scanner input = new Scanner(profile);
-            while (input.hasNextLine() && currentLine < 1) {
-                String[] saveCheck = input.nextLine().split(";");
-                // If a new save then draw the new save button
-                switch (saveCheck[0]) {
-                    case "NEW":
-                        UIHelper.drawImageRelativeXX(
-                                gc, imageLevel1, xPos, yPos, width);
-                    case "1":
-                        UIHelper.drawImageRelativeXX(
-                                gc, imageLevel1, xPos, yPos, width);
-                    case "2":
-                        UIHelper.drawImageRelativeXX(
-                                gc, imageLevel2, xPos, yPos, width);
-                    case "3":
-                        UIHelper.drawImageRelativeXX(
-                                gc, imageLevel3, xPos, yPos, width);
-                }
-                currentLine++;
-            }
-            input.close();
-        } catch (IOException e) {
-            System.out.println(e);
+    private void displayLevel(GraphicsContext gc,
+                              double xPos, double yPos, double size) {
+        switch (gameSessionData.getLevel()) {
+            case 1:
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_LEVEL1, xPos, yPos, size);
+            case 2:
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_LEVEL2, xPos, yPos, size);
+            case 3:
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_LEVEL3, xPos, yPos, size);
+            case 4:
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_LEVEL4, xPos, yPos, size);
+            case 5:
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_LEVEL5, xPos, yPos, size);
         }
     }
-
 
     /**
      * Returns true if mouse is on the exit button, used for returning back to

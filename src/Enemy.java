@@ -73,19 +73,33 @@ public abstract class Enemy extends Tile {
         for(int i = startX; i < endX + 1; i++){
             for(int j = startY; j < endY + 1; j++){
                 if ((isExplodable(gameSession.getTileFromGrid(i,j)))){ //Check if tile can explode
-                    Explosion explosion = new Explosion(gameSession, i, j,
-                            operationInterval, replaceWithDiamond);
+                    Explosion explosion = new Explosion(
+                            gameSession,
+                            i,
+                            j,
+                            operationInterval,
+                            replaceWithDiamond,
+                            false
+                    );
 
                     gameSession.setTile(j, i, explosion);
                 }
 
                 if((gameSession.getTileFromGrid(i,j).getTileType() == TileType.PLAYER)){
-                    Explosion explosion = new Explosion(gameSession, i, j,
-                            operationInterval, replaceWithDiamond);
+                    Explosion explosion = new Explosion(
+                            gameSession,
+                            i,
+                            j,
+                            operationInterval,
+                            replaceWithDiamond,
+                            true
+                    );
 
                     gameSession.setTile(j, i, explosion);
 
-                    gameSession.callKillPlayer();
+
+
+
                 }
             }
         }

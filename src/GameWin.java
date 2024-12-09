@@ -12,6 +12,8 @@ public class GameWin extends DisplayLayer {
     private final CanvasLayer cl;
     private final Game game;
 
+    private String userName;
+
     // Includes data for the game stored in the GameSessionData class
     private final GameSessionData gameSessionData;
 
@@ -22,10 +24,8 @@ public class GameWin extends DisplayLayer {
             new Image("file:Assets/Buttons/ScoreButton.png");
     private static final Image IMAGE_RETURN_MENU =
             new Image("file:Assets/Buttons/ExitToMainMenuButton.png");
-
-    private static final Image IMAGE_LEVEL1 = new Image("file:Assets/Buttons/LevelOne.png");
-    private static final Image IMAGE_LEVEL2 = new Image("file:Assets/Buttons/LevelTwo.png");
-    private static final Image IMAGE_LEVEL3 = new Image("file:Assets/Buttons/LevelThree.png");
+    private static final Image IMAGE_LEVEL5 =
+            new Image("file:Assets/Buttons/LevelFive.png");
 
     private final File profile1 = new File("Profiles/profile1.txt");
     private final File profile2 = new File("Profiles/profile2.txt");
@@ -42,7 +42,8 @@ public class GameWin extends DisplayLayer {
      *             current game session.
      * @param cc used for managing the different layers of the canvas.
      */
-    public GameWin(Game game, CanvasCompositor cc, GameSessionData gameSessionData) {
+    public GameWin(Game game, CanvasCompositor cc,
+                   GameSessionData gameSessionData) {
         this.cc = cc;
         this.game = game;
         this.gameSessionData = gameSessionData;
@@ -55,13 +56,15 @@ public class GameWin extends DisplayLayer {
         // and the screen
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
-            public boolean onMouseDown(double x, double y, boolean hasConsumed) {
+            public boolean onMouseDown(
+                    double x, double y, boolean hasConsumed) {
                 mouseDownOnExit[0] = isMouseOnExit(x, y);
                 return true;
             }
 
             @Override
-            public boolean onMouseUp(double x, double y, boolean hasConsumed) {
+            public boolean onMouseUp(
+                    double x, double y, boolean hasConsumed) {
                 if (mouseDownOnExit[0] && isMouseOnExit(x, y)) {
                     game.onExitButtonClicked();
                 }
@@ -69,7 +72,8 @@ public class GameWin extends DisplayLayer {
             }
 
             @Override
-            public boolean onMouseMove(double x, double y, boolean hasConsumed) {
+            public boolean onMouseMove(
+                    double x, double y, boolean hasConsumed) {
                 return true;
             }
 
@@ -95,19 +99,9 @@ public class GameWin extends DisplayLayer {
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_SCORE, .4, .45, .15);
 
-                // Takes an x, y and size parameter to draw the level status
-                double x = .5;
-                double y = .5;
-                double size = .1;
-
-                // Displays current level based on profile status
-                if (game.getPlayerProfileID().equals("1")) {
-                    displayProfileStatus(gc, profile1, x, y, size);
-                } else if (game.getPlayerProfileID().equals("2")) {
-                    displayProfileStatus(gc, profile2, x, y, size);
-                } else {
-                    displayProfileStatus(gc, profile3, x, y, size);
-                }
+                // Displays last level (as you won the game)
+                UIHelper.drawImageRelativeXX(gc, IMAGE_LEVEL5,
+                        .5, .5, .1);
 
                 // Sets the text colour to white and writes out the user's score
                 // at the end of the level
@@ -129,24 +123,6 @@ public class GameWin extends DisplayLayer {
     }
 
     /**
-     * Draws the relevant level image to the screen depending on what level the
-     * user was on before they died.
-     * xPos, yPos and width are included as parameters in case these values want
-     * to be varied for future use if the case arises.
-     * @param gc Used to issue draw calls to the canvas using a buffer.
-     * @param profile profile file to read from.
-     * @param xPos x-position to print the image in the correct horizontal
-     *             plane.
-     * @param yPos y-position to print the image in the correct vertical
-     *      *             plane.
-     * @param width recalculates the size of the image given a double.
-     */
-    private void displayProfileStatus(GraphicsContext gc, File profile, double xPos, double yPos, double width) {
-        GameOver.displayProfileStatus(gc, profile, xPos, yPos, width, IMAGE_LEVEL1, IMAGE_LEVEL2, IMAGE_LEVEL3);
-    }
-
-
-    /**
      * Returns true if mouse is on the exit button, used for returning back to
      * the main menu to replay the game.
      * @param mouseX x-position of the mouse.
@@ -155,7 +131,8 @@ public class GameWin extends DisplayLayer {
      */
     private boolean isMouseOnExit(double mouseX, double mouseY) {
         //check for play button
-        return UIHelper.checkIsXYInBoxRelativeXX(mouseX, mouseY, IMAGE_RETURN_MENU, .5, .8, .3);
+        return UIHelper.checkIsXYInBoxRelativeXX(mouseX,
+                mouseY, IMAGE_RETURN_MENU, .5, .8, .3);
     }
 
     /**
