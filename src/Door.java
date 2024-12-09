@@ -67,7 +67,7 @@ public class Door extends Wall {
     /**
      * Select the correct image for the door based on its colour.
      * @param colour The colour of the door.
-     * @return The door image to be drawn.
+     * @return The door image to be used.
      */
     private Image selectImageBasedOnColour(String colour) {
         switch (colour) {
