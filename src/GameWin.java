@@ -12,7 +12,9 @@ public class GameWin extends DisplayLayer {
     private final CanvasLayer cl;
     private final Game game;
 
-    private String userName;
+
+
+    private UITextBox textBox;
 
     // Includes data for the game stored in the GameSessionData class
     private final GameSessionData gameSessionData;
@@ -52,20 +54,25 @@ public class GameWin extends DisplayLayer {
         // clicked on the button yet
         mouseDownOnExit = new boolean[]{false};
 
+        this.textBox = new UITextBox(.5, .6, .7, .2, new Color(1, 1, 1, 1));
+
         // Creates a new canvas layer to manage interaction between the player
         // and the screen
         this.cl = new CanvasLayer(new CanvasLayer.CanvasLayerI() {
             @Override
-            public boolean onMouseDown(
-                    double x, double y, boolean hasConsumed) {
+            public boolean onMouseDown(double x, double y, boolean hasConsumed) {
+
+                textBox.onMouseDown(x, y);
                 mouseDownOnExit[0] = isMouseOnExit(x, y);
                 return true;
             }
 
             @Override
-            public boolean onMouseUp(
-                    double x, double y, boolean hasConsumed) {
+            public boolean onMouseUp(double x, double y, boolean hasConsumed) {
+
+                textBox.onMouseUp(x, y);
                 if (mouseDownOnExit[0] && isMouseOnExit(x, y)) {
+                    addScoreToLeaderboard(textBox.getText());
                     game.onExitButtonClicked();
                 }
                 return true;
@@ -79,10 +86,12 @@ public class GameWin extends DisplayLayer {
 
             @Override
             public void onKeyDown(KeyCode key) {
+                textBox.onKeyDown(key);
             }
 
             @Override
             public void onKeyUp(KeyCode key) {
+                textBox.onKeyUp(key);
             }
 
             @Override
@@ -113,6 +122,16 @@ public class GameWin extends DisplayLayer {
                 // Draws the return to menu button
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_RETURN_MENU, .5, .8, .3);
+
+
+                if (textBox.getIsFocused()) {
+                        gc.setFill(new Color(.4, .4, .4, 1));
+                } else {
+                        gc.setFill(new Color(.7, .7, .7, 1));
+                }
+                gc.fillRect(.15, .5, .7, .2);
+
+                textBox.draw(gc);
             }
         }, 1);
 
@@ -145,5 +164,19 @@ public class GameWin extends DisplayLayer {
      */
     public void show() {
         cc.addLayer(cl);
+    }
+
+
+    /**
+     * Adds a score to the leaderboard
+     * @param name the name to be written next to the score
+     */
+    private void addScoreToLeaderboard(String name) {
+        
+        String finalName = name;
+        if (finalName.isEmpty()) {
+                finalName = "Unknown";
+        }
+        new Leaderboard().writeNewNameToLeaderboard(finalName, gameSessionData.getScore());
     }
 }
