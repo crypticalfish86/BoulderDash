@@ -116,7 +116,8 @@ public class AmoebaController {
                             this.gameSession,
                             amoeba.getXPosition(),
                             amoeba.getYPosition(),
-                            this.operationInterval
+                            this.operationInterval,
+                            false
                     );
             this.gameSession.setTile(
                     amoeba.getYPosition(),
@@ -138,7 +139,8 @@ public class AmoebaController {
                             this.gameSession,
                             amoeba.getXPosition(),
                             amoeba.getYPosition(),
-                            this.operationInterval
+                            this.operationInterval,
+                            false
                     );
 
             this.gameSession.setTile(amoeba.getYPosition(),

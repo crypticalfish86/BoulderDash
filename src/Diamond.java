@@ -24,9 +24,8 @@ public class Diamond extends FallingObject{
      * @param y the y position of the diamond.
      * @param operationInterval The time in ms between operations.
      */
-    public Diamond(GameSession gameSession, int x, int y, long operationInterval){
-        super(gameSession, x, y, TileType.DIAMOND, operationInterval);
-        
+    public Diamond(GameSession gameSession, int x, int y, long operationInterval, boolean isFalling){
+        super(gameSession, x, y, TileType.DIAMOND, operationInterval, isFalling);
     }
 
     /**

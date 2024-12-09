@@ -74,9 +74,9 @@ public class MagicWall extends Wall {
 
         // Create the new tile based on the new tile type
         if (newTileType == TileType.BOULDER) {
-            newTile = new Boulder(gameSession, x, y, tile.getOperationInterval());
+            newTile = new Boulder(gameSession, x, y, tile.getOperationInterval(), true);
         } else if (newTileType == TileType.DIAMOND) {
-            newTile = new Diamond(gameSession, x, y, tile.getOperationInterval());
+            newTile = new Diamond(gameSession, x, y, tile.getOperationInterval(), true);
         } else {
             return;
         }

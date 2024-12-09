@@ -69,7 +69,7 @@ public class Explosion extends Tile {
     private void convertExplosion(){
         if(replaceWithDiamond){
             Diamond diamond = new Diamond(gameSession, this.x, this.y,
-                    operationInterval);
+                    operationInterval, false);
             gameSession.setTile(this.y,this.x, diamond);
         }else{
             PathWall pathWall = new PathWall(gameSession, this.x, this.y,

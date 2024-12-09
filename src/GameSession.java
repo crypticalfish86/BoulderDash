@@ -218,10 +218,10 @@ public class GameSession {
                         newTile = new DirtWall(this, x, y, OPERATION_INTERVAL);
                         break;
                     case "*":
-                        newTile = new Diamond(this, x, y, OPERATION_INTERVAL);
+                        newTile = new Diamond(this, x, y, OPERATION_INTERVAL, false);
                         break;
                     case "@":
-                        newTile = new Boulder(this, x, y, OPERATION_INTERVAL);
+                        newTile = new Boulder(this, x, y, OPERATION_INTERVAL,false);
                         break;
                     case "RK":
                         newTile = new Key(this, x, y, OPERATION_INTERVAL, "RK");
