@@ -156,6 +156,7 @@ public class PathFinder<T> {
      * @version 1.0
      * @param <U> vector variable.
      */
+
     private class VecQueue<U> {
         LinkedList<U> queue = new LinkedList<>();
 
