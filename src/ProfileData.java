@@ -3,6 +3,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * This class represents all the data for a profile.
+ * @author Jace Weerawardena
+ * @version 1.0
+ */
+
 public class ProfileData {
     private boolean profileNotInstantiated;
     private File profileFile;

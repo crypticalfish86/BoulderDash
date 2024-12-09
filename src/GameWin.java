@@ -4,6 +4,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * Represents the winning screen.
+ * @author Armaan Ghadiali
+ * @version 1.0
+ */
 
 public class GameWin extends DisplayLayer {
     // Attributes to link the drawing of images and manipulation of layers

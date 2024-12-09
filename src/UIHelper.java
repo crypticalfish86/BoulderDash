@@ -1,6 +1,12 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * This class helps draw and interpret hitboxes.
+ * @author Alex (Tsz Tung Yee)
+ * @version 1.0
+ */
+
 public class UIHelper {
     
     /**
