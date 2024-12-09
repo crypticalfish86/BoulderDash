@@ -50,7 +50,6 @@ public class Game {
             String musicFilePath = "./Assets/level_music.mp3";
             musicPlayer = new MusicPlayer(musicFilePath);
         } catch (Exception e) {
-            System.out.println("Failed to initialise music player.");
             e.printStackTrace();
         }
     }
@@ -153,7 +152,7 @@ public class Game {
      */
     private void startGameWithLevel(int level, int accumulatedScore) {
 
-        System.out.println("reading level file");
+
         File levelOneFile = new File(String.format("./Levels/level%d.txt", level));
 
         try {
@@ -178,33 +177,28 @@ public class Game {
     }
 
     public void onPlayButtonClicked() {
-        System.out.println("play is clicked");
         mainMenu.hide();
         this.profileSelector = new ProfileSelector(this, cc);
     }
 
     public void onBackButtonClicked() {
-        System.out.println("back button has been clicked");
         profileSelector.hide();
         mainMenu.show();
     }
 
     public void onProfileBoxClicked1() {
-        System.out.println("Profile box 1 has been clicked");
         this.loadedPlayerProfileID = "1";
         profileSelector.hide();
         loadGame("1");
     }
 
     public void onProfileBoxClicked2() {
-        System.out.println("Profile box 2 has been clicked");
         this.loadedPlayerProfileID = "2";
         profileSelector.hide();
         loadGame("2");
     }
 
     public void onProfileBoxClicked3() {
-        System.out.println("Profile box 3 has been clicked");
         this.loadedPlayerProfileID = "3";
         profileSelector.hide();
         loadGame("3");
@@ -215,7 +209,6 @@ public class Game {
      * Should be fired when the main menu button is clicked
      */
     public void onExitToMainMenuButtonClicked() {
-        System.out.println("back to main menu button has been clicked");
         leaderboardShowcase.hide();
         mainMenu.show();
         stopMusic(); // Stop the music when exiting the game
@@ -223,31 +216,25 @@ public class Game {
     }
 
     public void onCreateButtonClicked1() {
-        System.out.println("Create button 1 has been clicked");
     }
 
     public void onCreateButtonClicked2() {
-        System.out.println("Create button 2 has been clicked");
     }
 
     public void onCreateButtonClicked3() {
-        System.out.println("Create button 3 has been clicked");
     }
 
     public void onDeleteButtonClicked1() {
-        System.out.println("Delete button 1 has been clicked");
         profileSelector.deleteProfile(profileSelector.getProfile1());
         this.profileSelector.hide();
         this.profileSelector = new ProfileSelector(this, cc);
     }
 
     public void onDeleteButtonClicked2() {
-        System.out.println("Delete button 2 has been clicked");
         profileSelector.deleteProfile(profileSelector.getProfile2());
     }
 
     public void onDeleteButtonClicked3() {
-        System.out.println("Delete button 3 has been clicked");
         profileSelector.deleteProfile(profileSelector.getProfile3());
     }
 
@@ -280,14 +267,12 @@ public class Game {
     }
 
     public void onExitButtonClicked() {
-        System.out.println("Exit button has been clicked");
         gameOver.hide();
         mainMenu.show();
         stopMusic();
     }
 
     public void onLeaderboardButtonClicked() {
-        System.out.println("Leaderboard button has been clicked");
         mainMenu.hide();
         this.leaderboardShowcase = new LeaderboardShowcase(this, cc);
         leaderboardShowcase.show();
@@ -304,7 +289,6 @@ public class Game {
      * Should be called when the player decides to leave the game (through pausing menu)
      */
     public void showMenu() {
-        //TODO: implement returning to main menu
         mainMenu.show();
         stopMusic();
 

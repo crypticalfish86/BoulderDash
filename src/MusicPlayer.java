@@ -52,9 +52,6 @@ public class MusicPlayer {
     public void stop() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
-            System.out.println("Music stopped.");
-        } else {
-            System.out.println("No music loaded to stop.");
         }
     }
 }

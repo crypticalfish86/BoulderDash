@@ -62,7 +62,6 @@ public class AmoebaController {
         this.operationInterval = operationInterval;
         this.operationIntervalsPerAmoebaGrowthRate = amoebaGrowthRatePerOperationInterval;
         this.currentNumberOfIntervals = 0;
-        //TODO add a starting timestamp here
     }
 
     /**

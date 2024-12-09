@@ -58,19 +58,18 @@ public class CanvasTest extends Application {
 
             @Override
             public boolean onMouseMove(double x, double y, boolean hasConsumed) {
-                // TODO Auto-generated method stub
                 return false;
             }
 
             @Override
             public void onKeyDown(KeyCode key) {
-                // TODO Auto-generated method stub
+
                 
             }
 
             @Override
             public void onKeyUp(KeyCode key) {
-                // TODO Auto-generated method stub
+
                 
             }
 

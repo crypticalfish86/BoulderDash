@@ -137,7 +137,7 @@ public class GameSession {
         int currentLevel = Integer.parseInt(gameDataArr[0]);
         this.gridHeight = Integer.parseInt(gameDataArr[2]);
         this.gridWidth = Integer.parseInt(gameDataArr[1]);
-        System.out.printf("Map size: (%d, %d)\n", this.gridWidth, this.gridHeight);
+
         
         
         
@@ -266,7 +266,7 @@ public class GameSession {
                         newTile = new FireFly(this, x, y, OPERATION_INTERVAL, false);
                         break;
                     case "F":
-                        newTile = new Frog(this, x, y);//TODO ask alex why there is no operation interval for frog
+                        newTile = new Frog(this, x, y);
                         break;
                     case "A1":
                     case "A2":
@@ -313,7 +313,6 @@ public class GameSession {
 
 
                     default:
-                        System.out.println("ERROR TILE NOT RECOGNISED, PRINTING PATH-WALL BY DEFAULT");
                         newTile = new PathWall(this, x, y, OPERATION_INTERVAL);
                         break;
                 }
@@ -362,7 +361,6 @@ public class GameSession {
         String saveString = "";
 
         int[] data = this.currentSessionData.returnAllGameSessionData();
-        //TODO figure out where "current level" is stored, also clean up inline comments
         String newLineString = System.lineSeparator();
 
         saveString += "1;"; // change this when you figure it out
@@ -676,7 +674,6 @@ public class GameSession {
 
         // Check if time has run out
         if (timeLeft <= 0) {
-            System.out.println("Time's up!");
             callKillPlayer();
             return; // Stop further updates
         }
@@ -788,9 +785,9 @@ public class GameSession {
      */
     public void onGameOver(boolean hasWon) {
         if (hasWon) {
-            System.out.println("Congratulations! Level Complete.");
+
         } else {
-            System.out.println("Game Over. Better luck next time.");
+
         }
 
         // Call the game's method to handle the end of the session

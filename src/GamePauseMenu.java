@@ -147,14 +147,12 @@ public class GamePauseMenu {
 
     /** fired when the save button is clicked */
     private void save() {
-        //TODO: link saving
         gameSession.onSaveGameClicked();
     }
 
 
     /** fired when the load button is clicked */
     private void load() {
-        //TODO: link loading
         gameSession.onLoadGameClicked();
     }
     

@@ -70,7 +70,6 @@ public class Boulder extends FallingObject{
      * @param isRight the direction the boulder is being pushed.
      */
     private void pushBoulder(Tile player, boolean isRight) {
-        System.out.println(isRight);
 
         //tries to interact behind
         int thisX = getXPosition();
