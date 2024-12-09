@@ -1,0 +1,12 @@
+5;14;7;
+0;180;180;
+0;1;
+3;4;
+0;0;0;0;
+T T T T T T T T T T T T T T
+T F - - - - - P - - - - TE1 T
+T T T T T T T T T T T T T T
+T TE2 - - - - - - - - - - TE1 T
+T T T T T T T T T T T T T T
+T TE2 - - - - - - - - - * E T
+T T T T T T T T T T T T T T
