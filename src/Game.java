@@ -77,6 +77,10 @@ public class Game {
         }
     }
 
+    /**
+     * Save the current game state.
+     * @return True if the game saves properly, false otherwise.
+     */
     private boolean saveGame() {
         if(this.currentGamesession == null){
             return false;
