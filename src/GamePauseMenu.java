@@ -7,7 +7,8 @@ import javafx.scene.paint.Color;
 /**
  * A class used for the visual representation of the pause menu, of a game.
  * Links to the game session to perform actions over the game, does not handle logic on its own.
- * 
+ * @Author Alex (Tsz Tung Yee)
+ * @version 1.1
  */
 public class GamePauseMenu {
     private final CanvasLayer cl;
