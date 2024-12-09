@@ -20,8 +20,12 @@ public class Frog extends Enemy {
     private static final int PATH_REFRESH_RATE = 120;
 
 
-
-
+    /**
+     * Constructs a frog.
+     * @param gameSession The current gameSession.
+     * @param x The x position of the frog.
+     * @param y The y position of the frog.
+     */
     public Frog(GameSession gameSession, int x, int y){
         super(gameSession, x, y, 0);
         

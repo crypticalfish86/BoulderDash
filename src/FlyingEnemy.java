@@ -20,6 +20,16 @@ public abstract class FlyingEnemy extends Enemy {
     protected String direction;
 
 
+    /**
+     * Represents a blueprint for flying enemies.
+     * @param gameSession the current gameSession.
+     * @param x the x position of the flying enemies.
+     * @param y the y position of the flying enemies.
+     * @param tileType the tile type of the tile.
+     * @param operationInterval The time in ms between operations.
+     * @param prioritiseLeft Represents whether the flying enemy follows
+     *                       the left edge or right edge.
+     */
     public FlyingEnemy(GameSession gameSession, int x, int y, TileType tileType,
                        long operationInterval, boolean prioritiseLeft) {
 
