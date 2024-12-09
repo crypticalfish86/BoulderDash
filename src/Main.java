@@ -21,6 +21,7 @@ public class Main extends Application {
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
+        stage.setTitle("OMG IT'S Boulder Dash!!!!!!!!");
 
         CanvasCompositor cc = new CanvasCompositor(root, scene, WINDOW_WIDTH, WINDOW_HEIGHT);
 

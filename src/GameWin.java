@@ -54,7 +54,7 @@ public class GameWin extends DisplayLayer {
         // clicked on the button yet
         mouseDownOnExit = new boolean[]{false};
 
-        this.textBox = new UITextBox(.5, .6, .7, .2, new Color(1, 1, 1, 1));
+        this.textBox = new UITextBox(.5, .75, .7, .15, new Color(1, 1, 1, 1));
 
         // Creates a new canvas layer to manage interaction between the player
         // and the screen
@@ -129,7 +129,10 @@ public class GameWin extends DisplayLayer {
                 } else {
                         gc.setFill(new Color(.7, .7, .7, 1));
                 }
-                gc.fillRect(.15, .5, .7, .2);
+                gc.fillRect(
+                        .15 * Main.WINDOW_WIDTH, .625 * Main.WINDOW_HEIGHT,
+                        .7 * Main.WINDOW_WIDTH, .15 * Main.WINDOW_HEIGHT
+                );
 
                 textBox.draw(gc);
             }
