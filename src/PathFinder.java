@@ -24,9 +24,9 @@ public class PathFinder<T> {
 
     /**
      * computes the coordinates of the path.
-     * @param start start coordinates of xy
-     * @param end end coordiantes of xy
-     * @param canWalk function that returns if a certain grid can be stepped on
+     * @param start start coordinates of xy.
+     * @param end end coordiantes of xy.
+     * @param canWalk function that returns if a certain grid can be stepped on.
      * @return 
      */
     public ArrayList<int[]> computeGridFill(int[] start, int[] end, canWalk<T> canWalk) {
@@ -106,7 +106,7 @@ public class PathFinder<T> {
 
 
     /**
-     * checks if the given position is in range
+     * checks if the given position is in range.
      * @param x
      * @param y
      * @return
@@ -117,7 +117,7 @@ public class PathFinder<T> {
     
 
     /**
-     * adds an element to the queue it is allowed, has lower values than the current value
+     * adds an element to the queue it is allowed, has lower values than the current value.
      * @param vals
      * @param q
      * @param newVal
@@ -137,7 +137,6 @@ public class PathFinder<T> {
             q.push(new int[] {newX, newY});
         }
     }
-
 
     //used for checking if the type T of element is considered valid
     public interface canWalk<T> {
