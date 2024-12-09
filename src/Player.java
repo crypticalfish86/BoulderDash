@@ -29,9 +29,9 @@ public class Player extends Tile {
     private int recurringFrameCount = 0;
 
     // Constants for movement speed
-    public static final int RECURRING_DIRECTION_SPEED_UP = 4;
-    public static final int RECURRING_DIRECTION_INITIAL_SPEED = 20;
-    public static final int RECURRING_DIRECTION_FAST_SPEED = 7;
+    private static final int RECURRING_DIRECTION_SPEED_UP = 4;
+    private static final int RECURRING_DIRECTION_INITIAL_SPEED = 20;
+    private static final int RECURRING_DIRECTION_FAST_SPEED = 7;
 
     /**
      * Constructs a Player object with the position and operation interval listed.
