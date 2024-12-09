@@ -92,7 +92,6 @@ public class GameWin extends DisplayLayer {
 
             @Override
             public void draw(GraphicsContext gc, long elapsed) {
-                // gc.setFill(new Color(.15, .1, .05, 1));
                 gc.setFill(new Color(.05, .05, .05, 1));
                 gc.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
 

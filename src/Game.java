@@ -239,19 +239,18 @@ public class Game {
     public void onDeleteButtonClicked1() {
         System.out.println("Delete button 1 has been clicked");
         profileSelector.deleteProfile(profileSelector.getProfile1());
+        this.profileSelector.hide();
         this.profileSelector = new ProfileSelector(this, cc);
     }
 
     public void onDeleteButtonClicked2() {
         System.out.println("Delete button 2 has been clicked");
         profileSelector.deleteProfile(profileSelector.getProfile2());
-        this.profileSelector = new ProfileSelector(this, cc);
     }
 
     public void onDeleteButtonClicked3() {
         System.out.println("Delete button 3 has been clicked");
         profileSelector.deleteProfile(profileSelector.getProfile3());
-        this.profileSelector = new ProfileSelector(this, cc);
     }
 
 

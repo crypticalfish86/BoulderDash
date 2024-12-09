@@ -151,18 +151,23 @@ public class GameOver extends DisplayLayer {
             case 1:
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_LEVEL1, xPos, yPos, size);
+                break;
             case 2:
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_LEVEL2, xPos, yPos, size);
+                break;
             case 3:
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_LEVEL3, xPos, yPos, size);
+                break;
             case 4:
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_LEVEL4, xPos, yPos, size);
+                break;
             case 5:
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_LEVEL5, xPos, yPos, size);
+                break;
         }
     }
 
