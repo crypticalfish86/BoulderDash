@@ -38,6 +38,7 @@ public class ProfileData {
         }
     }
 
+
     /**
      * Reads the data from the profile and assigns that data to relevant attributes.
      */
