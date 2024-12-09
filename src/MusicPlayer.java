@@ -1,3 +1,7 @@
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
+
 /**
  * MusicPlayer is a class that uses JavaFX to play music during levels.
  * It supports the looping of music.
@@ -5,11 +9,6 @@
  * Author: Cameron McDonald (cmcoff)
  * Version: 2.0
  */
-
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
-
 
 public class MusicPlayer {
 

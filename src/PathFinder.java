@@ -111,7 +111,7 @@ public class PathFinder<T> {
      * checks if the given position is in range.
      * @param x
      * @param y
-     * @return
+     * @return true if in position.
      */
     private boolean isVecInRange(int x, int y) {
         return x >= 0 && y >= 0 && x < sizeX && y < sizeY;
@@ -120,12 +120,12 @@ public class PathFinder<T> {
 
     /**
      * adds an element to the queue it is allowed, has lower values than the current value.
-     * @param vals
-     * @param q
-     * @param newVal
-     * @param newX
-     * @param newY
-     * @param canWalk
+     * @param vals old values.
+     * @param q queue.
+     * @param newVal new value.
+     * @param newX new x position.
+     * @param newY new y position.
+     * @param canWalk boolean whether you can walk.
      */
     private void pushIfLower(int[][] vals, VecQueue<int[]> q, int newVal, int newX, int newY, canWalk<T> canWalk) {
         if (!isVecInRange(newX, newY)) { return; }
@@ -140,18 +140,22 @@ public class PathFinder<T> {
         }
     }
 
-    //used for checking if the type T of element is considered valid
+
+    /**
+     * Used for checking if the type T of element is considered valid.
+     */
+
     public interface canWalk<T> {
         public boolean e(T item);
     }
-    
-
-    
 
 
-
-
-    //queue used for computing the flood fill
+    /**
+     * Class for the vector queue to compute the flood fill.
+     * @author Alex (Tsz Tung Yee)
+     * @version 1.0
+     * @param <U> vector variable.
+     */
     private class VecQueue<U> {
         LinkedList<U> queue = new LinkedList<>();
 

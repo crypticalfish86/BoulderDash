@@ -17,8 +17,7 @@ public class AmoebaController {
     private long operationIntervalsPerAmoebaGrowthRate; //how many operation intervals per growth
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
-
-    private static final int AMOEBA_ATTEMPTS = 10;
+    private static final int AMOEBA_ATTEMPTS = 10;//how many times the amoeba can attempt to spread
     private int currentAttempts = 0;
 
     private int clusterID;
@@ -39,6 +38,8 @@ public class AmoebaController {
      * The number of operation intervals between attempted amoeba cluster growths.
      * @param maxAmoebaChildCount
      * The maximum number of amoeba tiles in the cluster before diamond conversion triggers.
+     * @param clusterID
+     * The ID for the cluster.
      */
     public AmoebaController(
             GameSession gameSession,
