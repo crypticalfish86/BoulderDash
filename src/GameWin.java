@@ -175,10 +175,10 @@ public class GameWin extends DisplayLayer {
         if (finalName.isEmpty()) {
                 finalName = "Unknown";
         }
-        
+
         if (!hasAddedScore) {
-            new Leaderboard().writeNewNameToLeaderboard(finalName, gameSessionData.getScore());
             hasAddedScore = true;
+            new Leaderboard().writeNewNameToLeaderboard(finalName, gameSessionData.getScore());
         }
     }
 }
