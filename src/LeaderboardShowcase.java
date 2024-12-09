@@ -43,7 +43,7 @@ public class LeaderboardShowcase {
         this.cc = cc;
 
         // Retrieves the output string for the leaderboard
-        leaderboardDisplay = new Leaderboard().getLeaderBoardDisplay();
+        leaderboardDisplay = new Leaderboard("").getLeaderBoardDisplay();
 
         // Automatically sets this to false since we assume the mouse has not
         // clicked on the button yet

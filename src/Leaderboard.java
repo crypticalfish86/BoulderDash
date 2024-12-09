@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
 /**
@@ -11,39 +12,43 @@ import java.io.FileWriter;
  * @version 1.0
  */
 public class Leaderboard {
-    private final String filepath = "./LeaderBoards/leaderboard.txt";
-    private ArrayList<String> leaderBoardDisplay;
+    private final String filepath = "./LeaderBoards/leaderboard%s.txt";
+    private ArrayList<String> leaderBoardDisplay = new ArrayList<>();
+    private final String leaderboardName;
 
     /**
      * Instantiates a leaderboard object which can be used to add new names/scores to the
      * leaderboard and get a display of the entire leaderboard.
      */
-    public Leaderboard() {
-        leaderBoardDisplay = new ArrayList<String>();
+    public Leaderboard(String leaderboardName) {
+        this.leaderboardName = leaderboardName;
 
-        File file = new File(filepath);
+        File file = new File(String.format(filepath, leaderboardName));
 
         Scanner scanner = null;
-        try{
+        try {
             scanner = new Scanner(file);
-        } catch (Exception error){
-            System.err.println(error);
-        }
 
-        scanner.useDelimiter("\\A"); // Read entire file as one string
-        String fileContent = null;
-        if(scanner.hasNext()){
-            fileContent = scanner.next();
-        }
-        scanner.close();
-
-        if(fileContent != null){
-
-            String[] leaderBoardArray = fileContent.split(System.lineSeparator());
-            for(String entry :leaderBoardArray){
-                leaderBoardDisplay.add(entry);
+            scanner.useDelimiter("\\A"); // Read entire file as one string
+            String fileContent = null;
+            if (scanner.hasNext()) {
+                fileContent = scanner.next();
             }
+            scanner.close();
+
+            if (fileContent != null) {
+
+                String[] leaderBoardArray = fileContent.split(System.lineSeparator());
+                for (String entry :leaderBoardArray) {
+                    leaderBoardDisplay.add(entry);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            // System.err.println(error);
+            
         }
+
+        
     }
 
 
@@ -106,7 +111,7 @@ public class Leaderboard {
         }
 
         try {
-            FileWriter fileWriter = new FileWriter(this.filepath);
+            FileWriter fileWriter = new FileWriter(String.format(filepath, leaderboardName));
             fileWriter.write(newLeaderboards);
             fileWriter.close();
         }

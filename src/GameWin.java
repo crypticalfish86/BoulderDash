@@ -184,7 +184,7 @@ public class GameWin extends DisplayLayer {
 
         if (!hasAddedScore) {
             hasAddedScore = true;
-            new Leaderboard().writeNewNameToLeaderboard(finalName,
+            new Leaderboard("").writeNewNameToLeaderboard(finalName,
                     gameSessionData.getScore());
         }
     }
