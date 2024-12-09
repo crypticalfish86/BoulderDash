@@ -3,7 +3,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import java.io.File;
 
 
 public class GameWin extends DisplayLayer {
@@ -117,7 +116,7 @@ public class GameWin extends DisplayLayer {
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_RETURN_MENU, .5, .8, .3);
 
-
+                // Creates textbox for user to enter text into
                 if (textBox.getIsFocused()) {
                         gc.setFill(new Color(.4, .4, .4, 1));
                 } else {
@@ -162,7 +161,6 @@ public class GameWin extends DisplayLayer {
     public void show() {
         cc.addLayer(cl);
     }
-
 
     /**
      * Adds a score to the leaderboard
