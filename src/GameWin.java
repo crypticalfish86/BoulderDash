@@ -14,7 +14,7 @@ public class GameWin extends DisplayLayer {
 
 
 
-    private UITextBox textBox;
+    private final UITextBox textBox;
 
     // Includes data for the game stored in the GameSessionData class
     private final GameSessionData gameSessionData;
@@ -26,12 +26,6 @@ public class GameWin extends DisplayLayer {
             new Image("file:Assets/Buttons/ScoreButton.png");
     private static final Image IMAGE_RETURN_MENU =
             new Image("file:Assets/Buttons/ExitToMainMenuButton.png");
-    private static final Image IMAGE_LEVEL5 =
-            new Image("file:Assets/Buttons/LevelFive.png");
-
-    private final File profile1 = new File("Profiles/profile1.txt");
-    private final File profile2 = new File("Profiles/profile2.txt");
-    private final File profile3 = new File("Profiles/profile3.txt");
 
     // Holds whether the mouse has been clicked on within the button's
     // dimensions
