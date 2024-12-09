@@ -33,7 +33,6 @@ public class CanvasLayer {
     }
 
 
-
     /**
      * Interface used for determining the behaviour of a graphics layer.
      */
