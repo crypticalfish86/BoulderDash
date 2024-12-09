@@ -4,6 +4,12 @@ import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+
+/**
+ * This class represents a frog in the game.
+ * @author Alex (Tsz Tung Yee)
+ * @version 1.1
+ */
 public class Frog extends Enemy {
 
 
@@ -35,7 +41,9 @@ public class Frog extends Enemy {
     @Override
     public void interact(Tile tile) {
 
-        if ((tile.getTileType() == TileType.BOULDER || tile.getTileType() == TileType.DIAMOND || tile.getTileType() == TileType.AMOEBA) && tile.getYPosition() == this.y - 1) {
+        if ((   tile.getTileType() == TileType.BOULDER ||
+                tile.getTileType() == TileType.DIAMOND ||
+                tile.getTileType() == TileType.AMOEBA) && tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, false);
         }
     }

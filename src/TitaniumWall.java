@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
  * This class represents a titanium wall in the game.
  * @author Jace Weerawardena
  * @author Cameron mcDonald
+ * @version 1.0
  */
 
 public class TitaniumWall extends Wall {

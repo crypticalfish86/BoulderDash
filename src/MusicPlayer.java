@@ -10,6 +10,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
+/**
+ * This class is responsible for managing the music in the game.
+ * @author Cameron mcDonald
+ * @version 1.0
+ */
+
 public class MusicPlayer {
 
     // Handles the music playback

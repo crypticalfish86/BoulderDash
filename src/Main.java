@@ -7,6 +7,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Entry point to the application.
+ */
+
 public class Main extends Application {
 
     public static final int WINDOW_HEIGHT = 960;
