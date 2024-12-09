@@ -243,7 +243,7 @@ public class Game {
                 this.gameOver = new GameWin(this, cc, gameSessionData);
 
             } else {
-                //TODO: start next game with level + 1
+                
 
                 int finalScore = gameSessionData.getScore() + (int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000);
                 startGameWithLevel(gameSessionData.getLevel() + 1, finalScore);

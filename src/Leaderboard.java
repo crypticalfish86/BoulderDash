@@ -61,7 +61,14 @@ public class Leaderboard {
         boolean hasAdded = false;
         for (int i = leaderBoardDisplay.size() - 1; i >= 0; --i) {
             
-            int leaderboardScore = Integer.parseInt(leaderBoardDisplay.get(i).split(" ")[1]);
+
+            int leaderboardScore;
+             
+            try {
+                leaderboardScore = Integer.parseInt(leaderBoardDisplay.get(i).split(" ")[1]);
+            } catch (NumberFormatException e) {
+                leaderboardScore = 0;
+            }
 
             System.out.printf("score: current: %d, list: %d\n", newScore, leaderboardScore);
             if (newScore <= leaderboardScore) {
