@@ -76,12 +76,17 @@ public class FireFly extends FlyingEnemy{
     }
 
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String returnStringTileRepresentation(){
         if (prioritiseLeft){
             return "FL";

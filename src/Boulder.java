@@ -44,8 +44,10 @@ public class Boulder extends FallingObject{
                     int otherX = tile.getXPosition();
                     int thisX = this.getXPosition();
 
-                    if (otherX == thisX + 1) { pushBoulder(tile, false); }
-                    if (otherX == thisX - 1) { pushBoulder(tile, true); }
+                    if (otherX == thisX + 1) {
+                        pushBoulder(tile, false); }
+                    if (otherX == thisX - 1) {
+                        pushBoulder(tile, true); }
                 }        
             default:
                 break;
@@ -60,6 +62,7 @@ public class Boulder extends FallingObject{
      * The number of milliseconds since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds) {
+
         updatePhysics();
     }
 
@@ -92,14 +95,19 @@ public class Boulder extends FallingObject{
     }
 
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public String returnStringTileRepresentation(){
+
         return "@";
     }
 }

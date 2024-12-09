@@ -60,6 +60,9 @@ public class Door extends Wall {
         gameSession.updateTilePositions(pathWall, tile, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
     }
@@ -85,15 +88,29 @@ public class Door extends Wall {
         throw new IllegalArgumentException("Unsupported door colour: " + colour);
     }
 
+    /**
+     * gets the colour of the door
+     * @return
+     * returns the door colour
+     */
     // Getter for door colour
-    public String getDoorColour() {return this.doorColour;}
+    public String getDoorColour() {
+        return this.doorColour;
+    }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Draw the door image
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String returnStringTileRepresentation() {
+
         return this.doorColour;
     }
 

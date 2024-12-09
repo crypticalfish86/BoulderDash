@@ -49,6 +49,7 @@ public class ExitWall extends Wall {
      */
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
+
         activateIfDiamondsCollected();
     }
 
@@ -75,9 +76,13 @@ public class ExitWall extends Wall {
     }
 
 
-    public boolean isActive() {return this.isActive;}
+    public boolean isActive() {
+        return this.isActive;
+    }
 
-
+    /**
+     * {@inheritDoc}
+     */
     // Draw the exit wall
     @Override
     public void drawTile(GraphicsContext gc) {
@@ -86,7 +91,11 @@ public class ExitWall extends Wall {
         draw(gc, currentImg, 0, 0); // Draw the selected image
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String returnStringTileRepresentation() {
+
         return "E";
     }
 }
