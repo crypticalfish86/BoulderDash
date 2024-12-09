@@ -71,7 +71,7 @@ public class Leaderboard {
             }
 
             System.out.printf("score: current: %d, list: %d\n", newScore, leaderboardScore);
-            if (newScore <= leaderboardScore) {
+            if (newScore > leaderboardScore) {
                 leaderBoardDisplay.add(i, newLeaderBoardEntry);
                 hasAdded = true;
                 break;
