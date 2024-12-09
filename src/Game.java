@@ -257,10 +257,15 @@ public class Game {
         stopMusic(); // Stop music on game over
 
         if (hasWon) {
+            new Leaderboard(Integer.toString(gameSessionData.getLevel()))
+                    .writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
+
+
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
                 gameSessionData.updateScore((int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000));
                 this.gameOver = new GameWin(this, cc, gameSessionData);
 
+                
             } else {
                 
 
