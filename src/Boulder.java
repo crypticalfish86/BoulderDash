@@ -24,8 +24,8 @@ public class Boulder extends FallingObject{
      * @param y the y position of the boulder.
      * @param operationInterval The time in ms between operations.
      */
-    public Boulder(GameSession gameSession, int x, int y, long operationInterval){
-        super(gameSession, x, y, TileType.BOULDER, operationInterval);
+    public Boulder(GameSession gameSession, int x, int y, long operationInterval, boolean isFalling){
+        super(gameSession, x, y, TileType.BOULDER, operationInterval, isFalling);
         
     }
 

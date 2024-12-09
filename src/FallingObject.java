@@ -30,8 +30,9 @@ public abstract class FallingObject extends Tile {
      * @param operationInterval The time in ms between operations.
      */
     public FallingObject(GameSession gameSession, int x, int y, TileType TileType,
-                         long operationInterval) {
+                         long operationInterval, boolean isFalling) {
         super(gameSession, x, y, TileType, operationInterval);
+        this.isFalling = isFalling;
     }
 
     /**
