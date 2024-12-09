@@ -13,7 +13,7 @@ public class Player extends Tile {
     /**
      * The image used to represent the player.
      */
-    public static final Image img = new Image("file:Assets/Images/PlayerForward.png");
+    private static final Image img = new Image("file:Assets/Images/PlayerForward.png");
 
     // Directional keys tracking
     private boolean keyUp = false;

@@ -9,7 +9,7 @@ public class Frog extends Enemy {
 
 
 
-    public static final Image img = new Image("file:Assets/Images/Frog.png"); // Placeholder for the image
+    private static final Image img = new Image("file:Assets/Images/Frog.png"); // Placeholder for the image
 
     private ArrayList<int[]> path = new ArrayList<>();
     private int coolDown = 0; // holds the amount of frames that the frog should not move for

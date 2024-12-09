@@ -11,6 +11,12 @@ import javafx.scene.text.TextAlignment;
 /**
  * Manages the game logic internally by providing the canvas.
  * Collaborates with game to work with external features.
+ * @author Jace Weerawardena
+ * @author Alex (Tsz Tung Yee)
+ * @author Armaan Ghadiali
+ * @author Isaac Atkinson
+ * @author Omar Zarugh
+ * @version 1.0
  */
 public class GameSession {
 
@@ -326,6 +332,11 @@ public class GameSession {
         }
     }
 
+    /**
+     * Determines whether a tile is not an amoeba or a teleport tile.
+     * @param tileString The string representation of the tile to check.
+     * @return true if the tile is an amoeba or teleport tile, false otherwise.
+     */
     public boolean doesNotEqualAmoebaOrTeleportTile(String tileString) {
         switch(tileString) {
             case "A1":

@@ -12,7 +12,7 @@ public class NormalWall extends Wall {
     /**
      * The image for the normal wall.
      */
-    public static final Image img = new Image("file:Assets/Images/NormalWallVers3.png");
+    private static final Image img = new Image("file:Assets/Images/NormalWallVers3.png");
 
     /**
      * Creates a normal wall tile.

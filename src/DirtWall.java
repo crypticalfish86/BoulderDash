@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
  */
 public class DirtWall extends Wall {
 
-    public static final Image img = new Image("file:Assets/Images/Dirt.png"); // Placeholder for the dirt wall image
+    private static final Image img = new Image("file:Assets/Images/Dirt.png"); // Placeholder for the dirt wall image
 
     /**
      * Constructs a dirt wall tile.

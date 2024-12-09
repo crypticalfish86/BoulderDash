@@ -17,10 +17,10 @@ public class GamePauseMenu {
     private static final double WINDOW_SIZE_X = .3; // the width of the background of this window
     private static final double WINDOW_SIZE_Y = .5; // the height of the background of this window
 
-    public static final Image IMAGE_RESUME = new Image("file:Assets/Buttons/ResumeButton.png");
-    public static final Image IMAGE_SAVE = new Image("file:Assets/Buttons/SaveButton.png");
-    public static final Image IMAGE_LOAD = new Image("file:Assets/Buttons/LoadButton.png");
-    public static final Image IMAGE_EXIT = new Image("file:Assets/Buttons/ExitButton.png");
+    private static final Image IMAGE_RESUME = new Image("file:Assets/Buttons/ResumeButton.png");
+    private static final Image IMAGE_SAVE = new Image("file:Assets/Buttons/SaveButton.png");
+    private static final Image IMAGE_LOAD = new Image("file:Assets/Buttons/LoadButton.png");
+    private static final Image IMAGE_EXIT = new Image("file:Assets/Buttons/ExitButton.png");
 
 
     /**

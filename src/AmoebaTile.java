@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
  */
 public class AmoebaTile extends Tile{
 
-    public static final Image img = new Image("file:Assets/Images/Ameoba.png");
+    private static final Image img = new Image("file:Assets/Images/Ameoba.png");
     private final AmoebaController thisAmoebaTilesController;
 
     /**
