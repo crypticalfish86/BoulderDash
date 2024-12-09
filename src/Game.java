@@ -224,6 +224,36 @@ public class Game {
 
     }
 
+    public void onCreateButtonClicked1() {
+        System.out.println("Create button 1 has been clicked");
+    }
+
+    public void onCreateButtonClicked2() {
+        System.out.println("Create button 2 has been clicked");
+    }
+
+    public void onCreateButtonClicked3() {
+        System.out.println("Create button 3 has been clicked");
+    }
+
+    public void onDeleteButtonClicked1() {
+        System.out.println("Delete button 1 has been clicked");
+        profileSelector.deleteProfile(profileSelector.getProfile1());
+        this.profileSelector = new ProfileSelector(this, cc);
+    }
+
+    public void onDeleteButtonClicked2() {
+        System.out.println("Delete button 2 has been clicked");
+        profileSelector.deleteProfile(profileSelector.getProfile2());
+        this.profileSelector = new ProfileSelector(this, cc);
+    }
+
+    public void onDeleteButtonClicked3() {
+        System.out.println("Delete button 3 has been clicked");
+        profileSelector.deleteProfile(profileSelector.getProfile3());
+        this.profileSelector = new ProfileSelector(this, cc);
+    }
+
 
     /**
      * Should be called when the game has won or lost not due to the leave menus
