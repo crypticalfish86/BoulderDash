@@ -4,7 +4,8 @@ import javafx.scene.image.Image;
 /**
  * This class represents a key in the game which can be collected by the player
  * and used to unlock doors.
- * @author Cameron mcDonald
+ * @author Cameron McDonald
+ * @author Anthony Davies
  * @version 1.1
  */
 
@@ -30,6 +31,7 @@ public class Key extends Wall {
 
 
     /**
+     * {@inheritDoc}
      * Handles the player picking up the key and moving the player to this tile.
      * Also updates the number of keys the player has in their inventory.
      * @param tile The tile that is interacting with this tile.
@@ -49,11 +51,21 @@ public class Key extends Wall {
     public void updateTile(long currentTimeInMilliseconds) {
     }
 
+    /**
+     *
+     * @param gc
+     * The graphics context you're drawing to.
+     */
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Draw the key image
     }
 
+    /**
+     * {@inheritDoc}
+     * @return keycolour
+     * returns the colour of the key.
+     */
     @Override
     public String returnStringTileRepresentation() {
         return this.keyColour;

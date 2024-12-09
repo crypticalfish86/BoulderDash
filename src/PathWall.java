@@ -41,17 +41,31 @@ public class PathWall extends Wall {
     }
 
 
+    /**
+     * {@inheritDoc}
+     * @param currentTimeInMilliseconds
+     * The current time in milliseconds since the unix epoch (01/01/1970).
+     */
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
         
     }
 
+    /**
+     * {@inheritDoc}
+     * @param gc
+     * The graphics context you're drawing to.
+     */
     // Draw the PathWall tile
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Draw the PathWall image at its current position
     }
 
+    /**
+     * {@inheritDoc}
+     * @return "-"
+     */
     public String returnStringTileRepresentation(){
         return "-";
     }

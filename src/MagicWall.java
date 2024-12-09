@@ -122,19 +122,33 @@ public class MagicWall extends Wall {
 
     }
 
-
+    /**
+     * {@inheritDoc}
+     * @param currentTimeInMilliseconds
+     * The current time in milliseconds since the unix epoch (01/01/1970).
+     */
     // Update logic for the magic wall
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     * @param gc
+     * The graphics context you're drawing to.
+     */
     // Draw the magic wall
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Draw the magic wall image
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     * the tile representation for Magic Wall
+     */
     // Return a string representation of the magic wall
     @Override
     public String returnStringTileRepresentation() {
