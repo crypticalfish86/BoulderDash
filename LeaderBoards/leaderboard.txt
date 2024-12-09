@@ -2,6 +2,9 @@ waaaaaaaa: 2873
 Unknown: 2873
 Unknown: 2873
 Unknown: 2873
+1234: 2895
+Unknown: 2896
+Unknown: 2898
 Player1: 4000
 Player2: 100
 -------: 0

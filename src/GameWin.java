@@ -50,7 +50,7 @@ public class GameWin extends DisplayLayer {
         // clicked on the button yet
         mouseDownOnExit = new boolean[]{false};
 
-        this.textBox = new UITextBox(.5, .75, .7, .15, new Color(1, 1, 1, 1));
+        this.textBox = new UITextBox(.5, .65, .4, .1, new Color(1, 1, 1, 1));
 
         // Creates a new canvas layer to manage interaction between the player
         // and the screen
@@ -126,8 +126,8 @@ public class GameWin extends DisplayLayer {
                         gc.setFill(new Color(.7, .7, .7, 1));
                 }
                 gc.fillRect(
-                        .15 * Main.WINDOW_WIDTH, .625 * Main.WINDOW_HEIGHT,
-                        .7 * Main.WINDOW_WIDTH, .15 * Main.WINDOW_HEIGHT
+                        .3 * Main.WINDOW_WIDTH, .6 * Main.WINDOW_HEIGHT,
+                        .4 * Main.WINDOW_WIDTH, .1 * Main.WINDOW_HEIGHT
                 );
 
                 textBox.draw(gc);
@@ -170,10 +170,15 @@ public class GameWin extends DisplayLayer {
      * @param name the name to be written next to the score
      */
     private void addScoreToLeaderboard(String name) {
-        
-        String finalName = name;
-        if (finalName.isEmpty()) {
-                finalName = "Unknown";
+        System.out.println(name);
+
+
+        String finalName;
+
+        if (name.isEmpty()) {
+            finalName = "Unknown";
+        } else {
+            finalName = name;
         }
 
         if (!hasAddedScore) {

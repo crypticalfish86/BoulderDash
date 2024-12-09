@@ -59,7 +59,7 @@ public class Leaderboard {
         String newLeaderBoardEntry = name + ": " + Integer.toString(newScore);
 
         boolean hasAdded = false;
-        for (int i = leaderBoardDisplay.size() - 1; i >= 0; --i) {
+        for (int i = 0; i < leaderBoardDisplay.size(); ++i) {
             
 
             int leaderboardScore;
