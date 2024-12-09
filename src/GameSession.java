@@ -16,7 +16,7 @@ import javafx.scene.text.TextAlignment;
  * @author Armaan Ghadiali
  * @author Isaac Atkinson
  * @author Omar Zarugh
- * @version 1.0
+ * @version 1.4
  */
 public class GameSession {
 
