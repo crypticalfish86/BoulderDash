@@ -239,13 +239,7 @@ public class Game {
 
         if (hasWon) {
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
-                //TODO: show winning screen with score
-                new Leaderboard().writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
-
-
                 gameSessionData.updateScore((int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000));
-
-
                 this.gameWin = new GameWin(this, cc, gameSessionData);
 
             } else {
