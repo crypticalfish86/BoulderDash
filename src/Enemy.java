@@ -78,7 +78,8 @@ public abstract class Enemy extends Tile {
                             i,
                             j,
                             operationInterval,
-                            replaceWithDiamond
+                            replaceWithDiamond,
+                            false
                     );
 
                     gameSession.setTile(j, i, explosion);
@@ -90,12 +91,15 @@ public abstract class Enemy extends Tile {
                             i,
                             j,
                             operationInterval,
-                            replaceWithDiamond
+                            replaceWithDiamond,
+                            true
                     );
 
                     gameSession.setTile(j, i, explosion);
 
-                    gameSession.callKillPlayer();
+
+
+
                 }
             }
         }
