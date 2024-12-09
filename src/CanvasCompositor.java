@@ -14,6 +14,11 @@ import javafx.scene.layout.Pane;
  * Each layer is required to define its behaviour to certain events
  * By using this object, a timeline is required to operate its drawing loop, and the elapsed time is also required to pass into the object
  * @see javafx.animation.Timeline
+ * @author Jace Weerawardena
+ * @author Armaan Ghadiali
+ * @author Omar Zarugh
+ * @author Alex (Tsz Tung Yee)
+ * @version 1.7
  */
 public class CanvasCompositor {
     

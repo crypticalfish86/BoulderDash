@@ -8,6 +8,11 @@ import javafx.scene.input.KeyCode;
  * 
  * The interface {@link CanvasCompositor} is required to define the custom behaviour of this layer
  * so that this layer can respond to drawing and key inputs, as well as mouse inputs
+ * @author Jace Weerawardena
+ * @author Armaan Ghadiali
+ * @author Omar Zarugh
+ * @author Alex (Tsz Tung Yee)
+ * @version 1.5
  */
 public class CanvasLayer {
 
