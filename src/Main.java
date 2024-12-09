@@ -9,6 +9,14 @@ import javafx.util.Duration;
 
 /**
  * Entry point to the application.
+ * @author Alex (Tsz Tung Yee)
+ * @author Omar Zarugh
+ * @author Armaan Ghadiali
+ * @author Jace Weerawardena
+ * @author Isaac Atkinson
+ * @author Anthony Davies
+ * @author Cameron McDonald
+ * @version 1.1
  */
 
 public class Main extends Application {

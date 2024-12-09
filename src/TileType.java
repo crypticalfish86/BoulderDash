@@ -1,5 +1,7 @@
 /**
  * Represents the tile types.
+ * @author Omar Zarugh
+ * @version 1.4
  */
 
 public enum TileType {
