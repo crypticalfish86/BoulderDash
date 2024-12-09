@@ -49,6 +49,8 @@ public class ProfileSelector extends DisplayLayer {
             new Image("file:Assets/Buttons/CreateButton.png");
     private static final Image IMAGE_DELETE =
             new Image("file:Assets/Buttons/DeleteButton.png");
+    private static final Image IMAGE_CONTINUE =
+            new Image("file:Assets/Buttons/ContinueButton.png");
 
     // Text files which import the current state of the profiles
     private final File profile1 =
@@ -61,15 +63,18 @@ public class ProfileSelector extends DisplayLayer {
     // Checks for whether the mouse has been clicked on within the button's
     // dimensions
     private final boolean[] mouseDownOnBackButton;
-    private final boolean[] mouseDownOnProfileBox1;
-    private final boolean[] mouseDownOnProfileBox2;
-    private final boolean[] mouseDownOnProfileBox3;
+
     private final boolean[] mouseDownOnCreateButton1;
     private final boolean[] mouseDownOnCreateButton2;
     private final boolean[] mouseDownOnCreateButton3;
+
     private final boolean[] mouseDownOnDeleteButton1;
     private final boolean[] mouseDownOnDeleteButton2;
     private final boolean[] mouseDownOnDeleteButton3;
+
+    private final boolean[] mouseDownOnContinueButton1;
+    private final boolean[] mouseDownOnContinueButton2;
+    private final boolean[] mouseDownOnContinueButton3;
 
 
     /**
@@ -87,10 +92,6 @@ public class ProfileSelector extends DisplayLayer {
         // clicked on any of the buttons yet
         mouseDownOnBackButton = new boolean[]{false};
 
-        mouseDownOnProfileBox1 = new boolean[]{false};
-        mouseDownOnProfileBox2 = new boolean[]{false};
-        mouseDownOnProfileBox3 = new boolean[]{false};
-
         mouseDownOnCreateButton1 = new boolean[]{false};
         mouseDownOnCreateButton2 = new boolean[]{false};
         mouseDownOnCreateButton3 = new boolean[]{false};
@@ -98,6 +99,10 @@ public class ProfileSelector extends DisplayLayer {
         mouseDownOnDeleteButton1 = new boolean[]{false};
         mouseDownOnDeleteButton2 = new boolean[]{false};
         mouseDownOnDeleteButton3 = new boolean[]{false};
+
+        mouseDownOnContinueButton1 = new boolean[]{false};
+        mouseDownOnContinueButton2 = new boolean[]{false};
+        mouseDownOnContinueButton3 = new boolean[]{false};
 
         // Creates a new canvas layer to manage interaction between the player
         // and the screen
@@ -110,10 +115,6 @@ public class ProfileSelector extends DisplayLayer {
                 }
                 mouseDownOnBackButton[0] = isMouseOnBackButton(x, y);
 
-                mouseDownOnProfileBox1[0] = isMouseOnProfileBox1(x, y);
-                mouseDownOnProfileBox2[0] = isMouseOnProfileBox2(x, y);
-                mouseDownOnProfileBox3[0] = isMouseOnProfileBox3(x, y);
-
                 mouseDownOnCreateButton1[0] = isMouseOnCreateButton1(x, y);
                 mouseDownOnCreateButton2[0] = isMouseOnCreateButton2(x, y);
                 mouseDownOnCreateButton3[0] = isMouseOnCreateButton3(x, y);
@@ -121,6 +122,10 @@ public class ProfileSelector extends DisplayLayer {
                 mouseDownOnDeleteButton1[0] = isMouseOnDeleteButton1(x, y);
                 mouseDownOnDeleteButton2[0] = isMouseOnDeleteButton2(x, y);
                 mouseDownOnDeleteButton3[0] = isMouseOnDeleteButton3(x, y);
+
+                mouseDownOnContinueButton1[0] = isMouseOnContinueButton1(x, y);
+                mouseDownOnContinueButton2[0] = isMouseOnContinueButton2(x, y);
+                mouseDownOnContinueButton3[0] = isMouseOnContinueButton3(x, y);
                 return true;
             }
 
@@ -129,18 +134,6 @@ public class ProfileSelector extends DisplayLayer {
                 if (hasConsumed) { return true; }
                 if (mouseDownOnBackButton[0] && isMouseOnBackButton(x, y)) {
                     game.onBackButtonClicked();
-                    hide();
-                }
-                if (mouseDownOnProfileBox1[0] && isMouseOnProfileBox1(x, y)) {
-                    game.onProfileBoxClicked1();
-                    hide();
-                }
-                if (mouseDownOnProfileBox2[0] && isMouseOnProfileBox2(x, y)) {
-                    game.onProfileBoxClicked2();
-                    hide();
-                }
-                if (mouseDownOnProfileBox3[0] && isMouseOnProfileBox3(x, y)) {
-                    game.onProfileBoxClicked3();
                     hide();
                 }
                 if (mouseDownOnCreateButton1[0] && isMouseOnCreateButton1(x, y)) {
@@ -165,6 +158,18 @@ public class ProfileSelector extends DisplayLayer {
                 }
                 if (mouseDownOnDeleteButton3[0] && isMouseOnDeleteButton3(x, y)) {
                     game.onDeleteButtonClicked3();
+                    hide();
+                }
+                if (mouseDownOnContinueButton1[0] && isMouseOnContinueButton1(x, y)) {
+                    game.onContinueButtonClicked1();
+                    hide();
+                }
+                if (mouseDownOnContinueButton2[0] && isMouseOnContinueButton2(x, y)) {
+                    game.onContinueButtonClicked2();
+                    hide();
+                }
+                if (mouseDownOnContinueButton3[0] && isMouseOnContinueButton3(x, y)) {
+                    game.onContinueButtonClicked3();
                     hide();
                 }
                 return true;
@@ -221,13 +226,22 @@ public class ProfileSelector extends DisplayLayer {
                 displaySaveStatus(gc, profile2, .625, .45, .12);
                 displaySaveStatus(gc, profile3, .625, .75, .12);
 
-                // Draws the create button images
                 UIHelper.drawImageRelativeXX(
-                        gc, IMAGE_CREATE, .625, .225, .11);
+                        gc, IMAGE_CONTINUE, .625, .225, .11);
                 UIHelper.drawImageRelativeXX(
-                        gc, IMAGE_CREATE, .625, .525, .11);
+                        gc, IMAGE_CREATE, .5, .3, .11);
+
                 UIHelper.drawImageRelativeXX(
-                        gc, IMAGE_CREATE, .625, .825, .11);
+                        gc, IMAGE_CONTINUE, .625, .525, .11);
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_CREATE, .5, .6, .11);
+
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_CONTINUE, .625, .825, .11);
+                UIHelper.drawImageRelativeXX(
+                        gc, IMAGE_CREATE, .5, .9, .11);
+
+
 
                 // Draws the delete button images
                 UIHelper.drawImageRelativeXX(
@@ -236,6 +250,7 @@ public class ProfileSelector extends DisplayLayer {
                         gc, IMAGE_DELETE, .625, .6, .11);
                 UIHelper.drawImageRelativeXX(
                         gc, IMAGE_DELETE, .625, .9, .11);
+
             }
         }, 1);
 
@@ -330,45 +345,6 @@ public class ProfileSelector extends DisplayLayer {
     }
 
     /**
-     * Returns true if mouse is on the first profile, used for selecting the
-     * first profile.
-     * @param mouseX x-position of the mouse.
-     * @param mouseY y-position of the mouse.
-     * @return if the mouse is on the first profile box.
-     */
-    private boolean isMouseOnProfileBox1(double mouseX, double mouseY) {
-        // Check for profile box one
-        return UIHelper.checkIsXYInBoxRelativeXX(
-                mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .2, .4);
-    }
-
-    /**
-     * Returns true if mouse is on the second profile, used for selecting the
-     * second profile.
-     * @param mouseX x-position of the mouse.
-     * @param mouseY y-position of the mouse.
-     * @return if the mouse is on the second profile box.
-     */
-    private boolean isMouseOnProfileBox2(double mouseX, double mouseY) {
-        // Check for profile box two
-        return UIHelper.checkIsXYInBoxRelativeXX(
-                mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .5, .4);
-    }
-
-    /**
-     * Returns true if mouse is on the third profile, used for selecting the
-     * third profile.
-     * @param mouseX x-position of the mouse.
-     * @param mouseY y-position of the mouse.
-     * @return if the mouse is on the third profile box.
-     */
-    private boolean isMouseOnProfileBox3(double mouseX, double mouseY) {
-        // Check for profile box three
-        return UIHelper.checkIsXYInBoxRelativeXX(
-                mouseX, mouseY, IMAGE_PROFILE_BOX, .5, .8, .4);
-    }
-
-    /**
      * Returns true if mouse is on the first create button, used for making a
      * new profile.
      * @param mouseX x-position of the mouse.
@@ -378,7 +354,7 @@ public class ProfileSelector extends DisplayLayer {
     private boolean isMouseOnCreateButton1(double mouseX, double mouseY) {
         // Check for create button 1
         return UIHelper.checkIsXYInBoxRelativeXX(
-                mouseX, mouseY, IMAGE_CREATE, .625, .225, .11);
+                mouseX, mouseY, IMAGE_CREATE, .5, .3, .11);
     }
 
     /**
@@ -391,7 +367,7 @@ public class ProfileSelector extends DisplayLayer {
     private boolean isMouseOnCreateButton2(double mouseX, double mouseY) {
         // Check for create button 2
         return UIHelper.checkIsXYInBoxRelativeXX(
-                mouseX, mouseY, IMAGE_CREATE, .625, .525, .11);
+                mouseX, mouseY, IMAGE_CREATE, .5, .6, .11);
     }
 
     /**
@@ -404,7 +380,7 @@ public class ProfileSelector extends DisplayLayer {
     private boolean isMouseOnCreateButton3(double mouseX, double mouseY) {
         // Check for create button 3
         return UIHelper.checkIsXYInBoxRelativeXX(
-                mouseX, mouseY, IMAGE_CREATE, .625, .825, .11);
+                mouseX, mouseY, IMAGE_CREATE, .5, .9, .11);
     }
 
     /**
@@ -444,6 +420,24 @@ public class ProfileSelector extends DisplayLayer {
         // Check for delete button 3
         return UIHelper.checkIsXYInBoxRelativeXX(
                 mouseX, mouseY, IMAGE_DELETE, .625, .9, .11);
+    }
+
+    private boolean isMouseOnContinueButton1(double mouseX, double mouseY) {
+        // Check for delete button 1
+        return UIHelper.checkIsXYInBoxRelativeXX(
+                mouseX, mouseY, IMAGE_CONTINUE, .625, .225, .11);
+    }
+
+    private boolean isMouseOnContinueButton2(double mouseX, double mouseY) {
+        // Check for delete button 2
+        return UIHelper.checkIsXYInBoxRelativeXX(
+                mouseX, mouseY, IMAGE_CONTINUE, .625, .525, .11);
+    }
+
+    private boolean isMouseOnContinueButton3(double mouseX, double mouseY) {
+        // Check for delete button 3
+        return UIHelper.checkIsXYInBoxRelativeXX(
+                mouseX, mouseY, IMAGE_CONTINUE, .625, .825, .11);
     }
 
     /**

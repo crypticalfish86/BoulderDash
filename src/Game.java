@@ -192,24 +192,6 @@ public class Game {
         mainMenu.show();
     }
 
-    public void onProfileBoxClicked1() {
-        this.loadedPlayerProfileID = "1";
-        profileSelector.hide();
-        loadGame("1");
-    }
-
-    public void onProfileBoxClicked2() {
-        this.loadedPlayerProfileID = "2";
-        profileSelector.hide();
-        loadGame("2");
-    }
-
-    public void onProfileBoxClicked3() {
-        this.loadedPlayerProfileID = "3";
-        profileSelector.hide();
-        loadGame("3");
-    }
-
 
     /**
      * Should be fired when the main menu button is clicked
@@ -232,16 +214,35 @@ public class Game {
 
     public void onDeleteButtonClicked1() {
         profileSelector.deleteProfile(profileSelector.getProfile1());
-        this.profileSelector.hide();
         this.profileSelector = new ProfileSelector(this, cc);
     }
 
     public void onDeleteButtonClicked2() {
         profileSelector.deleteProfile(profileSelector.getProfile2());
+        this.profileSelector = new ProfileSelector(this, cc);
     }
 
     public void onDeleteButtonClicked3() {
         profileSelector.deleteProfile(profileSelector.getProfile3());
+        this.profileSelector = new ProfileSelector(this, cc);
+    }
+
+    public void onContinueButtonClicked1() {
+        this.loadedPlayerProfileID = "1";
+        profileSelector.hide();
+        loadGame("1");
+    }
+
+    public void onContinueButtonClicked2() {
+        this.loadedPlayerProfileID = "2";
+        profileSelector.hide();
+        loadGame("2");
+    }
+
+    public void onContinueButtonClicked3() {
+        this.loadedPlayerProfileID = "3";
+        profileSelector.hide();
+        loadGame("3");
     }
 
 
