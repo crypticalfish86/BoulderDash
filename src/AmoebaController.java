@@ -74,7 +74,7 @@ public class AmoebaController {
     }
 
     /**
-     *If the amoeba cluster still contains tiles on the grid, regulate amoeba growth and check,
+     *If the amoeba cluster still contains tiles on the grid, regulate amoeba growth and check
      *  for diamond conversion trigger.
      * @param currentTimeInMilliseconds
      * The current time in milliseconds since the unix epoch (01/01/1970).

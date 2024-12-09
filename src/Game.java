@@ -9,11 +9,10 @@ import java.io.File;
 
 /**
  * Represents the one single game that handles loading and saving the game.
- * @author
  * @author Jace Weerawardena
  * @author Alex (Tsz Tung Yee)
  * @author Armaan Ghadiali
- * @author Cameron mcDonald
+ * @author Cameron McDonald
  */
 
 

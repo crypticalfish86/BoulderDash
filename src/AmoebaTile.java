@@ -56,8 +56,7 @@ public class AmoebaTile extends Tile{
      * The current time in ms since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds) {
-        
-        return;
+
     }
 
     /**
