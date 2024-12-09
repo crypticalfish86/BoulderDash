@@ -119,6 +119,10 @@ public class UITextBox {
      */
     public boolean onMouseDown(double mouseX, double mouseY) {
         isMouseDownOnBox = isMouseInArea(mouseX, mouseY);
+        if (!isMouseDownOnBox) {
+            isFocused = false;
+        }
+
         return isMouseDownOnBox;
     }
 
@@ -138,7 +142,10 @@ public class UITextBox {
                 clear();
             }
             isFocused = true;
+        } else if (!isMouseDownOnBox) {
+            isFocused = false;
         }
+
         isMouseDownOnBox = false;
 
         return isMouseUpOnBox;
@@ -164,7 +171,7 @@ public class UITextBox {
         return text.toString();
     }
 
-    
+
     /**
      * Sets the text of this textbox.
      * @param text The text to set with.

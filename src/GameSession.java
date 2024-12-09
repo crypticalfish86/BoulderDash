@@ -134,6 +134,7 @@ public class GameSession {
         
         
         // line 1: Current Level, Height, Width
+        int currentLevel = Integer.parseInt(gameDataArr[0]);
         this.gridHeight = Integer.parseInt(gameDataArr[2]);
         this.gridWidth = Integer.parseInt(gameDataArr[1]);
         System.out.printf("Map size: (%d, %d)\n", this.gridWidth, this.gridHeight);
@@ -163,10 +164,10 @@ public class GameSession {
         int greenKeys = Integer.parseInt(gameDataArr[13]);
         
 
-        
+
         this.currentSessionData = new GameSessionData(
             this, timeLeft, diamondsRequired, redKeys, blueKeys, yellowKeys, greenKeys,
-            diamondCount, score
+            diamondCount, score, currentLevel
         );
             
             

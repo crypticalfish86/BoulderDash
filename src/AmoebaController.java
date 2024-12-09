@@ -18,7 +18,7 @@ public class AmoebaController {
     private int currentNumberOfIntervals; //how many intervals it's been since the amoeba has grown
 
 
-    private static final int AMOEBA_ATTEMPTS = 100;
+    private static final int AMOEBA_ATTEMPTS = 10;
     private int currentAttempts = 0;
 
     private int clusterID;

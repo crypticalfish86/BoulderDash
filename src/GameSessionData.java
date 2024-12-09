@@ -37,7 +37,7 @@ public class GameSessionData {
      * @param score
      * The current score of the player.
      */
-    public GameSessionData(GameSession gameSession, int timeAllowed, int diamondsRequired, int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score) {
+    public GameSessionData(GameSession gameSession, int timeAllowed, int diamondsRequired, int redKeys, int blueKeys, int yellowKeys, int greenKeys, int diamondCount, int score, int level) {
         this.gameSession = gameSession;
         this.timeAllowed = timeAllowed;
         this.diamondsRequired = diamondsRequired;
@@ -47,6 +47,7 @@ public class GameSessionData {
         this.greenKeys = greenKeys;
         this.diamondCount = diamondCount;
         this.score = score;
+        this.level = level;
 
     }
 
