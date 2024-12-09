@@ -240,7 +240,7 @@ public class Game {
         if (hasWon) {
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
                 gameSessionData.updateScore((int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000));
-                this.gameWin = new GameWin(this, cc, gameSessionData);
+                this.gameOver = new GameWin(this, cc, gameSessionData);
 
             } else {
                 //TODO: start next game with level + 1
