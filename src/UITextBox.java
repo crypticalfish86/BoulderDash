@@ -69,7 +69,7 @@ public class UITextBox {
         gc.setFill(this.textColor);
         gc.setFont(new Font(WINDOW_SIZE_Y * height * .8));
         gc.setTextAlign(TextAlignment.CENTER);
-        gc.fillText(getText(), WINDOW_SIZE_X * x, WINDOW_SIZE_Y * y, WINDOW_SIZE_X * width);
+        gc.fillText(getText(), WINDOW_SIZE_X * x, WINDOW_SIZE_Y * (y + height * .2), WINDOW_SIZE_X * width);
     }
 
 
