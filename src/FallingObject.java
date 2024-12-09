@@ -73,7 +73,7 @@ public abstract class FallingObject extends Tile {
 
     /**
      * Signals the falling object to try falling or rolling.
-     * Should be called during update when other calcualtiosn are done.
+     * Should be called during update when other calculations are done.
      */
     protected void updatePhysics() {
 
@@ -115,6 +115,7 @@ public abstract class FallingObject extends Tile {
             if (    tileLeft.getTileType() == TileType.PATH &&
                     tileLeftBelow.getTileType() == TileType.PATH &&
                     onCurvedTile(this.x,this.y)) {
+
                 this.roll(tileLeft, tileLeftBelow);
                 return;
             }
@@ -134,6 +135,7 @@ public abstract class FallingObject extends Tile {
             if (    tileRight.getTileType() == TileType.PATH &&
                     tileRightBelow.getTileType() == TileType.PATH &&
                     onCurvedTile(this.x,this.y)){
+
                 this.roll(tileRight, tileRightBelow);
                 return;
             }
@@ -153,8 +155,7 @@ public abstract class FallingObject extends Tile {
             return true;
         }else if(tileBelow.getTileType() == TileType.DIAMOND){
             return true;
-        }
-        else if(tileBelow.getTileType() == TileType.TITANIUM_WALL){
+        }else if(tileBelow.getTileType() == TileType.TITANIUM_WALL){
             return true;
         }else if(tileBelow.getTileType() == TileType.DIRT_WALL) {
             return true;

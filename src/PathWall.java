@@ -1,17 +1,32 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * This class represents a path in the game.
+ * @author Alex (Tsz Tung Yee)
+ * @version 1.1
+ */
 public class PathWall extends Wall {
 
     // Image representing the PathWall (replace with the actual image path)
-    public static final Image img = new Image("file:Assets/Images/BlackPath.png"); // Path to the PathWall image
+    private static final Image img = new Image("file:Assets/Images/BlackPath.png"); // Path to the PathWall image
 
-    // Constructor
+    /**
+     * Constructs a path tile.
+     * @param gameSession The current game session.
+     * @param x the x position of the diamond.
+     * @param y the y position of the diamond.
+     * @param operationInterval The time in ms between operations.
+     */
     public PathWall(GameSession gameSession, int x, int y, long operationInterval) {
         super(gameSession, x, y, TileType.PATH, operationInterval);
     }
 
-    // Handle interactions with other tiles
+    /**
+     * Handles moving other tiles in the game to this tile if they try to
+     * interact with this tile.
+     * @param tile The tile that is interacting with this tile.
+     */
     @Override
     public void interact(Tile tile) {
         
