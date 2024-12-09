@@ -38,7 +38,6 @@ public class Game {
 
     }
 
-
     /**
      * Initialises the music player by setting the path to the music file
      * and creates a new instance of the MusicPlayer class.
@@ -78,8 +77,7 @@ public class Game {
         }
     }
 
-    //TODO Add proper exceptions and errors like in loadgame
-    private boolean saveGame() { //TODO add proper exception throwing
+    private boolean saveGame() {
         if(this.currentGamesession == null){
             return false;
         }
@@ -164,7 +162,8 @@ public class Game {
 
 
 
-            this.currentGamesession = new GameSession(this, fileContent, cc, accumulatedScore);
+            this.currentGamesession = new GameSession(this,
+                    fileContent, cc, accumulatedScore);
             startMusic(); // Start music when the level starts
 
         } catch (FileNotFoundException e) {
@@ -174,15 +173,10 @@ public class Game {
 
     }
 
-
-
     public void onPlayButtonClicked() {
         System.out.println("play is clicked");
         mainMenu.hide();
         this.profileSelector = new ProfileSelector(this, cc);
-
-        // TODO Auto-generated method stub
-        // Run load game function here or move to profileselector to manage save screen
     }
 
     public void onBackButtonClicked() {
@@ -262,8 +256,6 @@ public class Game {
      */
 
     public void onGameOver(boolean hasWon, GameSessionData gameSessionData, long timeLeft) {
-        //TODO: check Game Level
-
         stopMusic(); // Stop music on game over
 
         if (hasWon) {
@@ -279,7 +271,6 @@ public class Game {
             }
         } else {
             this.gameOver = new GameOver(this, cc, gameSessionData);
-            // showMenu();
             stopMusic(); // Stop music on game over
         }
     }
