@@ -53,6 +53,7 @@ public class Diamond extends FallingObject{
      * The number of milliseconds since 01/01/1970.
      */
     public void updateTile(long currentTimeInMilliseconds) {
+
         updatePhysics();
     }
 
@@ -66,12 +67,19 @@ public class Diamond extends FallingObject{
         currentSessionData.incrementDiamondCount(); //update player's diamond count
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String returnStringTileRepresentation(){
+
         return "*";
     }
 }

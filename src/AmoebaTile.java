@@ -109,7 +109,9 @@ public class AmoebaTile extends Tile{
         return false;
     }
 
-
+    /**
+    * {@inheritDoc}
+    */
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);

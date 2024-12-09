@@ -4,12 +4,6 @@ import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-
-/**
- * This class represents a frog in the game.
- * @author Alex (Tsz Tung Yee)
- * @version 1.1
- */
 public class Frog extends Enemy {
 
 
@@ -37,18 +31,30 @@ public class Frog extends Enemy {
         
     }
 
-
+    /**
+     * {@inheritDoc}
+     * Checks if a boulder, diamond or amoeba is above the frog.
+     * If so, it explodes.
+     */
     @Override
     public void interact(Tile tile) {
 
-        if ((   tile.getTileType() == TileType.BOULDER ||
-                tile.getTileType() == TileType.DIAMOND ||
-                tile.getTileType() == TileType.AMOEBA) && tile.getYPosition() == this.y - 1) {
+        if ((tile.getTileType() == TileType.BOULDER
+                || tile.getTileType() == TileType.DIAMOND
+                || tile.getTileType() == TileType.AMOEBA)
+                && tile.getYPosition() == this.y - 1) {
             this.triggerExplosion(this.x, this.y, false);
         }
     }
 
-    
+    /**
+     * {@inheritDoc}
+     * @param currentTimeInMilliseconds
+     * It kills the frog if it is next to an amoeba.
+     * It checks if the frog should move.
+     * It moves the frog, if there is a path.
+     * If there is no path, then it generates one.
+     */
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
 
@@ -88,7 +94,7 @@ public class Frog extends Enemy {
 
 
     /**
-     * Refreshes the path of the frog
+     * Refreshes the path of the frog.
      */
     private void refreshPath() {
         pathRefresh = PATH_REFRESH_RATE;
@@ -101,7 +107,7 @@ public class Frog extends Enemy {
 
 
     /**
-     * Allows the frog to do a random move along its possible moves
+     * Allows the frog to do a random move along its possible moves.
      */
     private void doRandomMove() {
 
@@ -164,19 +170,29 @@ public class Frog extends Enemy {
     }
 
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
     }
 
-    
 
+    /**
+     * Checks whether the frog can move on to a particular tile.
+     * @param tileType
+     * The type of tile the frog is trying to move to.
+     */
     public boolean canMoveToTileType(TileType tileType) {
         return tileType == TileType.PATH || tileType == TileType.PLAYER;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String returnStringTileRepresentation() {
+
         return "F";
     }
 }

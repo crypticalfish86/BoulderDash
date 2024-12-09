@@ -43,19 +43,28 @@ public class DirtWall extends Wall {
         }
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateTile(long currentTimeInMilliseconds) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     // Draw the dirt wall image
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0); // Render the dirt wall
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String returnStringTileRepresentation(){
+
         return "D";
     }
 }

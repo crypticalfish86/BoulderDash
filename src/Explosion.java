@@ -39,6 +39,9 @@ public class Explosion extends Tile {
         ticksAlive = 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void interact(Tile Tile) {
 
     }
@@ -56,7 +59,9 @@ public class Explosion extends Tile {
     }
 
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawTile(GraphicsContext gc) {
         draw(gc, img, 0, 0);
@@ -84,6 +89,9 @@ public class Explosion extends Tile {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String returnStringTileRepresentation(){
         return "EX";
     }
