@@ -12,6 +12,9 @@ public class GameWin extends DisplayLayer {
     private final Game game;
 
 
+    private boolean hasAddedScore = false;
+
+
 
     private final UITextBox textBox;
 
@@ -172,6 +175,10 @@ public class GameWin extends DisplayLayer {
         if (finalName.isEmpty()) {
                 finalName = "Unknown";
         }
-        new Leaderboard().writeNewNameToLeaderboard(finalName, gameSessionData.getScore());
+
+        if (!hasAddedScore) {
+            hasAddedScore = true;
+            new Leaderboard().writeNewNameToLeaderboard(finalName, gameSessionData.getScore());
+        }
     }
 }
