@@ -1,3 +1,7 @@
+/**
+ * Represents the tile types.
+ */
+
 public enum TileType {
     PLAYER,
     EXPLOSION,

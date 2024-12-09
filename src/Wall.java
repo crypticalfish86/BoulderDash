@@ -1,7 +1,8 @@
 /**
  * Represents a wall tile in the game.
- * Author: Cameron McDonald (cmcoff) & Jace Weerawardena(crypticalfish86).
- * Version: 1.0
+ * @author Cameron McDonald (cmcoff)
+ * @author Jace Weerawardena(crypticalfish86).
+ * @version 1.0
  * Walls are immovable tiles that act as barriers. This is an abstract
  * base class for other types of walls like titanium walls.
  *
