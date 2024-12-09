@@ -7,6 +7,7 @@ import javafx.scene.text.Font;
 /**
  * Represents the winning screen.
  * @author Armaan Ghadiali
+ * @author Alex
  * @version 1.0
  */
 

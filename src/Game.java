@@ -23,8 +23,8 @@ import java.io.File;
 public class Game {
     private String loadedPlayerProfileID;
 
-    private final int MAX_LEVEL = 5;
-    private final int SCORE_PER_SECOND_LEFT = 3;
+    private static final int MAX_LEVEL = 5;
+    private static final int SCORE_PER_SECOND_LEFT = 3;
 
     private MusicPlayer musicPlayer;
 
@@ -112,8 +112,7 @@ public class Game {
      * When a profile is clicked, reads a profile file and initialises a GameSession with that file data passed to it.
      * @param profileID
      * The profile number.
-     * @return
-     * A boolean value that determines if the loading of the GameSession was successful.
+     * @return A boolean value that determines if the loading of the GameSession was successful.
      */
     public boolean loadGame(String profileID) {
         if (profileID.equals("1") || profileID.equals("2") || profileID.equals("3")) {
@@ -154,8 +153,9 @@ public class Game {
 
     /**
      * Starts a game with a specified level
-     * @param level
-     * @param accumulatedScore
+     * @param level Level number to indicate which level file to load.
+     * @param accumulatedScore Score up to the point where the player is about
+     *                         to enter the next level.
      */
     private void startGameWithLevel(int level, int accumulatedScore) {
 
@@ -204,42 +204,51 @@ public class Game {
 
     }
 
-    public void onCreateButtonClicked1() {
-    }
-
-    public void onCreateButtonClicked2() {
-    }
-
-    public void onCreateButtonClicked3() {
-    }
-
+    /**
+     * Deletes profile 1 when clicked in the profile selector.
+     */
     public void onDeleteButtonClicked1() {
         profileSelector.deleteProfile(profileSelector.getProfile1());
         this.profileSelector = new ProfileSelector(this, cc);
     }
 
+    /**
+     * Deletes profile 2 when clicked in the profile selector.
+     */
     public void onDeleteButtonClicked2() {
         profileSelector.deleteProfile(profileSelector.getProfile2());
         this.profileSelector = new ProfileSelector(this, cc);
     }
 
+    /**
+     * Deletes profile 3 when clicked in the profile selector.
+     */
     public void onDeleteButtonClicked3() {
         profileSelector.deleteProfile(profileSelector.getProfile3());
         this.profileSelector = new ProfileSelector(this, cc);
     }
 
+    /**
+     * Starts profile 1 when clicked in the profile selector.
+     */
     public void onContinueButtonClicked1() {
         this.loadedPlayerProfileID = "1";
         profileSelector.hide();
         loadGame("1");
     }
 
+    /**
+     * Starts profile 2 when clicked in the profile selector.
+     */
     public void onContinueButtonClicked2() {
         this.loadedPlayerProfileID = "2";
         profileSelector.hide();
         loadGame("2");
     }
 
+    /**
+     * Starts profile 3 when clicked in the profile selector.
+     */
     public void onContinueButtonClicked3() {
         this.loadedPlayerProfileID = "3";
         profileSelector.hide();
@@ -253,7 +262,6 @@ public class Game {
      * @param gameSessionData the internal data of the game to be read
      * @param timeLeft time in milliseconds left
      */
-
     public void onGameOver(boolean hasWon, GameSessionData gameSessionData, long timeLeft) {
         stopMusic(); // Stop music on game over
 
@@ -261,15 +269,10 @@ public class Game {
             new Leaderboard(Integer.toString(gameSessionData.getLevel()))
                     .writeNewNameToLeaderboard(loadedPlayerProfileID, gameSessionData.getScore());
 
-
             if (gameSessionData.getLevel() == -1 || gameSessionData.getLevel() >= MAX_LEVEL) {
                 gameSessionData.updateScore((int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000));
                 this.gameOver = new GameWin(this, cc, gameSessionData);
-
-                
             } else {
-                
-
                 int finalScore = gameSessionData.getScore() + (int) (timeLeft * SCORE_PER_SECOND_LEFT / 1000);
                 startGameWithLevel(gameSessionData.getLevel() + 1, finalScore);
             }
@@ -289,7 +292,6 @@ public class Game {
         mainMenu.hide();
         this.leaderboardShowcase = new LeaderboardShowcase(this, cc);
         leaderboardShowcase.show();
-
     }
 
     /**
@@ -298,7 +300,6 @@ public class Game {
     public void showMenu() {
         mainMenu.show();
         stopMusic();
-
     }
 
     public void loadGameButton() {
