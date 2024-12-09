@@ -11,7 +11,7 @@ public class UIHelper {
     
     /**
      * draws an image centered around the given coordinates,
-     * with a specified width (size relative to x axis)
+     * with a specified width (size relative to x-axis)
      * @param gc graphics context to draw on
      * @param img image to be drawn, also used for determining height
      * @param xPos x-position of the center
@@ -33,7 +33,7 @@ public class UIHelper {
 
     /**
      * draws an image centered around the given coordinates,
-     * with a specified height (size relative to y axis)
+     * with a specified height (size relative to y-axis)
      * @param gc graphics context to draw on
      * @param img image to be drawn, also used for determining width
      * @param xPos x-position of the center

@@ -374,7 +374,7 @@ public class GameSession {
         int[] data = this.currentSessionData.returnAllGameSessionData();
         String newLineString = System.lineSeparator();
 
-        saveString += "1;"; // change this when you figure it out
+        saveString += currentSessionData.getLevel() + ";";
 
 
         // height and width
