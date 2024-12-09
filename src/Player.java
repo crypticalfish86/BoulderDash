@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
  * The player can move, interact with tiles, and respond to input.
  * @author Alex (Tsz Tung Yee)
  * @author Cameron McDonald (cmcoff)
- *  * @version 2.1
+ * @version 2.1
  */
 public class Player extends Tile {
 
