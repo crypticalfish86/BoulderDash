@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * This class is used for the frog pathfinding.
+ * @param <T> A generic representing tiles.
+ */
+
 public class PathFinder<T> {
     
 

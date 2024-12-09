@@ -6,7 +6,7 @@ import javafx.scene.input.KeyCode;
  * This Class is used to create a layer to be used with {@link CanvasCompositor}, to allow any layers
  * have the same previlege of rendering and listening inputs
  * 
- * The interface {@link CanvasCompositor.CanvasLayerI} is required to define the custom behaviour of this layer
+ * The interface {@link CanvasCompositor} is required to define the custom behaviour of this layer
  * so that this layer can respond to drawing and key inputs, as well as mouse inputs
  */
 public class CanvasLayer {
