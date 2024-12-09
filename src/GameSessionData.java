@@ -192,12 +192,15 @@ public class GameSessionData {
      * @return
      * how many diamonds the user has picked up.
      */
-    public int getDiamondCount() {return this.diamondCount;}
+    public int getDiamondCount() {
+        return this.diamondCount;
+    }
 
     /**
      * Increments the diamond count.
      */
     public void incrementDiamondCount() {
+
         diamondCount++;
     }
 
@@ -207,6 +210,7 @@ public class GameSessionData {
      * The number of diamonds required to open the exit door.
      */
     public int getDiamondsRequired() {
+
         return this.diamondsRequired;
     }
 
@@ -216,6 +220,7 @@ public class GameSessionData {
      * @return int of level, can be -1 to indicate if level is non-conventional.
      */
     public int getLevel() {
+
         return this.level;
     }
 }
