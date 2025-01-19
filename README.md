@@ -33,7 +33,7 @@ Armaan Ghadiali (2370381)
         "Insert all classes in source code here"  
 
 # How to run the game  
-Ensure you have JavaFX installed and your runtime recognises the library
+Ensure you have JavaFX installed and your runtime recognises the library  
 Run the Main class, and you should be taken to the main menu.  
 There you can choose to display leaderboards or click play.  
 Once you click play choose a profile (you can choose to continue or load a new game).  
